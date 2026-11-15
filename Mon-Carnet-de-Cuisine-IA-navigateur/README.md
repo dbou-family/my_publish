@@ -24,7 +24,7 @@ Au premier clic sur le bouton grisé « Préparer l’IA », l’application exp
 
 L’inférence se fait sur l’appareil via WebGPU ; il faut un navigateur récent compatible et une connexion Internet pour le premier chargement. Les performances et la qualité, notamment en français, peuvent varier selon l’ordinateur et le navigateur.
 
-Une photo du plat ne permet pas de connaître sûrement ses ingrédients ou sa préparation. Le modèle est invité à ne pas les inventer et à signaler les informations manquantes, mais relisez toujours le brouillon avant de l’enregistrer.
+Depuis l’onglet Photo, le modèle observe un plat et propose une recette plausible (ingrédients, quantités, étapes, durée et portions). Les ingrédients cachés et la préparation réelle ne sont pas vérifiables depuis l’image : la proposition les signale comme incertains. Relisez et adaptez toujours la fiche avant de cuisiner. L’onglet Texte permet de coller une recette à extraire fidèlement.
 
 Pour un site ou une vidéo TikTok, indiquez le lien comme référence et collez le texte de la recette, la transcription ou les sous-titres. Les navigateurs empêchent généralement une page locale de lire le contenu d’un autre site ; l’application n’essaie donc pas de contourner ces protections. Aucun contenu TikTok n’est transcrit automatiquement.
 
