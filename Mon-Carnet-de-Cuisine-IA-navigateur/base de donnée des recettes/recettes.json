@@ -1,7 +1,23 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T19:35:32.177Z",
+  "updatedAt": "2026-11-15T19:36:45.998Z",
   "recipes": [
+    {
+      "id": "r1794771405193",
+      "name": "Viande sauce vin",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "",
+      "description": "Une délicieuse recette à partager.",
+      "ingredients": [],
+      "steps": [],
+      "favorite": false,
+      "createdAt": "2026-11-15T19:36:45.193Z",
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1794857805282
+    },
     {
       "id": "r1794767750366",
       "name": "Canard au poireau",
