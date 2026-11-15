@@ -1,0 +1,309 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-15T18:36:50.017Z",
+  "recipes": [
+    {
+      "id": "r1794767809193",
+      "name": "pates au saumon et des pates",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "",
+      "description": "Une délicieuse recette à partager.",
+      "ingredients": [],
+      "steps": [],
+      "favorite": false,
+      "createdAt": "2026-11-15T18:36:49.193Z",
+      "imageSearchState": "pending"
+    },
+    {
+      "id": "r1794767750366",
+      "name": "Canard au poireau",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "https://api.openverse.org/v1/images/ab989d82-0b7f-4c44-8265-1ee831edc311/thumb/",
+      "description": "Une délicieuse recette à partager.",
+      "ingredients": [],
+      "steps": [],
+      "favorite": false,
+      "createdAt": "2026-11-15T18:35:50.366Z",
+      "imageSearchState": "found",
+      "imageCredit": "Romainbehar",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/User:Romainbehar",
+      "imageSourceUrl": "https://commons.wikimedia.org/w/index.php?curid=87745773",
+      "imageLicense": "cc0",
+      "imageLicenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+      "imageProvider": "Openverse",
+      "imageTitle": "Lyon 7e - Rue de Bonald - Restaurant Kuro Goma, kamo nanban soba"
+    },
+    {
+      "id": "r1794757630115",
+      "name": "pates au saumon et des pates",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "https://api.openverse.org/v1/images/f41428fa-f81f-491f-ae46-298a112b2fad/thumb/",
+      "description": "Une délicieuse recette à partager.",
+      "ingredients": [],
+      "steps": [],
+      "favorite": false,
+      "createdAt": "2026-11-15T15:47:10.115Z"
+    },
+    {
+      "id": "r1",
+      "name": "Risotto crémeux aux champignons",
+      "category": "Plat",
+      "time": 35,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=900&q=85",
+      "description": "Un risotto généreux aux champignons dorés, au parmesan et à la sauge fraîche.",
+      "ingredients": [
+        [
+          "Riz arborio",
+          "320 g"
+        ],
+        [
+          "Champignons bruns",
+          "250 g"
+        ],
+        [
+          "Bouillon de légumes",
+          "1 l"
+        ],
+        [
+          "Parmesan râpé",
+          "70 g"
+        ],
+        [
+          "Vin blanc sec",
+          "12 cl"
+        ],
+        [
+          "Beurre doux",
+          "30 g"
+        ],
+        [
+          "Sauge fraîche",
+          "quelques feuilles"
+        ]
+      ],
+      "steps": [
+        "Faites chauffer le bouillon dans une casserole et gardez-le à frémissement.",
+        "Faites revenir les champignons émincés dans une noix de beurre. Réservez.",
+        "Faites nacrer le riz avec l’échalote, puis déglacez au vin blanc.",
+        "Ajoutez le bouillon louche par louche en remuant régulièrement pendant 18 minutes.",
+        "Incorporez les champignons, le parmesan et le beurre. Servez aussitôt."
+      ],
+      "favorite": true
+    },
+    {
+      "id": "r2",
+      "name": "Salade méditerranéenne",
+      "category": "Entrée",
+      "time": 15,
+      "servings": 2,
+      "difficulty": "Facile",
+      "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85",
+      "description": "Une salade pleine de soleil, croquante et parfumée aux herbes du jardin.",
+      "ingredients": [
+        [
+          "Tomates mûres",
+          "3"
+        ],
+        [
+          "Concombre",
+          "½"
+        ],
+        [
+          "Feta",
+          "120 g"
+        ],
+        [
+          "Olives noires",
+          "50 g"
+        ],
+        [
+          "Huile d’olive",
+          "2 c. à s."
+        ],
+        [
+          "Origan",
+          "1 pincée"
+        ]
+      ],
+      "steps": [
+        "Coupez les tomates et le concombre en morceaux.",
+        "Ajoutez la feta émiettée et les olives.",
+        "Arrosez d’huile d’olive, parsemez d’origan et servez frais."
+      ],
+      "favorite": false
+    },
+    {
+      "id": "r3",
+      "name": "Fondant au chocolat",
+      "category": "Dessert",
+      "time": 25,
+      "servings": 6,
+      "difficulty": "Facile",
+      "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=85",
+      "description": "Un cœur intensément chocolaté sous une fine croûte délicate.",
+      "ingredients": [
+        [
+          "Chocolat noir",
+          "200 g"
+        ],
+        [
+          "Beurre",
+          "150 g"
+        ],
+        [
+          "Œufs",
+          "4"
+        ],
+        [
+          "Sucre",
+          "120 g"
+        ],
+        [
+          "Farine",
+          "50 g"
+        ],
+        [
+          "Fleur de sel",
+          "1 pincée"
+        ]
+      ],
+      "steps": [
+        "Préchauffez le four à 200 °C. Faites fondre le chocolat avec le beurre.",
+        "Fouettez les œufs et le sucre jusqu’à ce que le mélange blanchisse.",
+        "Incorporez le chocolat fondu, puis la farine et le sel.",
+        "Versez dans un moule beurré et enfournez 12 à 14 minutes."
+      ],
+      "favorite": true
+    },
+    {
+      "id": "r4",
+      "name": "Bœuf bourguignon",
+      "category": "Plat",
+      "time": 150,
+      "servings": 6,
+      "difficulty": "Intermédiaire",
+      "image": "https://images.unsplash.com/photo-1534939561126-855b8675edd7?auto=format&fit=crop&w=900&q=85",
+      "description": "Le grand classique mijoté au vin rouge, tendre et réconfortant.",
+      "ingredients": [
+        [
+          "Bœuf à braiser",
+          "1,2 kg"
+        ],
+        [
+          "Vin rouge",
+          "75 cl"
+        ],
+        [
+          "Carottes",
+          "3"
+        ],
+        [
+          "Lardons fumés",
+          "150 g"
+        ],
+        [
+          "Oignons grelots",
+          "200 g"
+        ],
+        [
+          "Bouquet garni",
+          "1"
+        ]
+      ],
+      "steps": [
+        "La veille, faites mariner le bœuf dans le vin avec les aromates.",
+        "Égouttez la viande, faites-la dorer puis ajoutez les légumes.",
+        "Versez la marinade filtrée et laissez mijoter à feu doux 2 h 30.",
+        "Ajoutez les oignons grelots en fin de cuisson et rectifiez l’assaisonnement."
+      ],
+      "favorite": false
+    },
+    {
+      "id": "r5",
+      "name": "Tartines avocat & œuf poché",
+      "category": "Petit-déjeuner",
+      "time": 20,
+      "servings": 2,
+      "difficulty": "Facile",
+      "image": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=85",
+      "description": "Des tartines gourmandes pour commencer la journée du bon pied.",
+      "ingredients": [
+        [
+          "Pain au levain",
+          "2 tranches"
+        ],
+        [
+          "Avocat mûr",
+          "1"
+        ],
+        [
+          "Œufs frais",
+          "2"
+        ],
+        [
+          "Citron",
+          "½"
+        ],
+        [
+          "Piment doux",
+          "1 pincée"
+        ]
+      ],
+      "steps": [
+        "Faites griller les tranches de pain et écrasez l’avocat avec le citron.",
+        "Pochez les œufs 3 minutes dans une eau frémissante vinaigrée.",
+        "Tartinez le pain, déposez les œufs et ajoutez le piment doux."
+      ],
+      "favorite": false
+    },
+    {
+      "id": "r6",
+      "name": "Velouté de potimarron",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=900&q=85",
+      "description": "La douceur du potimarron relevée par une pointe de muscade.",
+      "ingredients": [
+        [
+          "Potimarron",
+          "800 g"
+        ],
+        [
+          "Oignon",
+          "1"
+        ],
+        [
+          "Bouillon de légumes",
+          "70 cl"
+        ],
+        [
+          "Crème fraîche",
+          "10 cl"
+        ],
+        [
+          "Muscade",
+          "1 pincée"
+        ]
+      ],
+      "steps": [
+        "Épépinez et coupez le potimarron en cubes. Émincez l’oignon.",
+        "Faites revenir l’oignon, ajoutez le potimarron et le bouillon.",
+        "Laissez cuire 20 minutes puis mixez avec la crème et la muscade."
+      ],
+      "favorite": false
+    }
+  ]
+}
