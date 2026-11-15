@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes pages — Catalogue</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes pages — Catalogue</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230f172a'/%3E%3Cg stroke='url(%23g)' stroke-width='2.5' opacity='0.85'%3E%3Cline x1='15' y1='20' x2='32' y2='14'/%3E%3Cline x1='15' y1='20' x2='32' y2='32'/%3E%3Cline x1='15' y1='20' x2='32' y2='50'/%3E%3Cline x1='15' y1='44' x2='32' y2='14'/%3E%3Cline x1='15' y1='44' x2='32' y2='32'/%3E%3Cline x1='15' y1='44' x2='32' y2='50'/%3E%3Cline x1='32' y1='14' x2='49' y2='32'/%3E%3Cline x1='32' y1='32' x2='49' y2='32'/%3E%3Cline x1='32' y1='50' x2='49' y2='32'/%3E%3C/g%3E%3Ccircle cx='15' cy='20' r='4.5' fill='%2338bdf8'/%3E%3Ccircle cx='15' cy='44' r='4.5' fill='%2338bdf8'/%3E%3Ccircle cx='32' cy='14' r='4.5' fill='%23818cf8'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%23818cf8'/%3E%3Ccircle cx='32' cy='50' r='4.5' fill='%23818cf8'/%3E%3Ccircle cx='49' cy='32' r='5.5' fill='%23c084fc'/%3E%3C/svg%3E">
+<style>
+  /* ==========================================================================
+     1. VARIABLES & THÈMES (Neutre, Jeux, Skills)
+     ========================================================================== */
+  :root {
+    color-scheme: light dark;
+    /* Palette de base (Accueil - Mode Clair) */
+    --bg: #f4f6fa;
+    --bg-pattern: radial-gradient(#cbd5e1 1px, transparent 1px);
+    --surface: #ffffff;
+    --surface-hover: #f8fafc;
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #e2e8f0;
+    --accent: #3b82f6;
+    --accent-soft: #eff6ff;
+    --accent-ink: #1d4ed8;
+    --focus: #2563eb;
+    --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --shadow-hover: 0 20px 30px -10px rgba(15, 23, 42, 0.14);
+    
+    --radius: 20px;
+    --radius-sm: 12px;
+    --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --transition: 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Mode Sombre global (hors thème spécifique) */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-color-mode="light"]) {
+      --bg: #0b1120;
+      --bg-pattern: radial-gradient(#1e293b 1px, transparent 1px);
+      --surface: #131c31;
+      --surface-hover: #192540;
+      --ink: #f1f5f9;
+      --muted: #94a3b8;
+      --line: #23304a;
+      --accent: #60a5fa;
+      --accent-soft: #1e293b;
+      --accent-ink: #93c5fd;
+      --focus: #60a5fa;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+    }
+  }
+  :root[data-color-mode="dark"] {
+    --bg: #0b1120;
+    --bg-pattern: radial-gradient(#1e293b 1px, transparent 1px);
+    --surface: #131c31;
+    --surface-hover: #192540;
+    --ink: #f1f5f9;
+    --muted: #94a3b8;
+    --line: #23304a;
+    --accent: #60a5fa;
+    --accent-soft: #1e293b;
+    --accent-ink: #93c5fd;
+    --focus: #60a5fa;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+  }
+
+  /* --------------------------------------------------------------------------
+     THÈME SPÉCIFIQUE : JEUX (Ambiance Arcade / Gaming vibrante)
+     -------------------------------------------------------------------------- */
+  :root[data-category="jeux"] {
+    --bg: #130b24;
+    --bg-pattern: radial-gradient(rgba(236, 72, 153, 0.18) 1.5px, transparent 1.5px);
+    --surface: #1e1238;
+    --surface-hover: #29184d;
+    --ink: #fdf4ff;
+    --muted: #d8b4fe;
+    --line: #3b236e;
+    --accent: #f43f5e;
+    --accent-soft: rgba(244, 63, 94, 0.2);
+    --accent-ink: #fda4af;
+    --focus: #fbbf24;
+    --radius: 24px;
+    --font-display: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(244, 63, 94, 0.15);
+    --shadow-hover: 0 18px 35px -8px rgba(244, 63, 94, 0.35), 0 0 20px rgba(168, 85, 247, 0.25);
+  }
+  :root[data-category="jeux"][data-color-mode="light"] {
+    --bg: #fdf2f8;
+    --bg-pattern: radial-gradient(rgba(219, 39, 119, 0.15) 1.5px, transparent 1.5px);
+    --surface: #ffffff;
+    --surface-hover: #fff1f2;
+    --ink: #3b0764;
+    --muted: #701a75;
+    --line: #fbcfe8;
+    --accent: #e11d48;
+    --accent-soft: #ffe4e6;
+    --accent-ink: #be123c;
+    --focus: #be123c;
+  }
+
+  /* --------------------------------------------------------------------------
+     THÈME SPÉCIFIQUE : SKILLS (Ambiance Atelier / Savoir-faire précis)
+     -------------------------------------------------------------------------- */
+  :root[data-category="skill"] {
+    --bg: #f0f5f3;
+    --bg-pattern: linear-gradient(to right, rgba(15, 118, 110, 0.06) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(15, 118, 110, 0.06) 1px, transparent 1px);
+    --surface: #ffffff;
+    --surface-hover: #f4fbf9;
+    --ink: #062c29;
+    --muted: #3b635e;
+    --line: #cce3de;
+    --accent: #0f766e;
+    --accent-soft: #ccfbf1;
+    --accent-ink: #115e59;
+    --focus: #0f766e;
+    --radius: 12px;
+    --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    --shadow: 0 4px 20px -2px rgba(6, 44, 41, 0.06);
+    --shadow-hover: 0 14px 28px -6px rgba(15, 118, 110, 0.18);
+  }
+  :root[data-category="skill"][data-color-mode="dark"] {
+    --bg: #071917;
+    --bg-pattern: linear-gradient(to right, rgba(45, 212, 191, 0.06) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(45, 212, 191, 0.06) 1px, transparent 1px);
+    --surface: #0d2623;
+    --surface-hover: #133531;
+    --ink: #ecfdf5;
+    --muted: #99f6e4;
+    --line: #1d4742;
+    --accent: #2dd4bf;
+    --accent-soft: rgba(45, 212, 191, 0.15);
+    --accent-ink: #5eead4;
+    --focus: #2dd4bf;
+  }
+
+  /* ==========================================================================
+     2. RESET & ACCESSIBILITÉ
+     ========================================================================== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    background-color: var(--bg);
+    background-image: var(--bg-pattern);
+    background-size: 24px 24px;
+    color: var(--ink);
+    min-height: 100vh;
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  /* Lien d'évitement clavier (Skip Link) */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    background: var(--accent);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    z-index: 1000;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 16px;
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Focus clavier haute visibilité */
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ==========================================================================
+     3. EN-TÊTE & NAVIGATION
+     ========================================================================== */
+  .top-wrapper {
+    background: color-mix(in srgb, var(--surface) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .top {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
+  }
+
+  .brand-area {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Fil d'Ariane */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .breadcrumb a {
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  header h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  :root[data-category="skill"] header h1 {
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .category-badge {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  header p {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn-icon {
+    padding: 10px 14px;
+  }
+
+  /* ==========================================================================
+     4. CONTENU PRINCIPAL & BARRE D'OUTILS
+     ========================================================================== */
+  main {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 32px 24px 72px;
+  }
+
+  /* Barre de recherche dans les catégories */
+  .toolbar {
+    margin-bottom: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .search-box {
+    position: relative;
+    flex: 1 1 280px;
+    max-width: 420px;
+  }
+  .search-box svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .search-input::placeholder { color: var(--muted); }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  /* ==========================================================================
+     5. GRILLES & CARTES
+     ========================================================================== */
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  /* Grille d'accueil (2 grandes cartes héroïques) */
+  .grid.home-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 8px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    background: var(--surface-hover);
+    box-shadow: var(--shadow-hover);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover { transform: translateY(-4px); }
+  }
+
+  /* Visuel de carte */
+  .media-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    overflow: hidden;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover img { transform: scale(1.04); }
+  }
+
+  .thumb-svg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .thumb-svg svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Contenu texte de la carte */
+  .card-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .card-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .card .label {
+    font-weight: 700;
+    font-size: 1.08rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .card-arrow {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+  .card:hover .card-arrow {
+    background: var(--accent);
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+
+  /* Styles spécifiques des Cartes Catégories (Accueil) */
+  .card.category[data-key="jeux"] {
+    --accent: #e11d48;
+    --accent-soft: #ffe4e6;
+    --accent-ink: #be123c;
+  }
+  .card.category[data-key="skill"] {
+    --accent: #0f766e;
+    --accent-soft: #ccfbf1;
+    --accent-ink: #115e59;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-color-mode="light"]) .card.category[data-key="jeux"] {
+      --accent: #f43f5e;
+      --accent-soft: rgba(244, 63, 94, 0.2);
+      --accent-ink: #fda4af;
+    }
+    :root:not([data-color-mode="light"]) .card.category[data-key="skill"] {
+      --accent: #2dd4bf;
+      --accent-soft: rgba(45, 212, 191, 0.18);
+      --accent-ink: #5eead4;
+    }
+  }
+  :root[data-color-mode="dark"] .card.category[data-key="jeux"] {
+    --accent: #f43f5e;
+    --accent-soft: rgba(244, 63, 94, 0.2);
+    --accent-ink: #fda4af;
+  }
+  :root[data-color-mode="dark"] .card.category[data-key="skill"] {
+    --accent: #2dd4bf;
+    --accent-soft: rgba(45, 212, 191, 0.18);
+    --accent-ink: #5eead4;
+  }
+
+  .card.category .media-wrap {
+    aspect-ratio: 16 / 9;
+  }
+  .card.category .card-body {
+    padding: 24px 26px 26px;
+  }
+  .card.category .label {
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    font-weight: 700;
+  }
+  .card.category .desc {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .count-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .info {
+    grid-column: 1 / -1;
+    background: var(--surface);
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    color: var(--muted);
+    text-align: center;
+    padding: 56px 24px;
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 600px) {
+    .top { padding: 16px; }
+    main { padding: 20px 16px 56px; }
+    .grid { grid-template-columns: 1fr; gap: 16px; }
+    .card.category .label { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#app" class="skip-link">Aller au contenu principal</a>
+
+<div class="top-wrapper">
+  <header class="top">
+    <div class="brand-area">
+      <nav class="breadcrumb" id="breadcrumb" aria-label="Fil d'Ariane"></nav>
+      <h1>
+        <span id="pageTitle">Mes pages</span>
+        <span class="category-badge" id="categoryBadge" hidden></span>
+      </h1>
+      <p id="subtitle" role="status" aria-live="polite">Chargement du catalogue…</p>
+    </div>
+
+    <div class="controls" role="toolbar" aria-label="Outils de navigation">
+      <button class="btn" id="btnPrecedent" type="button" onclick="history.back()">
+        <span aria-hidden="true">←</span> Précédent
+      </button>
+      <button class="btn" id="btnSommaire" type="button" onclick="location.hash = ''">
+        Sommaire
+      </button>
+      <button class="btn btn-icon" id="btnTheme" type="button" aria-label="Changer le mode clair ou sombre" title="Changer l'apparence clair/sombre">
+        <span id="themeIcon" aria-hidden="true">🌓</span>
+      </button>
+    </div>
+  </header>
+</div>
+
+<main id="app" tabindex="-1">
+  <p class="info">Recherche des pages en cours…</p>
+</main>
+
+<!-- Données générées par generer_pages.py -->
+<script src="pages.js"></script>
+
+<script>
+  /* ==========================================================================
+     ILLUSTRATIONS VECTORIELLES INTÉGRÉES (Fallbacks visuels pertinents)
+     ========================================================================== */
+  const ILLUSTRATIONS = {
+    jeux: `
+      <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-jeux" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3b0764"/>
+            <stop offset="50%" stop-color="#831843"/>
+            <stop offset="100%" stop-color="#e11d48"/>
+          </linearGradient>
+          <radialGradient id="glow-jeux" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="225" fill="url(#g-jeux)"/>
+        <circle cx="200" cy="112" r="110" fill="url(#glow-jeux)"/>
+        <!-- Grille néon perspective -->
+        <path d="M0 175 L400 175 M0 195 L400 195 M0 215 L400 215 M80 155 L20 225 M160 155 L130 225 M240 155 L270 225 M320 155 L380 225" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+        <!-- Manette stylisée -->
+        <g transform="translate(120, 52)">
+          <rect x="20" y="20" width="120" height="68" rx="34" fill="#1e1b4b" stroke="#f472b6" stroke-width="3"/>
+          <!-- Croix directionnelle -->
+          <path d="M52 42 v24 M40 54 h24" stroke="#38bdf8" stroke-width="6" stroke-linecap="round"/>
+          <!-- Boutons d'action -->
+          <circle cx="112" cy="44" r="5" fill="#fbbf24"/>
+          <circle cx="124" cy="54" r="5" fill="#f43f5e"/>
+          <circle cx="112" cy="64" r="5" fill="#34d399"/>
+          <circle cx="100" cy="54" r="5" fill="#a78bfa"/>
+        </g>
+        <!-- Étoiles -->
+        <circle cx="65" cy="45" r="2.5" fill="#fde047"/>
+        <circle cx="335" cy="55" r="3" fill="#38bdf8"/>
+        <circle cx="310" cy="135" r="2" fill="#f472b6"/>
+      </svg>`,
+    skill: `
+      <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-skill" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#064e3b"/>
+            <stop offset="60%" stop-color="#0f766e"/>
+            <stop offset="100%" stop-color="#14b8a6"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="225" fill="url(#g-skill)"/>
+        <!-- Cercles géométriques / architecture -->
+        <circle cx="200" cy="112" r="78" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-dasharray="6 6"/>
+        <circle cx="200" cy="112" r="52" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+        <!-- Compas / Fiche structurée / Étoile de compétence -->
+        <g transform="translate(152, 64)" fill="none" stroke="#ecfdf5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="48,8 60,34 88,38 68,58 72,86 48,72 24,86 28,58 8,38 36,34" fill="rgba(255,255,255,0.16)"/>
+          <circle cx="48" cy="48" r="10" fill="#5eead4" stroke="none"/>
+        </g>
+        <!-- Lignes techniques -->
+        <path d="M40 40 h45 M40 50 h28 M315 175 h45 M332 185 h28" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+      </svg>`
+  };
+
+  /* ==========================================================================
+     CONFIGURATION DES CATÉGORIES
+     ========================================================================== */
+  const CATEGORIES = {
+    jeux: {
+      title: "Jeux",
+      badge: "Espace Ludique",
+      description: "Mini-jeux, défis interactifs et expériences ludiques.",
+      icon: "🎮",
+      img: "switch"
+    },
+    skill: {
+      title: "Skills",
+      badge: "Atelier & Savoir-faire",
+      description: "Guides pratiques, outils métiers, méthodes et ressources.",
+      icon: "🧩",
+      img: "skill"
+    }
+  };
+
+  const IMAGE_EXT = ["jpg", "jpeg", "png", "webp"];
+  let PAGES = [];
+  let currentSearch = "";
+
+  const app = document.getElementById("app");
+  const pageTitle = document.getElementById("pageTitle");
+  const categoryBadge = document.getElementById("categoryBadge");
+  const subtitle = document.getElementById("subtitle");
+  const breadcrumb = document.getElementById("breadcrumb");
+  const btnSommaire = document.getElementById("btnSommaire");
+  const btnTheme = document.getElementById("btnTheme");
+
+  /* ==========================================================================
+     GESTION DU MODE CLAIR / SOMBRE MANUEL
+     ========================================================================== */
+  function initColorMode() {
+    const saved = localStorage.getItem("catalogue-color-mode");
+    if (saved) document.documentElement.dataset.colorMode = saved;
+    
+    btnTheme.addEventListener("click", () => {
+      const current = document.documentElement.dataset.colorMode;
+      const isDarkSystem = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      let next;
+      if (!current) {
+        next = isDarkSystem ? "light" : "dark";
+      } else {
+        next = current === "dark" ? "light" : "dark";
+      }
+      document.documentElement.dataset.colorMode = next;
+      localStorage.setItem("catalogue-color-mode", next);
+    });
+  }
+
+  /* ==========================================================================
+     1. DÉCOUVERTE DES FICHIERS
+     ========================================================================== */
+  async function listFromDirectory() {
+    const res = await fetch("./");
+    if (!res.ok) throw new Error("listing indisponible");
+    const doc = new DOMParser().parseFromString(await res.text(), "text/html");
+    return [...doc.querySelectorAll("a")]
+      .map(a => decodeURIComponent(a.getAttribute("href") || ""))
+      .filter(h => /^(jeux|skill)[^/]*\.html$/i.test(h))
+      .map(f => ({ file: f }));
+  }
+
+  async function discover() {
+    if (Array.isArray(window.PAGES_DATA) && window.PAGES_DATA.length) {
+      return window.PAGES_DATA;
+    }
+    try {
+      const entries = await listFromDirectory();
+      if (entries.length) return entries;
+    } catch (err) {
+      console.warn("Listing impossible :", err);
+    }
+    return [];
+  }
+
+  /* ==========================================================================
+     2. INFOS DE CHAQUE PAGE
+     ========================================================================== */
+  async function titleOf(file) {
+    try {
+      const res = await fetch(file);
+      const doc = new DOMParser().parseFromString(await res.text(), "text/html");
+      return doc.title.trim() || null;
+    } catch { return null; }
+  }
+
+  function imageExists(src) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(src);
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+  }
+
+  async function findImage(stem) {
+    for (const dir of ["", "images/"]) {
+      for (const ext of IMAGE_EXT) {
+        const ok = await imageExists(`${dir}${stem}.${ext}`);
+        if (ok) return ok;
+      }
+    }
+    return null;
+  }
+
+  function categoryOf(file) {
+    return Object.keys(CATEGORIES).find(k => file.toLowerCase().startsWith(k)) || null;
+  }
+
+  async function loadCategoryIcons() {
+    for (const cat of Object.values(CATEGORIES)) {
+      cat.image = cat.img ? await findImage(cat.img) : null;
+    }
+  }
+
+  async function buildPages() {
+    const entries = await discover();
+    const pages = [];
+    for (const e of entries) {
+      try {
+        const key = categoryOf(e.file);
+        if (!key) continue;
+        const stem = e.file.replace(/\.html$/i, "");
+        pages.push({
+          key,
+          file: e.file,
+          name: e.name || (await titleOf(e.file)) || stem,
+          image: ("image" in e) ? e.image : await findImage(stem)
+        });
+      } catch (err) {
+        console.warn("Page ignorée :", e, err);
+      }
+    }
+    pages.sort((a, b) => a.name.localeCompare(b.name, "fr", { numeric: true }));
+    return pages;
+  }
+
+  /* ==========================================================================
+     3. AFFICHAGE & ACCESSIBILITÉ
+     ========================================================================== */
+  function makeSvgThumb(key) {
+    const div = document.createElement("div");
+    div.className = "thumb-svg";
+    div.setAttribute("aria-hidden", "true");
+    div.innerHTML = ILLUSTRATIONS[key] || ILLUSTRATIONS.skill;
+    return div;
+  }
+
+  function makeCard({ href, name, description, image, key, isCategory = false, count = null }) {
+    const li = document.createElement("li");
+    
+    const a = document.createElement("a");
+    a.className = "card" + (isCategory ? " category" : "");
+    a.href = href;
+    a.dataset.key = key;
+
+    // Zone visuelle (Photo ou Illustration SVG dédiée)
+    const mediaWrap = document.createElement("div");
+    mediaWrap.className = "media-wrap";
+    if (image) {
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = ""; // Décoratif car le lien contient déjà le titre explicite
+      img.loading = "lazy";
+      img.onerror = () => img.replaceWith(makeSvgThumb(key));
+      mediaWrap.appendChild(img);
+    } else {
+      mediaWrap.appendChild(makeSvgThumb(key));
+    }
+    a.appendChild(mediaWrap);
+
+    // Corps de carte
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const titleRow = document.createElement("div");
+    titleRow.className = "card-title-row";
+
+    const titleSpan = document.createElement("span");
+    titleSpan.className = "label";
+    titleSpan.textContent = name;
+    titleRow.appendChild(titleSpan);
+
+    if (count !== null) {
+      const badge = document.createElement("span");
+      badge.className = "count-pill";
+      badge.textContent = `${count} ${count > 1 ? "pages" : "page"}`;
+      titleRow.appendChild(badge);
+    } else {
+      const arrow = document.createElement("span");
+      arrow.className = "card-arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = "→";
+      titleRow.appendChild(arrow);
+    }
+
+    body.appendChild(titleRow);
+
+    if (description) {
+      const desc = document.createElement("p");
+      desc.className = "desc";
+      desc.textContent = description;
+      body.appendChild(desc);
+    }
+
+    a.appendChild(body);
+    li.appendChild(a);
+    return li;
+  }
+
+  function updateHeader({ categoryKey = null, title, badge = "", sub = "" }) {
+    if (categoryKey) {
+      document.documentElement.dataset.category = categoryKey;
+      breadcrumb.innerHTML = `<a href="#">Accueil</a> <span aria-hidden="true">/</span> <span>${title}</span>`;
+      categoryBadge.textContent = badge;
+      categoryBadge.hidden = false;
+    } else {
+      delete document.documentElement.dataset.category;
+      breadcrumb.innerHTML = `<span>Accueil du catalogue</span>`;
+      categoryBadge.hidden = true;
+    }
+    pageTitle.textContent = title;
+    subtitle.textContent = sub;
+    document.title = categoryKey ? `${title} — Mes pages` : "Mes pages — Catalogue";
+  }
+
+  function renderHome() {
+    currentSearch = "";
+    const total = PAGES.length;
+    updateHeader({
+      title: "Mes pages",
+      sub: total ? `Explorez vos ${total} ressources réparties en 2 univers` : "Aucune page trouvée"
+    });
+    btnSommaire.disabled = true;
+    app.innerHTML = "";
+
+    const ul = document.createElement("ul");
+    ul.className = "grid home-grid";
+    ul.setAttribute("aria-label", "Catégories disponibles");
+
+    for (const [key, cat] of Object.entries(CATEGORIES)) {
+      const count = PAGES.filter(p => p.key === key).length;
+      ul.appendChild(makeCard({
+        href: "#" + key,
+        name: cat.title,
+        description: cat.description,
+        image: cat.image,
+        key,
+        isCategory: true,
+        count
+      }));
+    }
+    app.appendChild(ul);
+  }
+
+  function renderCategory(key) {
+    const cat = CATEGORIES[key];
+    const allCatPages = PAGES.filter(p => p.key === key);
+    
+    updateHeader({
+      categoryKey: key,
+      title: cat.title,
+      badge: cat.badge,
+      sub: `${allCatPages.length} ${allCatPages.length > 1 ? "pages disponibles" : "page disponible"}`
+    });
+    btnSommaire.disabled = false;
+    app.innerHTML = "";
+
+    if (!allCatPages.length) {
+      const p = document.createElement("p");
+      p.className = "info";
+      p.textContent = "Aucune page dans cette catégorie pour le moment.";
+      app.appendChild(p);
+      return;
+    }
+
+    // Barre d'outils avec recherche accessible
+    const toolbar = document.createElement("div");
+    toolbar.className = "toolbar";
+    toolbar.innerHTML = `
+      <div class="search-box">
+        <label for="searchInput" class="sr-only">Filtrer les pages dans ${cat.title}</label>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input id="searchInput" class="search-input" type="search" placeholder="Rechercher dans ${cat.title}…" value="${currentSearch}">
+      </div>
+    `;
+    app.appendChild(toolbar);
+
+    const ul = document.createElement("ul");
+    ul.className = "grid";
+    ul.setAttribute("aria-label", `Liste des pages ${cat.title}`);
+    app.appendChild(ul);
+
+    function drawList(query) {
+      ul.innerHTML = "";
+      const q = query.trim().toLowerCase();
+      const filtered = q
+        ? allCatPages.filter(p => p.name.toLowerCase().includes(q) || p.file.toLowerCase().includes(q))
+        : allCatPages;
+
+      subtitle.textContent = q
+        ? `${filtered.length} résultat(s) sur ${allCatPages.length}`
+        : `${allCatPages.length} ${allCatPages.length > 1 ? "pages disponibles" : "page disponible"}`;
+
+      if (!filtered.length) {
+        const li = document.createElement("li");
+        li.className = "info";
+        li.textContent = `Aucune page ne correspond à « ${query} ».`;
+        ul.appendChild(li);
+        return;
+      }
+
+      for (const p of filtered) {
+        ul.appendChild(makeCard({
+          href: p.file,
+          name: p.name,
+          image: p.image,
+          key
+        }));
+      }
+    }
+
+    drawList(currentSearch);
+
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value;
+      drawList(currentSearch);
+    });
+  }
+
+  function route() {
+    const key = location.hash.slice(1);
+    if (CATEGORIES[key]) renderCategory(key);
+    else renderHome();
+  }
+
+  /* ==========================================================================
+     DÉMARRAGE
+     ========================================================================== */
+  (async () => {
+    initColorMode();
+    try {
+      await loadCategoryIcons();
+      PAGES = await buildPages();
+    } catch (err) {
+      console.error(err);
+      PAGES = [];
+    }
+    window.addEventListener("hashchange", route);
+    route();
+    if (!PAGES.length) {
+      subtitle.textContent = "Aucune page trouvée";
+      app.innerHTML = '<p class="info">Vérifiez que <strong>pages.js</strong> existe (lancez <code>generer_pages.py</code>), ou utilisez <code>lancer.py</code>.</p>';
+    }
+  })();
+</script>
+</body>
+</html>
