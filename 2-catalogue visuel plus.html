@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Mes univers — Jeux & Skills</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;transition:background-color .25s,color .25s}
+button,a{font:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+button{cursor:pointer}
+#app{min-height:100vh}
+
+/* =========================================================
+   ACCUEIL : PORTAIL NEUTRE (Variables Clair / Sombre)
+   ========================================================= */
+.home{
+ --h-bg:#f4f6fb;
+ --h-ink:#11162b;
+ --h-kicker:#586280;
+ --h-intro:#4a536e;
+ --h-foot:#6d7694;
+ --h-blob1:#7c5ce628;
+ --h-blob2:#08999328;
+ --h-btn-bg:#ffffffcc;
+ --h-btn-line:#11162b1f;
+ --h-btn-hover:#ffffff;
+ min-height:100vh;
+ padding:clamp(28px,6vw,76px);
+ color:var(--h-ink);
+ background:var(--h-bg);
+ position:relative;
+ overflow:hidden;
+ transition:background .25s,color .25s
+}
+[data-theme="dark"] .home{
+ --h-bg:#0d1020;
+ --h-ink:#f7f8ff;
+ --h-kicker:#aab0ca;
+ --h-intro:#b6bdd2;
+ --h-foot:#747d9b;
+ --h-blob1:#5532a866;
+ --h-blob2:#087d7866;
+ --h-btn-bg:#ffffff12;
+ --h-btn-line:#ffffff28;
+ --h-btn-hover:#ffffff22
+}
+.home:before,.home:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}
+.home:before{width:520px;height:520px;right:-180px;top:-240px;background:radial-gradient(circle,var(--h-blob1),transparent 70%)}
+.home:after{width:480px;height:480px;left:-200px;bottom:-270px;background:radial-gradient(circle,var(--h-blob2),transparent 70%)}
+.home-inner{max-width:1180px;margin:auto;position:relative;z-index:1}
+.home-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.home-kicker{letter-spacing:.22em;text-transform:uppercase;color:var(--h-kicker);font-size:.75rem;font-weight:800}
+.home-theme-btn{border:1px solid var(--h-btn-line);background:var(--h-btn-bg);color:var(--h-ink);border-radius:99px;padding:8px 15px;font-size:.82rem;font-weight:750;backdrop-filter:blur(10px);transition:background .2s,border-color .2s}
+.home-theme-btn:hover{background:var(--h-btn-hover);border-color:currentColor}
+.home h1{font-size:clamp(2.8rem,8vw,6rem);line-height:.95;letter-spacing:-.07em;margin:18px 0}
+.home-intro{color:var(--h-intro);max-width:580px;font-size:1.08rem;line-height:1.7}
+.portals{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+.portal{position:relative;min-height:390px;border-radius:28px;overflow:hidden;text-decoration:none;color:white;padding:30px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid #ffffff22;isolation:isolate;transition:transform .25s,border-color .25s,box-shadow .25s}
+[data-theme="light"] .portal{box-shadow:0 20px 45px #11162b1c}
+.portal:hover{transform:translateY(-7px);border-color:#ffffff88}
+.portal-games{background:radial-gradient(ellipse at 70% 15%,#e52c8c88,transparent 42%),linear-gradient(145deg,#21123e,#090b17 72%)}
+.portal-skills{background:radial-gradient(ellipse at 72% 12%,#55d6bd77,transparent 45%),linear-gradient(145deg,#123a42,#0a1824 75%)}
+.portal-art{position:absolute;inset:0;z-index:-1;opacity:.9}
+.portal-symbol{font-size:5.5rem;position:absolute;right:26px;top:20px;filter:drop-shadow(0 12px 24px #0008)}
+.portal-eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:800;opacity:.8}
+.portal h2{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.06em;margin:10px 0}
+.portal p{max-width:380px;color:#e0e1ef;line-height:1.6;margin:0}
+.portal-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:28px;font-weight:800}
+.portal-count{background:#ffffff20;border:1px solid #ffffff35;border-radius:99px;padding:7px 13px;font-size:.8rem}
+.portal-arrow{font-size:1.8rem}
+.home-foot{margin-top:38px;color:var(--h-foot);font-size:.8rem}
+
+/* =========================================================
+   UNIVERS JEUX : LAUNCHER NÉON (Clair / Sombre)
+   ========================================================= */
+.games{
+ --g-bg:#f6f3fc;
+ --g-top:#f6f3fccc;
+ --g-panel:#ffffff;
+ --g-panel2:#efe8fb;
+ --g-ink:#191229;
+ --g-muted:#5c4e75;
+ --g-line:#1912291a;
+ --g-pink:#d91b7a;
+ --g-purple:#763ee8;
+ --g-glow1:#e6b8e077;
+ --g-glow2:#d3c4f777;
+ --g-btn-bg:#ffffffb8;
+ --g-stat-bg:#ffffffcc;
+ --g-stat-ink:#2f2247;
+ --g-card-bg:linear-gradient(160deg,#ffffff,#f3edfc 75%);
+ --g-card-shadow:0 16px 35px #2e18591c,0 0 22px #d91b7a14;
+ min-height:100vh;
+ background:radial-gradient(ellipse at 82% 0%,var(--g-glow1),transparent 34%),radial-gradient(ellipse at 8% 45%,var(--g-glow2),transparent 35%),var(--g-bg);
+ color:var(--g-ink);
+ padding-bottom:70px;
+ transition:background .25s,color .25s
+}
+[data-theme="dark"] .games{
+ --g-bg:#090811;
+ --g-top:#090811cc;
+ --g-panel:#151222;
+ --g-panel2:#20172d;
+ --g-ink:#f8f4ff;
+ --g-muted:#b7a9c9;
+ --g-line:#ffffff18;
+ --g-pink:#ff3e9d;
+ --g-purple:#9d6bff;
+ --g-glow1:#64245b55;
+ --g-glow2:#35205c55;
+ --g-btn-bg:#ffffff09;
+ --g-stat-bg:#ffffff08;
+ --g-stat-ink:#e8dff3;
+ --g-card-bg:linear-gradient(160deg,#21172d,#110f1b 65%);
+ --g-card-shadow:0 18px 40px #0008,0 0 25px #ff3e9d18
+}
+.game-top{padding:22px clamp(18px,5vw,70px);display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--g-line);background:var(--g-top);backdrop-filter:blur(16px);position:sticky;top:0;z-index:5}
+.game-brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.82rem}
+.game-brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--g-pink),var(--g-purple));color:#fff;display:grid;place-items:center;box-shadow:0 0 25px #ff3e9d55}
+.game-nav{display:flex;gap:9px;flex-wrap:wrap}
+.game-btn{border:1px solid var(--g-line);background:var(--g-btn-bg);color:var(--g-ink);border-radius:10px;padding:9px 14px;font-weight:700;transition:border-color .2s,background .2s}
+.game-btn:hover{border-color:var(--g-pink);background:#ff3e9d18}
+.game-hero{max-width:1320px;margin:0 auto;padding:clamp(38px,7vw,86px) clamp(18px,5vw,70px) 38px;position:relative;overflow:hidden}
+.game-hero:after{content:"";position:absolute;width:360px;height:360px;border:1px solid #ff3e9d33;border-radius:50%;right:7%;top:30px;box-shadow:0 0 0 38px #9d6bff0b,0 0 0 78px #ff3e9d0a;pointer-events:none}
+.game-overline{color:var(--g-pink);font-size:.75rem;font-weight:900;letter-spacing:.24em;text-transform:uppercase}
+.game-hero h1{font-size:clamp(3rem,8vw,7.5rem);line-height:.86;letter-spacing:-.075em;text-transform:uppercase;margin:18px 0;max-width:850px}
+.game-hero h1 span{color:transparent;-webkit-text-stroke:1.5px var(--g-ink)}
+.game-hero p{color:var(--g-muted);max-width:590px;line-height:1.7;font-size:1.05rem}
+.game-statline{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.game-stat{border:1px solid var(--g-line);background:var(--g-stat-bg);padding:9px 13px;border-radius:8px;color:var(--g-stat-ink);font-size:.8rem}
+.game-stat strong{color:var(--g-pink);margin-right:6px}
+.game-section{max-width:1320px;margin:18px auto 0;padding:0 clamp(18px,5vw,70px)}
+.game-section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:20px;border-bottom:1px solid var(--g-line);padding-bottom:15px}
+.game-section-head h2{font-size:1.4rem;text-transform:uppercase;letter-spacing:.1em;margin:0}
+.game-section-head p{margin:0;color:var(--g-muted);font-size:.85rem}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:20px}
+.game-card{min-width:0;background:var(--g-card-bg);border:1px solid var(--g-line);border-radius:15px;overflow:hidden;text-decoration:none;color:var(--g-ink);display:flex;flex-direction:column;transition:transform .22s,border-color .22s,box-shadow .22s}
+.game-card:hover{transform:translateY(-6px);border-color:var(--g-pink);box-shadow:var(--g-card-shadow)}
+.game-cover{aspect-ratio:4/5;position:relative;overflow:hidden;background:radial-gradient(circle at 70% 25%,#ff3e9d77,transparent 35%),linear-gradient(145deg,#39205a,#10101b 70%);display:grid;place-items:center}
+.game-cover img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.game-cover:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#080711cc)}
+.game-cover-fallback{font-size:5rem;filter:drop-shadow(0 8px 18px #0009)}
+.game-cover-index{position:absolute;top:13px;left:13px;z-index:1;background:#090811bb;color:#f8f4ff;border:1px solid #ffffff30;border-radius:6px;padding:5px 9px;font-size:.68rem;font-weight:900;letter-spacing:.13em}
+.game-card-info{padding:16px 17px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.game-card-title{font-weight:850;font-size:1.02rem;line-height:1.3;overflow-wrap:anywhere}
+.game-card-meta{display:flex;justify-content:space-between;gap:8px;color:var(--g-muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em}
+.game-card-cta{color:var(--g-pink);font-weight:900;font-size:.78rem;letter-spacing:.1em;margin-top:6px}
+.game-empty{border:1px dashed var(--g-line);border-radius:16px;padding:42px;text-align:center;color:var(--g-muted)}
+
+/* =========================================================
+   UNIVERS SKILLS : LABORATOIRE (Clair / Sombre)
+   ========================================================= */
+.skills{
+ --s-bg:linear-gradient(135deg,#f5f9f7,#eaf2f2);
+ --s-top:#ffffffd9;
+ --s-paper:#ffffff;
+ --s-sidebar:#ffffffb8;
+ --s-ink:#173b3b;
+ --s-muted:#668080;
+ --s-label:#72918d;
+ --s-line:#d9e7e3;
+ --s-green:#07866f;
+ --s-blue:#2477a8;
+ --s-btn-bg:#ffffff;
+ --s-btn-hover:#effaf6;
+ --s-card-hover:#76b9a9;
+ --s-card-shadow:0 12px 28px #164b4b12;
+ --s-thumb-bg:linear-gradient(145deg,#dff4ed,#dcecf5);
+ --s-thumb-ring:#53a99766;
+ --s-thumb-icon:#087b6b;
+ min-height:100vh;
+ background:var(--s-bg);
+ color:var(--s-ink);
+ padding-bottom:70px;
+ transition:background .25s,color .25s
+}
+[data-theme="dark"] .skills{
+ --s-bg:linear-gradient(135deg,#091416,#0d1d22);
+ --s-top:#0b191cd9;
+ --s-paper:#112327;
+ --s-sidebar:#112327cc;
+ --s-ink:#e3f5f2;
+ --s-muted:#8eb3ad;
+ --s-label:#6ba39b;
+ --s-line:#1f3d42;
+ --s-green:#2dd4bf;
+ --s-blue:#38bdf8;
+ --s-btn-bg:#14292e;
+ --s-btn-hover:#1a363c;
+ --s-card-hover:#2dd4bf88;
+ --s-card-shadow:0 14px 32px #00000055;
+ --s-thumb-bg:linear-gradient(145deg,#143336,#162c3d);
+ --s-thumb-ring:#2dd4bf44;
+ --s-thumb-icon:#2dd4bf
+}
+.skill-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px clamp(18px,5vw,70px);background:var(--s-top);border-bottom:1px solid var(--s-line);position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.skill-brand{display:flex;align-items:center;gap:12px;font-size:.83rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.skill-brand-mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#07866f,#2477a8);color:white;display:grid;place-items:center}
+.skill-nav{display:flex;gap:9px;flex-wrap:wrap}
+.skill-btn{border:1px solid var(--s-line);background:var(--s-btn-bg);color:var(--s-ink);border-radius:9px;padding:9px 14px;font-weight:750;transition:border-color .2s,background .2s}
+.skill-btn:hover{border-color:var(--s-green);background:var(--s-btn-hover)}
+.skill-layout{max-width:1320px;margin:auto;padding:clamp(24px,5vw,62px) clamp(18px,5vw,70px)}
+.lab-hero{background:linear-gradient(115deg,#123e43,#145b59 56%,#176b76);border-radius:22px;color:#f3fffc;padding:clamp(26px,5vw,54px);position:relative;overflow:hidden;box-shadow:0 18px 45px #164b4b22}
+[data-theme="dark"] .lab-hero{background:linear-gradient(115deg,#0d2c30,#114746 56%,#13525b);border:1px solid #2dd4bf26;box-shadow:0 18px 45px #00000044}
+.lab-hero:before{content:"";position:absolute;width:420px;height:420px;border:1px solid #b5fff044;border-radius:50%;right:-65px;top:-230px;box-shadow:0 0 0 36px #b5fff010,0 0 0 78px #b5fff00a}
+.lab-hero:after{content:"";position:absolute;width:180px;height:180px;border:1px solid #b5fff044;border-radius:50%;right:90px;bottom:-130px}
+.lab-kicker{color:#9ce5d4;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;font-weight:900}
+.lab-hero h1{font-size:clamp(2.5rem,6vw,5.3rem);letter-spacing:-.07em;line-height:.95;margin:17px 0;max-width:780px}
+.lab-hero p{max-width:620px;color:#c5e5df;line-height:1.7;margin:0}
+.lab-hero-foot{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.lab-chip{padding:7px 11px;border:1px solid #d8fff033;background:#ffffff0d;border-radius:7px;color:#d8fff0;font-size:.78rem}
+.molecule{position:absolute;right:9%;top:22%;width:180px;height:150px;opacity:.8}
+.molecule svg{width:100%;height:100%}
+.skill-dashboard{display:grid;grid-template-columns:250px 1fr;gap:24px;margin-top:28px;align-items:start}
+.skill-sidebar{background:var(--s-sidebar);border:1px solid var(--s-line);border-radius:16px;padding:22px;position:sticky;top:90px;backdrop-filter:blur(10px)}
+.side-label{font-size:.68rem;letter-spacing:.17em;text-transform:uppercase;color:var(--s-label);font-weight:900}
+.side-stat{padding:17px 0;border-bottom:1px solid var(--s-line)}
+.side-stat:last-child{border:0;padding-bottom:0}
+.side-number{font-size:2rem;letter-spacing:-.06em;font-weight:900;color:var(--s-green)}
+.side-caption{font-size:.82rem;color:var(--s-muted)}
+.skill-content-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:2px 0 18px}
+.skill-content-head h2{font-size:1.45rem;letter-spacing:-.04em;margin:0}
+.skill-content-head p{color:var(--s-muted);font-size:.85rem;margin:5px 0 0}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px}
+.skill-card{background:var(--s-paper);border:1px solid var(--s-line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--s-ink);display:flex;min-height:142px;transition:transform .2s,border-color .2s,box-shadow .2s}
+.skill-card:hover{transform:translateY(-3px);border-color:var(--s-card-hover);box-shadow:var(--s-card-shadow)}
+.skill-thumb{width:94px;flex:0 0 94px;position:relative;background:var(--s-thumb-bg);display:grid;place-items:center;overflow:hidden}
+.skill-thumb:before,.skill-thumb:after{content:"";position:absolute;border:1px solid var(--s-thumb-ring);border-radius:50%;width:70px;height:70px}
+.skill-thumb:after{width:42px;height:42px}
+.skill-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.skill-thumb-icon{font-size:2rem;position:relative;z-index:0;color:var(--s-thumb-icon)}
+.skill-card-body{padding:17px 15px;display:flex;flex-direction:column;justify-content:center;gap:9px;min-width:0}
+.skill-card-title{font-weight:850;line-height:1.3;overflow-wrap:anywhere}
+.skill-card-meta{font-size:.7rem;color:var(--s-muted);letter-spacing:.12em;text-transform:uppercase}
+.skill-card-open{font-size:.77rem;color:var(--s-green);font-weight:850}
+.skill-empty{background:var(--s-paper);border:1px dashed var(--s-line);border-radius:15px;padding:42px;text-align:center;color:var(--s-muted)}
+.page-footer{text-align:center;margin-top:35px;color:var(--s-label);font-size:.78rem}
+.info{grid-column:1/-1;text-align:center;padding:50px 20px;color:inherit;opacity:.7}
+
+@media(max-width:760px){.portals{grid-template-columns:1fr}.portal{min-height:300px}.game-hero:after{right:-190px}.molecule{opacity:.25;right:0}.skill-dashboard{grid-template-columns:1fr}.skill-sidebar{position:static;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.side-label{grid-column:1/-1}.side-stat{border:0;padding:8px 0}.side-number{font-size:1.55rem}}
+@media(max-width:480px){.game-top,.skill-top{padding:14px 16px}.game-brand,.skill-brand{font-size:.68rem;letter-spacing:.06em}.game-btn,.skill-btn{padding:8px 10px;font-size:.8rem}.game-grid,.skill-grid{grid-template-columns:1fr 1fr;gap:11px}.game-cover{aspect-ratio:3/4}.game-card-info{padding:12px}.game-card-title{font-size:.9rem}.skill-card{display:block}.skill-thumb{width:100%;height:100px}.skill-card-body{padding:12px}.skill-sidebar{padding:14px;grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+<script>
+(function(){
+ try{
+  const saved=localStorage.getItem("univers-theme");
+  const prefersDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.theme=saved||(prefersDark?"dark":"light");
+ }catch(e){
+  document.documentElement.dataset.theme="light";
+ }
+})();
+</script>
+</head>
+<body>
+<main id="app" aria-live="polite"><p class="info">Chargement du catalogue…</p></main>
+<script src="pages.js"></script>
+<script>
+"use strict";
+const CATEGORIES={
+ jeux:{title:"Jeux",icon:"🎮",img:"switch"},
+ skill:{title:"Skills",icon:"🧬",img:"skill"}
+};
+const IMAGE_EXT=["jpg","jpeg","png","webp"];
+let PAGES=[];
+const app=document.getElementById("app");
+
+function getTheme(){
+ return document.documentElement.dataset.theme==="dark"?"dark":"light";
+}
+function setTheme(theme){
+ document.documentElement.dataset.theme=theme;
+ try{localStorage.setItem("univers-theme",theme);}catch(e){}
+ document.querySelectorAll("[data-theme-toggle]").forEach(updateThemeButton);
+}
+function updateThemeButton(btn){
+ const isDark=getTheme()==="dark";
+ btn.textContent=isDark?"☀ Mode clair":"☾ Mode sombre";
+ btn.setAttribute("aria-pressed",String(isDark));
+ btn.title=isDark?"Passer en mode clair":"Passer en mode sombre";
+}
+function themeButton(cls){
+ const btn=el("button",cls);
+ btn.type="button";
+ btn.dataset.themeToggle="1";
+ updateThemeButton(btn);
+ btn.addEventListener("click",()=>setTheme(getTheme()==="dark"?"light":"dark"));
+ return btn;
+}
+
+async function listFromDirectory(){
+ const res=await fetch("./");
+ if(!res.ok)throw new Error("listing indisponible");
+ const doc=new DOMParser().parseFromString(await res.text(),"text/html");
+ return [...doc.querySelectorAll("a")].map(a=>decodeURIComponent(a.getAttribute("href")||""))
+  .filter(h=>/^(jeux|skill)[^/]*\.html$/i.test(h)).map(file=>({file}));
+}
+async function discover(){
+ if(Array.isArray(window.PAGES_DATA)&&window.PAGES_DATA.length)return window.PAGES_DATA;
+ try{const entries=await listFromDirectory();if(entries.length)return entries;}catch(err){console.warn("Listing impossible :",err);}
+ return [];
+}
+async function titleOf(file){
+ try{const res=await fetch(file);if(!res.ok)return null;const doc=new DOMParser().parseFromString(await res.text(),"text/html");return doc.title.trim()||null;}catch{return null;}
+}
+function imageExists(src){return new Promise(resolve=>{const img=new Image();img.onload=()=>resolve(src);img.onerror=()=>resolve(null);img.src=src;});}
+async function findImage(stem){
+ for(const dir of ["","images/"])for(const ext of IMAGE_EXT){const ok=await imageExists(`${dir}${stem}.${ext}`);if(ok)return ok;}
+ return null;
+}
+function categoryOf(file){return Object.keys(CATEGORIES).find(k=>file.toLowerCase().startsWith(k))||null;}
+async function buildPages(){
+ const entries=await discover(),pages=[];
+ for(const e of entries){
+  try{
+   const key=categoryOf(e.file);if(!key)continue;
+   const stem=e.file.replace(/\.html$/i,"");
+   pages.push({key,file:e.file,name:e.name||(await titleOf(e.file))||stem,image:("image" in e)?e.image:await findImage(stem)});
+  }catch(err){console.warn("Page ignorée :",e,err);}
+ }
+ return pages.sort((a,b)=>a.name.localeCompare(b.name,"fr",{numeric:true}));
+}
+async function loadCategoryIcons(){
+ for(const cat of Object.values(CATEGORIES))cat.image=cat.img?await findImage(cat.img):null;
+}
+function el(tag,cls,text){
+ const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;
+}
+function navButton(label,action,cls){
+ const b=el("button",cls,label);b.type="button";b.addEventListener("click",action);return b;
+}
+function imageNode(src,alt=""){
+ const img=el("img");img.src=src;img.alt=alt;img.loading="lazy";return img;
+}
+function renderHome(){
+ const root=el("section","home"),inner=el("div","home-inner");
+ const top=el("div","home-top");
+ top.append(el("div","home-kicker","Bibliothèque personnelle · Deux espaces"),themeButton("home-theme-btn"));
+ inner.append(top);
+ inner.append(el("h1","","Explorez vos univers."));
+ inner.append(el("p","home-intro","Un espace pour jouer, un espace pour apprendre. Choisissez votre univers : chacun possède désormais sa propre interface."));
+ const portals=el("div","portals");
+ const configs=[
+  {key:"jeux",cls:"portal portal-games",eyebrow:"Arcade · Collection",desc:"Retrouvez vos jeux dans un launcher sombre, immersif et électrique.",symbol:"🎮"},
+  {key:"skill",cls:"portal portal-skills",eyebrow:"Laboratoire · Connaissances",desc:"Explorez vos compétences dans un tableau de bord clair, structuré et scientifique.",symbol:"⚛"}
+ ];
+ for(const c of configs){
+  const count=PAGES.filter(p=>p.key===c.key).length;
+  const a=el("a",c.cls);a.href="#"+c.key;
+  const art=el("div","portal-art");art.setAttribute("aria-hidden","true");a.append(art);
+  a.append(el("div","portal-symbol",c.symbol),el("div","portal-eyebrow",c.eyebrow),el("h2","",CATEGORIES[c.key].title),el("p","",c.desc));
+  const bottom=el("div","portal-bottom");bottom.append(el("span","portal-count",count+" élément(s)"),el("span","portal-arrow","↗"));a.append(bottom);portals.append(a);
+ }
+ inner.append(portals,el("div","home-foot","Catalogue local · Les pages et images restent chargées depuis vos fichiers"));
+ root.append(inner);app.replaceChildren(root);
+}
+function renderGames(){
+ const pages=PAGES.filter(p=>p.key==="jeux");
+ const root=el("section","games");
+ const top=el("header","game-top"),brand=el("div","game-brand");
+ brand.append(el("span","game-brand-mark","✦"),el("span","","GAME LIBRARY"));
+ const nav=el("nav","game-nav");nav.setAttribute("aria-label","Navigation");
+ nav.append(themeButton("game-btn"),navButton("← Retour",()=>history.back(),"game-btn"),navButton("⌂ Sommaire",()=>location.hash="","game-btn"));
+ top.append(brand,nav);
+ const hero=el("section","game-hero");hero.append(el("div","game-overline","Player one · Bibliothèque"));
+ const h=el("h1");h.append(document.createTextNode("Choisissez votre "),el("span","","prochain jeu"));
+ hero.append(h,el("p","","Votre collection, présentée comme un launcher : jaquettes en grand format, ambiance néon et accès direct à chaque page."));
+ const stats=el("div","game-statline");stats.append(el("div","game-stat",`${pages.length} jeu(x) dans la bibliothèque`),el("div","game-stat","MODE · EXPLORATION"));hero.append(stats);
+ const section=el("section","game-section"),head=el("div","game-section-head");
+ head.append(el("h2","","Votre collection"),el("p","",`${String(pages.length).padStart(2,"0")} TITRES`));section.append(head);
+ if(!pages.length)section.append(el("div","game-empty","Aucun jeu trouvé dans cette catégorie."));
+ else{
+  const grid=el("div","game-grid");
+  pages.forEach((p,i)=>{
+   const a=el("a","game-card");a.href=p.file;
+   const cover=el("div","game-cover"),index=el("span","game-cover-index",`GAME ${String(i+1).padStart(2,"0")}`);
+   cover.append(el("span","game-cover-fallback","🎮"),index);
+   if(p.image){const img=imageNode(p.image,p.name);img.onerror=()=>img.remove();cover.append(img);}
+   const info=el("div","game-card-info");info.append(el("div","game-card-meta","Bibliothèque · Jeu"),el("div","game-card-title",p.name),el("div","game-card-cta","LANCER LA PAGE ↗"));
+   a.append(cover,info);grid.append(a);
+  });
+  section.append(grid);
+ }
+ root.append(top,hero,section);app.replaceChildren(root);
+}
+function renderSkills(){
+ const pages=PAGES.filter(p=>p.key==="skill");
+ const root=el("section","skills");
+ const top=el("header","skill-top"),brand=el("div","skill-brand");
+ brand.append(el("span","skill-brand-mark","⌬"),el("span","","SKILLS LAB / KNOWLEDGE BASE"));
+ const nav=el("nav","skill-nav");nav.setAttribute("aria-label","Navigation");
+ nav.append(themeButton("skill-btn"),navButton("← Retour",()=>history.back(),"skill-btn"),navButton("Sommaire",()=>location.hash="","skill-btn"));
+ top.append(brand,nav);
+ const layout=el("div","skill-layout"),hero=el("section","lab-hero");
+ hero.append(el("div","lab-kicker","Centre de recherche · Espace de compétences"),el("h1","","Cartographier les savoirs."));
+ hero.append(el("p","","Un environnement de travail lumineux pour consulter vos skills, méthodes et outils. Chaque fiche est organisée comme une ressource de laboratoire."));
+ const chips=el("div","lab-hero-foot");chips.append(el("span","lab-chip","BASE DE CONNAISSANCES"),el("span","lab-chip","RESSOURCES & MÉTHODES"),el("span","lab-chip","EXPLORATION"));hero.append(chips);
+ const molecule=el("div","molecule");molecule.setAttribute("aria-hidden","true");
+ molecule.innerHTML='<svg viewBox="0 0 180 150" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#b5fff0" stroke-width="2"><path d="M40 75 90 35 140 75 90 115Z"/><path d="M40 75 90 75 140 75M90 35V115"/></g><g fill="#a8f5df" stroke="#eafffa" stroke-width="2"><circle cx="40" cy="75" r="9"/><circle cx="90" cy="35" r="9"/><circle cx="140" cy="75" r="9"/><circle cx="90" cy="115" r="9"/><circle cx="90" cy="75" r="7"/></g></svg>';
+ hero.append(molecule);
+ const dashboard=el("div","skill-dashboard"),sidebar=el("aside","skill-sidebar");
+ sidebar.append(el("div","side-label","Vue d’ensemble"));
+ const stat1=el("div","side-stat");stat1.append(el("div","side-number",String(pages.length).padStart(2,"0")),el("div","side-caption","Skills disponibles"));
+ const stat2=el("div","side-stat");stat2.append(el("div","side-number","01"),el("div","side-caption","Base locale"));
+ const stat3=el("div","side-stat");stat3.append(el("div","side-number","∞"),el("div","side-caption","Possibilités d’apprentissage"));
+ sidebar.append(stat1,stat2,stat3);
+ const content=el("section","skill-content"),head=el("div","skill-content-head");
+ const titleWrap=el("div");titleWrap.append(el("h2","","Ressources disponibles"),el("p","","Sélectionnez une fiche pour ouvrir sa page détaillée."));
+ head.append(titleWrap,el("span","side-label",`${pages.length} FICHE(S)`));content.append(head);
+ if(!pages.length)content.append(el("div","skill-empty","Aucun skill trouvé dans cette catégorie."));
+ else{
+  const grid=el("div","skill-grid");
+  pages.forEach(p=>{
+   const a=el("a","skill-card");a.href=p.file;
+   const thumb=el("div","skill-thumb");thumb.append(el("span","skill-thumb-icon","⌬"));
+   if(p.image){const img=imageNode(p.image,p.name);img.onerror=()=>img.remove();thumb.append(img);}
+   const body=el("div","skill-card-body");body.append(el("div","skill-card-meta","Fiche ressource"),el("div","skill-card-title",p.name),el("div","skill-card-open","Consulter la fiche ↗"));
+   a.append(thumb,body);grid.append(a);
+  });
+  content.append(grid);
+ }
+ dashboard.append(sidebar,content);layout.append(hero,dashboard,el("div","page-footer","SKILLS LAB · Votre espace de connaissances personnel"));root.append(top,layout);app.replaceChildren(root);
+}
+function route(){
+ const key=location.hash.slice(1).toLowerCase();
+ if(key==="jeux")renderGames();else if(key==="skill")renderSkills();else renderHome();
+}
+(async()=>{
+ try{await loadCategoryIcons();PAGES=await buildPages();}
+ catch(err){console.error(err);PAGES=[];}
+ window.addEventListener("hashchange",route);route();
+ if(!PAGES.length){
+  const note=el("p","info","Aucune page trouvée. Vérifiez que pages.js existe (lancez generer_pages.py), ou ouvrez le catalogue avec un serveur local pour permettre la découverte du dossier.");
+  app.append(note);
+ }
+})();
+</script>
+</body>
+</html>

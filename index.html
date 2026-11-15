@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mes pages — Catalogue</title>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mes pages — Catalogue</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230f172a'/%3E%3Cg stroke='url(%23g)' stroke-width='2.5' opacity='0.85'%3E%3Cline x1='15' y1='20' x2='32' y2='14'/%3E%3Cline x1='15' y1='20' x2='32' y2='32'/%3E%3Cline x1='15' y1='20' x2='32' y2='50'/%3E%3Cline x1='15' y1='44' x2='32' y2='14'/%3E%3Cline x1='15' y1='44' x2='32' y2='32'/%3E%3Cline x1='15' y1='44' x2='32' y2='50'/%3E%3Cline x1='32' y1='14' x2='49' y2='32'/%3E%3Cline x1='32' y1='32' x2='49' y2='32'/%3E%3Cline x1='32' y1='50' x2='49' y2='32'/%3E%3C/g%3E%3Ccircle cx='15' cy='20' r='4.5' fill='%2338bdf8'/%3E%3Ccircle cx='15' cy='44' r='4.5' fill='%2338bdf8'/%3E%3Ccircle cx='32' cy='14' r='4.5' fill='%23818cf8'/%3E%3Ccircle cx='32' cy='32' r='4.5' fill='%23818cf8'/%3E%3Ccircle cx='32' cy='50' r='4.5' fill='%23818cf8'/%3E%3Ccircle cx='49' cy='32' r='5.5' fill='%23c084fc'/%3E%3C/svg%3E">
 <style>
   /* ==========================================================================
@@ -525,6 +521,25 @@
     --accent-ink: #5eead4;
   }
 
+  /* Vignette Cuisine (lien direct vers le carnet) */
+  .card.category[data-key="cuisine"] {
+    --accent: #ea580c;
+    --accent-soft: #ffedd5;
+    --accent-ink: #9a3412;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-color-mode="light"]) .card.category[data-key="cuisine"] {
+      --accent: #fb923c;
+      --accent-soft: rgba(251, 146, 60, 0.18);
+      --accent-ink: #fdba74;
+    }
+  }
+  :root[data-color-mode="dark"] .card.category[data-key="cuisine"] {
+    --accent: #fb923c;
+    --accent-soft: rgba(251, 146, 60, 0.18);
+    --accent-ink: #fdba74;
+  }
+
   .card.category .media-wrap {
     aspect-ratio: 16 / 9;
   }
@@ -670,6 +685,29 @@
         </g>
         <!-- Lignes techniques -->
         <path d="M40 40 h45 M40 50 h28 M315 175 h45 M332 185 h28" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+      </svg>`,
+    cuisine: `
+      <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-cuisine" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7c2d12"/>
+            <stop offset="55%" stop-color="#c2410c"/>
+            <stop offset="100%" stop-color="#fb923c"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="225" fill="url(#g-cuisine)"/>
+        <!-- Poêle vue de dessus -->
+        <circle cx="190" cy="115" r="66" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.45)" stroke-width="3"/>
+        <circle cx="190" cy="115" r="42" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+        <path d="M256 115 h70" stroke="#fff7ed" stroke-width="9" stroke-linecap="round"/>
+        <!-- Vapeur -->
+        <path d="M172 32 q-10 -12 0 -24 M190 32 q-10 -12 0 -24 M208 32 q-10 -12 0 -24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3" stroke-linecap="round"/>
+        <!-- Ingrédients -->
+        <circle cx="180" cy="108" r="7" fill="#fde047"/>
+        <circle cx="200" cy="125" r="6" fill="#86efac"/>
+        <circle cx="186" cy="132" r="5" fill="#fecaca"/>
+        <!-- Lignes techniques -->
+        <path d="M40 40 h45 M40 50 h28 M315 175 h45 M332 185 h28" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
       </svg>`
   };
 
@@ -691,6 +729,16 @@
       icon: "🧩",
       img: "skill"
     }
+  };
+
+  /* Vignette de sélection : lance l'index du carnet de cuisine */
+  const CUISINE_TILE = {
+    key: "cuisine",
+    href: "Mon-Carnet-de-Cuisine-IA-navigateur/index.html",
+    title: "Mon Carnet de Cuisine",
+    description: "Recettes et carnet de cuisine, à consulter directement dans le navigateur.",
+    img: "cuisine",
+    image: null
   };
 
   const IMAGE_EXT = ["jpg", "jpeg", "png", "webp"];
@@ -790,6 +838,7 @@
     for (const cat of Object.values(CATEGORIES)) {
       cat.image = cat.img ? await findImage(cat.img) : null;
     }
+    CUISINE_TILE.image = await findImage(CUISINE_TILE.img);
   }
 
   async function buildPages() {
@@ -908,7 +957,7 @@
     const total = PAGES.length;
     updateHeader({
       title: "Mes pages",
-      sub: total ? `Explorez vos ${total} ressources réparties en 2 univers` : "Aucune page trouvée"
+      sub: total ? `Explorez vos ${total} ressources réparties en 3 univers` : "Aucune page trouvée"
     });
     btnSommaire.disabled = true;
     app.innerHTML = "";
@@ -929,6 +978,14 @@
         count
       }));
     }
+    ul.appendChild(makeCard({
+      href: CUISINE_TILE.href,
+      name: CUISINE_TILE.title,
+      description: CUISINE_TILE.description,
+      image: CUISINE_TILE.image,
+      key: CUISINE_TILE.key,
+      isCategory: true
+    }));
     app.appendChild(ul);
   }
 
