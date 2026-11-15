@@ -70,7 +70,12 @@
     const text = document.querySelector('#githubSyncLabel');
     const button = document.querySelector('#githubSyncButton');
     if (text) text.textContent = label;
-    if (button && title) button.title = title;
+    if (button) {
+      const synced = label === 'À jour' && githubLastSynced !== null && recipeSnapshot() === githubLastSynced;
+      button.classList.toggle('is-synced', synced);
+      button.classList.toggle('is-unsynced', !synced);
+      if (title) button.title = title;
+    }
   }
 
   function openSyncDialog() {
