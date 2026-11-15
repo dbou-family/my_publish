@@ -1,21 +1,28 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T18:35:11.001Z",
+  "updatedAt": "2026-11-15T18:36:11.100Z",
   "recipes": [
     {
-      "id": "r1794767710260",
+      "id": "r1794767750366",
       "name": "Canard au poireau",
       "category": "Entrée",
       "time": 30,
       "servings": 4,
       "difficulty": "Facile",
-      "image": "",
+      "image": "https://api.openverse.org/v1/images/ab989d82-0b7f-4c44-8265-1ee831edc311/thumb/",
       "description": "Une délicieuse recette à partager.",
       "ingredients": [],
       "steps": [],
       "favorite": false,
-      "createdAt": "2026-11-15T18:35:10.260Z",
-      "imageSearchState": "pending"
+      "createdAt": "2026-11-15T18:35:50.366Z",
+      "imageSearchState": "found",
+      "imageCredit": "Romainbehar",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/User:Romainbehar",
+      "imageSourceUrl": "https://commons.wikimedia.org/w/index.php?curid=87745773",
+      "imageLicense": "cc0",
+      "imageLicenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+      "imageProvider": "Openverse",
+      "imageTitle": "Lyon 7e - Rue de Bonald - Restaurant Kuro Goma, kamo nanban soba"
     },
     {
       "id": "r1794757630115",
