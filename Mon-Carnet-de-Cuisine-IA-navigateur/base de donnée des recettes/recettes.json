@@ -1,7 +1,22 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T18:36:11.100Z",
+  "updatedAt": "2026-11-15T18:36:50.017Z",
   "recipes": [
+    {
+      "id": "r1794767809193",
+      "name": "pates au saumon et des pates",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "",
+      "description": "Une délicieuse recette à partager.",
+      "ingredients": [],
+      "steps": [],
+      "favorite": false,
+      "createdAt": "2026-11-15T18:36:49.193Z",
+      "imageSearchState": "pending"
+    },
     {
       "id": "r1794767750366",
       "name": "Canard au poireau",
