@@ -14,7 +14,9 @@ Ouvrez `index.html` pour parcourir le carnet. Les fonctions classiques sont disp
 - Extraction de texte visible sur une photo ou de texte de recette fourni.
 - Recherche d’image Openverse quand une recette est enregistrée sans photo, avec crédit et licence quand disponibles.
 
-Les recettes et favoris sont conservés dans le stockage local du navigateur sur cet appareil. Ils ne sont pas envoyés à un serveur.
+Par défaut, les recettes et favoris sont conservés dans le stockage local du navigateur sur cet appareil. Le bouton **Synchroniser** permet de partager le carnet entre plusieurs ordinateurs avec le dépôt GitHub `dbou-family/my_publish`. Il faut connecter chaque navigateur avec un jeton finement limité à ce dépôt et autorisant `Contents: Read and write`. Le jeton reste dans le stockage local de ce navigateur.
+
+La base partagée est enregistrée dans `base de donnée des recettes/recettes.json`. Le dépôt GitHub est public : les recettes qui y sont synchronisées sont visibles publiquement. Sans connexion GitHub, l’application continue de fonctionner en mode local.
 
 ## IA sans clé API ni installation
 
