@@ -42,11 +42,12 @@
         </div>
 
         <div class="flex items-center gap-3 w-full sm:w-auto">
+            <a href="../index.html" title="Retour au sommaire" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                Sommaire
+            </a>
             <input type="text" id="searchInput" placeholder="Rechercher un cocktail..." 
                 class="bg-slate-800 border border-slate-700 text-sm rounded-lg px-4 py-2 text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 w-full sm:w-64 transition">
-            <button onclick="openStockModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-lg text-sm transition whitespace-nowrap">
-                Mon stock
-            </button>
             <button onclick="openModal()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2 whitespace-nowrap shadow-lg shadow-amber-500/10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 Nouvelle Recette
@@ -59,12 +60,11 @@
         
         <!-- Filtres par catégorie -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2" id="categoryFilters">
-            <button onclick="filterCategory('Tous')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950 whitespace-nowrap">Tous</button>
-            <button onclick="filterCategory('Alcoolisé')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Alcoolisé</button>
-            <button onclick="filterCategory('Sans alcool')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Sans alcool</button>
-            <button onclick="filterCategory('Tiki')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Tiki</button>
-            <button onclick="filterCategory('Chaud')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Chaud</button>
-            <button id="makeableBtn" onclick="toggleMakeable()" class="makeable-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Réalisables</button>
+            <button onclick="filterCategory('Tous')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950">Tous</button>
+            <button onclick="filterCategory('Alcoolisé')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Alcoolisé</button>
+            <button onclick="filterCategory('Sans alcool')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Sans alcool</button>
+            <button onclick="filterCategory('Tiki')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Tiki</button>
+            <button onclick="filterCategory('Chaud')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Chaud</button>
         </div>
 
         <!-- Grille des cocktails -->
@@ -152,29 +152,6 @@
         </div>
     </div>
 
-    <!-- Modal Mon stock -->
-    <div id="stockModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl">
-            <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
-                <h3 class="text-lg font-bold text-white">Mon stock d'ingrédients</h3>
-                <button onclick="closeModal('stockModal')" class="text-slate-400 hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
-            <div class="p-6 flex flex-col gap-4">
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Ingrédients disponibles (un par ligne)</label>
-                    <textarea id="stockInput" rows="8" placeholder="Rhum blanc&#10;Lime&#10;Menthe&#10;Bourbon" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
-                    <p class="text-xs text-slate-500 mt-2">Écrivez le nom court de l'ingrédient : « Rhum » suffit pour « 6 cl de Rhum blanc ».</p>
-                </div>
-                <div class="flex justify-end gap-3 pt-4 border-t border-slate-800">
-                    <button type="button" onclick="closeModal('stockModal')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition">Annuler</button>
-                    <button type="button" onclick="saveStock()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm transition shadow-lg shadow-amber-500/10">Enregistrer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Script Logique Application -->
     <script>
         // Données initiales par défaut
@@ -215,28 +192,10 @@
 
         let recipes = JSON.parse(localStorage.getItem('barcraft_recipes')) || defaultRecipes;
         let currentFilter = 'Tous';
-        let stock = JSON.parse(localStorage.getItem('barcraft_stock')) || [];
-        let onlyMakeable = false;
-        const BASE_INGREDIENTS = ['eau', 'glacon', 'glace'];
 
         // Sauvegarde dans le localStorage
         function saveRecipes() {
             localStorage.setItem('barcraft_recipes', JSON.stringify(recipes));
-        }
-
-        // Minuscules et sans accents, pour comparer « Glaçons » et « glacons »
-        function normalize(str) {
-            return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-        }
-
-        // Une recette est réalisable si chacun de ses ingrédients figure dans le stock
-        function isMakeable(recipe) {
-            const available = stock.map(normalize);
-            return recipe.ingredients.every(ing => {
-                const n = normalize(ing);
-                if (BASE_INGREDIENTS.some(b => n.includes(b))) return true;
-                return available.some(item => n.includes(item));
-            });
         }
 
         // Affichage des recettes
@@ -248,7 +207,7 @@
                 const matchCategory = filter === 'Tous' || r.category === filter;
                 const matchSearch = r.name.toLowerCase().includes(search.toLowerCase()) || 
                                     r.ingredients.some(i => i.toLowerCase().includes(search.toLowerCase()));
-                return matchCategory && matchSearch && (!onlyMakeable || isMakeable(r));
+                return matchCategory && matchSearch;
             });
 
             if (filtered.length === 0) {
@@ -270,7 +229,6 @@
                         <div class="absolute top-3 left-3">
                             <span class="px-3 py-1 bg-slate-950/70 backdrop-blur-md text-amber-400 text-xs font-semibold rounded-full border border-slate-800">${recipe.category}</span>
                         </div>
-                        ${isMakeable(recipe) ? '<span class="absolute top-3 right-3 px-2 py-1 bg-emerald-500 text-slate-950 text-[10px] font-bold rounded-full">Prêt</span>' : ''}
                     </div>
                     <div class="p-5 flex flex-col flex-1 justify-between gap-4">
                         <div>
@@ -292,20 +250,11 @@
             currentFilter = category;
             document.querySelectorAll('.category-btn').forEach(btn => {
                 if(btn.textContent === category) {
-                    btn.className = "category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950 whitespace-nowrap";
+                    btn.className = "category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950";
                 } else {
-                    btn.className = "category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap";
+                    btn.className = "category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700";
                 }
             });
-            renderRecipes(currentFilter, document.getElementById('searchInput').value);
-        }
-
-        // Filtre « Réalisables »
-        function toggleMakeable() {
-            onlyMakeable = !onlyMakeable;
-            document.getElementById('makeableBtn').className = onlyMakeable
-                ? "makeable-btn px-4 py-2 rounded-full text-xs font-medium transition bg-emerald-500 text-slate-950 whitespace-nowrap"
-                : "makeable-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap";
             renderRecipes(currentFilter, document.getElementById('searchInput').value);
         }
 
@@ -345,22 +294,6 @@
         function openModal() {
             document.getElementById('recipeForm').reset();
             document.getElementById('addModal').classList.remove('hidden');
-        }
-
-        // Mon stock
-        function openStockModal() {
-            document.getElementById('stockInput').value = stock.join('\n');
-            document.getElementById('stockModal').classList.remove('hidden');
-        }
-
-        function saveStock() {
-            stock = document.getElementById('stockInput').value
-                .split('\n')
-                .map(s => s.trim())
-                .filter(Boolean);
-            localStorage.setItem('barcraft_stock', JSON.stringify(stock));
-            closeModal('stockModal');
-            renderRecipes(currentFilter, document.getElementById('searchInput').value);
         }
 
         // Suppression d'une recette
