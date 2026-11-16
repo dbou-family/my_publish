@@ -708,6 +708,29 @@
         <circle cx="186" cy="132" r="5" fill="#fecaca"/>
         <!-- Lignes techniques -->
         <path d="M40 40 h45 M40 50 h28 M315 175 h45 M332 185 h28" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+      </svg>`,
+    cocktail: `
+      <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-cocktail" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4c0519"/>
+            <stop offset="55%" stop-color="#be185d"/>
+            <stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="225" fill="url(#g-cocktail)"/>
+        <circle cx="300" cy="60" r="34" fill="rgba(255,255,255,0.12)"/>
+        <!-- Verre à cocktail -->
+        <path d="M150 62 h100 l-50 62 z" fill="rgba(255,255,255,0.22)" stroke="#fff7ed" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M200 124 v58 M162 184 h76" stroke="#fff7ed" stroke-width="5" stroke-linecap="round"/>
+        <!-- Liquide et garniture -->
+        <path d="M168 84 h64 l-32 36 z" fill="#fde047"/>
+        <path d="M236 52 l18 -30" stroke="#86efac" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="256" cy="20" r="6" fill="#fb7185"/>
+        <!-- Bulles -->
+        <circle cx="120" cy="150" r="4" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="280" cy="160" r="3" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="90" cy="110" r="2.5" fill="rgba(255,255,255,0.5)"/>
       </svg>`
   };
 
@@ -738,6 +761,16 @@
     title: "Mon Carnet de Cuisine",
     description: "Recettes et carnet de cuisine, à consulter directement dans le navigateur.",
     img: "cuisine",
+    image: null
+  };
+
+  /* Vignette de sélection : lance l'index du bar à cocktails */
+  const BAR_TILE = {
+    key: "cocktail",
+    href: "bar-a-cocktails/index.html",
+    title: "Mon Bar à Cocktails",
+    description: "Recettes de cocktails et index du bar, à consulter directement dans le navigateur.",
+    img: "cocktail",
     image: null
   };
 
@@ -839,6 +872,7 @@
       cat.image = cat.img ? await findImage(cat.img) : null;
     }
     CUISINE_TILE.image = await findImage(CUISINE_TILE.img);
+    BAR_TILE.image = await findImage(BAR_TILE.img);
   }
 
   async function buildPages() {
@@ -984,6 +1018,14 @@
       description: CUISINE_TILE.description,
       image: CUISINE_TILE.image,
       key: CUISINE_TILE.key,
+      isCategory: true
+    }));
+    ul.appendChild(makeCard({
+      href: BAR_TILE.href,
+      name: BAR_TILE.title,
+      description: BAR_TILE.description,
+      image: BAR_TILE.image,
+      key: BAR_TILE.key,
       isCategory: true
     }));
     app.appendChild(ul);

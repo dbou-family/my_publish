@@ -10,6 +10,7 @@ async function getModel() {
     let adapter = null;
     try { adapter = self.navigator.gpu ? await self.navigator.gpu.requestAdapter() : null; } catch {}
     modelDevice = adapter ? 'webgpu' : 'wasm';
+    self.postMessage({status:'hardware', backend:modelDevice});
     modelPromise = AutoModelForVision2Seq.from_pretrained(MODEL, {
       dtype: adapter ? 'fp32' : 'q8',
       device: modelDevice,
@@ -21,7 +22,7 @@ async function getModel() {
 }
 self.onmessage = async ({data}) => {
   try {
-    if (data.type === 'load') { await getModel(); self.postMessage({status:'ready', backend:modelDevice}); return; }
+    if (data.type === 'load') { await getModel(); self.postMessage({status:'loading', data:'Fichiers reçus : préparation du modèle en mémoire.'}); self.postMessage({status:'ready', backend:modelDevice}); return; }
     if (data.type !== 'generate') return;
     const [processor, model] = await getModel();
     const messages = [{role:'user',content:[...(data.data.image?[{type:'image',image:data.data.image}]:[]),{type:'text',text:data.data.prompt}]}];

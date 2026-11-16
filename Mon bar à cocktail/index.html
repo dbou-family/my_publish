@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarCraft - Gestionnaire de Cocktails Pro</title>
+    <!-- Favicon : Bouteille de champagne (SVG encodé) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23d97706%22><path d=%22M15 2H9v2h6V2zm-4 4h2v3h-2V6zm0 5h2v2h-2v-2zm-1.5 4h5l1 7H8.5l1-7zM12 1a1 1 0 00-1 1v1h2V2a1 1 0 00-1-1z%22/></svg>">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cocktail: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#f59e0b',
+                            hover: '#d97706'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cocktail-dark text-slate-100 h-full flex flex-col font-sans selection:bg-amber-500 selection:text-white">
+
+    <!-- En-tête -->
+    <header class="bg-slate-900/80 backdrop-blur border-b border-slate-800 sticky top-0 z-50 px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <div class="bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20 text-amber-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight text-white">BarCraft Pro</h1>
+                <p class="text-xs text-slate-400">Gestion moderne de recettes et bar à cocktails</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+            <input type="text" id="searchInput" placeholder="Rechercher un cocktail..." 
+                class="bg-slate-800 border border-slate-700 text-sm rounded-lg px-4 py-2 text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 w-full sm:w-64 transition">
+            <button onclick="openStockModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-2 rounded-lg text-sm transition whitespace-nowrap">
+                Mon stock
+            </button>
+            <button onclick="openModal()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2 whitespace-nowrap shadow-lg shadow-amber-500/10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Nouvelle Recette
+            </button>
+        </div>
+    </header>
+
+    <!-- Corps de page -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 flex flex-col gap-6">
+        
+        <!-- Filtres par catégorie -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2" id="categoryFilters">
+            <button onclick="filterCategory('Tous')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950 whitespace-nowrap">Tous</button>
+            <button onclick="filterCategory('Alcoolisé')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Alcoolisé</button>
+            <button onclick="filterCategory('Sans alcool')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Sans alcool</button>
+            <button onclick="filterCategory('Tiki')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Tiki</button>
+            <button onclick="filterCategory('Chaud')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Chaud</button>
+            <button id="makeableBtn" onclick="toggleMakeable()" class="makeable-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Réalisables</button>
+        </div>
+
+        <!-- Grille des cocktails -->
+        <div id="recipeGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Injecté dynamiquement par JS -->
+        </div>
+    </main>
+
+    <!-- Modal Détails Recette -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-150">
+            <div class="relative h-64 sm:h-72">
+                <img id="detailImage" src="" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 bg-slate-950/60 hover:bg-slate-950 text-white p-2 rounded-full transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <div class="absolute bottom-4 left-6 right-6">
+                    <span id="detailCategory" class="px-3 py-1 bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-semibold rounded-full"></span>
+                    <h2 id="detailTitle" class="text-3xl font-extrabold text-white mt-2"></h2>
+                </div>
+            </div>
+            <div class="p-6 flex flex-col gap-6 max-h-[60vh] overflow-y-auto">
+                <div>
+                    <h3 class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-3">Ingrédients</h3>
+                    <ul id="detailIngredients" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300"></ul>
+                </div>
+                <div>
+                    <h3 class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Préparation</h3>
+                    <p id="detailInstructions" class="text-sm text-slate-300 leading-relaxed bg-slate-800/50 p-4 rounded-xl border border-slate-800"></p>
+                </div>
+                <div class="flex justify-end gap-3 pt-2 border-t border-slate-800">
+                    <button id="deleteBtn" class="px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 rounded-lg text-sm font-medium transition">Supprimer</button>
+                    <button onclick="closeModal('detailModal')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ajout Recette -->
+    <div id="addModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl">
+            <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white">Ajouter une nouvelle recette</h3>
+                <button onclick="closeModal('addModal')" class="text-slate-400 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <form id="recipeForm" onsubmit="handleFormSubmit(event)" class="p-6 flex flex-col gap-4 max-h-[75vh] overflow-y-auto">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Nom du cocktail</label>
+                    <input type="text" id="formName" required placeholder="Ex: Espresso Martini" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Catégorie</label>
+                        <select id="formCategory" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                            <option value="Alcoolisé">Alcoolisé</option>
+                            <option value="Sans alcool">Sans alcool</option>
+                            <option value="Tiki">Tiki</option>
+                            <option value="Chaud">Chaud</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">URL de l'image (Optionnel)</label>
+                        <input type="url" id="formImage" placeholder="Laisser vide pour recherche auto" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Ingrédients (un par ligne)</label>
+                    <textarea id="formIngredients" rows="3" required placeholder="5 cl de Vodka&#10;3 cl de Kahlúa&#10;1 shot de café expresso" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Instructions de préparation</label>
+                    <textarea id="formInstructions" rows="3" required placeholder="Secouer vigoureusement avec des glaçons et filtrer dans un verre à martini..." class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
+                </div>
+                <div id="loadingIndicator" class="hidden text-center text-xs text-amber-400 animate-pulse">
+                    Recherche d'une image appropriée sur Openverse en cours...
+                </div>
+                <div class="flex justify-end gap-3 pt-4 border-t border-slate-800">
+                    <button type="button" onclick="closeModal('addModal')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition">Annuler</button>
+                    <button type="submit" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm transition shadow-lg shadow-amber-500/10">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Mon stock -->
+    <div id="stockModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl">
+            <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white">Mon stock d'ingrédients</h3>
+                <button onclick="closeModal('stockModal')" class="text-slate-400 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Ingrédients disponibles (un par ligne)</label>
+                    <textarea id="stockInput" rows="8" placeholder="Rhum blanc&#10;Lime&#10;Menthe&#10;Bourbon" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
+                    <p class="text-xs text-slate-500 mt-2">Écrivez le nom court de l'ingrédient : « Rhum » suffit pour « 6 cl de Rhum blanc ».</p>
+                </div>
+                <div class="flex justify-end gap-3 pt-4 border-t border-slate-800">
+                    <button type="button" onclick="closeModal('stockModal')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition">Annuler</button>
+                    <button type="button" onclick="saveStock()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm transition shadow-lg shadow-amber-500/10">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logique Application -->
+    <script>
+        // Données initiales par défaut
+        const defaultRecipes = [
+            {
+                id: 1,
+                name: "Mojito Cubain",
+                category: "Alcoolisé",
+                image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
+                ingredients: ["6 cl de Rhum blanc", "3 cl de Jus de lime frais", "6 feuilles de Menthe fraîche", "2 c. à café de Sucre de canne", "Eau gazeuse"],
+                instructions: "Dans un verre highball, placer les feuilles de menthe et le sucre. Ajouter le jus de lime et écraser délicatement. Remplir le verre de glace pilée, verser le rhum et compléter avec de l'eau gazeuse. Mélanger délicatement."
+            },
+            {
+                id: 2,
+                name: "Old Fashioned",
+                category: "Alcoolisé",
+                image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
+                ingredients: ["6 cl de Bourbon ou Rye whiskey", "2 traits d'Angostura bitters", "1 morceau de sucre", "Un trait d'eau"],
+                instructions: "Dans un verre Old Fashioned, placer le morceau de sucre et imbiber d'Angostura bitters et d'eau. Écraser le sucre. Remplir le verre de glaçons et verser le bourbon. Remuer pendant environ 30 secondes. Décorer d'un zeste d'orange."
+            },
+            {
+                id: 3,
+                name: "Virgin Colada",
+                category: "Sans alcool",
+                image: "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=800&q=80",
+                ingredients: ["12 cl de Jus d'ananas", "4 cl de Lait de coco", "2 cl de Sirop de sucre de canne", "Glaçons"],
+                instructions: "Mettre tous les ingrédients dans un blender avec une poignée de glaçons. Mixer à vitesse maximale jusqu'à l'obtention d'une texture onctueuse et mousseuse. Servir dans un grand verre avec une tranche d'ananas."
+            },
+            {
+                id: 4,
+                name: "Mai Tai",
+                category: "Tiki",
+                image: "https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=800&q=80",
+                ingredients: ["4 cl de Rhum ambré", "2 cl de Rhum blanc", "1,5 cl de Curaçao triple sec", "1,5 cl de Sirop d'orgeat", "1 cl de Jus de lime frais"],
+                instructions: "Verser tous les ingrédients dans un shaker rempli de glaçons. Secouer vigoureusement pendant 10 secondes. Verser dans un verre tumbler rempli de glace fraîche. Garnir d'un quartier de lime et d'un brin de menthe."
+            }
+        ];
+
+        let recipes = JSON.parse(localStorage.getItem('barcraft_recipes')) || defaultRecipes;
+        let currentFilter = 'Tous';
+        let stock = JSON.parse(localStorage.getItem('barcraft_stock')) || [];
+        let onlyMakeable = false;
+        const BASE_INGREDIENTS = ['eau', 'glacon', 'glace'];
+
+        // Sauvegarde dans le localStorage
+        function saveRecipes() {
+            localStorage.setItem('barcraft_recipes', JSON.stringify(recipes));
+        }
+
+        // Minuscules et sans accents, pour comparer « Glaçons » et « glacons »
+        function normalize(str) {
+            return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+        }
+
+        // Une recette est réalisable si chacun de ses ingrédients figure dans le stock
+        function isMakeable(recipe) {
+            const available = stock.map(normalize);
+            return recipe.ingredients.every(ing => {
+                const n = normalize(ing);
+                if (BASE_INGREDIENTS.some(b => n.includes(b))) return true;
+                return available.some(item => n.includes(item));
+            });
+        }
+
+        // Affichage des recettes
+        function renderRecipes(filter = 'Tous', search = '') {
+            const grid = document.getElementById('recipeGrid');
+            grid.innerHTML = '';
+
+            const filtered = recipes.filter(r => {
+                const matchCategory = filter === 'Tous' || r.category === filter;
+                const matchSearch = r.name.toLowerCase().includes(search.toLowerCase()) || 
+                                    r.ingredients.some(i => i.toLowerCase().includes(search.toLowerCase()));
+                return matchCategory && matchSearch && (!onlyMakeable || isMakeable(r));
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-500">
+                        <p class="text-base">Aucun cocktail trouvé.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(recipe => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition group flex flex-col cursor-pointer shadow-lg";
+                card.onclick = () => openDetailModal(recipe.id);
+                card.innerHTML = `
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 bg-slate-950/70 backdrop-blur-md text-amber-400 text-xs font-semibold rounded-full border border-slate-800">${recipe.category}</span>
+                        </div>
+                        ${isMakeable(recipe) ? '<span class="absolute top-3 right-3 px-2 py-1 bg-emerald-500 text-slate-950 text-[10px] font-bold rounded-full">Prêt</span>' : ''}
+                    </div>
+                    <div class="p-5 flex flex-col flex-1 justify-between gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">${recipe.name}</h3>
+                            <p class="text-xs text-slate-400 mt-1 line-clamp-2">${recipe.ingredients.join(', ')}</p>
+                        </div>
+                        <div class="flex items-center text-xs text-amber-500 font-medium gap-1">
+                            <span>Voir la recette</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filtrage par catégorie
+        function filterCategory(category) {
+            currentFilter = category;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if(btn.textContent === category) {
+                    btn.className = "category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950 whitespace-nowrap";
+                } else {
+                    btn.className = "category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap";
+                }
+            });
+            renderRecipes(currentFilter, document.getElementById('searchInput').value);
+        }
+
+        // Filtre « Réalisables »
+        function toggleMakeable() {
+            onlyMakeable = !onlyMakeable;
+            document.getElementById('makeableBtn').className = onlyMakeable
+                ? "makeable-btn px-4 py-2 rounded-full text-xs font-medium transition bg-emerald-500 text-slate-950 whitespace-nowrap"
+                : "makeable-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap";
+            renderRecipes(currentFilter, document.getElementById('searchInput').value);
+        }
+
+        // Recherche en temps réel
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            renderRecipes(currentFilter, e.target.value);
+        });
+
+        // Modal Détails
+        function openDetailModal(id) {
+            const recipe = recipes.find(r => r.id === id);
+            if (!recipe) return;
+
+            document.getElementById('detailImage').src = recipe.image;
+            document.getElementById('detailTitle').textContent = recipe.name;
+            document.getElementById('detailCategory').textContent = recipe.category;
+            
+            const ingList = document.getElementById('detailIngredients');
+            ingList.innerHTML = '';
+            recipe.ingredients.forEach(ing => {
+                const li = document.createElement('li');
+                li.className = "flex items-center gap-2 bg-slate-800/40 px-3 py-2 rounded-lg border border-slate-800";
+                li.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span> ${ing}`;
+                ingList.appendChild(li);
+            });
+
+            document.getElementById('detailInstructions').textContent = recipe.instructions;
+            document.getElementById('deleteBtn').onclick = () => deleteRecipe(recipe.id);
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function openModal() {
+            document.getElementById('recipeForm').reset();
+            document.getElementById('addModal').classList.remove('hidden');
+        }
+
+        // Mon stock
+        function openStockModal() {
+            document.getElementById('stockInput').value = stock.join('\n');
+            document.getElementById('stockModal').classList.remove('hidden');
+        }
+
+        function saveStock() {
+            stock = document.getElementById('stockInput').value
+                .split('\n')
+                .map(s => s.trim())
+                .filter(Boolean);
+            localStorage.setItem('barcraft_stock', JSON.stringify(stock));
+            closeModal('stockModal');
+            renderRecipes(currentFilter, document.getElementById('searchInput').value);
+        }
+
+        // Suppression d'une recette
+        function deleteRecipe(id) {
+            if(confirm('Voulez-vous vraiment supprimer cette recette ?')) {
+                recipes = recipes.filter(r => r.id !== id);
+                saveRecipes();
+                closeModal('detailModal');
+                renderRecipes(currentFilter, document.getElementById('searchInput').value);
+            }
+        }
+
+        // Fonction Openverse pour récupérer une image si manquante
+        async function fetchImageFromOpenverse(query) {
+            try {
+                const response = await fetch(`https://api.openverse.engineering/v1/images/?q=${encodeURIComponent(query + ' cocktail drink')}&page_size=1`);
+                const data = await response.json();
+                if (data.results && data.results.length > 0) {
+                    return data.results[0].url;
+                }
+            } catch (error) {
+                console.error("Erreur lors de la récupération de l'image Openverse :", error);
+            }
+            // Image par défaut si l'API échoue ou ne renvoie rien
+            return "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80";
+        }
+
+        // Soumission du formulaire d'ajout
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('formName').value;
+            const category = document.getElementById('formCategory').value;
+            let imageUrl = document.getElementById('formImage').value.trim();
+            const ingredients = document.getElementById('formIngredients').value.split('\n').filter(i => i.trim() !== '');
+            const instructions = document.getElementById('formInstructions').value;
+
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            if (!imageUrl) {
+                loadingIndicator.classList.remove('hidden');
+                imageUrl = await fetchImageFromOpenverse(name);
+                loadingIndicator.classList.add('hidden');
+            }
+
+            const newRecipe = {
+                id: Date.now(),
+                name,
+                category,
+                image: imageUrl,
+                ingredients,
+                instructions
+            };
+
+            recipes.unshift(newRecipe);
+            saveRecipes();
+            closeModal('addModal');
+            renderRecipes(currentFilter, '');
+        }
+
+        // Initialisation initiale au chargement
+        renderRecipes();
+    </script>
+</body>
+</html>
