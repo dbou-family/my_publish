@@ -1,44 +1,5 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T19:07:16.720Z",
-  "recipes": [
-    {
-      "id": "r6",
-      "name": "Velouté de potimarron",
-      "category": "Entrée",
-      "time": 30,
-      "servings": 4,
-      "difficulty": "Facile",
-      "image": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=900&q=85",
-      "description": "La douceur du potimarron relevée par une pointe de muscade.",
-      "ingredients": [
-        [
-          "Potimarron",
-          "800 g"
-        ],
-        [
-          "Oignon",
-          "1"
-        ],
-        [
-          "Bouillon de légumes",
-          "70 cl"
-        ],
-        [
-          "Crème fraîche",
-          "10 cl"
-        ],
-        [
-          "Muscade",
-          "1 pincée"
-        ]
-      ],
-      "steps": [
-        "Épépinez et coupez le potimarron en cubes. Émincez l’oignon.",
-        "Faites revenir l’oignon, ajoutez le potimarron et le bouillon.",
-        "Laissez cuire 20 minutes puis mixez avec la crème et la muscade."
-      ],
-      "favorite": false
-    }
-  ]
+  "updatedAt": "2026-11-16T19:10:08.733Z",
+  "recipes": []
 }
