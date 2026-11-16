@@ -25,10 +25,12 @@ self.onmessage = async ({data}) => {
     if (data.type === 'load') { await getModel(); self.postMessage({status:'loading', data:'Fichiers reçus : préparation du modèle en mémoire.'}); self.postMessage({status:'ready', backend:modelDevice}); return; }
     if (data.type !== 'generate') return;
     const [processor, model] = await getModel();
+    self.postMessage({status:'processing', data:'Préparation de la photo et du texte…'});
     const messages = [{role:'user',content:[...(data.data.image?[{type:'image',image:data.data.image}]:[]),{type:'text',text:data.data.prompt}]}];
     const images = data.data.image ? [await load_image(data.data.image)] : [];
     const prompt = processor.apply_chat_template(messages, {add_generation_prompt:true});
     const inputs = await processor(prompt, images);
+    self.postMessage({status:'generating', data:'Le modèle analyse votre source…'});
     const output = await model.generate({...inputs, do_sample:false, max_new_tokens:700});
     const generated = output.slice(null, inputs.input_ids.dims[1]);
     const text = processor.batch_decode(generated, {skip_special_tokens:true})[0];
