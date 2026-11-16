@@ -22,7 +22,7 @@ La base partagée est enregistrée dans `base de donnée des recettes/recettes.j
 
 Au premier clic sur le bouton grisé « Préparer l’IA », l’application explique le téléchargement depuis jsDelivr et Hugging Face et demande l’accord de l’utilisateur. Sans accord, rien n’est téléchargé et le bouton reste grisé. Après acceptation, une barre indique la progression du chargement de Transformers.js et du modèle vision SmolVLM-256M, dans un worker du navigateur. À la fin, une confirmation s’affiche et le bouton « Générer avec l’IA » devient disponible. Le navigateur conserve le moteur et le modèle en cache.
 
-L’inférence se fait sur l’appareil via WebGPU ; il faut un navigateur récent compatible et une connexion Internet pour le premier chargement. Les performances et la qualité, notamment en français, peuvent varier selon l’ordinateur et le navigateur.
+L’inférence se fait sur l’appareil. WebGPU est utilisé lorsqu’un adaptateur GPU est disponible ; sinon l’application bascule sur le processeur via WebAssembly, ce qui peut être plus lent. Une connexion Internet est nécessaire au premier chargement. Les performances et la qualité, notamment en français, peuvent varier selon l’ordinateur et le navigateur.
 
 Depuis l’onglet Photo, le modèle observe un plat et propose une recette plausible (ingrédients, quantités, étapes, durée et portions). Les ingrédients cachés et la préparation réelle ne sont pas vérifiables depuis l’image : la proposition les signale comme incertains. Relisez et adaptez toujours la fiche avant de cuisiner. L’onglet Texte permet de coller une recette à extraire fidèlement.
 
