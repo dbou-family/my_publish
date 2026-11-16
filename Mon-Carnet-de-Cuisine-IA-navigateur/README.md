@@ -16,7 +16,7 @@ Ouvrez `index.html` pour parcourir le carnet. Les fonctions classiques sont disp
 
 Par défaut, les recettes et favoris sont conservés dans le stockage local du navigateur sur cet appareil. Le bouton **Synchroniser** permet de partager le carnet entre plusieurs ordinateurs avec le dépôt GitHub `dbou-family/my_publish`. Il faut connecter chaque navigateur avec un jeton finement limité à ce dépôt et autorisant `Contents: Read and write`. Le jeton reste dans le stockage local de ce navigateur.
 
-La base partagée est enregistrée dans `base de donnée des recettes/recettes.json`. Le dépôt GitHub est public : les recettes qui y sont synchronisées sont visibles publiquement. Sans connexion GitHub, l’application continue de fonctionner en mode local.
+La base partagée est enregistrée dans `base de donnée des recettes/recettes.json`, sur la branche `recipes-data` du dépôt `dbou-family/my_publish`. La branche est créée automatiquement à partir de `main` lors de la première connexion. Les modifications de recettes ne changent donc plus `main` et ne relancent pas la publication GitHub Pages lorsque celle-ci suit `main`. Le dépôt GitHub est public : les recettes qui y sont synchronisées sont visibles publiquement. Sans connexion GitHub, l’application continue de fonctionner en mode local.
 
 ## IA sans clé API ni installation
 

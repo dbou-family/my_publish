@@ -1,6 +1,7 @@
 (() => {
   const GITHUB_RECIPE_REPO = 'dbou-family/my_publish';
-  const GITHUB_RECIPE_BRANCH = 'main';
+  // Garder les données hors de la branche publiée par GitHub Pages.
+  const GITHUB_RECIPE_BRANCH = 'recipes-data';
   const GITHUB_RECIPE_PATH = 'Mon-Carnet-de-Cuisine-IA-navigateur/base de donnée des recettes/recettes.json';
   const GITHUB_TOKEN_KEY = 'mon-carnet-github-token-v1';
   const apiBase = `https://api.github.com/repos/${GITHUB_RECIPE_REPO}/contents/` +
@@ -11,9 +12,38 @@
   let githubSaveRunning = false;
   let githubSaveAgain = false;
   let githubPendingRemote = null;
+  let githubDataBranchReady = null;
 
   const token = () => localStorage.getItem(GITHUB_TOKEN_KEY) || '';
   const recipeSnapshot = () => JSON.stringify(recipes);
+  const githubHeaders = () => ({ Accept: 'application/vnd.github+json', Authorization: `Bearer ${token()}`, 'X-GitHub-Api-Version': '2022-11-28' });
+  async function ensureDataBranch() {
+    if (githubDataBranchReady) return githubDataBranchReady;
+    githubDataBranchReady = (async () => {
+      const refsUrl = `https://api.github.com/repos/${GITHUB_RECIPE_REPO}/git/refs`;
+      const branchRefUrl = `https://api.github.com/repos/${GITHUB_RECIPE_REPO}/git/ref/heads/${GITHUB_RECIPE_BRANCH}`;
+      const branchResponse = await fetch(branchRefUrl, { headers: githubHeaders() });
+      if (branchResponse.ok) return;
+      if (branchResponse.status !== 404) throw await githubError(branchResponse, 'Vérification de la branche de données impossible');
+
+      const mainResponse = await fetch(`https://api.github.com/repos/${GITHUB_RECIPE_REPO}/git/ref/heads/main`, { headers: githubHeaders() });
+      if (!mainResponse.ok) throw await githubError(mainResponse, 'Lecture de la branche principale impossible');
+      const mainRef = await mainResponse.json();
+      const createResponse = await fetch(refsUrl, {
+        method: 'POST', headers: { ...githubHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: `refs/heads/${GITHUB_RECIPE_BRANCH}`, sha: mainRef.object.sha })
+      });
+      if (!createResponse.ok) {
+        // Une autre fenêtre peut avoir créé la branche entre les deux requêtes.
+        if (createResponse.status === 422) {
+          const checkResponse = await fetch(branchRefUrl, { headers: githubHeaders() });
+          if (checkResponse.ok) return;
+        }
+        throw await githubError(createResponse, 'Création de la branche de données impossible');
+      }
+    })().catch(error => { githubDataBranchReady = null; throw error; });
+    return githubDataBranchReady;
+  }
   async function githubError(response, action) {
     let body = null;
     try { body = await response.json(); } catch { /* réponse absente ou non JSON */ }
@@ -45,9 +75,8 @@
   };
 
   async function getRemote() {
-    const response = await fetch(`${apiBase}?ref=${encodeURIComponent(GITHUB_RECIPE_BRANCH)}`, {
-      headers: { Accept: 'application/vnd.github+json', Authorization: `Bearer ${token()}`, 'X-GitHub-Api-Version': '2022-11-28' }
-    });
+    await ensureDataBranch();
+    const response = await fetch(`${apiBase}?ref=${encodeURIComponent(GITHUB_RECIPE_BRANCH)}`, { headers: githubHeaders() });
     if (response.status === 404) return null;
     if (!response.ok) throw await githubError(response, 'Lecture des recettes impossible');
     const file = await response.json();
@@ -94,7 +123,7 @@
     const connected = Boolean(token());
     showDialog(`<div class="sync-content">
       <h2 id="dialogTitle">Synchroniser mes recettes</h2>
-      <p class="sync-lead">Le carnet partagé est stocké dans le dépôt GitHub <b>dbou-family/my_publish</b>. Connectez chaque ordinateur avec un jeton personnel à accès limité pour retrouver et enregistrer vos recettes.</p>
+      <p class="sync-lead">Le carnet partagé est stocké dans le dépôt GitHub <b>dbou-family/my_publish</b>, sur une branche de données séparée du site. Connectez chaque ordinateur avec un jeton personnel à accès limité pour retrouver et enregistrer vos recettes.</p>
       <p class="sync-public-note"><b>À savoir :</b> ce dépôt est public. Les recettes enregistrées dans GitHub seront visibles par toute personne qui consulte le dépôt.</p>
       <label class="sync-label" for="githubTokenInput">Jeton GitHub</label>
       <input class="sync-token-input" id="githubTokenInput" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
