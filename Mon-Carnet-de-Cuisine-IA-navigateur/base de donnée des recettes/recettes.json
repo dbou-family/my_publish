@@ -1,29 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T20:49:02.970Z",
+  "updatedAt": "2026-11-16T18:42:11.104Z",
   "recipes": [
-    {
-      "id": "r1794767750366",
-      "name": "Canard au poireau",
-      "category": "Entrée",
-      "time": 30,
-      "servings": 4,
-      "difficulty": "Facile",
-      "image": "https://api.openverse.org/v1/images/ab989d82-0b7f-4c44-8265-1ee831edc311/thumb/",
-      "description": "Une délicieuse recette à partager.",
-      "ingredients": [],
-      "steps": [],
-      "favorite": false,
-      "createdAt": "2026-11-15T18:35:50.366Z",
-      "imageSearchState": "found",
-      "imageCredit": "Romainbehar",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/User:Romainbehar",
-      "imageSourceUrl": "https://commons.wikimedia.org/w/index.php?curid=87745773",
-      "imageLicense": "cc0",
-      "imageLicenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
-      "imageProvider": "Openverse",
-      "imageTitle": "Lyon 7e - Rue de Bonald - Restaurant Kuro Goma, kamo nanban soba"
-    },
     {
       "id": "r1794757630115",
       "name": "pates au saumon et des pates",
