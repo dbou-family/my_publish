@@ -1,21 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T18:42:11.104Z",
+  "updatedAt": "2026-11-16T18:57:42.832Z",
   "recipes": [
-    {
-      "id": "r1794757630115",
-      "name": "pates au saumon et des pates",
-      "category": "Entrée",
-      "time": 30,
-      "servings": 4,
-      "difficulty": "Facile",
-      "image": "https://api.openverse.org/v1/images/f41428fa-f81f-491f-ae46-298a112b2fad/thumb/",
-      "description": "Une délicieuse recette à partager.",
-      "ingredients": [],
-      "steps": [],
-      "favorite": false,
-      "createdAt": "2026-11-15T15:47:10.115Z"
-    },
     {
       "id": "r1",
       "name": "Risotto crémeux aux champignons",
