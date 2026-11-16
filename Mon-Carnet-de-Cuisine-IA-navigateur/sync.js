@@ -14,6 +14,22 @@
 
   const token = () => localStorage.getItem(GITHUB_TOKEN_KEY) || '';
   const recipeSnapshot = () => JSON.stringify(recipes);
+  async function githubError(response, action) {
+    let body = null;
+    try { body = await response.json(); } catch { /* réponse absente ou non JSON */ }
+    const parts = [`${action} (HTTP ${response.status}${response.statusText ? ` ${response.statusText}` : ''})`];
+    if (body?.message) parts.push(body.message);
+    if (Array.isArray(body?.errors)) {
+      const details = body.errors.map(item => typeof item === 'string' ? item : [item.resource, item.field, item.code, item.message].filter(Boolean).join(' / ')).filter(Boolean);
+      if (details.length) parts.push(`Détails : ${details.join('; ')}`);
+    }
+    if (body?.documentation_url) parts.push(`Documentation : ${body.documentation_url}`);
+    const requestId = response.headers.get('x-github-request-id');
+    if (requestId) parts.push(`Référence GitHub : ${requestId}`);
+    if (response.status === 409) parts.push('Le fichier a probablement changé depuis sa dernière lecture (conflit de version/SHA). Rechargez la version distante puis réessayez.');
+    if (response.status === 401 || response.status === 403) parts.push('Vérifiez les droits du jeton et son accès au dépôt.');
+    return new Error(parts.join('\n'));
+  }
   const encodeUtf8Base64 = value => {
     const bytes = new TextEncoder().encode(value);
     let binary = '';
@@ -33,9 +49,7 @@
       headers: { Accept: 'application/vnd.github+json', Authorization: `Bearer ${token()}`, 'X-GitHub-Api-Version': '2022-11-28' }
     });
     if (response.status === 404) return null;
-    if (!response.ok) throw new Error(response.status === 401 || response.status === 403
-      ? 'GitHub refuse ce jeton. Vérifiez son accès au dépôt et aux contenus.'
-      : `GitHub a répondu avec l’erreur ${response.status}.`);
+    if (!response.ok) throw await githubError(response, 'Lecture des recettes impossible');
     const file = await response.json();
     if (!file.content) throw new Error('Le fichier de recettes est vide ou trop volumineux pour être lu.');
     const data = JSON.parse(decodeUtf8Base64(file.content));
@@ -58,9 +72,7 @@
       },
       body: JSON.stringify(payload)
     });
-    if (!response.ok) throw new Error(response.status === 401 || response.status === 403
-      ? 'GitHub refuse l’écriture. Le jeton doit pouvoir modifier le contenu de ce dépôt.'
-      : `Impossible d’enregistrer les recettes sur GitHub (${response.status}).`);
+    if (!response.ok) throw await githubError(response, 'Enregistrement des recettes impossible');
     const result = await response.json();
     githubRecipeSha = result.content?.sha || null;
     githubLastSynced = JSON.stringify(nextRecipes);
