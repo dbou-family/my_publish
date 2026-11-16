@@ -1,7 +1,49 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T18:58:40.714Z",
+  "updatedAt": "2026-11-16T19:00:01.819Z",
   "recipes": [
+    {
+      "id": "r2",
+      "name": "Salade méditerranéenne",
+      "category": "Entrée",
+      "time": 15,
+      "servings": 2,
+      "difficulty": "Facile",
+      "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85",
+      "description": "Une salade pleine de soleil, croquante et parfumée aux herbes du jardin.",
+      "ingredients": [
+        [
+          "Tomates mûres",
+          "3"
+        ],
+        [
+          "Concombre",
+          "½"
+        ],
+        [
+          "Feta",
+          "120 g"
+        ],
+        [
+          "Olives noires",
+          "50 g"
+        ],
+        [
+          "Huile d’olive",
+          "2 c. à s."
+        ],
+        [
+          "Origan",
+          "1 pincée"
+        ]
+      ],
+      "steps": [
+        "Coupez les tomates et le concombre en morceaux.",
+        "Ajoutez la feta émiettée et les olives.",
+        "Arrosez d’huile d’olive, parsemez d’origan et servez frais."
+      ],
+      "favorite": false
+    },
     {
       "id": "r3",
       "name": "Fondant au chocolat",
