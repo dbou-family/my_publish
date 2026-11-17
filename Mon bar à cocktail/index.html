@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BarCraft - Gestionnaire de Cocktails Pro</title>
     <!-- Favicon : Bouteille de champagne (SVG encodé) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23d97706%22><path d=%22M15 2H9v2h6V2zm-4 4h2v3h-2V6zm0 5h2v2h-2v-2zm-1.5 4h5l1 7H8.5l1-7zM12 1a1 1 0 00-1 1v1h2V2a1 1 0 00-1-1z%22/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M13 17h38L35 37v13h10v5H19v-5h10V37L13 17z%22 fill=%22%23f59e0b%22 stroke=%22%23fde68a%22 stroke-width=%222%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M21 23h22L34 34h-4z%22 fill=%22%23fb7185%22/%3E%3Cpath d=%22M38 16l10-9%22 stroke=%22%23e2e8f0%22 stroke-width=%223%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2246%22 cy=%2223%22 r=%226%22 fill=%22%23fde047%22 stroke=%22%23fff7ad%22 stroke-width=%222%22/%3E%3Ccircle cx=%2246%22 cy=%2223%22 r=%222%22 fill=%22%23fb923c%22/%3E%3Cpath d=%22M13 10v5m-2.5-2.5h5M53 37v5m-2.5-2.5h5M14 44v4m-2-2h4%22 stroke=%22%23f472b6%22 stroke-width=%222%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -48,6 +48,10 @@
             </a>
             <input type="text" id="searchInput" placeholder="Rechercher un cocktail..." 
                 class="bg-slate-800 border border-slate-700 text-sm rounded-lg px-4 py-2 text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 w-full sm:w-64 transition">
+            <button onclick="openPantryModal()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 whitespace-nowrap">
+                Mon bar
+            </button>
+            <button onclick="openSyncSettings()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap">Synchronisation</button>
             <button onclick="openModal()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition flex items-center gap-2 whitespace-nowrap shadow-lg shadow-amber-500/10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 Nouvelle Recette
@@ -104,6 +108,27 @@
         </div>
     </div>
 
+    <!-- Connexion GitHub -->
+    <div id="syncModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-white">Synchronisation GitHub</h3>
+                <button onclick="closeModal('syncModal')" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+            <p class="text-sm text-slate-300 mb-3">Les recettes sont stockées dans <code class="text-amber-400">bdd recette/recettes.json</code> sur la branche <code class="text-amber-400">recipes-data</code>. Un jeton GitHub avec accès en écriture au dépôt est nécessaire sur chaque ordinateur.</p>
+            <label for="githubToken" class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Jeton personnel GitHub</label>
+            <input id="githubToken" type="password" autocomplete="off" placeholder="github_pat_…" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+            <p class="text-xs text-slate-500 mt-2">Créez un jeton limité à ce dépôt avec la permission Contents: Read and write. Il est conservé dans le stockage local de ce navigateur.</p>
+            <div class="flex justify-between items-center mt-5">
+                <span id="syncStatus" role="status" class="text-xs text-slate-400"></span>
+                <div class="flex gap-2">
+                    <button onclick="closeModal('syncModal')" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm">Fermer</button>
+                    <button onclick="connectGitHub()" class="px-4 py-2 bg-amber-500 text-slate-950 font-semibold rounded-lg text-sm">Enregistrer et synchroniser</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Ajout Recette -->
     <div id="addModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl">
@@ -152,6 +177,26 @@
         </div>
     </div>
 
+    <!-- Modal Mon Bar (ingrédients possédés) -->
+    <div id="pantryModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl">
+            <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white">Mes ingrédients</h3>
+                <button onclick="closeModal('pantryModal')" class="text-slate-400 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+                <form id="pantryForm" onsubmit="addPantryItem(event)" class="flex gap-2">
+                    <input type="text" id="pantryInput" required placeholder="Ex: Rhum blanc" class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                    <button type="submit" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm transition whitespace-nowrap">Ajouter</button>
+                </form>
+                <p id="pantryCount" class="text-xs text-slate-400"></p>
+                <ul id="pantryList" class="flex flex-col gap-2 max-h-[50vh] overflow-y-auto"></ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Script Logique Application -->
     <script>
         // Données initiales par défaut
@@ -190,12 +235,101 @@
             }
         ];
 
-        let recipes = JSON.parse(localStorage.getItem('barcraft_recipes')) || defaultRecipes;
+        const GITHUB_OWNER = 'dbou-family';
+        const GITHUB_REPO = 'my_publish';
+        const DATA_BRANCH = 'recipes-data';
+        const DATA_PATH = 'bdd recette/recettes.json';
+        let recipes = defaultRecipes;
+        let githubFileSha = null;
+        let syncQueue = Promise.resolve();
         let currentFilter = 'Tous';
 
-        // Sauvegarde dans le localStorage
+        function githubHeaders() {
+            const token = localStorage.getItem('barcraft_github_token');
+            if (!token) throw new Error('Ajoutez votre jeton GitHub dans Synchronisation.');
+            return { 'Accept': 'application/vnd.github+json', 'Authorization': `Bearer ${token}`, 'X-GitHub-Api-Version': '2022-11-28' };
+        }
+
+        async function ensureDataBranch() {
+            const base = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/ref/heads/`;
+            let response = await fetch(base + DATA_BRANCH, { headers: githubHeaders() });
+            if (response.ok) return;
+            if (response.status !== 404) throw new Error(`GitHub ne peut pas vérifier la branche (${response.status}).`);
+            response = await fetch(base + 'main', { headers: githubHeaders() });
+            if (!response.ok) throw new Error(`Impossible de lire main (${response.status}).`);
+            const mainRef = await response.json();
+            response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/refs`, {
+                method: 'POST', headers: { ...githubHeaders(), 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ref: `refs/heads/${DATA_BRANCH}`, sha: mainRef.object.sha })
+            });
+            if (!response.ok && response.status !== 422) throw new Error(`Impossible de créer ${DATA_BRANCH} (${response.status}).`);
+        }
+
+        async function loadRecipesFromGitHub() {
+            await ensureDataBranch();
+            const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${encodeURIComponent(DATA_PATH).replaceAll('%2F','/')}`;
+            let response = await fetch(`${url}?ref=${DATA_BRANCH}`, { headers: githubHeaders() });
+            if (response.status === 404) {
+                recipes = defaultRecipes;
+                await persistRecipes();
+                return;
+            }
+            if (!response.ok) throw new Error(`Impossible de lire les recettes (${response.status}).`);
+            const file = await response.json();
+            githubFileSha = file.sha;
+            const decoded = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+            const parsed = JSON.parse(decoded);
+            if (!Array.isArray(parsed)) throw new Error('Le fichier de recettes ne contient pas une liste valide.');
+            recipes = parsed;
+        }
+
+        async function persistRecipes() {
+            const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${encodeURIComponent(DATA_PATH).replaceAll('%2F','/')}`;
+            const bytes = new TextEncoder().encode(JSON.stringify(recipes, null, 2));
+            let binary = '';
+            bytes.forEach(byte => binary += String.fromCharCode(byte));
+            const body = { message: 'Mise à jour des recettes', content: btoa(binary), branch: DATA_BRANCH };
+            if (githubFileSha) body.sha = githubFileSha;
+            const response = await fetch(url, { method: 'PUT', headers: { ...githubHeaders(), 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({}));
+                if (response.status === 409 || response.status === 422) githubFileSha = null;
+                throw new Error(error.message || `Échec de l'enregistrement (${response.status}). Rechargez les recettes avant de réessayer.`);
+            }
+            githubFileSha = (await response.json()).content.sha;
+        }
+
         function saveRecipes() {
-            localStorage.setItem('barcraft_recipes', JSON.stringify(recipes));
+            syncQueue = syncQueue.then(persistRecipes);
+            syncQueue.catch(error => showSyncStatus(error.message, true));
+        }
+
+        function showSyncStatus(message, isError = false) {
+            const status = document.getElementById('syncStatus');
+            status.textContent = message;
+            status.className = `text-xs ${isError ? 'text-rose-400' : 'text-emerald-400'}`;
+        }
+
+        function openSyncSettings() {
+            document.getElementById('githubToken').value = localStorage.getItem('barcraft_github_token') || '';
+            showSyncStatus('');
+            document.getElementById('syncModal').classList.remove('hidden');
+        }
+
+        async function connectGitHub() {
+            const token = document.getElementById('githubToken').value.trim();
+            if (!token) { showSyncStatus('Saisissez un jeton GitHub.', true); return; }
+            localStorage.setItem('barcraft_github_token', token);
+            const button = document.querySelector('#syncModal button[onclick="connectGitHub()"]');
+            button.disabled = true;
+            showSyncStatus('Connexion et chargement des recettes…');
+            try {
+                await loadRecipesFromGitHub();
+                renderRecipes(currentFilter, document.getElementById('searchInput').value);
+                showSyncStatus('Recettes synchronisées avec recipes-data.');
+            } catch (error) {
+                showSyncStatus(error.message, true);
+            } finally { button.disabled = false; }
         }
 
         // Affichage des recettes
@@ -353,8 +487,75 @@
             renderRecipes(currentFilter, '');
         }
 
-        // Initialisation initiale au chargement
+        // ----- Mes ingrédients (ce que je possède) -----
+        let pantry = JSON.parse(localStorage.getItem('barcraft_pantry')) || [];
+
+        function savePantry() {
+            localStorage.setItem('barcraft_pantry', JSON.stringify(pantry));
+        }
+
+        function openPantryModal() {
+            renderPantry();
+            document.getElementById('pantryModal').classList.remove('hidden');
+            document.getElementById('pantryInput').focus();
+        }
+
+        function addPantryItem(event) {
+            event.preventDefault();
+            const input = document.getElementById('pantryInput');
+            const item = input.value.trim();
+            if (item) {
+                const exists = pantry.some(p => p.toLowerCase() === item.toLowerCase());
+                if (!exists) {
+                    pantry.push(item);
+                    pantry.sort((a, b) => a.localeCompare(b, 'fr'));
+                    savePantry();
+                }
+            }
+            input.value = '';
+            input.focus();
+            renderPantry();
+        }
+
+        function removePantryItem(index) {
+            pantry.splice(index, 1);
+            savePantry();
+            renderPantry();
+        }
+
+        function renderPantry() {
+            const list = document.getElementById('pantryList');
+            list.innerHTML = '';
+            document.getElementById('pantryCount').textContent = pantry.length === 0
+                ? "Votre bar est vide pour l'instant."
+                : `${pantry.length} ingrédient(s) dans votre bar`;
+
+            pantry.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = "flex items-center justify-between bg-slate-800/40 px-3 py-2 rounded-lg border border-slate-800 text-sm text-slate-300";
+
+                const span = document.createElement('span');
+                span.textContent = item;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = 'Retirer';
+                btn.className = "text-xs text-rose-400 hover:text-rose-300 transition";
+                btn.onclick = () => removePantryItem(index);
+
+                li.append(span, btn);
+                list.appendChild(li);
+            });
+        }
+
+        // Charge les données partagées si un jeton a déjà été configuré.
         renderRecipes();
+        if (localStorage.getItem('barcraft_github_token')) {
+            loadRecipesFromGitHub().then(() => renderRecipes()).catch(error => {
+                console.error('Synchronisation GitHub impossible :', error);
+                document.getElementById('syncStatus').textContent = error.message;
+            });
+        }
     </script>
 </body>
 </html>
