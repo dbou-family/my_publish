@@ -42,10 +42,11 @@
         </div>
 
         <div class="flex items-center gap-3 w-full sm:w-auto">
-            <a href="../index.html" title="Retour au sommaire" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 whitespace-nowrap">
+            <a id="summaryLink" href="../index.html" title="Retour au sommaire" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 Sommaire
             </a>
+            <button onclick="openQrModal()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap">QR code</button>
             <input type="text" id="searchInput" placeholder="Rechercher un cocktail..." 
                 class="bg-slate-800 border border-slate-700 text-sm rounded-lg px-4 py-2 text-slate-200 placeholder-slate-400 focus:outline-none focus:border-amber-500 w-full sm:w-64 transition">
             <button onclick="openPantryModal()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 whitespace-nowrap">
@@ -58,6 +59,19 @@
             </button>
         </div>
     </header>
+
+    <!-- QR code pour ouvrir le site en mode consultation -->
+    <div id="qrModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="qrTitle" class="text-lg font-bold text-white">Ouvrir le site sur un téléphone</h2>
+                <button onclick="closeModal('qrModal')" aria-label="Fermer" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+            <img id="siteQrCode" alt="QR code pour ouvrir BarCraft en mode consultation" class="mx-auto bg-white p-2 rounded-lg w-56 h-56">
+            <p class="text-sm text-slate-300 mt-4">Scannez ce code pour consulter les recettes, sans le bouton Sommaire.</p>
+            <p id="qrUrlHint" class="text-xs text-slate-500 mt-2 break-all"></p>
+        </div>
+    </div>
 
     <!-- Corps de page -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 flex flex-col gap-6">
@@ -202,6 +216,19 @@
 
     <!-- Script Logique Application -->
     <script>
+        // Le lien QR ouvre le site avec le bouton Sommaire masqué.
+        const consultationMode = new URLSearchParams(window.location.search).get('consultation') === '1';
+        if (consultationMode) document.getElementById('summaryLink').classList.add('hidden');
+
+        function openQrModal() {
+            const url = new URL(window.location.href);
+            url.searchParams.set('consultation', '1');
+            const targetUrl = url.toString();
+            document.getElementById('siteQrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(targetUrl)}`;
+            document.getElementById('qrUrlHint').textContent = targetUrl;
+            document.getElementById('qrModal').classList.remove('hidden');
+        }
+
         // Données initiales par défaut
         const defaultRecipes = [
             {
