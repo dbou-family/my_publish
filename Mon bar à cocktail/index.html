@@ -38,7 +38,7 @@
             <div>
                 <h1 class="text-xl font-bold tracking-tight text-white">BarCraft Pro</h1>
                 <p class="text-xs text-slate-400">Gestion moderne de recettes et bar à cocktails</p>
-                <p id="guestModeLabel" class="hidden text-xs font-semibold text-amber-300 mt-1">Mode invité · Choisissez un cocktail à commander</p>
+                <p id="guestModeLabel" class="hidden w-fit mt-2 px-3 py-1.5 rounded-full bg-amber-400 text-slate-950 border border-amber-200 shadow-lg shadow-amber-500/30 text-xs font-extrabold tracking-wide">🍸 MODE INVITÉ · Choisissez un cocktail à commander</p>
             </div>
         </div>
 
@@ -260,7 +260,8 @@
         // Le lien QR ouvre le site en mode invité.
         const params = new URLSearchParams(window.location.search);
         const consultationMode = params.get('consultation') === '1';
-        const guestMode = params.get('guest') === '1' || localStorage.getItem('barcraft_guest_mode') === '1';
+        // Le lien QR porte explicitement le mode invité ; chaque accès direct demande un choix.
+        const guestMode = params.get('guest') === '1' || params.get('consultation') === '1';
         let guestId = localStorage.getItem('barcraft_guest_id');
         if (!guestId) { guestId = (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`); localStorage.setItem('barcraft_guest_id', guestId); }
         if (consultationMode || guestMode) document.getElementById('summaryLink').classList.add('hidden');
@@ -630,8 +631,7 @@
         function enterBarMode() {
             localStorage.removeItem('barcraft_guest_mode');
             localStorage.setItem('barcraft_mode_chosen', '1');
-            const url = new URL(window.location.href); url.searchParams.delete('guest'); url.searchParams.delete('consultation');
-            window.location.assign(url.toString());
+            closeModal('modeModal');
         }
         function startGuestOrder() {
             if (!selectedGuestRecipe) return;
@@ -847,7 +847,7 @@
             setSyncState(false);
             document.getElementById('syncStatus').textContent = error.message;
         });
-        if (!params.has('guest') && !localStorage.getItem('barcraft_mode_chosen')) document.getElementById('modeModal').classList.remove('hidden');
+        if (!guestMode) document.getElementById('modeModal').classList.remove('hidden');
         if (guestMode) {
             document.getElementById('ordersButton').classList.add('hidden');
             checkGuestDelivery(); setInterval(checkGuestDelivery, 12000);
