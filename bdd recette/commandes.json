@@ -10,5 +10,20 @@
     "status": "completed",
     "createdAt": "2026-11-18T17:54:48.156Z",
     "completedAt": "2026-11-18T17:54:59.466Z"
+  },
+  {
+    "id": "f8f342bf-8b08-4347-aa6e-cbd6cb5789af",
+    "guestId": "a4ec8d81-900f-4e49-a6b2-b70c12675bbb",
+    "pseudo": "Patate pourrie",
+    "cocktail": "Mojito Cubain",
+    "ingredients": [
+      "6 cl de Rhum blanc",
+      "3 cl de Jus de lime frais",
+      "6 feuilles de Menthe fraîche",
+      "2 c. à café de Sucre de canne",
+      "Eau gazeuse"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-18T19:25:48.363Z"
   }
 ]
