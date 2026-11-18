@@ -691,6 +691,8 @@
                 button.className = barIsOpen
                     ? 'px-3 py-2 rounded-lg text-sm font-semibold border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 whitespace-nowrap'
                     : 'px-3 py-2 rounded-lg text-sm font-semibold border border-rose-500/40 bg-rose-500/10 text-rose-300 whitespace-nowrap';
+                // className réinitialise les classes : réappliquer le masquage invité après le style.
+                button.classList.toggle('hidden', guestMode);
                 if (guestMode && !barIsOpen) { closeModal('detailModal'); closeModal('guestSubmitModal'); }
             } catch (error) { console.warn('État du bar indisponible', error); }
         }
