@@ -93,6 +93,28 @@
       <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 max-h-[85vh] overflow-y-auto"><div class="flex justify-between items-center mb-5"><h2 class="text-xl font-bold text-white">Commandes des invités</h2><button onclick="closeModal('ordersModal')" class="text-slate-400 hover:text-white">✕</button></div><div id="ordersList" class="space-y-3"></div></div>
     </div>
     <div id="guestNotice" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-[80] bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-xl" role="status">✅ Votre commande est livrée !</div>
+    <div id="orderSentModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[90] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="orderSentTitle">
+      <div class="order-sent-card bg-slate-900 border border-amber-400/40 rounded-3xl max-w-sm w-full p-7 text-center shadow-2xl shadow-amber-500/10">
+        <div class="order-sent-stage" aria-hidden="true">
+          <span class="order-sent-spark spark-one">✦</span><span class="order-sent-spark spark-two">✦</span>
+          <span class="order-sent-tray">🍸</span><span class="order-sent-bartender">🏃‍♂️</span>
+        </div>
+        <h2 id="orderSentTitle" class="text-2xl font-extrabold text-white mt-2">C’est parti !</h2>
+        <p class="text-slate-200 mt-3">✅ Commande transmise au barman. Vous serez averti dès qu’elle sera livrée.</p>
+        <button onclick="closeModal('orderSentModal')" class="mt-6 w-full px-4 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl">Super !</button>
+      </div>
+    </div>
+    <style>
+      .order-sent-stage { height: 130px; position: relative; overflow: hidden; border-radius: 1.25rem; background: radial-gradient(ellipse at bottom, rgba(245,158,11,.22), transparent 68%); }
+      .order-sent-bartender { position: absolute; left: 12%; bottom: 15px; font-size: 4.6rem; animation: bartender-run 1.15s ease-in-out infinite alternate; transform-origin: bottom center; }
+      .order-sent-tray { position: absolute; right: 16%; top: 26px; font-size: 2.4rem; animation: tray-bounce .65s ease-in-out infinite alternate; }
+      .order-sent-spark { position: absolute; color: #fcd34d; animation: sparkle 1.3s ease-in-out infinite; }
+      .spark-one { left: 20%; top: 15px; font-size: 1.5rem; }.spark-two { right: 17%; bottom: 18px; font-size: 1.2rem; animation-delay: .5s; }
+      @keyframes bartender-run { from { transform: translateX(0) rotate(-5deg); } to { transform: translateX(92px) rotate(6deg); } }
+      @keyframes tray-bounce { from { transform: translateY(0) rotate(-8deg); } to { transform: translateY(-9px) rotate(8deg); } }
+      @keyframes sparkle { 0%,100% { opacity: .25; transform: scale(.7) rotate(0); } 50% { opacity: 1; transform: scale(1.2) rotate(25deg); } }
+      @media (prefers-reduced-motion: reduce) { .order-sent-bartender,.order-sent-tray,.order-sent-spark { animation: none; } }
+    </style>
 
     <!-- Corps de page -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 flex flex-col gap-6">
@@ -298,6 +320,43 @@
 
         const COCKTAILS_API = '../api/cocktails';
         const ORDERS_API = '../api/orders';
+        let barcraftAudio = null;
+        function getBarcraftAudio() {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return null;
+            if (!barcraftAudio) barcraftAudio = new AudioContextClass();
+            if (barcraftAudio.state === 'suspended') barcraftAudio.resume().catch(() => {});
+            return barcraftAudio;
+        }
+        document.addEventListener('pointerdown', getBarcraftAudio, { once: true });
+        document.addEventListener('keydown', getBarcraftAudio, { once: true });
+        function playTone(context, frequency, start, duration, type = 'sine', volume = 0.12) {
+            const oscillator = context.createOscillator(); const gain = context.createGain();
+            oscillator.type = type; oscillator.frequency.setValueAtTime(frequency, start);
+            gain.gain.setValueAtTime(0.0001, start); gain.gain.exponentialRampToValueAtTime(volume, start + 0.025);
+            gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+            oscillator.connect(gain); gain.connect(context.destination); oscillator.start(start); oscillator.stop(start + duration + 0.03);
+        }
+        function playClap(context, start, duration = 0.12) {
+            const length = Math.ceil(context.sampleRate * duration);
+            const buffer = context.createBuffer(1, length, context.sampleRate); const data = buffer.getChannelData(0);
+            for (let i = 0; i < length; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / length);
+            const source = context.createBufferSource(); const filter = context.createBiquadFilter(); const gain = context.createGain();
+            filter.type = 'highpass'; filter.frequency.value = 850; gain.gain.setValueAtTime(0.0001, start);
+            gain.gain.exponentialRampToValueAtTime(0.22, start + 0.008); gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+            source.buffer = buffer; source.connect(filter); filter.connect(gain); gain.connect(context.destination); source.start(start);
+        }
+        function playBarcraftSound(kind) {
+            const context = getBarcraftAudio(); if (!context) return;
+            const now = context.currentTime + 0.04;
+            if (kind === 'incoming') {
+                playTone(context, 880, now, 0.22, 'triangle', 0.18); playTone(context, 1175, now + 0.19, 0.32, 'triangle', 0.18);
+            } else if (kind === 'sent') {
+                [0, .16, .34, .52, .72, .94, 1.14].forEach((offset, index) => playClap(context, now + offset, index % 3 === 0 ? .18 : .12));
+            } else if (kind === 'delivered') {
+                [[587.33, 0], [739.99, .14], [880, .28], [1174.66, .48]].forEach(([frequency, offset]) => playTone(context, frequency, now + offset, .62, 'sine', .17));
+            }
+        }
         let recipes = defaultRecipes;
         let githubFileSha = null;
         let syncQueue = Promise.resolve();
@@ -592,17 +651,22 @@
                 const result = await response.json();
                 if (!response.ok) throw new Error(result.error || 'La commande n’a pas pu être transmise.');
                 closeModal('guestSubmitModal'); document.getElementById('guestSubmitModal').querySelector('form').reset();
-                window.alert('✅ Commande transmise au barman. Vous serez averti dès qu’elle sera livrée.');
+                playBarcraftSound('sent');
+                document.getElementById('orderSentModal').classList.remove('hidden');
             } catch (error) { errorBox.textContent = error.message; errorBox.classList.remove('hidden'); }
             finally { button.disabled = false; button.textContent = 'Transmettre au barman'; }
         }
         let ordersCache = [];
+        let knownPendingOrderIds = null;
         async function refreshOrders() {
             try {
                 const response = await fetch(ORDERS_API, { cache: 'no-store' });
                 if (!response.ok) return;
                 const data = await response.json(); ordersCache = data.orders || [];
                 const pending = ordersCache.filter(order => order.status !== 'completed');
+                const currentPendingIds = new Set(pending.map(order => order.id));
+                if (knownPendingOrderIds && [...currentPendingIds].some(id => !knownPendingOrderIds.has(id))) playBarcraftSound('incoming');
+                knownPendingOrderIds = currentPendingIds;
                 document.getElementById('ordersCount').textContent = pending.length;
                 document.getElementById('ordersButton').classList.toggle('hidden', guestMode);
                 document.getElementById('ordersButton').classList.toggle('text-amber-300', pending.length > 0);
@@ -639,6 +703,7 @@
                 const { orders = [] } = await response.json();
                 const delivered = orders.filter(order => order.status === 'completed' && !localStorage.getItem(`barcraft_notified_${order.id}`));
                 if (delivered.length) {
+                    playBarcraftSound('delivered');
                     delivered.forEach(order => localStorage.setItem(`barcraft_notified_${order.id}`, '1'));
                     const notice = document.getElementById('guestNotice'); notice.textContent = `✅ ${delivered.length === 1 ? 'Votre commande est livrée' : 'Vos commandes sont livrées'} !`; notice.classList.remove('hidden');
                     if ('Notification' in window && Notification.permission === 'granted') new Notification('BarCraft', { body: 'Votre cocktail est prêt !' });
