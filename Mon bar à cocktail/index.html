@@ -625,13 +625,13 @@
             localStorage.setItem('barcraft_guest_mode', '1');
             localStorage.setItem('barcraft_mode_chosen', '1');
             const url = new URL(window.location.href); url.searchParams.set('guest', '1'); url.searchParams.delete('consultation');
-            window.location.replace(url.toString());
+            window.location.assign(url.toString());
         }
         function enterBarMode() {
             localStorage.removeItem('barcraft_guest_mode');
             localStorage.setItem('barcraft_mode_chosen', '1');
             const url = new URL(window.location.href); url.searchParams.delete('guest'); url.searchParams.delete('consultation');
-            window.location.replace(url.toString());
+            window.location.assign(url.toString());
         }
         function startGuestOrder() {
             if (!selectedGuestRecipe) return;
@@ -705,8 +705,12 @@
                 if (delivered.length) {
                     playBarcraftSound('delivered');
                     delivered.forEach(order => localStorage.setItem(`barcraft_notified_${order.id}`, '1'));
-                    const notice = document.getElementById('guestNotice'); notice.textContent = `✅ ${delivered.length === 1 ? 'Votre commande est livrée' : 'Vos commandes sont livrées'} !`; notice.classList.remove('hidden');
-                    if ('Notification' in window && Notification.permission === 'granted') new Notification('BarCraft', { body: 'Votre cocktail est prêt !' });
+                    const notice = document.getElementById('guestNotice');
+                    const deliveryMessages = delivered.map(order => `✅ ${order.pseudo}, votre ${order.cocktail} est livré !`);
+                    notice.textContent = deliveryMessages.join(' · '); notice.classList.remove('hidden');
+                    if ('Notification' in window && Notification.permission === 'granted') {
+                        delivered.forEach(order => new Notification('Votre commande est prête !', { body: `${order.pseudo}, votre ${order.cocktail} est livré.` }));
+                    }
                     setTimeout(() => notice.classList.add('hidden'), 9000);
                 }
             } catch (error) { console.warn('Vérification de livraison impossible', error); }
