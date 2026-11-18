@@ -15,6 +15,7 @@ async function github(path, token, options = {}) {
     ...options,
     headers: {
       Accept: 'application/vnd.github+json',
+      'User-Agent': 'Mon-Carnet-de-Cuisine-IA',
       Authorization: `Bearer ${token}`,
       'X-GitHub-Api-Version': '2022-11-28',
       ...(options.body ? { 'Content-Type': 'application/json' } : {}),
