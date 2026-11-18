@@ -1,0 +1,13 @@
+[
+  {
+    "id": "5c27d72c-466e-4fe9-8c92-998d2ee2f8a9",
+    "guestId": "d75f2f78-5306-4e9c-bf57-c41e66586083",
+    "pseudo": "Dede",
+    "cocktail": "coca cola",
+    "ingredients": [
+      "vodka"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-18T17:18:09.087Z"
+  }
+]
