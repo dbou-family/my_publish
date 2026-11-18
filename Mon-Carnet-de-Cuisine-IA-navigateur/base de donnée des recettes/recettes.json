@@ -1,7 +1,30 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T19:20:01.638Z",
+  "updatedAt": "2026-11-18T16:15:38.940Z",
   "recipes": [
+    {
+      "id": "r1795018536938",
+      "name": "gratin de pates",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Filet_mignon_et_son_gratin_de_p%C3%A2tes_%28Brasserie_des_Terreaux%2C_Belley%29.jpg/960px-Filet_mignon_et_son_gratin_de_p%C3%A2tes_%28Brasserie_des_Terreaux%2C_Belley%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "description": "Une délicieuse recette à partager.",
+      "ingredients": [],
+      "steps": [],
+      "favorite": false,
+      "createdAt": "2026-11-18T16:15:36.938Z",
+      "imageSearchState": "found",
+      "imageCredit": "Benoît Prieur",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Filet_mignon_et_son_gratin_de_p%C3%A2tes_(Brasserie_des_Terreaux,_Belley).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Filet_mignon_et_son_gratin_de_p%C3%A2tes_(Brasserie_des_Terreaux,_Belley).jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Filet mignon et son gratin de pâtes (Brasserie des Terreaux, Belley)",
+      "imageSearchRetryAt": 0
+    },
     {
       "id": "r1794856800476",
       "name": "tarte aux pommes",
