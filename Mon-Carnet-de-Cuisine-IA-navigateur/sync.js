@@ -7,6 +7,17 @@
   let githubSaveRunning = false;
   let githubSaveAgain = false;
   let githubPendingRemote = null;
+  let diagnosticLog = null;
+
+  function logDiagnostic(message, details = '') {
+    const line = document.createElement('div');
+    line.textContent = `${new Date().toLocaleTimeString('fr-FR')} — ${message}${details ? ` : ${details}` : ''}`;
+    if (diagnosticLog) {
+      diagnosticLog.append(line);
+      diagnosticLog.scrollTop = diagnosticLog.scrollHeight;
+    }
+    console.info('[GitHub sync]', message, details);
+  }
 
   const token = () => true; // Le jeton reste côté serveur dans Cloudflare.
   const recipeSnapshot = () => JSON.stringify(recipes);
@@ -16,7 +27,9 @@
     return new Error(body?.error || `${action} (HTTP ${response.status})`);
   }
   async function getRemote() {
+    logDiagnostic('GET', apiBase);
     const response = await fetch(apiBase);
+    logDiagnostic('Réponse GET', `HTTP ${response.status}`);
     if (response.status === 404) return null;
     if (!response.ok) throw await apiError(response, 'Lecture des recettes impossible');
     const file = await response.json();
@@ -29,11 +42,13 @@
       recipes: nextRecipes
     };
     if (sha) payload.sha = sha;
+    logDiagnostic('PUT', `${apiBase} — ${nextRecipes.length} recette(s), jeton conservé côté serveur`);
     const response = await fetch(apiBase, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+    logDiagnostic('Réponse PUT', `HTTP ${response.status}`);
     if (!response.ok) throw await apiError(response, 'Enregistrement des recettes impossible');
     const result = await response.json();
     githubRecipeSha = result.sha || null;
@@ -64,13 +79,17 @@
         <button class="sync-primary" id="connectGithubSync">Synchroniser</button>
       </div>
       <p class="sync-message" id="githubSyncMessage" role="status"></p>
+      <details class="sync-diagnostics" open><summary>Console de diagnostic</summary><div id="githubSyncDiagnostics" role="log" aria-live="polite"></div></details>
     </div>`);
+    diagnosticLog = document.querySelector('#githubSyncDiagnostics');
+    logDiagnostic('Diagnostic initialisé', `API ${apiBase}; dépôt ${GITHUB_RECIPE_REPO}`);
     document.querySelector('#cancelGithubSync')?.addEventListener('click', closeDialog);
     document.querySelector('#connectGithubSync').addEventListener('click', async () => {
       const button = document.querySelector('#connectGithubSync');
       const message = document.querySelector('#githubSyncMessage');
       button.disabled = true;
       message.textContent = 'Connexion à GitHub…';
+      logDiagnostic('Début de synchronisation');
       try {
         const remote = await getRemote();
         if (remote) {
@@ -90,6 +109,7 @@
         }
         setTimeout(closeDialog, 700);
       } catch (error) {
+        logDiagnostic('ÉCHEC', error.message || String(error));
         message.textContent = error.message || 'Connexion impossible. Vérifiez votre jeton et votre connexion Internet.';
         button.disabled = false;
         setStatus('Erreur', 'La synchronisation GitHub a échoué');
