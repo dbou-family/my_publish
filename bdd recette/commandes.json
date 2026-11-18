@@ -50,5 +50,16 @@
     "status": "completed",
     "createdAt": "2026-11-18T17:26:58.510Z",
     "completedAt": "2026-11-18T17:27:35.998Z"
+  },
+  {
+    "id": "358ced44-3f83-4c3b-9556-35f6e3e02818",
+    "guestId": "d75f2f78-5306-4e9c-bf57-c41e66586083",
+    "pseudo": "Dede",
+    "cocktail": "coca cola",
+    "ingredients": [
+      "vodka"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-18T17:38:58.241Z"
   }
 ]
