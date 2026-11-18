@@ -24,10 +24,16 @@ async function github(path, token, options = {}) {
 }
 
 async function githubError(response, action) {
+  let raw = '';
+  try { raw = await response.text(); } catch { /* réponse absente */ }
   let body = {};
-  try { body = await response.json(); } catch { /* réponse non JSON */ }
-  const details = [body.message, body.documentation_url].filter(Boolean).join(' — ');
-  return new Error(`${action} (HTTP ${response.status})${details ? ` : ${details}` : ''}`);
+  try { body = raw ? JSON.parse(raw) : {}; } catch { /* réponse non JSON */ }
+  const details = [body.message, body.documentation_url, !body.message && raw ? raw.slice(0, 1000) : ''].filter(Boolean).join(' — ');
+  const requestId = response.headers.get('x-github-request-id');
+  const remaining = response.headers.get('x-ratelimit-remaining');
+  const reset = response.headers.get('x-ratelimit-reset');
+  const diagnostics = [requestId && `requête GitHub ${requestId}`, remaining !== null && `quota restante ${remaining}`, reset && `réinitialisation quota ${new Date(Number(reset) * 1000).toISOString()}`].filter(Boolean).join(' ; ');
+  return new Error(`${action} (HTTP ${response.status})${details ? ` : ${details}` : ''}${diagnostics ? ` [${diagnostics}]` : ''}`);
 }
 
 async function ensureBranch(token) {
