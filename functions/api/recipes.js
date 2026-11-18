@@ -23,18 +23,25 @@ async function github(path, token, options = {}) {
   });
 }
 
+async function githubError(response, action) {
+  let body = {};
+  try { body = await response.json(); } catch { /* réponse non JSON */ }
+  const details = [body.message, body.documentation_url].filter(Boolean).join(' — ');
+  return new Error(`${action} (HTTP ${response.status})${details ? ` : ${details}` : ''}`);
+}
+
 async function ensureBranch(token) {
   let response = await github(`/git/ref/heads/${BRANCH}`, token);
   if (response.ok) return;
-  if (response.status !== 404) throw new Error(`GitHub ne peut pas vérifier la branche (${response.status}).`);
+  if (response.status !== 404) throw await githubError(response, 'GitHub ne peut pas vérifier la branche');
   response = await github('/git/ref/heads/main', token);
-  if (!response.ok) throw new Error(`GitHub ne peut pas lire main (${response.status}).`);
+  if (!response.ok) throw await githubError(response, 'GitHub ne peut pas lire main');
   const main = await response.json();
   response = await github('/git/refs', token, {
     method: 'POST', body: JSON.stringify({ ref: `refs/heads/${BRANCH}`, sha: main.object.sha })
   });
   if (response.ok || response.status === 422) return;
-  throw new Error(`GitHub ne peut pas créer la branche de recettes (${response.status}).`);
+  throw await githubError(response, 'GitHub ne peut pas créer la branche de recettes');
 }
 
 export async function onRequest(context) {
@@ -51,7 +58,7 @@ export async function onRequest(context) {
 
     if (request.method === 'GET') {
       if (currentResponse.status === 404) return json({ error: 'Base de recettes absente.' }, 404);
-      if (!currentResponse.ok) return json({ error: `Lecture GitHub impossible (${currentResponse.status}).` }, 502);
+      if (!currentResponse.ok) return json({ error: (await githubError(currentResponse, 'Lecture GitHub impossible')).message }, 502);
       const file = await currentResponse.json();
       if (!file.content) return json({ error: 'Le fichier distant est vide ou trop volumineux.' }, 502);
       const decoded = Uint8Array.from(atob(file.content.replace(/\s/g, '')), c => c.charCodeAt(0));
@@ -82,7 +89,7 @@ export async function onRequest(context) {
         ...(currentSha ? { sha: currentSha } : {})
       })
     });
-    if (!response.ok) return json({ error: `Enregistrement GitHub impossible (${response.status}).` }, response.status === 409 ? 409 : 502);
+    if (!response.ok) return json({ error: (await githubError(response, 'Enregistrement GitHub impossible')).message }, response.status === 409 ? 409 : 502);
     const result = await response.json();
     return json({ sha: result.content?.sha || null, recipes: input.recipes });
   } catch (error) {
