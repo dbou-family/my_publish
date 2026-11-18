@@ -125,19 +125,19 @@
         </div>
     </div>
 
-    <!-- Connexion GitHub -->
+    <!-- Synchronisation GitHub via Cloudflare -->
     <div id="syncModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-bold text-white">Synchronisation GitHub</h3>
                 <button onclick="closeModal('syncModal')" class="text-slate-400 hover:text-white">✕</button>
             </div>
-            <p class="text-sm text-slate-300 mb-3">Les recettes sont stockées sur GitHub via Cloudflare. Aucun jeton GitHub n’est demandé ni conservé dans ce navigateur.</p>
+            <p class="text-sm text-slate-300 mb-3">Les recettes sont stockées dans <code class="text-amber-400">bdd recette/recettes.json</code> sur la branche <code class="text-amber-400">recipes-data</code>. La synchronisation utilise le secret GitHub configuré dans Cloudflare. Le jeton reste côté serveur.</p>
             <div class="flex justify-between items-center mt-5">
                 <span id="syncStatus" role="status" class="text-xs text-slate-400"></span>
                 <div class="flex gap-2">
                     <button onclick="closeModal('syncModal')" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg text-sm">Fermer</button>
-                    <button onclick="connectGitHub()" class="px-4 py-2 bg-amber-500 text-slate-950 font-semibold rounded-lg text-sm">Recharger les recettes</button>
+                    <button onclick="connectGitHub()" class="px-4 py-2 bg-amber-500 text-slate-950 font-semibold rounded-lg text-sm">Synchroniser</button>
                 </div>
             </div>
         </div>
@@ -262,14 +262,12 @@
             }
         ];
 
-        const GITHUB_OWNER = 'dbou-family';
-        const GITHUB_REPO = 'my_publish';
-        const DATA_BRANCH = 'recipes-data';
-        const DATA_PATH = 'bdd recette/recettes.json';
+        const COCKTAILS_API = '../api/cocktails';
         let recipes = defaultRecipes;
         let githubFileSha = null;
         let syncQueue = Promise.resolve();
         let pendingWrites = 0;
+        localStorage.removeItem('barcraft_github_token');
 
         // Bouton « Synchronisation » : entièrement vert si synchronisé, entièrement rouge sinon
         const SYNC_BTN_OK = ['bg-emerald-600', 'hover:bg-emerald-500', 'border-emerald-500', 'text-white'];
@@ -283,24 +281,34 @@
         let currentFilter = 'Tous';
 
         async function loadRecipesFromGitHub() {
-            const response = await fetch('/api/recipes', { headers: { 'Accept': 'application/json' }, cache: 'no-store' });
-            if (!response.ok) throw new Error(`Cloudflare ne peut pas charger les recettes (${response.status}).`);
-            const data = await response.json();
-            if (!Array.isArray(data.recipes)) throw new Error('La réponse Cloudflare ne contient pas de liste de recettes valide.');
-            recipes = data.recipes;
-            setSyncState(true);
+            let response = await fetch(COCKTAILS_API);
+            if (response.status === 404) {
+                recipes = defaultRecipes;
+                await persistRecipes();
+                setSyncState(pendingWrites === 0);
+                return;
+            }
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({}));
+                throw new Error(error.error || `Impossible de lire les recettes (${response.status}).`);
+            }
+            const parsed = await response.json();
+            githubFileSha = parsed.sha;
+            recipes = parsed.recipes;
+            if (!Array.isArray(recipes)) throw new Error('Le fichier de recettes ne contient pas une liste valide.');
+            setSyncState(pendingWrites === 0);
         }
 
         async function persistRecipes() {
-            const response = await fetch('/api/recipes', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({ recipes })
-            });
+            const body = { recipes };
+            if (githubFileSha) body.sha = githubFileSha;
+            const response = await fetch(COCKTAILS_API, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
             if (!response.ok) {
                 const error = await response.json().catch(() => ({}));
-                throw new Error(error.error || `Cloudflare n'a pas pu enregistrer les recettes (${response.status}).`);
+                if (response.status === 409 || response.status === 422) githubFileSha = null;
+                throw new Error(error.error || `Échec de l'enregistrement (${response.status}). Rechargez les recettes avant de réessayer.`);
             }
+            githubFileSha = (await response.json()).sha;
         }
 
         function saveRecipes() {
@@ -333,12 +341,12 @@
         async function connectGitHub() {
             const button = document.querySelector('#syncModal button[onclick="connectGitHub()"]');
             button.disabled = true;
-            showSyncStatus('Chargement des recettes depuis Cloudflare…');
+            showSyncStatus('Connexion et chargement des recettes…');
             try {
                 await loadRecipesFromGitHub();
                 renderRecipes(currentFilter, document.getElementById('searchInput').value);
                 setSyncState(pendingWrites === 0);
-                showSyncStatus('Recettes rechargées via Cloudflare.');
+                showSyncStatus('Connexion établie : recettes synchronisées avec GitHub.');
                 setTimeout(() => closeModal('syncModal'), 1200);
             } catch (error) {
                 setSyncState(false);
@@ -642,7 +650,7 @@
         // Charge les données partagées via la fonction Cloudflare.
         renderRecipes();
         loadRecipesFromGitHub().then(() => renderRecipes()).catch(error => {
-            console.error('Synchronisation Cloudflare impossible :', error);
+            console.error('Synchronisation GitHub impossible :', error);
             setSyncState(false);
             document.getElementById('syncStatus').textContent = error.message;
         });
