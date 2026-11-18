@@ -1,6 +1,7 @@
 const REPO = 'dbou-family/my_publish';
 const BRANCH = 'recipes-data';
 const FILE_PATH = 'bdd recette/commandes.json';
+const STATUS_PATH = 'bdd recette/etat-bar.json';
 const GH = `https://api.github.com/repos/${REPO}`;
 
 function json(data, status = 200) {
@@ -47,6 +48,27 @@ async function writeOrders(token, orders, sha) {
   }) });
 }
 
+async function readBarStatus(token) {
+  const path = `/contents/${STATUS_PATH.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(BRANCH)}`;
+  const response = await github(path, token);
+  if (response.status === 404) return { open: true, sha: null };
+  if (!response.ok) throw new Error(`Lecture de l’état du bar impossible (${response.status}).`);
+  const file = await response.json();
+  const bytes = Uint8Array.from(atob(file.content.replace(/\s/g, '')), c => c.charCodeAt(0));
+  const status = JSON.parse(new TextDecoder().decode(bytes));
+  return { open: status.open !== false, sha: file.sha };
+}
+
+async function writeBarStatus(token, open, sha) {
+  const encodedPath = STATUS_PATH.split('/').map(encodeURIComponent).join('/');
+  const bytes = new TextEncoder().encode(JSON.stringify({ open, updatedAt: new Date().toISOString() }, null, 2));
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return github(`/contents/${encodedPath}`, token, { method: 'PUT', body: JSON.stringify({
+    message: `BarCraft : ${open ? 'ouverture' : 'fermeture'} du bar`, content: btoa(binary), branch: BRANCH, ...(sha ? { sha } : {})
+  }) });
+}
+
 export async function onRequest({ request, env }) {
   if (!env.GITHUB_TOKEN) return json({ error: 'Le secret GITHUB_TOKEN n’est pas configuré dans Cloudflare.' }, 503);
   if (!['GET', 'POST', 'PATCH'].includes(request.method)) return json({ error: 'Méthode non autorisée.' }, 405);
@@ -54,12 +76,31 @@ export async function onRequest({ request, env }) {
     const token = env.GITHUB_TOKEN;
     await ensureBranch(token);
     if (request.method === 'GET') {
+      if (new URL(request.url).searchParams.get('barStatus') === '1') {
+        const status = await readBarStatus(token);
+        return json({ open: status.open });
+      }
       const { orders } = await readOrders(token);
       const guestId = new URL(request.url).searchParams.get('guestId');
       return json({ orders: guestId ? orders.filter(order => order.guestId === guestId) : orders });
     }
     const body = await request.json();
+    if (request.method === 'PATCH' && body.action === 'barStatus') {
+      if (!env.BAR_ADMIN_PIN) return json({ error: 'Configurez le secret BAR_ADMIN_PIN dans Cloudflare pour gérer l’ouverture du bar.' }, 503);
+      const suppliedPin = request.headers.get('X-Bar-Admin-Pin') || '';
+      if (suppliedPin !== env.BAR_ADMIN_PIN) return json({ error: 'Code barman incorrect.' }, 403);
+      const open = body.open === true;
+      for (let attempt = 0; attempt < 4; attempt++) {
+        const current = await readBarStatus(token);
+        const response = await writeBarStatus(token, open, current.sha);
+        if (response.ok) return json({ open });
+        if (response.status !== 409 && response.status !== 422) return json({ error: `Mise à jour de l’état impossible (${response.status}).` }, 502);
+      }
+      return json({ error: 'L’état du bar vient de changer. Réessayez.' }, 409);
+    }
     if (request.method === 'POST') {
+      const barStatus = await readBarStatus(token);
+      if (!barStatus.open) return json({ error: 'Le bar est fermé et ne prend plus de commandes.' }, 423);
       const pseudo = String(body.pseudo || '').trim().slice(0, 40);
       const cocktail = String(body.cocktail || '').trim().slice(0, 100);
       const ingredients = Array.isArray(body.ingredients) ? body.ingredients.map(item => String(item).slice(0, 120)).slice(0, 30) : [];
