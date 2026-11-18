@@ -85,10 +85,17 @@ export async function onRequest({ request, env }) {
       return json({ orders: guestId ? orders.filter(order => order.guestId === guestId) : orders });
     }
     const body = await request.json();
+    if (request.method === 'PATCH' && body.action === 'clearOrders') {
+      for (let attempt = 0; attempt < 4; attempt++) {
+        const current = await readOrders(token);
+        if (!current.orders.length) return json({ orders: [] });
+        const response = await writeOrders(token, [], current.sha);
+        if (response.ok) return json({ orders: [] });
+        if (response.status !== 409 && response.status !== 422) return json({ error: `Nettoyage GitHub impossible (${response.status}).` }, 502);
+      }
+      return json({ error: 'Les commandes viennent de changer. Rechargez la liste et réessayez.' }, 409);
+    }
     if (request.method === 'PATCH' && body.action === 'barStatus') {
-      if (!env.BAR_ADMIN_PIN) return json({ error: 'Configurez le secret BAR_ADMIN_PIN dans Cloudflare pour gérer l’ouverture du bar.' }, 503);
-      const suppliedPin = request.headers.get('X-Bar-Admin-Pin') || '';
-      if (suppliedPin !== env.BAR_ADMIN_PIN) return json({ error: 'Code barman incorrect.' }, 403);
       const open = body.open === true;
       for (let attempt = 0; attempt < 4; attempt++) {
         const current = await readBarStatus(token);

@@ -91,7 +91,7 @@
       </form>
     </div>
     <div id="ordersModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
-      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 max-h-[85vh] overflow-y-auto"><div class="flex justify-between items-center mb-5"><h2 class="text-xl font-bold text-white">Commandes des invités</h2><button onclick="closeModal('ordersModal')" class="text-slate-400 hover:text-white">✕</button></div><div id="ordersList" class="space-y-3"></div></div>
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 max-h-[85vh] overflow-y-auto"><div class="flex justify-between items-center gap-3 mb-5"><h2 class="text-xl font-bold text-white">Commandes des invités</h2><div class="flex items-center gap-3"><button onclick="clearOrders()" class="px-3 py-2 rounded-lg text-sm font-semibold bg-rose-500/10 border border-rose-500/30 text-rose-300 hover:bg-rose-500/20">Vider la liste</button><button onclick="closeModal('ordersModal')" class="text-slate-400 hover:text-white">✕</button></div></div><div id="ordersList" class="space-y-3"></div></div>
     </div>
     <div id="guestNotice" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-[80] bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-xl" role="status">✅ Votre commande est livrée !</div>
     <div id="orderSentModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[90] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="orderSentTitle">
@@ -695,15 +695,25 @@
             } catch (error) { console.warn('État du bar indisponible', error); }
         }
         async function toggleBarStatus() {
-            const pin = window.prompt('Code barman :');
-            if (!pin) return;
+            if (guestMode) return;
             const button = document.getElementById('barStatusButton'); button.disabled = true;
             try {
-                const response = await fetch(ORDERS_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'X-Bar-Admin-Pin': pin }, body: JSON.stringify({ action: 'barStatus', open: !barIsOpen }) });
+                const response = await fetch(ORDERS_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'barStatus', open: !barIsOpen }) });
                 const data = await response.json(); if (!response.ok) throw new Error(data.error || 'Impossible de modifier l’état du bar.');
                 barIsOpen = data.open; await refreshBarStatus();
             } catch (error) { window.alert(error.message); }
             finally { button.disabled = false; }
+        }
+        async function clearOrders() {
+            if (guestMode) return;
+            if (!window.confirm('Supprimer toutes les commandes, y compris celles qui ne sont pas encore réalisées ? Cette action est définitive.')) return;
+            try {
+                const response = await fetch(ORDERS_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'clearOrders' }) });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Impossible de nettoyer la liste.');
+                ordersCache = []; knownPendingOrderIds = new Set(); renderOrders();
+                document.getElementById('ordersCount').textContent = '0';
+            } catch (error) { window.alert(error.message); }
         }
         function renderOrders() {
             const list = document.getElementById('ordersList'); if (!list) return;
