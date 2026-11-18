@@ -121,5 +121,16 @@
     "status": "completed",
     "createdAt": "2026-11-18T17:48:47.831Z",
     "completedAt": "2026-11-18T17:48:58.938Z"
+  },
+  {
+    "id": "0b046e3f-2c57-4155-8063-357a879ee33b",
+    "guestId": "3c211a92-2b92-459e-b46a-264e5386363b",
+    "pseudo": "doudd",
+    "cocktail": "coca cola",
+    "ingredients": [
+      "vodka"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-18T17:52:43.182Z"
   }
 ]
