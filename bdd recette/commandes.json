@@ -130,7 +130,8 @@
     "ingredients": [
       "vodka"
     ],
-    "status": "pending",
-    "createdAt": "2026-11-18T17:52:43.182Z"
+    "status": "completed",
+    "createdAt": "2026-11-18T17:52:43.182Z",
+    "completedAt": "2026-11-18T17:53:09.294Z"
   }
 ]
