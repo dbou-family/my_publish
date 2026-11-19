@@ -966,13 +966,6 @@
             document.getElementById(context === 'recipe' ? 'recipeIngredientSuggestions' : 'pantrySuggestions').classList.add('hidden');
             if (!panel.classList.contains('hidden')) document.getElementById(`${context}CatalogInput`).focus();
         }
-        function proposeCatalogIngredient(context, suggestedName) {
-            const panel = document.getElementById(`${context}CatalogForm`);
-            panel.classList.remove('hidden');
-            document.getElementById(`${context}CatalogInput`).value = suggestedName;
-            document.getElementById(context === 'recipe' ? 'recipeIngredientSuggestions' : 'pantrySuggestions').classList.add('hidden');
-            document.getElementById(`${context}CatalogInput`).focus();
-        }
         function addCatalogIngredientFromForm(context) {
             const input = document.getElementById(`${context}CatalogInput`);
             const name = registerCatalogIngredient(input.value);
@@ -980,7 +973,23 @@
             input.value = '';
             document.getElementById(`${context}CatalogForm`).classList.add('hidden');
             if (context === 'recipe') addRecipeIngredient(name);
-            else selectPantryIngredient(name);
+            else {
+                pendingPantryIngredient = name;
+                addPantryItem();
+            }
+        }
+        function addCatalogIngredientFromSearch(context, value) {
+            const name = registerCatalogIngredient(value);
+            if (!name) return;
+            const input = document.getElementById(context === 'recipe' ? 'recipeIngredientSearch' : 'pantryInput');
+            input.value = '';
+            document.getElementById(context === 'recipe' ? 'recipeIngredientSuggestions' : 'pantrySuggestions').classList.add('hidden');
+            if (context === 'recipe') {
+                addRecipeIngredient(name);
+            } else {
+                pendingPantryIngredient = name;
+                addPantryItem();
+            }
         }
         function renderIngredientSuggestions(input, list, onSelect, context) {
             const query = ingredientKey(input.value);
@@ -999,8 +1008,10 @@
                 const addButton = document.createElement('button');
                 addButton.type = 'button';
                 addButton.className = 'w-full rounded-lg bg-amber-500 px-3 py-2 text-left text-sm font-semibold text-slate-950 hover:bg-amber-400';
-                addButton.textContent = `＋ Ajouter « ${input.value.trim()} » au catalogue`;
-                addButton.addEventListener('click', () => proposeCatalogIngredient(context, input.value.trim()));
+                addButton.textContent = context === 'recipe'
+                    ? `＋ Ajouter « ${input.value.trim()} » à cette recette et au catalogue`
+                    : `＋ Ajouter « ${input.value.trim()} » au bar et au catalogue`;
+                addButton.addEventListener('click', () => addCatalogIngredientFromSearch(context, input.value.trim()));
                 emptyState.append(message, addButton);
                 list.appendChild(emptyState);
             }
