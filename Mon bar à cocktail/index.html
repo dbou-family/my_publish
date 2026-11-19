@@ -170,7 +170,8 @@
             <button onclick="filterCategory('Sans alcool')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Sans alcool</button>
             <button onclick="filterCategory('Tiki')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Tiki</button>
             <button onclick="filterCategory('Chaud')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Chaud</button>
-            <span class="w-px bg-slate-700 mx-1 shrink-0"></span>
+            <button id="simpleAlcoholFilterButton" onclick="filterCategory('Alcool simple')" class="hidden category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Alcool simple</button>
+            <span id="barFilterSeparator" class="w-px bg-slate-700 mx-1 shrink-0"></span>
             <button onclick="setBarFilter('pret')" data-bar="pret" class="bar-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Réalisables</button>
             <button onclick="setBarFilter('un')" data-bar="un" class="bar-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Il manque 1</button>
         </div>
@@ -357,7 +358,10 @@
             document.getElementById('syncBtn').classList.add('hidden');
             document.querySelector('button[onclick="openPantryModal()"]')?.classList.add('hidden');
             document.querySelector('button[onclick="openModal()"]')?.classList.add('hidden');
-            document.getElementById('categoryFilters').classList.add('hidden');
+            document.getElementById('categoryFilters').classList.remove('hidden');
+            document.getElementById('simpleAlcoholFilterButton').classList.remove('hidden');
+            document.getElementById('barFilterSeparator').classList.add('hidden');
+            document.querySelectorAll('.bar-btn').forEach(button => button.classList.add('hidden'));
         }
 
         function openQrModal() {
@@ -608,6 +612,50 @@
             return '';
         }
 
+        function renderSimpleAlcoholCards(grid, search) {
+            const query = ingredientKey(search);
+            const options = getIngredientCatalog()
+                .filter(name => pantryIngredientCategory(name) !== 'Autres ingrédients')
+                .filter(name => !query || ingredientKey(name).includes(query));
+            if (!options.length) {
+                grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500"><p class="text-base">Aucun alcool simple trouvé.</p></div>';
+                return;
+            }
+            options.forEach(name => {
+                const card = document.createElement('div');
+                card.className = 'cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition hover:border-amber-500/50';
+                card.setAttribute('role', 'button');
+                card.tabIndex = 0;
+                const visual = document.createElement('div');
+                visual.className = 'flex h-40 items-center justify-center bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-6xl';
+                visual.setAttribute('aria-hidden', 'true');
+                visual.textContent = '🥃';
+                const details = document.createElement('div');
+                details.className = 'flex items-center justify-between gap-3 p-4';
+                const title = document.createElement('span');
+                title.className = 'font-bold text-white';
+                title.textContent = name;
+                const action = document.createElement('span');
+                action.className = 'text-xs font-medium text-amber-400';
+                action.textContent = 'Commander';
+                details.append(title, action);
+                card.append(visual, details);
+                const open = () => openDetailModal({
+                    id: `simple-alcohol:${ingredientKey(name)}`,
+                    name,
+                    category: 'Alcool simple',
+                    ingredients: [`1 unité de ${name}`],
+                    instructions: `Commande de ${name} servi seul.`,
+                    isSimpleAlcohol: true
+                });
+                card.addEventListener('click', open);
+                card.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); }
+                });
+                grid.appendChild(card);
+            });
+        }
+
         let barFilter = 'aucun'; // 'aucun' | 'pret' | 'un'
         function setBarFilter(mode) {
             barFilter = barFilter === mode ? 'aucun' : mode;
@@ -623,6 +671,11 @@
         function renderRecipes(filter = 'Tous', search = '') {
             const grid = document.getElementById('recipeGrid');
             grid.innerHTML = '';
+
+            if (filter === 'Alcool simple') {
+                renderSimpleAlcoholCards(grid, search);
+                return;
+            }
 
             const filtered = recipes.filter(r => {
                 const matchCategory = filter === 'Tous' || r.category === filter;
@@ -695,10 +748,10 @@
         // Modal Détails
         function openDetailModal(id) {
             if (guestMode && !barIsOpen) return;
-            const recipe = recipes.find(r => r.id === id);
+            const recipe = typeof id === 'object' ? id : recipes.find(r => r.id === id);
             if (!recipe) return;
 
-            document.getElementById('detailImage').src = recipe.image;
+            document.getElementById('detailImage').src = recipe.image || defaultRecipes[0].image;
             document.getElementById('detailTitle').textContent = recipe.name;
             document.getElementById('detailCategory').textContent = recipe.category;
             
@@ -713,8 +766,9 @@
 
             document.getElementById('detailInstructions').textContent = recipe.instructions;
             document.getElementById('guestOrderButton').classList.toggle('hidden', !guestMode);
-            document.getElementById('editRecipeButton').classList.toggle('hidden', guestMode);
-            document.getElementById('deleteBtn').classList.toggle('hidden', guestMode);
+            document.getElementById('guestOrderButton').textContent = recipe.isSimpleAlcohol ? 'Commander cet alcool' : 'Commander ce cocktail';
+            document.getElementById('editRecipeButton').classList.toggle('hidden', guestMode || recipe.isSimpleAlcohol);
+            document.getElementById('deleteBtn').classList.toggle('hidden', guestMode || recipe.isSimpleAlcohol);
             document.getElementById('deleteBtn').onclick = () => deleteRecipe(recipe.id);
             selectedGuestRecipe = recipe;
 
@@ -940,6 +994,15 @@
         }
         function pantryName(item) {
             return typeof item === 'string' ? item : (item?.name || '');
+        }
+        function pantryIngredientCategory(value) {
+            const key = ingredientKey(value);
+            const hasAny = terms => terms.some(term => (` ${key} `).includes(` ${term} `));
+            if (hasAny(['liqueur', 'curacao', 'triple sec', 'kahlua', 'vermouth', 'campari', 'aperol', 'bitters', 'amaretto', 'chartreuse', 'pastis', 'absinthe', 'pimm'])) return 'Liqueurs et apéritifs';
+            if (hasAny(['vin', 'wine', 'champagne', 'prosecco', 'cava', 'cremant', 'porto', 'sherry', 'xeres', 'marsala', 'sake'])) return 'Vins et bulles';
+            if (hasAny(['biere', 'beer', 'cidre', 'cider', 'pilsner', 'lager', 'ale', 'stout'])) return 'Bières et cidres';
+            if (hasAny(['vodka', 'gin', 'rhum', 'ron', 'tequila', 'mezcal', 'whisky', 'whiskey', 'bourbon', 'cognac', 'armagnac', 'brandy', 'pisco', 'calvados', 'aquavit'])) return 'Spiritueux';
+            return 'Autres ingrédients';
         }
         function getIngredientCatalog() {
             const fromRecipes = recipes.flatMap(recipe => (recipe.ingredients || []).map(nomIngredient));
@@ -1255,21 +1318,30 @@
                 empty.textContent = 'Aucun ingrédient ne correspond à cette recherche.';
                 list.appendChild(empty);
             }
-            matches.forEach(({ item, index }) => {
-                const li = document.createElement('li');
-                li.className = "flex items-center justify-between bg-slate-800/40 px-3 py-2 rounded-lg border border-slate-800 text-sm text-slate-300";
-
-                const span = document.createElement('span');
-                span.textContent = pantryName(item);
-
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.textContent = 'Retirer';
-                btn.className = "text-xs text-rose-400 hover:text-rose-300 transition";
-                btn.onclick = () => removePantryItem(index);
-
-                li.append(span, btn);
-                list.appendChild(li);
+            const categoryOrder = ['Spiritueux', 'Liqueurs et apéritifs', 'Vins et bulles', 'Bières et cidres', 'Autres ingrédients'];
+            const grouped = new Map(categoryOrder.map(category => [category, []]));
+            matches.forEach(entry => grouped.get(pantryIngredientCategory(pantryName(entry.item))).push(entry));
+            categoryOrder.forEach(category => {
+                const entries = grouped.get(category);
+                if (!entries.length) return;
+                const heading = document.createElement('li');
+                heading.className = 'sticky top-0 z-10 border-b border-slate-700 bg-slate-900/95 px-2 py-2 text-xs font-bold uppercase tracking-wider text-amber-300';
+                heading.textContent = `${category} · ${entries.length}`;
+                list.appendChild(heading);
+                entries.sort((a, b) => pantryName(a.item).localeCompare(pantryName(b.item), 'fr'));
+                entries.forEach(({ item, index }) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-800/40 px-3 py-2 text-sm text-slate-300';
+                    const span = document.createElement('span');
+                    span.textContent = pantryName(item);
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.textContent = 'Retirer';
+                    btn.className = 'shrink-0 text-xs text-rose-400 transition hover:text-rose-300';
+                    btn.onclick = () => removePantryItem(index);
+                    li.append(span, btn);
+                    list.appendChild(li);
+                });
             });
         }
 
