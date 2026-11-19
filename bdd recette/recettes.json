@@ -11,19 +11,5 @@
       "Un trait d'eau"
     ],
     "instructions": "Dans un verre Old Fashioned, placer le morceau de sucre et imbiber d'Angostura bitters et d'eau. Écraser le sucre. Remplir le verre de glaçons et verser le bourbon. Remuer pendant environ 30 secondes. Décorer d'un zeste d'orange."
-  },
-  {
-    "id": 4,
-    "name": "Mai Tai",
-    "category": "Tiki",
-    "image": "https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=800&q=80",
-    "ingredients": [
-      "4 cl de Rhum ambré",
-      "2 cl de Rhum blanc",
-      "1,5 cl de Curaçao triple sec",
-      "1,5 cl de Sirop d'orgeat",
-      "1 cl de Jus de lime frais"
-    ],
-    "instructions": "Verser tous les ingrédients dans un shaker rempli de glaçons. Secouer vigoureusement pendant 10 secondes. Verser dans un verre tumbler rempli de glace fraîche. Garnir d'un quartier de lime et d'un brin de menthe."
   }
 ]
