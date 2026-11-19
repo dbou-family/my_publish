@@ -47,7 +47,8 @@
       "1 morceau de sucre",
       "Un trait d'eau"
     ],
-    "status": "pending",
-    "createdAt": "2026-11-19T11:55:10.374Z"
+    "status": "completed",
+    "createdAt": "2026-11-19T11:55:10.374Z",
+    "completedAt": "2026-11-19T11:55:39.455Z"
   }
 ]
