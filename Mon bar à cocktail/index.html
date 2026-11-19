@@ -702,8 +702,8 @@
                 card.className = "bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition group flex flex-col cursor-pointer shadow-lg";
                 card.onclick = () => openDetailModal(recipe.id);
                 card.innerHTML = `
-                    <div class="h-48 overflow-hidden relative">
-                        <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="h-48 overflow-hidden relative bg-slate-950">
+                        <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-full object-contain group-hover:scale-105 transition duration-500">
                         <div class="absolute top-3 left-3">
                             <span class="px-3 py-1 bg-slate-950/70 backdrop-blur-md text-amber-400 text-xs font-semibold rounded-full border border-slate-800">${recipe.category}</span>
                         </div>
@@ -1412,3 +1412,4 @@
     </script>
 </body>
 </html>
+```[cite: 1]
