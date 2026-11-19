@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "70e622a4-d5d0-4212-af54-3065ec722209",
+    "guestId": "e9702b8b-9012-4e1a-b682-1db27b74c1e9",
+    "pseudo": "Pat",
+    "cocktail": "coca cola",
+    "ingredients": [
+      "vodka"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-19T08:21:40.608Z"
+  }
+]
