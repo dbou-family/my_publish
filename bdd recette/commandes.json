@@ -35,5 +35,19 @@
     ],
     "status": "pending",
     "createdAt": "2026-11-19T11:54:53.768Z"
+  },
+  {
+    "id": "6f8b7a28-9db9-4269-97ef-cc1dd74f299a",
+    "guestId": "3c211a92-2b92-459e-b46a-264e5386363b",
+    "pseudo": "ddd",
+    "cocktail": "Old Fashioned",
+    "ingredients": [
+      "6 cl de Bourbon ou Rye whiskey",
+      "2 traits d'Angostura bitters",
+      "1 morceau de sucre",
+      "Un trait d'eau"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-19T11:55:10.374Z"
   }
 ]
