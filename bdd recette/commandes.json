@@ -20,5 +20,20 @@
     ],
     "status": "pending",
     "createdAt": "2026-11-19T11:37:07.570Z"
+  },
+  {
+    "id": "2e485565-ef28-4d6f-bc68-6a2e5c6b5aa0",
+    "guestId": "3c211a92-2b92-459e-b46a-264e5386363b",
+    "pseudo": "doudd",
+    "cocktail": "Mojito Cubain",
+    "ingredients": [
+      "6 cl de Rhum blanc",
+      "3 cl de Jus de lime frais",
+      "6 feuilles de Menthe fraîche",
+      "2 c. à café de Sucre de canne",
+      "Eau gazeuse"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-19T11:54:53.768Z"
   }
 ]
