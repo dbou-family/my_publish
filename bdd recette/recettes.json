@@ -13,19 +13,6 @@
     "instructions": "Dans un verre Old Fashioned, placer le morceau de sucre et imbiber d'Angostura bitters et d'eau. Écraser le sucre. Remplir le verre de glaçons et verser le bourbon. Remuer pendant environ 30 secondes. Décorer d'un zeste d'orange."
   },
   {
-    "id": 3,
-    "name": "Virgin Colada",
-    "category": "Sans alcool",
-    "image": "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=800&q=80",
-    "ingredients": [
-      "12 cl de Jus d'ananas",
-      "4 cl de Lait de coco",
-      "2 cl de Sirop de sucre de canne",
-      "Glaçons"
-    ],
-    "instructions": "Mettre tous les ingrédients dans un blender avec une poignée de glaçons. Mixer à vitesse maximale jusqu'à l'obtention d'une texture onctueuse et mousseuse. Servir dans un grand verre avec une tranche d'ananas."
-  },
-  {
     "id": 4,
     "name": "Mai Tai",
     "category": "Tiki",
