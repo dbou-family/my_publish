@@ -118,6 +118,40 @@
       @keyframes tray-bounce { from { transform: translateY(0) rotate(-8deg); } to { transform: translateY(-9px) rotate(8deg); } }
       @keyframes sparkle { 0%,100% { opacity: .25; transform: scale(.7) rotate(0); } 50% { opacity: 1; transform: scale(1.2) rotate(25deg); } }
       @media (prefers-reduced-motion: reduce) { .order-sent-bartender,.order-sent-tray,.order-sent-spark { animation: none; } }
+      /* Ajustements tactiles pour les téléphones */
+      @media (max-width: 640px) {
+        body { min-height: 100vh; min-height: 100dvh; }
+        body > header { align-items: stretch !important; padding: 12px 16px !important; gap: 12px !important; }
+        body > header > div:first-child { align-self: flex-start; max-width: 100%; }
+        body > header > div:first-child p:not(#guestModeLabel) { line-height: 1.4; }
+        body > header > div:nth-child(2) {
+          display: grid !important;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px !important;
+          align-items: stretch;
+        }
+        body > header > div:nth-child(2) > * { min-width: 0; min-height: 44px; justify-content: center; }
+        #searchInput { grid-column: 1 / -1; width: 100% !important; font-size: 16px; }
+        #recipeGrid { grid-template-columns: 1fr !important; gap: 16px !important; }
+        #categoryFilters { margin-right: -4px; padding-bottom: 10px; scrollbar-width: thin; }
+        #categoryFilters button { min-height: 44px; padding-left: 14px; padding-right: 14px; white-space: nowrap; }
+        #detailModal > div { max-height: calc(100dvh - 24px); overflow-y: auto; }
+        #detailModal > div > div:first-child { height: 210px; }
+        #detailModal .p-6 { padding: 16px; }
+        #detailModal .max-h-\[60vh\] { max-height: none; }
+        #detailModal h2 { font-size: 1.5rem; }
+        #detailModal button, #syncModal button, #addModal button { min-height: 44px; }
+        #guestNotice { width: calc(100% - 32px); text-align: center; bottom: calc(16px + env(safe-area-inset-bottom)); }
+      }
+      @media (max-width: 380px) {
+        body > header > div:nth-child(2) { grid-template-columns: 1fr; }
+        #searchInput { grid-column: auto; }
+        #detailModal .flex.justify-end { flex-wrap: wrap; }
+        #detailModal .flex.justify-end button { flex: 1 1 100%; }
+      }
+      @media (hover: none) and (pointer: coarse) {
+        button, a { -webkit-tap-highlight-color: transparent; }
+      }
     </style>
 
     <!-- Corps de page -->

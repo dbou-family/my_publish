@@ -35,3 +35,41 @@ body{background:#f5f5f0;color:#252c25;letter-spacing:.005em}
 
 .sync-button.is-synced{background:#278443;border-color:#278443;color:#fff}.sync-button.is-synced:hover{background:#206f37;border-color:#206f37}.sync-button.is-synced>span:first-child{color:inherit}
 .sync-button.is-unsynced{background:#c83f3b;border-color:#c83f3b;color:#fff}.sync-button.is-unsynced:hover{background:#ad302d;border-color:#ad302d}.sync-button.is-unsynced>span:first-child{color:inherit}
+
+/* Confort de lecture et commandes tactiles sur téléphone */
+@media (max-width: 700px) {
+  html { -webkit-text-size-adjust: 100%; }
+  .topbar { position: sticky; top: 0; z-index: 30; }
+  .mobile-menu, .icon-button, .theme-toggle, .sync-button { min-width: 44px; min-height: 44px; }
+  .top-actions { gap: 6px; }
+  .content { padding-left: 16px; padding-right: 16px; }
+  .intro, .hero-copy p, .stat-note p { font-size: 12px; line-height: 1.55; }
+  .eyebrow, .stat small, .footer { font-size: 10px; }
+  .card-desc, .card-meta { font-size: 11px; line-height: 1.45; }
+  .card-title { font-size: 15px; line-height: 1.35; }
+  .recipe-card, .primary-button, .ai-button, .filter-button, .select-wrap,
+  .small-action, .form-submit, .ai-submit, .sync-primary, .sync-secondary { min-height: 44px; }
+  .nav-item, .category-link { min-height: 44px; }
+  .search-box input, .field input, .field select, .field textarea,
+  .ai-field input, .ai-field textarea, .sync-token-input { font-size: 16px; }
+  .dialog { width: min(100%, 560px); max-height: calc(100dvh - 20px); overflow-y: auto; }
+  .overlay { align-items: flex-start; overflow-y: auto; padding: 10px; }
+  .detail-columns { gap: 18px; }
+}
+@media (max-width: 390px) {
+  .topbar { padding-left: 12px; padding-right: 12px; gap: 8px; }
+  .top-actions { gap: 4px; }
+  .content { padding-left: 12px; padding-right: 12px; }
+  .recipe-grid { grid-template-columns: 1fr; }
+  .card-image { height: 180px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .stat-note { grid-column: 1 / -1; }
+  .welcome-row { flex-wrap: wrap; }
+  .hero-copy { max-width: 72%; }
+  .form-content, .ai-content, .ai-result, .sync-content { padding: 20px 16px; }
+  .ai-result-actions { flex-direction: column; }
+}
+@media (hover: none) and (pointer: coarse) {
+  .recipe-card:hover { transform: none; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+}
