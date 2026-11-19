@@ -205,6 +205,7 @@
                 </div>
                 <div class="flex justify-end gap-3 pt-2 border-t border-slate-800">
                     <button id="guestOrderButton" onclick="startGuestOrder()" class="hidden px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-sm font-bold">Commander ce cocktail</button>
+                    <button id="editRecipeButton" onclick="editRecipeFromDetail()" class="hidden px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-sm font-bold">Modifier la recette</button>
                     <button id="deleteBtn" class="px-4 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 rounded-lg text-sm font-medium transition">Supprimer</button>
                     <button onclick="closeModal('detailModal')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition">Fermer</button>
                 </div>
@@ -234,7 +235,7 @@
     <div id="addModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl">
             <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center">
-                <h3 class="text-lg font-bold text-white">Ajouter une nouvelle recette</h3>
+                <h3 id="recipeModalTitle" class="text-lg font-bold text-white">Ajouter une nouvelle recette</h3>
                 <button onclick="closeModal('addModal')" class="text-slate-400 hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
@@ -259,9 +260,21 @@
                         <input type="url" id="formImage" placeholder="Laisser vide pour recherche auto" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Ingrédients (un par ligne)</label>
-                    <textarea id="formIngredients" rows="3" required placeholder="5 cl de Vodka&#10;3 cl de Kahlúa&#10;1 shot de café expresso" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500"></textarea>
+                <div class="flex flex-col gap-3">
+                    <label for="recipeIngredientSearch" class="block text-xs uppercase tracking-wider text-slate-400 font-bold">Ingrédients de la recette</label>
+                    <div class="relative">
+                        <input type="search" id="recipeIngredientSearch" autocomplete="off" placeholder="Saisir un mot-clé : rhum, citron…" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-3 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                        <div id="recipeIngredientSuggestions" class="hidden absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-y-auto rounded-lg border border-slate-700 bg-slate-900 shadow-xl" role="listbox" aria-label="Ingrédients correspondants"></div>
+                    </div>
+                    <div id="recipeIngredientRows" class="flex flex-col gap-2"></div>
+                    <p id="recipeIngredientError" class="hidden text-sm text-rose-400" role="alert"></p>
+                    <div>
+                        <button type="button" onclick="toggleCatalogForm('recipe')" class="text-sm font-medium text-amber-300 hover:text-amber-200">＋ Ajouter un ingrédient à la liste</button>
+                        <div id="recipeCatalogForm" class="hidden mt-2 flex gap-2">
+                            <input id="recipeCatalogInput" type="text" maxlength="60" placeholder="Nom du nouvel ingrédient" class="min-w-0 flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                            <button type="button" onclick="addCatalogIngredientFromForm('recipe')" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-semibold">Ajouter</button>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Instructions de préparation</label>
@@ -272,7 +285,7 @@
                 </div>
                 <div class="flex justify-end gap-3 pt-4 border-t border-slate-800">
                     <button type="button" onclick="closeModal('addModal')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-sm font-medium transition">Annuler</button>
-                    <button type="submit" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm transition shadow-lg shadow-amber-500/10">Enregistrer</button>
+                    <button id="recipeSubmitButton" type="submit" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm transition shadow-lg shadow-amber-500/10">Enregistrer</button>
                 </div>
             </form>
         </div>
@@ -288,10 +301,29 @@
                 </button>
             </div>
             <div class="p-6 flex flex-col gap-4">
-                <form id="pantryForm" onsubmit="addPantryItem(event)" class="flex gap-2">
-                    <input type="text" id="pantryInput" required placeholder="Ex: Rhum blanc" class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
-                    <button type="submit" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm transition whitespace-nowrap">Ajouter</button>
-                </form>
+                <div class="flex flex-col gap-3">
+                    <label for="pantryInput" class="text-sm text-slate-300">Rechercher un ingrédient du catalogue</label>
+                    <div class="relative">
+                        <input type="search" id="pantryInput" autocomplete="off" placeholder="Saisir un mot-clé : rhum, citron…" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-3 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                        <div id="pantrySuggestions" class="hidden absolute left-0 right-0 top-full z-20 mt-1 max-h-48 overflow-y-auto rounded-lg border border-slate-700 bg-slate-900 shadow-xl" role="listbox" aria-label="Ingrédients correspondants"></div>
+                    </div>
+                    <div id="pantrySelection" class="hidden rounded-lg border border-slate-700 bg-slate-800/60 p-3">
+                        <p class="mb-2 text-sm font-semibold text-amber-200">Ingrédient sélectionné : <span id="pantrySelectedName"></span></p>
+                        <label for="pantryQuantity" class="mb-1 block text-xs text-slate-300">Quantité disponible (cl)</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="pantryQuantity" min="0.1" step="0.1" inputmode="decimal" placeholder="Ex. 50" class="min-w-0 flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                            <button type="button" onclick="addPantryItem()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm">Ajouter au bar</button>
+                        </div>
+                        <p id="pantryError" class="hidden mt-2 text-sm text-rose-400" role="alert"></p>
+                    </div>
+                    <div>
+                        <button type="button" onclick="toggleCatalogForm('pantry')" class="text-sm font-medium text-amber-300 hover:text-amber-200">＋ Ajouter un ingrédient au catalogue</button>
+                        <div id="pantryCatalogForm" class="hidden mt-2 flex gap-2">
+                            <input id="pantryCatalogInput" type="text" maxlength="60" placeholder="Nom du nouvel ingrédient" class="min-w-0 flex-1 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
+                            <button type="button" onclick="addCatalogIngredientFromForm('pantry')" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-semibold">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
                 <p id="pantryCount" class="text-xs text-slate-400"></p>
                 <ul id="pantryList" class="flex flex-col gap-2 max-h-[50vh] overflow-y-auto"></ul>
             </div>
@@ -522,16 +554,27 @@
                 .filter(t => t && !/^\d+$/.test(t) && !MOTS_VIDES.has(t));
         }
 
+        function quantiteIngredientEnCl(ingredient) {
+            const match = String(ingredient).match(/^\s*(\d+(?:[.,]\d+)?)\s*cl\b/i);
+            return match ? Number(match[1].replace(',', '.')) : null;
+        }
+
         // Un ingrédient est disponible si un de ses choix (séparés par « ou ») correspond à un produit du bar
         function ingredientDisponible(ingredient, bar) {
             const alternatives = ingredient.split(/\bou\b/i).map(tokens).filter(t => t.length > 0);
             if (alternatives.length === 0) return true;
+            const quantiteRequise = quantiteIngredientEnCl(ingredient);
             return alternatives.some(alt => {
                 if (alt.every(t => INGREDIENTS_DE_BASE.includes(t))) return true;
                 return bar.some(produit => {
-                    const it = tokens(produit);
+                    const it = tokens(pantryName(produit));
                     if (it.length === 0) return false;
-                    return alt.every(t => it.includes(t)) || it.every(t => alt.includes(t));
+                    const nomCorrespond = alt.every(t => it.includes(t)) || it.every(t => alt.includes(t));
+                    if (!nomCorrespond) return false;
+                    if (quantiteRequise !== null && typeof produit === 'object' && Number.isFinite(Number(produit.quantityCl))) {
+                        return Number(produit.quantityCl) >= quantiteRequise;
+                    }
+                    return true;
                 });
             });
         }
@@ -670,6 +713,7 @@
 
             document.getElementById('detailInstructions').textContent = recipe.instructions;
             document.getElementById('guestOrderButton').classList.toggle('hidden', !guestMode);
+            document.getElementById('editRecipeButton').classList.toggle('hidden', guestMode);
             document.getElementById('deleteBtn').classList.toggle('hidden', guestMode);
             document.getElementById('deleteBtn').onclick = () => deleteRecipe(recipe.id);
             selectedGuestRecipe = recipe;
@@ -682,6 +726,31 @@
         }
 
         let selectedGuestRecipe = null;
+        let editingRecipeId = null;
+        function editRecipeFromDetail() {
+            if (guestMode || !selectedGuestRecipe) return;
+            const recipe = selectedGuestRecipe;
+            editingRecipeId = recipe.id;
+            document.getElementById('recipeForm').reset();
+            document.getElementById('recipeIngredientRows').replaceChildren();
+            document.getElementById('recipeIngredientError').classList.add('hidden');
+            document.getElementById('recipeIngredientSuggestions').classList.add('hidden');
+            document.getElementById('recipeCatalogForm').classList.add('hidden');
+            document.getElementById('formName').value = recipe.name || '';
+            document.getElementById('formCategory').value = recipe.category || 'Alcoolisé';
+            document.getElementById('formImage').value = recipe.image || '';
+            document.getElementById('formInstructions').value = recipe.instructions || '';
+            (recipe.ingredients || []).forEach(ingredient => {
+                const amount = String(ingredient).match(/^\s*(\d+(?:[.,]\d+)?)\s*cl\b/i);
+                addRecipeIngredient(nomIngredient(ingredient));
+                const row = document.getElementById('recipeIngredientRows').lastElementChild;
+                if (row && amount) row.querySelector('input').value = amount[1].replace(',', '.');
+            });
+            document.getElementById('recipeModalTitle').textContent = 'Modifier la recette';
+            document.getElementById('recipeSubmitButton').textContent = 'Enregistrer les modifications';
+            closeModal('detailModal');
+            document.getElementById('addModal').classList.remove('hidden');
+        }
         function enterGuestMode() {
             localStorage.setItem('barcraft_guest_mode', '1');
             localStorage.setItem('barcraft_mode_chosen', '1');
@@ -733,22 +802,21 @@
                 renderOrders();
             } catch (error) { console.warn('Commandes indisponibles', error); }
         }
+        function renderBarStatusButton() {
+            const button = document.getElementById('barStatusButton');
+            button.textContent = barIsOpen ? 'Fermer le bar' : 'Ouvrir le bar';
+            button.className = barIsOpen
+                ? 'px-3 py-2 rounded-lg text-sm font-semibold border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 whitespace-nowrap'
+                : 'px-3 py-2 rounded-lg text-sm font-semibold border border-rose-500/40 bg-rose-500/10 text-rose-300 whitespace-nowrap';
+            button.classList.toggle('hidden', guestMode);
+        }
         async function refreshBarStatus() {
             try {
                 const response = await fetch(`${ORDERS_API}?barStatus=1`, { cache: 'no-store' });
                 if (!response.ok) return;
                 const data = await response.json(); barIsOpen = data.open !== false;
                 document.getElementById('barClosedOverlay').classList.toggle('hidden', barIsOpen || !guestMode);
-                const button = document.getElementById('barStatusButton');
-                button.classList.toggle('hidden', guestMode);
-                if (!barStatusUpdating) {
-                    button.textContent = barIsOpen ? 'Fermer le bar' : 'Ouvrir le bar';
-                    button.className = barIsOpen
-                        ? 'px-3 py-2 rounded-lg text-sm font-semibold border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 whitespace-nowrap'
-                        : 'px-3 py-2 rounded-lg text-sm font-semibold border border-rose-500/40 bg-rose-500/10 text-rose-300 whitespace-nowrap';
-                }
-                // className réinitialise les classes : réappliquer le masquage invité après le style.
-                button.classList.toggle('hidden', guestMode);
+                renderBarStatusButton();
                 if (guestMode && !barIsOpen) { closeModal('detailModal'); closeModal('guestSubmitModal'); }
             } catch (error) { console.warn('État du bar indisponible', error); }
         }
@@ -768,7 +836,9 @@
             try {
                 const response = await fetch(ORDERS_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'barStatus', open: opening }) });
                 const data = await response.json(); if (!response.ok) throw new Error(data.error || 'Impossible de modifier l’état du bar.');
-                barIsOpen = data.open; await refreshBarStatus();
+                barIsOpen = data.open;
+                renderBarStatusButton();
+                await refreshBarStatus();
             } catch (error) { window.alert(error.message); }
             finally {
                 barStatusUpdating = false;
@@ -833,8 +903,128 @@
         }
 
         function openModal() {
+            editingRecipeId = null;
             document.getElementById('recipeForm').reset();
+            document.getElementById('recipeIngredientRows').innerHTML = '';
+            document.getElementById('recipeIngredientError').classList.add('hidden');
+            document.getElementById('recipeIngredientSuggestions').classList.add('hidden');
+            document.getElementById('recipeCatalogForm').classList.add('hidden');
+            document.getElementById('recipeModalTitle').textContent = 'Ajouter une nouvelle recette';
+            document.getElementById('recipeSubmitButton').textContent = 'Enregistrer';
             document.getElementById('addModal').classList.remove('hidden');
+            document.getElementById('recipeIngredientSearch').focus();
+        }
+
+        const INGREDIENT_CATALOG_KEY = 'barcraft_ingredient_catalog';
+        const COMMON_INGREDIENTS = [
+            'Angostura bitters', 'Basilic frais', 'Bourbon', 'Campari', 'Cassis', 'Cognac', 'Concombre',
+            'Curaçao bleu', 'Curaçao triple sec', 'Eau gazeuse', 'Eau tonique', 'Espresso', 'Gin', 'Glaçons',
+            'Jus d’ananas', 'Jus de cranberry', 'Jus de citron jaune', 'Jus de citron vert', 'Jus de lime frais',
+            'Jus de pamplemousse', 'Jus d’orange', 'Kahlúa', 'Lait de coco', 'Menthe fraîche', 'Miel',
+            'Rhum ambré', 'Rhum blanc', 'Rhum épicé', 'Sirop d’agave', 'Sirop de grenadine', 'Sirop de sucre de canne',
+            'Sirop d’orgeat', 'Sucre de canne', 'Tequila blanche', 'Vermouth blanc', 'Vermouth rouge', 'Vodka',
+            'Whisky', 'Whisky Rye', 'Crème de coco', 'Crème de menthe', 'Liqueur de café', 'Liqueur de pêche',
+            'Triple sec', 'Vin pétillant', 'Eau', 'Limonade', 'Soda', 'Sel', 'Citron jaune', 'Citron vert', 'Orange'
+        ];
+        let savedIngredientCatalog = [];
+        try {
+            const storedCatalog = JSON.parse(localStorage.getItem(INGREDIENT_CATALOG_KEY) || '[]');
+            if (Array.isArray(storedCatalog)) savedIngredientCatalog = storedCatalog.filter(item => typeof item === 'string');
+        } catch (error) { console.warn('Catalogue d’ingrédients illisible', error); }
+
+        function ingredientKey(value) {
+            return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+        }
+        function pantryName(item) {
+            return typeof item === 'string' ? item : (item?.name || '');
+        }
+        function getIngredientCatalog() {
+            const fromRecipes = recipes.flatMap(recipe => (recipe.ingredients || []).map(nomIngredient));
+            const fromPantry = pantry.map(pantryName);
+            const unique = new Map();
+            [...COMMON_INGREDIENTS, ...savedIngredientCatalog, ...fromRecipes, ...fromPantry].forEach(name => {
+                const cleanName = String(name || '').trim();
+                const key = ingredientKey(cleanName);
+                if (key && !unique.has(key)) unique.set(key, cleanName);
+            });
+            return [...unique.values()].sort((a, b) => a.localeCompare(b, 'fr'));
+        }
+        function registerCatalogIngredient(value) {
+            const name = value.trim().replace(/\s+/g, ' ');
+            if (!name) return '';
+            const key = ingredientKey(name);
+            const existing = getIngredientCatalog().find(item => ingredientKey(item) === key);
+            if (existing) return existing;
+            savedIngredientCatalog.push(name);
+            localStorage.setItem(INGREDIENT_CATALOG_KEY, JSON.stringify(savedIngredientCatalog));
+            return name;
+        }
+        function toggleCatalogForm(context) {
+            const panel = document.getElementById(`${context}CatalogForm`);
+            panel.classList.toggle('hidden');
+            document.getElementById(context === 'recipe' ? 'recipeIngredientSuggestions' : 'pantrySuggestions').classList.add('hidden');
+            if (!panel.classList.contains('hidden')) document.getElementById(`${context}CatalogInput`).focus();
+        }
+        function addCatalogIngredientFromForm(context) {
+            const input = document.getElementById(`${context}CatalogInput`);
+            const name = registerCatalogIngredient(input.value);
+            if (!name) { input.focus(); return; }
+            input.value = '';
+            document.getElementById(`${context}CatalogForm`).classList.add('hidden');
+            if (context === 'recipe') addRecipeIngredient(name);
+            else selectPantryIngredient(name);
+        }
+        function renderIngredientSuggestions(input, list, onSelect) {
+            const query = ingredientKey(input.value);
+            const queryWords = query.split(' ').filter(Boolean);
+            const matches = getIngredientCatalog().filter(name => {
+                const key = ingredientKey(name);
+                return !query || key.includes(query) || queryWords.every(word => key.includes(word));
+            }).slice(0, 16);
+            list.replaceChildren();
+            if (matches.length === 0 && query) {
+                const empty = document.createElement('p');
+                empty.className = 'px-4 py-3 text-sm text-slate-400';
+                empty.textContent = 'Aucun choix trouvé. Ajoutez cet ingrédient au catalogue ci-dessous.';
+                list.appendChild(empty);
+            }
+            matches.forEach(name => {
+                const option = document.createElement('button');
+                option.type = 'button';
+                option.setAttribute('role', 'option');
+                option.className = 'block w-full px-4 py-3 text-left text-sm text-slate-200 hover:bg-slate-800 focus:bg-slate-800 focus:outline-none';
+                option.textContent = name;
+                option.addEventListener('click', () => onSelect(name));
+                list.appendChild(option);
+            });
+            list.classList.toggle('hidden', matches.length === 0 && !query);
+        }
+        function addRecipeIngredient(name) {
+            const container = document.getElementById('recipeIngredientRows');
+            if ([...container.children].some(row => ingredientKey(row.dataset.name) === ingredientKey(name))) {
+                document.getElementById('recipeIngredientError').textContent = 'Cet ingrédient est déjà dans la recette.';
+                document.getElementById('recipeIngredientError').classList.remove('hidden');
+                return;
+            }
+            const row = document.createElement('div');
+            row.dataset.name = name;
+            row.className = 'flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 p-2';
+            const label = document.createElement('span');
+            label.className = 'min-w-0 flex-1 text-sm text-slate-200';
+            label.textContent = name;
+            const quantity = document.createElement('input');
+            quantity.type = 'number'; quantity.min = '0.1'; quantity.step = '0.1'; quantity.required = true;
+            quantity.inputMode = 'decimal'; quantity.placeholder = 'Quantité'; quantity.setAttribute('aria-label', `Quantité de ${name} en centilitres`);
+            quantity.className = 'w-24 rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm text-slate-100';
+            const unit = document.createElement('span'); unit.className = 'text-sm text-slate-300'; unit.textContent = 'cl';
+            const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'px-2 py-2 text-rose-300 hover:text-rose-200'; remove.textContent = 'Retirer';
+            remove.addEventListener('click', () => row.remove());
+            row.append(label, quantity, unit, remove);
+            container.appendChild(row);
+            document.getElementById('recipeIngredientError').classList.add('hidden');
+            document.getElementById('recipeIngredientSearch').value = '';
+            document.getElementById('recipeIngredientSuggestions').classList.add('hidden');
+            quantity.focus();
         }
 
         // Suppression d'une recette
@@ -868,19 +1058,39 @@
             const name = document.getElementById('formName').value;
             const category = document.getElementById('formCategory').value;
             let imageUrl = document.getElementById('formImage').value.trim();
-            const ingredients = document.getElementById('formIngredients').value.split('\n').filter(i => i.trim() !== '');
+            const originalRecipe = editingRecipeId === null ? null : recipes.find(recipe => recipe.id === editingRecipeId);
+            const ingredientRows = [...document.getElementById('recipeIngredientRows').children];
+            const invalidQuantity = ingredientRows.find(row => {
+                const quantity = Number(row.querySelector('input').value);
+                return !Number.isFinite(quantity) || quantity <= 0;
+            });
+            const ingredientError = document.getElementById('recipeIngredientError');
+            if (ingredientRows.length === 0 || invalidQuantity) {
+                ingredientError.textContent = ingredientRows.length === 0
+                    ? 'Choisissez au moins un ingrédient dans la liste.'
+                    : 'Indiquez une quantité en cl supérieure à zéro pour chaque ingrédient.';
+                ingredientError.classList.remove('hidden');
+                (invalidQuantity?.querySelector('input') || document.getElementById('recipeIngredientSearch')).focus();
+                return;
+            }
+            const ingredients = ingredientRows.map(row => {
+                const amount = Number(row.querySelector('input').value).toString().replace('.', ',');
+                return `${amount} cl de ${row.dataset.name}`;
+            });
             const instructions = document.getElementById('formInstructions').value;
 
             const loadingIndicator = document.getElementById('loadingIndicator');
 
+            if (!imageUrl && originalRecipe?.image) imageUrl = originalRecipe.image;
             if (!imageUrl) {
                 loadingIndicator.classList.remove('hidden');
                 imageUrl = await fetchImageFromOpenverse(name);
                 loadingIndicator.classList.add('hidden');
             }
 
-            const newRecipe = {
-                id: Date.now(),
+            const updatedRecipe = {
+                ...(originalRecipe || {}),
+                id: editingRecipeId ?? Date.now(),
                 name,
                 category,
                 image: imageUrl,
@@ -888,14 +1098,26 @@
                 instructions
             };
 
-            recipes.unshift(newRecipe);
+            if (editingRecipeId !== null) {
+                recipes = recipes.map(recipe => recipe.id === editingRecipeId ? updatedRecipe : recipe);
+            } else {
+                recipes.unshift(updatedRecipe);
+            }
             saveRecipes();
             closeModal('addModal');
+            editingRecipeId = null;
+            document.getElementById('recipeModalTitle').textContent = 'Ajouter une nouvelle recette';
+            document.getElementById('recipeSubmitButton').textContent = 'Enregistrer';
             renderRecipes(currentFilter, '');
         }
 
         // ----- Mes ingrédients (ce que je possède) -----
-        let pantry = JSON.parse(localStorage.getItem('barcraft_pantry')) || [];
+        let pantry = [];
+        try {
+            const storedPantry = JSON.parse(localStorage.getItem('barcraft_pantry') || '[]');
+            if (Array.isArray(storedPantry)) pantry = storedPantry;
+        } catch (error) { console.warn('Liste du bar illisible', error); }
+        let pendingPantryIngredient = '';
 
         function savePantry() {
             localStorage.setItem('barcraft_pantry', JSON.stringify(pantry));
@@ -908,20 +1130,43 @@
             document.getElementById('pantryInput').focus();
         }
 
-        function addPantryItem(event) {
-            event.preventDefault();
-            const input = document.getElementById('pantryInput');
-            const item = input.value.trim();
-            if (item) {
-                const exists = pantry.some(p => p.toLowerCase() === item.toLowerCase());
-                if (!exists) {
-                    pantry.push(item);
-                    pantry.sort((a, b) => a.localeCompare(b, 'fr'));
-                    savePantry();
-                }
+        function selectPantryIngredient(name) {
+            pendingPantryIngredient = name;
+            document.getElementById('pantrySelectedName').textContent = name;
+            document.getElementById('pantryQuantity').value = '';
+            document.getElementById('pantryError').classList.add('hidden');
+            document.getElementById('pantrySelection').classList.remove('hidden');
+            document.getElementById('pantryInput').value = '';
+            document.getElementById('pantrySuggestions').classList.add('hidden');
+            document.getElementById('pantryQuantity').focus();
+        }
+
+        function addPantryItem() {
+            if (!pendingPantryIngredient) return;
+            const quantityInput = document.getElementById('pantryQuantity');
+            const quantityCl = Number(quantityInput.value);
+            if (!Number.isFinite(quantityCl) || quantityCl <= 0) {
+                const error = document.getElementById('pantryError');
+                error.textContent = 'Indiquez une quantité en cl supérieure à zéro.';
+                error.classList.remove('hidden');
+                quantityInput.focus();
+                return;
             }
-            input.value = '';
-            input.focus();
+            const existing = pantry.find(item => ingredientKey(pantryName(item)) === ingredientKey(pendingPantryIngredient));
+            if (existing) {
+                if (typeof existing === 'string') {
+                    pantry[pantry.indexOf(existing)] = { name: pendingPantryIngredient, quantityCl: quantityCl };
+                } else {
+                    existing.quantityCl = Number(existing.quantityCl || 0) + quantityCl;
+                }
+            } else {
+                pantry.push({ name: pendingPantryIngredient, quantityCl: quantityCl });
+            }
+            pantry.sort((a, b) => pantryName(a).localeCompare(pantryName(b), 'fr'));
+            savePantry();
+            pendingPantryIngredient = '';
+            document.getElementById('pantrySelection').classList.add('hidden');
+            document.getElementById('pantryInput').focus();
             renderPantry();
         }
 
@@ -943,7 +1188,11 @@
                 li.className = "flex items-center justify-between bg-slate-800/40 px-3 py-2 rounded-lg border border-slate-800 text-sm text-slate-300";
 
                 const span = document.createElement('span');
-                span.textContent = item;
+                const name = pantryName(item);
+                const quantity = typeof item === 'object' && Number.isFinite(Number(item.quantityCl))
+                    ? ` — ${Number(item.quantityCl).toString().replace('.', ',')} cl`
+                    : '';
+                span.textContent = `${name}${quantity}`;
 
                 const btn = document.createElement('button');
                 btn.type = 'button';
@@ -955,6 +1204,18 @@
                 list.appendChild(li);
             });
         }
+
+        const recipeIngredientSearch = document.getElementById('recipeIngredientSearch');
+        const recipeIngredientSuggestions = document.getElementById('recipeIngredientSuggestions');
+        document.getElementById('recipeCatalogInput').addEventListener('keydown', event => {
+            if (event.key === 'Enter') { event.preventDefault(); addCatalogIngredientFromForm('recipe'); }
+        });
+        recipeIngredientSearch.addEventListener('input', () => renderIngredientSuggestions(recipeIngredientSearch, recipeIngredientSuggestions, addRecipeIngredient));
+        recipeIngredientSearch.addEventListener('focus', () => renderIngredientSuggestions(recipeIngredientSearch, recipeIngredientSuggestions, addRecipeIngredient));
+        const pantryInput = document.getElementById('pantryInput');
+        const pantrySuggestions = document.getElementById('pantrySuggestions');
+        pantryInput.addEventListener('input', () => renderIngredientSuggestions(pantryInput, pantrySuggestions, selectPantryIngredient));
+        pantryInput.addEventListener('focus', () => renderIngredientSuggestions(pantryInput, pantrySuggestions, selectPantryIngredient));
 
         // Charge les données partagées via la fonction Cloudflare.
         renderRecipes();
