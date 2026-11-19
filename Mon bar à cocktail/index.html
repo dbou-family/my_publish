@@ -63,6 +63,11 @@
         </div>
     </header>
 
+    <div id="barStatusPending" class="hidden fixed top-24 left-1/2 -translate-x-1/2 z-[100] max-w-[calc(100%-2rem)] items-center gap-3 rounded-xl border border-amber-400/30 bg-slate-900/95 px-5 py-3 text-sm font-semibold text-amber-100 shadow-xl" role="status" aria-live="polite" aria-atomic="true">
+        <span class="h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-amber-300/30 border-t-amber-300" aria-hidden="true"></span>
+        <span id="barStatusPendingText">Mise à jour du bar en cours…</span>
+    </div>
+
     <!-- QR code pour ouvrir le site en mode invité -->
     <div id="qrModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl">
@@ -360,7 +365,9 @@
         const COCKTAILS_API = '../api/cocktails';
         const ORDERS_API = '../api/orders';
         let barIsOpen = !guestMode;
+        let barStatusUpdating = false;
         let barcraftAudio = null;
+        let orderSentAudio = null;
         function getBarcraftAudio() {
             const AudioContextClass = window.AudioContext || window.webkitAudioContext;
             if (!AudioContextClass) return null;
@@ -387,12 +394,25 @@
             source.buffer = buffer; source.connect(filter); filter.connect(gain); gain.connect(context.destination); source.start(start);
         }
         function playBarcraftSound(kind) {
+            if (kind === 'sent') {
+                if (!orderSentAudio) {
+                    orderSentAudio = new Audio('./dragon-studio-fireworks-07-419025.mp3');
+                    orderSentAudio.preload = 'auto';
+                    orderSentAudio.volume = 0.75;
+                }
+                orderSentAudio.currentTime = 0;
+                orderSentAudio.play().catch(() => {
+                    const fallbackContext = getBarcraftAudio();
+                    if (!fallbackContext) return;
+                    const start = fallbackContext.currentTime + 0.04;
+                    [0, .16, .34, .52, .72, .94, 1.14].forEach((offset, index) => playClap(fallbackContext, start + offset, index % 3 === 0 ? .18 : .12));
+                });
+                return;
+            }
             const context = getBarcraftAudio(); if (!context) return;
             const now = context.currentTime + 0.04;
             if (kind === 'incoming') {
                 playTone(context, 880, now, 0.22, 'triangle', 0.18); playTone(context, 1175, now + 0.19, 0.32, 'triangle', 0.18);
-            } else if (kind === 'sent') {
-                [0, .16, .34, .52, .72, .94, 1.14].forEach((offset, index) => playClap(context, now + offset, index % 3 === 0 ? .18 : .12));
             } else if (kind === 'delivered') {
                 [[587.33, 0], [739.99, .14], [880, .28], [1174.66, .48]].forEach(([frequency, offset]) => playTone(context, frequency, now + offset, .62, 'sine', .17));
             }
@@ -721,24 +741,42 @@
                 document.getElementById('barClosedOverlay').classList.toggle('hidden', barIsOpen || !guestMode);
                 const button = document.getElementById('barStatusButton');
                 button.classList.toggle('hidden', guestMode);
-                button.textContent = barIsOpen ? 'Fermer le bar' : 'Ouvrir le bar';
-                button.className = barIsOpen
-                    ? 'px-3 py-2 rounded-lg text-sm font-semibold border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 whitespace-nowrap'
-                    : 'px-3 py-2 rounded-lg text-sm font-semibold border border-rose-500/40 bg-rose-500/10 text-rose-300 whitespace-nowrap';
+                if (!barStatusUpdating) {
+                    button.textContent = barIsOpen ? 'Fermer le bar' : 'Ouvrir le bar';
+                    button.className = barIsOpen
+                        ? 'px-3 py-2 rounded-lg text-sm font-semibold border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 whitespace-nowrap'
+                        : 'px-3 py-2 rounded-lg text-sm font-semibold border border-rose-500/40 bg-rose-500/10 text-rose-300 whitespace-nowrap';
+                }
                 // className réinitialise les classes : réappliquer le masquage invité après le style.
                 button.classList.toggle('hidden', guestMode);
                 if (guestMode && !barIsOpen) { closeModal('detailModal'); closeModal('guestSubmitModal'); }
             } catch (error) { console.warn('État du bar indisponible', error); }
         }
         async function toggleBarStatus() {
-            if (guestMode) return;
-            const button = document.getElementById('barStatusButton'); button.disabled = true;
+            if (guestMode || barStatusUpdating) return;
+            const button = document.getElementById('barStatusButton');
+            const pending = document.getElementById('barStatusPending');
+            const opening = !barIsOpen;
+            barStatusUpdating = true;
+            button.disabled = true;
+            button.setAttribute('aria-busy', 'true');
+            document.getElementById('barStatusPendingText').textContent = opening
+                ? 'Ouverture du bar en cours…'
+                : 'Fermeture du bar en cours…';
+            pending.classList.remove('hidden');
+            pending.classList.add('flex');
             try {
-                const response = await fetch(ORDERS_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'barStatus', open: !barIsOpen }) });
+                const response = await fetch(ORDERS_API, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'barStatus', open: opening }) });
                 const data = await response.json(); if (!response.ok) throw new Error(data.error || 'Impossible de modifier l’état du bar.');
                 barIsOpen = data.open; await refreshBarStatus();
             } catch (error) { window.alert(error.message); }
-            finally { button.disabled = false; }
+            finally {
+                barStatusUpdating = false;
+                button.disabled = false;
+                button.removeAttribute('aria-busy');
+                pending.classList.add('hidden');
+                pending.classList.remove('flex');
+            }
         }
         async function clearOrders() {
             if (guestMode) return;
