@@ -311,6 +311,8 @@
                         <h4 class="font-semibold text-white">Dans mon bar</h4>
                         <p id="pantryCount" class="mt-1 text-xs text-slate-400"></p>
                     </div>
+                    <label for="pantryRemoveSearch" class="sr-only">Rechercher un ingrédient à retirer</label>
+                    <input type="search" id="pantryRemoveSearch" autocomplete="off" placeholder="Rechercher pour supprimer…" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
                     <ul id="pantryList" class="flex flex-col gap-2 max-h-[50vh] overflow-y-auto pr-1"></ul>
                 </section>
                 <section class="min-w-0 flex flex-col gap-4 rounded-xl border border-slate-800 bg-slate-950/30 p-4">
@@ -1233,11 +1235,25 @@
         function renderPantry() {
             const list = document.getElementById('pantryList');
             list.innerHTML = '';
+            const query = ingredientKey(document.getElementById('pantryRemoveSearch').value);
+            const queryWords = query.split(' ').filter(Boolean);
+            const matches = pantry.map((item, index) => ({ item, index })).filter(({ item }) => {
+                const name = ingredientKey(pantryName(item));
+                return !query || name.includes(query) || queryWords.every(word => name.includes(word));
+            });
             document.getElementById('pantryCount').textContent = pantry.length === 0
                 ? "Votre bar est vide pour l'instant."
-                : `${pantry.length} ingrédient(s) dans votre bar`;
+                : query
+                    ? `${matches.length} résultat(s) sur ${pantry.length} ingrédient(s)`
+                    : `${pantry.length} ingrédient(s) dans votre bar`;
 
-            pantry.forEach((item, index) => {
+            if (pantry.length > 0 && matches.length === 0) {
+                const empty = document.createElement('li');
+                empty.className = 'px-3 py-4 text-sm text-slate-400';
+                empty.textContent = 'Aucun ingrédient ne correspond à cette recherche.';
+                list.appendChild(empty);
+            }
+            matches.forEach(({ item, index }) => {
                 const li = document.createElement('li');
                 li.className = "flex items-center justify-between bg-slate-800/40 px-3 py-2 rounded-lg border border-slate-800 text-sm text-slate-300";
 
@@ -1266,6 +1282,7 @@
         const pantrySuggestions = document.getElementById('pantrySuggestions');
         pantryInput.addEventListener('input', () => renderIngredientSuggestions(pantryInput, pantrySuggestions, selectPantryIngredient, 'pantry'));
         pantryInput.addEventListener('focus', () => renderIngredientSuggestions(pantryInput, pantrySuggestions, selectPantryIngredient, 'pantry'));
+        document.getElementById('pantryRemoveSearch').addEventListener('input', renderPantry);
 
         // Charge les données partagées via la fonction Cloudflare.
         renderRecipes();
