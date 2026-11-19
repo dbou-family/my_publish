@@ -146,6 +146,7 @@
         #detailModal .max-h-\[60vh\] { max-height: none; }
         #detailModal h2 { font-size: 1.5rem; }
         #detailModal button, #syncModal button, #addModal button { min-height: 44px; }
+        #addModal input, #addModal select, #pantryModal input { min-height: 44px; font-size: 16px; }
         #guestNotice { width: calc(100% - 32px); text-align: center; bottom: calc(16px + env(safe-area-inset-bottom)); }
       }
       @media (max-width: 380px) {
@@ -309,11 +310,7 @@
                     </div>
                     <div id="pantrySelection" class="hidden rounded-lg border border-slate-700 bg-slate-800/60 p-3">
                         <p class="mb-2 text-sm font-semibold text-amber-200">Ingrédient sélectionné : <span id="pantrySelectedName"></span></p>
-                        <label for="pantryQuantity" class="mb-1 block text-xs text-slate-300">Quantité disponible (cl)</label>
-                        <div class="flex gap-2">
-                            <input type="number" id="pantryQuantity" min="0.1" step="0.1" inputmode="decimal" placeholder="Ex. 50" class="min-w-0 flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
-                            <button type="button" onclick="addPantryItem()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm">Ajouter au bar</button>
-                        </div>
+                        <button type="button" onclick="addPantryItem()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm">Ajouter au bar</button>
                         <p id="pantryError" class="hidden mt-2 text-sm text-rose-400" role="alert"></p>
                     </div>
                     <div>
@@ -554,27 +551,16 @@
                 .filter(t => t && !/^\d+$/.test(t) && !MOTS_VIDES.has(t));
         }
 
-        function quantiteIngredientEnCl(ingredient) {
-            const match = String(ingredient).match(/^\s*(\d+(?:[.,]\d+)?)\s*cl\b/i);
-            return match ? Number(match[1].replace(',', '.')) : null;
-        }
-
         // Un ingrédient est disponible si un de ses choix (séparés par « ou ») correspond à un produit du bar
         function ingredientDisponible(ingredient, bar) {
             const alternatives = ingredient.split(/\bou\b/i).map(tokens).filter(t => t.length > 0);
             if (alternatives.length === 0) return true;
-            const quantiteRequise = quantiteIngredientEnCl(ingredient);
             return alternatives.some(alt => {
                 if (alt.every(t => INGREDIENTS_DE_BASE.includes(t))) return true;
                 return bar.some(produit => {
                     const it = tokens(pantryName(produit));
                     if (it.length === 0) return false;
-                    const nomCorrespond = alt.every(t => it.includes(t)) || it.every(t => alt.includes(t));
-                    if (!nomCorrespond) return false;
-                    if (quantiteRequise !== null && typeof produit === 'object' && Number.isFinite(Number(produit.quantityCl))) {
-                        return Number(produit.quantityCl) >= quantiteRequise;
-                    }
-                    return true;
+                    return alt.every(t => it.includes(t)) || it.every(t => alt.includes(t));
                 });
             });
         }
@@ -591,7 +577,7 @@
             do {
                 precedent = s;
                 s = s.replace(/^\d+([.,]\d+)?\s*/, '');
-                s = s.replace(/^(cl|ml|kg|g|l|c\.\s*à\s*(café|soupe)|shots?|morceaux?|traits?|feuilles?|un|une|de|du|des)\s+/i, '');
+                s = s.replace(/^(cl|ml|kg|g|l|c\.?\s*à\s*(café|soupe)|unités?|feuilles?|shots?|morceaux?|traits?|un|une|de|du|des)\s+/i, '');
                 s = s.replace(/^d['’]/i, '');
             } while (s !== precedent);
             return s || ingredient.trim();
@@ -741,10 +727,13 @@
             document.getElementById('formImage').value = recipe.image || '';
             document.getElementById('formInstructions').value = recipe.instructions || '';
             (recipe.ingredients || []).forEach(ingredient => {
-                const amount = String(ingredient).match(/^\s*(\d+(?:[.,]\d+)?)\s*cl\b/i);
-                addRecipeIngredient(nomIngredient(ingredient));
+                const parsed = parseRecipeIngredient(ingredient);
+                addRecipeIngredient(parsed.name, parsed.amount, parsed.unit);
                 const row = document.getElementById('recipeIngredientRows').lastElementChild;
-                if (row && amount) row.querySelector('input').value = amount[1].replace(',', '.');
+                if (row) {
+                    row.querySelector('input').value = parsed.amount.replace(',', '.');
+                    row.querySelector('select').value = parsed.unit;
+                }
             });
             document.getElementById('recipeModalTitle').textContent = 'Modifier la recette';
             document.getElementById('recipeSubmitButton').textContent = 'Enregistrer les modifications';
@@ -999,7 +988,41 @@
             });
             list.classList.toggle('hidden', matches.length === 0 && !query);
         }
-        function addRecipeIngredient(name) {
+        const RECIPE_UNITS = [
+            ['cl', 'cl'], ['unite', 'unité(s)'], ['cac', 'cac'], ['cas', 'cas'],
+            ['feuille', 'feuille(s)'], ['trait', 'trait(s)'], ['morceau', 'morceau(x)'], ['shot', 'shot(s)']
+        ];
+        function parseRecipeIngredient(ingredient) {
+            const text = String(ingredient || '').trim();
+            const match = text.match(/^\s*(\d+(?:[.,]\d+)?|un|une)\s*(cl|c\.?\s*à\s*café|c\.?\s*à\s*soupe|unités?|feuilles?|traits?|morceaux?|shots?)\s+(?:de\s+|d['’])?(.+)$/i);
+            if (!match) return { name: nomIngredient(text), amount: '', unit: 'cl' };
+            const rawUnit = match[2].toLowerCase();
+            const unit = rawUnit.startsWith('c') && rawUnit.includes('café') ? 'cac'
+                : rawUnit.startsWith('c') && rawUnit.includes('soupe') ? 'cas'
+                : rawUnit.startsWith('unité') ? 'unite'
+                : rawUnit.startsWith('feuille') ? 'feuille'
+                : rawUnit.startsWith('trait') ? 'trait'
+                : rawUnit.startsWith('morceau') ? 'morceau'
+                : rawUnit.startsWith('shot') ? 'shot' : 'cl';
+            const amount = /^(un|une)$/i.test(match[1]) ? '1' : match[1];
+            return { name: match[3].trim(), amount, unit };
+        }
+        function formatRecipeIngredient(amount, unit, name) {
+            const number = Number(amount);
+            const count = Number.isInteger(number) ? String(number) : String(number).replace('.', ',');
+            const phrases = {
+                cl: `${count} cl de ${name}`,
+                unite: `${count} ${number === 1 ? 'unité' : 'unités'} de ${name}`,
+                cac: `${count} c. à café de ${name}`,
+                cas: `${count} c. à soupe de ${name}`,
+                feuille: `${count} ${number === 1 ? 'feuille' : 'feuilles'} de ${name}`,
+                trait: `${count} ${number === 1 ? 'trait' : 'traits'} de ${name}`,
+                morceau: `${count} ${number === 1 ? 'morceau' : 'morceaux'} de ${name}`,
+                shot: `${count} ${number === 1 ? 'shot' : 'shots'} de ${name}`
+            };
+            return phrases[unit] || phrases.cl;
+        }
+        function addRecipeIngredient(name, amount = '', selectedUnit = 'cl') {
             const container = document.getElementById('recipeIngredientRows');
             if ([...container.children].some(row => ingredientKey(row.dataset.name) === ingredientKey(name))) {
                 document.getElementById('recipeIngredientError').textContent = 'Cet ingrédient est déjà dans la recette.';
@@ -1014,10 +1037,17 @@
             label.textContent = name;
             const quantity = document.createElement('input');
             quantity.type = 'number'; quantity.min = '0.1'; quantity.step = '0.1'; quantity.required = true;
-            quantity.inputMode = 'decimal'; quantity.placeholder = 'Quantité'; quantity.setAttribute('aria-label', `Quantité de ${name} en centilitres`);
-            quantity.className = 'w-24 rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm text-slate-100';
-            const unit = document.createElement('span'); unit.className = 'text-sm text-slate-300'; unit.textContent = 'cl';
-            const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'px-2 py-2 text-rose-300 hover:text-rose-200'; remove.textContent = 'Retirer';
+            quantity.inputMode = 'decimal'; quantity.placeholder = 'Qté'; quantity.setAttribute('aria-label', `Quantité de ${name}`);
+            quantity.className = 'w-20 shrink-0 rounded-lg border border-slate-700 bg-slate-900 px-2 py-2 text-sm text-slate-100';
+            quantity.value = amount;
+            const unit = document.createElement('select');
+            unit.setAttribute('aria-label', `Unité pour ${name}`);
+            unit.className = 'w-20 shrink-0 rounded-lg border border-slate-700 bg-slate-900 px-1 py-2 text-xs text-slate-100';
+            RECIPE_UNITS.forEach(([value, labelText]) => {
+                const option = document.createElement('option'); option.value = value; option.textContent = labelText; unit.appendChild(option);
+            });
+            unit.value = selectedUnit;
+            const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'shrink-0 px-2 py-2 text-rose-300 hover:text-rose-200'; remove.setAttribute('aria-label', `Retirer ${name}`); remove.textContent = '×';
             remove.addEventListener('click', () => row.remove());
             row.append(label, quantity, unit, remove);
             container.appendChild(row);
@@ -1073,10 +1103,9 @@
                 (invalidQuantity?.querySelector('input') || document.getElementById('recipeIngredientSearch')).focus();
                 return;
             }
-            const ingredients = ingredientRows.map(row => {
-                const amount = Number(row.querySelector('input').value).toString().replace('.', ',');
-                return `${amount} cl de ${row.dataset.name}`;
-            });
+            const ingredients = ingredientRows.map(row => formatRecipeIngredient(
+                row.querySelector('input').value, row.querySelector('select').value, row.dataset.name
+            ));
             const instructions = document.getElementById('formInstructions').value;
 
             const loadingIndicator = document.getElementById('loadingIndicator');
@@ -1115,7 +1144,7 @@
         let pantry = [];
         try {
             const storedPantry = JSON.parse(localStorage.getItem('barcraft_pantry') || '[]');
-            if (Array.isArray(storedPantry)) pantry = storedPantry;
+            if (Array.isArray(storedPantry)) pantry = storedPantry.map(pantryName).filter(Boolean);
         } catch (error) { console.warn('Liste du bar illisible', error); }
         let pendingPantryIngredient = '';
 
@@ -1133,36 +1162,23 @@
         function selectPantryIngredient(name) {
             pendingPantryIngredient = name;
             document.getElementById('pantrySelectedName').textContent = name;
-            document.getElementById('pantryQuantity').value = '';
             document.getElementById('pantryError').classList.add('hidden');
             document.getElementById('pantrySelection').classList.remove('hidden');
             document.getElementById('pantryInput').value = '';
             document.getElementById('pantrySuggestions').classList.add('hidden');
-            document.getElementById('pantryQuantity').focus();
         }
 
         function addPantryItem() {
             if (!pendingPantryIngredient) return;
-            const quantityInput = document.getElementById('pantryQuantity');
-            const quantityCl = Number(quantityInput.value);
-            if (!Number.isFinite(quantityCl) || quantityCl <= 0) {
+            const exists = pantry.some(item => ingredientKey(pantryName(item)) === ingredientKey(pendingPantryIngredient));
+            if (exists) {
                 const error = document.getElementById('pantryError');
-                error.textContent = 'Indiquez une quantité en cl supérieure à zéro.';
+                error.textContent = 'Cet ingrédient est déjà dans votre bar.';
                 error.classList.remove('hidden');
-                quantityInput.focus();
                 return;
             }
-            const existing = pantry.find(item => ingredientKey(pantryName(item)) === ingredientKey(pendingPantryIngredient));
-            if (existing) {
-                if (typeof existing === 'string') {
-                    pantry[pantry.indexOf(existing)] = { name: pendingPantryIngredient, quantityCl: quantityCl };
-                } else {
-                    existing.quantityCl = Number(existing.quantityCl || 0) + quantityCl;
-                }
-            } else {
-                pantry.push({ name: pendingPantryIngredient, quantityCl: quantityCl });
-            }
-            pantry.sort((a, b) => pantryName(a).localeCompare(pantryName(b), 'fr'));
+            pantry.push(pendingPantryIngredient);
+            pantry.sort((a, b) => a.localeCompare(b, 'fr'));
             savePantry();
             pendingPantryIngredient = '';
             document.getElementById('pantrySelection').classList.add('hidden');
@@ -1188,11 +1204,7 @@
                 li.className = "flex items-center justify-between bg-slate-800/40 px-3 py-2 rounded-lg border border-slate-800 text-sm text-slate-300";
 
                 const span = document.createElement('span');
-                const name = pantryName(item);
-                const quantity = typeof item === 'object' && Number.isFinite(Number(item.quantityCl))
-                    ? ` — ${Number(item.quantityCl).toString().replace('.', ',')} cl`
-                    : '';
-                span.textContent = `${name}${quantity}`;
+                span.textContent = pantryName(item);
 
                 const btn = document.createElement('button');
                 btn.type = 'button';
