@@ -325,7 +325,7 @@
                         </div>
                         <div id="pantrySelection" class="hidden rounded-lg border border-slate-700 bg-slate-800/60 p-3">
                             <p class="mb-2 text-sm font-semibold text-amber-200">Ingrédient sélectionné : <span id="pantrySelectedName"></span></p>
-                            <button type="button" onclick="addPantryItem()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm">Ajouter au bar</button>
+                            <button type="button" id="addPantryItemButton" onclick="addPantryItem()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm">Ajouter au bar</button>
                             <p id="pantryError" class="hidden mt-2 text-sm text-rose-400" role="alert"></p>
                         </div>
                     </div>
@@ -1206,6 +1206,7 @@
             document.getElementById('pantrySelection').classList.remove('hidden');
             document.getElementById('pantryInput').value = '';
             document.getElementById('pantrySuggestions').classList.add('hidden');
+            document.getElementById('addPantryItemButton').focus();
         }
 
         function addPantryItem() {
@@ -1282,6 +1283,21 @@
         const pantrySuggestions = document.getElementById('pantrySuggestions');
         pantryInput.addEventListener('input', () => renderIngredientSuggestions(pantryInput, pantrySuggestions, selectPantryIngredient, 'pantry'));
         pantryInput.addEventListener('focus', () => renderIngredientSuggestions(pantryInput, pantrySuggestions, selectPantryIngredient, 'pantry'));
+        pantryInput.addEventListener('keydown', event => {
+            if (event.key !== 'Enter') return;
+            const query = ingredientKey(pantryInput.value);
+            if (!query) return;
+            const options = [...pantrySuggestions.querySelectorAll('button[role="option"]')];
+            const exactMatch = options.find(option => ingredientKey(option.textContent) === query);
+            if (exactMatch || options.length === 1) {
+                event.preventDefault();
+                selectPantryIngredient((exactMatch || options[0]).textContent);
+                if (exactMatch) addPantryItem();
+            }
+        });
+        document.getElementById('pantryCatalogInput').addEventListener('keydown', event => {
+            if (event.key === 'Enter') { event.preventDefault(); addCatalogIngredientFromForm('pantry'); }
+        });
         document.getElementById('pantryRemoveSearch').addEventListener('input', renderPantry);
 
         // Charge les données partagées via la fonction Cloudflare.
