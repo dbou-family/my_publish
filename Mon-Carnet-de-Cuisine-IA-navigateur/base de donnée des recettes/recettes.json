@@ -1,7 +1,65 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-20T19:08:23.950Z",
+  "updatedAt": "2026-11-20T19:17:35.144Z",
   "recipes": [
+    {
+      "id": "r1795202253323",
+      "name": "Terrine de saumon",
+      "category": "Entrée",
+      "time": 30,
+      "servings": 8,
+      "difficulty": "Facile",
+      "image": "https://img.cuisineaz.com/660x495/2019/10/28/i150362-terrine-de-saumon.webp",
+      "description": "Terriblement bon",
+      "ingredients": [
+        [
+          "3 oeufs",
+          "à votre goût"
+        ],
+        [
+          "1 échalotte",
+          "à votre goût"
+        ],
+        [
+          "20g de beurre",
+          "à votre goût"
+        ],
+        [
+          "400g de saumon cru",
+          "à votre goût"
+        ],
+        [
+          "20cl de crème fraiche liquide",
+          "à votre goût"
+        ],
+        [
+          "1cas citron",
+          "à votre goût"
+        ],
+        [
+          "2cac de persil",
+          "à votre goût"
+        ],
+        [
+          "2cac de sel",
+          "à votre goût"
+        ]
+      ],
+      "steps": [
+        "Préchauffer le four à 170",
+        "Beurrer le moule de 1L alu",
+        "Dans un mixer:",
+        "Couper le saumon en petit dés",
+        "Ajouter l'échalote",
+        "Ajouter les oeufs, créme fraiche, jus de citron, persil, sel, poivre",
+        "Mixer",
+        "Verser la préparation dans le moule et mettre au four en bain marie pendant 45min",
+        "La terrine doit atteindre 70° à coeur avec la sonde",
+        "Laisser refroidir et servir"
+      ],
+      "favorite": false,
+      "createdAt": "2026-11-20T19:17:33.323Z"
+    },
     {
       "id": "r1794856800476",
       "name": "tarte aux pommes",
