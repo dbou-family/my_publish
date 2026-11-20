@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-20T20:48:00.094Z",
+  "updatedAt": "2026-11-20T20:48:41.828Z",
   "recipes": [
     {
       "id": "r1795207019791",
@@ -109,26 +109,6 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-20T19:17:33.323Z"
-    },
-    {
-      "id": "r1794856800476",
-      "name": "tarte aux pommes",
-      "category": "Entrée",
-      "time": 30,
-      "servings": 4,
-      "difficulty": "Facile",
-      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Tarte_aux_pommes_25.jpg/960px-Tarte_aux_pommes_25.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "imageCredit": "René Hourdry",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tarte_aux_pommes_25.jpg",
-      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tarte_aux_pommes_25.jpg",
-      "imageLicense": "CC BY-SA 4.0",
-      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "imageProvider": "Wikimedia Commons",
-      "description": "Une délicieuse recette à partager.",
-      "ingredients": [],
-      "steps": [],
-      "favorite": false,
-      "createdAt": "2026-11-16T19:20:00.476Z"
     },
     {
       "id": "r1794856753259",
