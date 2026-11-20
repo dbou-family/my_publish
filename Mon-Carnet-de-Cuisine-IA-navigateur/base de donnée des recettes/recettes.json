@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-20T19:17:35.144Z",
+  "updatedAt": "2026-11-20T19:17:39.253Z",
   "recipes": [
     {
       "id": "r1795202253323",
@@ -57,7 +57,7 @@
         "La terrine doit atteindre 70° à coeur avec la sonde",
         "Laisser refroidir et servir"
       ],
-      "favorite": false,
+      "favorite": true,
       "createdAt": "2026-11-20T19:17:33.323Z"
     },
     {
