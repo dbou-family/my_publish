@@ -222,7 +222,7 @@
                 <h3 class="text-lg font-bold text-white">Synchronisation GitHub</h3>
                 <button onclick="closeModal('syncModal')" class="text-slate-400 hover:text-white">✕</button>
             </div>
-            <p class="text-sm text-slate-300 mb-3">Les recettes sont stockées dans <code class="text-amber-400">bdd recette/recettes.json</code> sur la branche <code class="text-amber-400">recipes-data</code>. La synchronisation utilise le secret GitHub configuré dans Cloudflare. Le jeton reste côté serveur.</p>
+            <p class="text-sm text-slate-300 mb-3">Les recettes et les ingrédients de votre bar sont stockés dans GitHub sur la branche <code class="text-amber-400">recipes-data</code>. La synchronisation utilise le secret GitHub configuré dans Cloudflare. Le jeton reste côté serveur.</p>
             <div class="flex justify-between items-center mt-5">
                 <span id="syncStatus" role="status" class="text-xs text-slate-400"></span>
                 <div class="flex gap-2">
@@ -410,6 +410,7 @@
         ];
 
         const COCKTAILS_API = '../api/cocktails';
+        const PANTRY_API = '../api/pantry';
         const ORDERS_API = '../api/orders';
         let barIsOpen = !guestMode;
         let barStatusUpdating = false;
@@ -468,16 +469,31 @@
         let githubFileSha = null;
         let syncQueue = Promise.resolve();
         let pendingWrites = 0;
+        let recipesSyncOk = false;
+        let pantrySyncOk = false;
+        let pantryFileSha = null;
+        let pantrySyncQueue = Promise.resolve();
+        let pantryRevision = 0;
+        let pendingPantryWrites = 0;
         localStorage.removeItem('barcraft_github_token');
 
         // Bouton « Synchronisation » : entièrement vert si synchronisé, entièrement rouge sinon
         const SYNC_BTN_OK = ['bg-emerald-600', 'hover:bg-emerald-500', 'border-emerald-500', 'text-white'];
         const SYNC_BTN_KO = ['bg-rose-600', 'hover:bg-rose-500', 'border-rose-500', 'text-white'];
-        function setSyncState(synced) {
+        function updateSyncButton() {
             const btn = document.getElementById('syncBtn');
+            const synced = recipesSyncOk && pantrySyncOk;
             btn.classList.remove(...SYNC_BTN_OK, ...SYNC_BTN_KO);
             btn.classList.add(...(synced ? SYNC_BTN_OK : SYNC_BTN_KO));
-            btn.title = synced ? 'Synchronisé avec GitHub' : 'Non synchronisé avec GitHub';
+            btn.title = synced ? 'Recettes et ingrédients synchronisés avec GitHub' : 'Recettes ou ingrédients non synchronisés avec GitHub';
+        }
+        function setSyncState(synced) {
+            recipesSyncOk = synced;
+            updateSyncButton();
+        }
+        function setPantrySyncState(synced) {
+            pantrySyncOk = synced;
+            updateSyncButton();
         }
         let currentFilter = 'Tous';
 
@@ -542,12 +558,14 @@
         async function connectGitHub() {
             const button = document.querySelector('#syncModal button[onclick="connectGitHub()"]');
             button.disabled = true;
-            showSyncStatus('Connexion et chargement des recettes…');
+            showSyncStatus('Connexion et chargement des recettes et ingrédients…');
             try {
                 await loadRecipesFromGitHub();
+                await loadPantryFromGitHub();
                 renderRecipes(currentFilter, document.getElementById('searchInput').value);
                 setSyncState(pendingWrites === 0);
-                showSyncStatus('Connexion établie : recettes synchronisées avec GitHub.');
+                setPantrySyncState(true);
+                showSyncStatus('Recettes et ingrédients synchronisés avec GitHub.');
                 setTimeout(() => closeModal('syncModal'), 1200);
             } catch (error) {
                 setSyncState(false);
@@ -1253,8 +1271,67 @@
         let pendingPantryIngredient = '';
 
         function savePantry() {
+            pantryRevision++;
             localStorage.setItem('barcraft_pantry', JSON.stringify(pantry));
             renderRecipes(currentFilter, document.getElementById('searchInput').value);
+            persistPantryInBackground();
+        }
+
+        async function loadPantryFromGitHub() {
+            const revisionAtStart = pantryRevision;
+            const response = await fetch(PANTRY_API, { cache: 'no-store' });
+            if (response.status === 404) {
+                // Première synchronisation : conserver et importer le contenu local existant.
+                await persistPantry([...pantry]);
+                setPantrySyncState(true);
+                return;
+            }
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({}));
+                throw new Error(error.error || `Impossible de lire les ingrédients du bar (${response.status}).`);
+            }
+            const data = await response.json();
+            if (!Array.isArray(data.pantry)) throw new Error('Le fichier GitHub ne contient pas une liste d’ingrédients valide.');
+            pantryFileSha = data.sha || null;
+            if (revisionAtStart !== pantryRevision) {
+                await persistPantry([...pantry]);
+                setPantrySyncState(true);
+                return;
+            }
+            pantry = data.pantry.map(pantryName).filter(Boolean);
+            localStorage.setItem('barcraft_pantry', JSON.stringify(pantry));
+            renderPantry();
+            renderRecipes(currentFilter, document.getElementById('searchInput').value);
+            setPantrySyncState(true);
+        }
+
+        async function persistPantry(items = pantry) {
+            const response = await fetch(PANTRY_API, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pantry: items, sha: pantryFileSha })
+            });
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({}));
+                throw new Error(error.error || `Échec de l’enregistrement des ingrédients (${response.status}).`);
+            }
+            const data = await response.json();
+            pantryFileSha = data.sha || null;
+        }
+
+        function persistPantryInBackground() {
+            pendingPantryWrites++;
+            setPantrySyncState(false);
+            const snapshot = [...pantry];
+            pantrySyncQueue = pantrySyncQueue.then(async () => {
+                await persistPantry(snapshot);
+                pendingPantryWrites--;
+                setPantrySyncState(pendingPantryWrites === 0);
+            }).catch(error => {
+                pendingPantryWrites--;
+                setPantrySyncState(false);
+                showSyncStatus(error.message, true);
+            });
         }
 
         function openPantryModal() {
@@ -1397,6 +1474,11 @@
         loadRecipesFromGitHub().then(() => renderRecipes()).catch(error => {
             console.error('Synchronisation GitHub impossible :', error);
             setSyncState(false);
+            document.getElementById('syncStatus').textContent = error.message;
+        });
+        loadPantryFromGitHub().catch(error => {
+            console.error('Synchronisation des ingrédients impossible :', error);
+            setPantrySyncState(false);
             document.getElementById('syncStatus').textContent = error.message;
         });
         if (!guestMode) document.getElementById('modeModal').classList.remove('hidden');
