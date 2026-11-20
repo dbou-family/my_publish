@@ -170,6 +170,8 @@
             <button onclick="filterCategory('Sans alcool')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Sans alcool</button>
             <button onclick="filterCategory('Tiki')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Tiki</button>
             <button onclick="filterCategory('Chaud')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Chaud</button>
+            <button onclick="filterCategory('Mes favoris')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Mes favoris</button>
+            <button onclick="filterCategory('À tester')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">À tester</button>
             <button id="simpleAlcoholFilterButton" onclick="filterCategory('Alcool simple')" class="hidden category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Alcool simple</button>
             <span id="barFilterSeparator" class="w-px bg-slate-700 mx-1 shrink-0"></span>
             <button onclick="setBarFilter('pret')" data-bar="pret" class="bar-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Réalisables</button>
@@ -197,6 +199,18 @@
                 </div>
             </div>
             <div class="p-6 flex flex-col gap-6 max-h-[60vh] overflow-y-auto">
+                <section id="recipePreferences" class="rounded-xl border border-slate-800 bg-slate-800/40 p-4">
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div>
+                            <h3 class="text-xs uppercase tracking-wider text-slate-400 font-bold">Ma note</h3>
+                            <div id="ratingStars" class="mt-1 flex items-center gap-1" role="group" aria-label="Noter ce cocktail de zéro à quatre étoiles"></div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button id="favoriteToggle" type="button" onclick="toggleRecipeFlag('favorite')" class="rounded-lg border px-3 py-2 text-sm font-semibold"></button>
+                            <button id="toTryToggle" type="button" onclick="toggleRecipeFlag('toTry')" class="rounded-lg border px-3 py-2 text-sm font-semibold"></button>
+                        </div>
+                    </div>
+                </section>
                 <div>
                     <h3 class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-3">Ingrédients</h3>
                     <ul id="detailIngredients" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300"></ul>
@@ -500,7 +514,7 @@
         async function loadRecipesFromGitHub() {
             let response = await fetch(COCKTAILS_API);
             if (response.status === 404) {
-                recipes = defaultRecipes;
+                recipes = normalizeRecipes(defaultRecipes);
                 await persistRecipes();
                 setSyncState(pendingWrites === 0);
                 return;
@@ -511,9 +525,18 @@
             }
             const parsed = await response.json();
             githubFileSha = parsed.sha;
-            recipes = parsed.recipes;
-            if (!Array.isArray(recipes)) throw new Error('Le fichier de recettes ne contient pas une liste valide.');
+            if (!Array.isArray(parsed.recipes)) throw new Error('Le fichier de recettes ne contient pas une liste valide.');
+            recipes = normalizeRecipes(parsed.recipes);
             setSyncState(pendingWrites === 0);
+        }
+
+        function normalizeRecipes(items) {
+            return items.map(recipe => ({
+                ...recipe,
+                rating: Number.isInteger(Number(recipe.rating)) ? Math.max(0, Math.min(4, Number(recipe.rating))) : 0,
+                favorite: recipe.favorite === true,
+                toTry: recipe.toTry === true
+            }));
         }
 
         async function persistRecipes() {
@@ -696,7 +719,10 @@
             }
 
             const filtered = recipes.filter(r => {
-                const matchCategory = filter === 'Tous' || r.category === filter;
+                const matchCategory = filter === 'Tous'
+                    || (filter === 'Mes favoris' ? r.favorite === true
+                        : filter === 'À tester' ? r.toTry === true
+                            : r.category === filter);
                 const matchSearch = r.name.toLowerCase().includes(search.toLowerCase()) || 
                                     r.ingredients.some(i => i.toLowerCase().includes(search.toLowerCase()));
                 const manquants = analyserRecette(r).manquants.length;
@@ -732,6 +758,8 @@
                     <div class="p-5 flex flex-col flex-1 justify-between gap-4">
                         <div>
                             <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">${recipe.name}</h3>
+                            <p class="mt-1 text-sm text-amber-300" aria-label="Note : ${Math.max(0, Math.min(4, Number(recipe.rating) || 0))} sur 4">${'★'.repeat(Math.max(0, Math.min(4, Number(recipe.rating) || 0)))}${'☆'.repeat(4 - Math.max(0, Math.min(4, Number(recipe.rating) || 0)))} <span class="text-xs text-slate-400">${Math.max(0, Math.min(4, Number(recipe.rating) || 0))}/4</span></p>
+                            ${(recipe.favorite || recipe.toTry) ? `<div class="mt-2 flex flex-wrap gap-2">${recipe.favorite ? '<span class="rounded-full border border-rose-400/30 bg-rose-500/10 px-2 py-1 text-xs text-rose-300">♥ Favori</span>' : ''}${recipe.toTry ? '<span class="rounded-full border border-violet-400/30 bg-violet-500/10 px-2 py-1 text-xs text-violet-300">À tester</span>' : ''}</div>` : ''}
                             <p class="text-xs text-slate-400 mt-1 line-clamp-2">${recipe.ingredients.join(', ')}</p>
                         </div>
                         <div class="flex items-center text-xs text-amber-500 font-medium gap-1">
@@ -782,14 +810,74 @@
             });
 
             document.getElementById('detailInstructions').textContent = recipe.instructions;
+            document.getElementById('recipePreferences').classList.toggle('hidden', Boolean(recipe.isSimpleAlcohol));
+            selectedGuestRecipe = recipe;
+            renderRecipePreferences();
             document.getElementById('guestOrderButton').classList.toggle('hidden', !guestMode);
             document.getElementById('guestOrderButton').textContent = recipe.isSimpleAlcohol ? 'Commander cet alcool' : 'Commander ce cocktail';
             document.getElementById('editRecipeButton').classList.toggle('hidden', guestMode || recipe.isSimpleAlcohol);
             document.getElementById('deleteBtn').classList.toggle('hidden', guestMode || recipe.isSimpleAlcohol);
             document.getElementById('deleteBtn').onclick = () => deleteRecipe(recipe.id);
-            selectedGuestRecipe = recipe;
-
             document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function renderRecipePreferences() {
+            const recipe = selectedGuestRecipe;
+            if (!recipe || recipe.isSimpleAlcohol) return;
+            const rating = Math.max(0, Math.min(4, Number(recipe.rating) || 0));
+            const stars = document.getElementById('ratingStars');
+            stars.replaceChildren();
+            for (let value = 1; value <= 4; value++) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = value <= rating ? '★' : '☆';
+                button.title = `${value} étoile${value > 1 ? 's' : ''}`;
+                button.setAttribute('aria-label', `Noter ${value} sur 4`);
+                button.setAttribute('aria-pressed', String(value === rating));
+                button.disabled = guestMode;
+                button.className = `text-2xl leading-none ${value <= rating ? 'text-amber-300' : 'text-slate-500'} ${guestMode ? 'cursor-default' : 'hover:text-amber-200'}`;
+                button.onclick = event => { event.stopPropagation(); setRecipeRating(value === rating ? 0 : value); };
+                stars.appendChild(button);
+            }
+            const zeroButton = document.createElement('button');
+            zeroButton.type = 'button';
+            zeroButton.textContent = '0';
+            zeroButton.title = 'Effacer la note';
+            zeroButton.setAttribute('aria-label', 'Mettre la note à zéro');
+            zeroButton.setAttribute('aria-pressed', String(rating === 0));
+            zeroButton.disabled = guestMode;
+            zeroButton.className = `ml-2 rounded-md px-2 py-1 text-xs ${rating === 0 ? 'bg-slate-700 text-white' : 'text-slate-400 hover:text-white'} ${guestMode ? 'cursor-default' : ''}`;
+            zeroButton.onclick = event => { event.stopPropagation(); setRecipeRating(0); };
+            stars.appendChild(zeroButton);
+
+            const favorite = document.getElementById('favoriteToggle');
+            favorite.textContent = recipe.favorite ? '♥ Dans mes favoris' : '♡ Ajouter aux favoris';
+            favorite.disabled = guestMode;
+            favorite.className = `rounded-lg border px-3 py-2 text-sm font-semibold ${recipe.favorite ? 'border-rose-400/40 bg-rose-500/15 text-rose-200' : 'border-slate-700 bg-slate-800 text-slate-300'} ${guestMode ? 'cursor-default opacity-80' : 'hover:border-rose-400/50'}`;
+            const toTry = document.getElementById('toTryToggle');
+            toTry.textContent = recipe.toTry ? '✓ À tester' : '＋ À tester';
+            toTry.disabled = guestMode;
+            toTry.className = `rounded-lg border px-3 py-2 text-sm font-semibold ${recipe.toTry ? 'border-violet-400/40 bg-violet-500/15 text-violet-200' : 'border-slate-700 bg-slate-800 text-slate-300'} ${guestMode ? 'cursor-default opacity-80' : 'hover:border-violet-400/50'}`;
+        }
+
+        function updateRecipePreference(updates) {
+            if (guestMode || !selectedGuestRecipe || selectedGuestRecipe.isSimpleAlcohol) return;
+            const index = recipes.findIndex(recipe => recipe.id === selectedGuestRecipe.id);
+            if (index < 0) return;
+            recipes[index] = { ...recipes[index], ...updates };
+            selectedGuestRecipe = recipes[index];
+            renderRecipePreferences();
+            saveRecipes();
+            renderRecipes(currentFilter, document.getElementById('searchInput').value);
+        }
+
+        function setRecipeRating(rating) {
+            updateRecipePreference({ rating: Math.max(0, Math.min(4, Number(rating) || 0)) });
+        }
+
+        function toggleRecipeFlag(flag) {
+            if (!['favorite', 'toTry'].includes(flag) || !selectedGuestRecipe) return;
+            updateRecipePreference({ [flag]: !selectedGuestRecipe[flag] });
         }
 
         function closeModal(modalId) {
@@ -1242,6 +1330,9 @@
             const updatedRecipe = {
                 ...(originalRecipe || {}),
                 id: editingRecipeId ?? Date.now(),
+                rating: originalRecipe?.rating ?? 0,
+                favorite: originalRecipe?.favorite === true,
+                toTry: originalRecipe?.toTry === true,
                 name,
                 category,
                 image: imageUrl,
