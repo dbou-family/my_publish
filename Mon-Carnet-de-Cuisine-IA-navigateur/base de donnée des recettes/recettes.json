@@ -1,7 +1,57 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-20T20:31:52.644Z",
+  "updatedAt": "2026-11-20T20:37:01.443Z",
   "recipes": [
+    {
+      "id": "r1795207019791",
+      "name": "BBQ hotdog",
+      "category": "Plat",
+      "time": 30,
+      "servings": 4,
+      "difficulty": "Facile",
+      "image": "https://www.google.com/imgres?q=hot%20dog%20maison&imgurl=https%3A%2F%2Fwww.painsjacquet.com%2Fwp-content%2Fuploads%2F2023%2F03%2FHot-dog-BD.jpg&imgrefurl=https%3A%2F%2Fwww.painsjacquet.com%2Frecettes%2Fhot-dog-a-lamericaine%2F&docid=7zKfs7jxmxJSYM&tbnid=OA14jmzlebJU1M&vet=12ahUKEwjG_-SqspeYAxVk1gIHHV1DECUQnPAOegQIRBAA..i&w=1078&h=1920&hcb=2&ved=2ahUKEwjG_-SqspeYAxVk1gIHHV1DECUQnPAOegQIRBAA",
+      "description": "Une hotdog revisité",
+      "ingredients": [
+        [
+          "Pour 1 hotdog",
+          "à votre goût"
+        ],
+        [
+          "un pain viennois ou brioché",
+          "à votre goût"
+        ],
+        [
+          "2 fromages à fondre",
+          "à votre goût"
+        ],
+        [
+          "2 tranches de bacon",
+          "à votre goût"
+        ],
+        [
+          "1 knacki",
+          "à votre goût"
+        ],
+        [
+          "oignons pickles simple ( oignons dans le vinaigre chaud)",
+          "à votre goût"
+        ],
+        [
+          "sauce BBQ au choix et moutarde",
+          "à votre goût"
+        ]
+      ],
+      "steps": [
+        "Ouvrir le pain en 2",
+        "Disposer les fromages à fondre ouverts en portefeuille",
+        "Rouler le bacon autour de la saucisse et faire cuire pour saisir",
+        "Mettre la saucisse dans le pain",
+        "Mettre de oignons pickles",
+        "Finir par la sauce"
+      ],
+      "favorite": false,
+      "createdAt": "2026-11-20T20:36:59.791Z"
+    },
     {
       "id": "r1795202253323",
       "name": "Terrine de saumon",
