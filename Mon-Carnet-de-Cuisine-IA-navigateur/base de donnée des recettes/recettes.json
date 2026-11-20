@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-20T20:48:41.828Z",
+  "updatedAt": "2026-11-20T20:48:46.049Z",
   "recipes": [
     {
       "id": "r1795207019791",
@@ -109,29 +109,6 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-20T19:17:33.323Z"
-    },
-    {
-      "id": "r1794856753259",
-      "name": "hot dog",
-      "category": "Entrée",
-      "time": 30,
-      "servings": 4,
-      "difficulty": "Facile",
-      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/60m_Hot_Dog_Akasaka_Aug4_06.jpeg/960px-60m_Hot_Dog_Akasaka_Aug4_06.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "description": "Une délicieuse recette à partager.",
-      "ingredients": [],
-      "steps": [],
-      "favorite": false,
-      "createdAt": "2026-11-16T19:19:13.259Z",
-      "imageSearchState": "found",
-      "imageCredit": "Tim Lindenschmidt",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:60m_Hot_Dog_Akasaka_Aug4_06.jpeg",
-      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:60m_Hot_Dog_Akasaka_Aug4_06.jpeg",
-      "imageLicense": "Public domain",
-      "imageLicenseUrl": "https://commons.wikimedia.org/wiki/File:60m_Hot_Dog_Akasaka_Aug4_06.jpeg",
-      "imageProvider": "Wikimedia Commons",
-      "imageTitle": "60m Hot Dog Akasaka Aug4 06",
-      "imageSearchRetryAt": 0
     }
   ]
 }
