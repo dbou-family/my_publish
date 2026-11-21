@@ -653,6 +653,43 @@
             return '';
         }
 
+        // Images des ingrédients du bar (affichées en vue invité, mode Alcool simple)
+        const INGREDIENT_IMAGE_SOURCES = [
+            ["Bourbon 3 ans", "https://www.woodfordreserve.com/wp-content/uploads/2019/12/Holiday-Bottle.png"],
+            ["Scotch blended malt", "https://images.ctfassets.net/miw9xo325qds/42soZaWJmnXGhujdijXjuM/e0b69419317244c6b9a183a34993edd2/NEW_Bottle_Image_Orange_Background.png"],
+            ["Whisky francais FONDAUDEGE", "https://calvados-coquerel.com/cdn/shop/files/MECENEWHISKYDetoure_1_1.png"],
+            ["Gin", "https://upload.wikimedia.org/wikipedia/commons/9/9c/Hendrick%27s_Gin_-_Bottle.png"],
+            ["Grappa", "https://starlightdistillery.com/wp-content/uploads/2023/12/grappa-bottle.png"],
+            ["Grappa ambree", "https://www.vallepicciola.com/assets/img/grappa-card_2024-03-21-160524_jqan.png"],
+            ["Kirsh", "https://lerouxusa.com/wp-content/uploads/2023/03/Leroux_Kirsch_bottle_crop-1-672x1024.png"],
+            ["Malibu", "https://spades.com.mt/cdn/shop/products/image_9c26efea-ca24-4e67-9e90-45c1c3b471e6_600x.png"],
+            ["Rhum ambrée", "https://png.pngtree.com/png-vector/20240708/ourlarge/pngtree-premium-amber-whisky-bottle-mockup-elegant-brandy-packaging-design-luxurious-cognac-png-image_12859819.png"],
+            ["Rhum ambré", "https://png.pngtree.com/png-vector/20240708/ourlarge/pngtree-premium-amber-whisky-bottle-mockup-elegant-brandy-packaging-design-luxurious-cognac-png-image_12859819.png"],
+            ["Rhum blanc", "https://lindasliquorandwine.com/wp-content/uploads/2021/12/Bacardi-Superior-White-Rum.png"],
+            ["Rhum XO", "https://woodencork.com/cdn/shop/products/Bumbu-XO-Rum.png"],
+            ["Tequila blanche", "https://125538537.cdn6.editmysite.com/uploads/1/2/5/5/125538537/MJTPEPPX3HSDIKDI2PEGRX6X.png"],
+            ["Vodka", "https://upload.wikimedia.org/wikipedia/commons/1/1e/Absolut_vodka_bottle.png"],
+            ["Aperol", "https://cdn11.bigcommerce.com/s-u9ww3di/images/stencil/1280x1280/products/9018/13057/AperolFront__34712.1577521008.png"],
+            ["Cointreau", "https://la-maison-du-barman.fr/wp-content/uploads/2025/04/20250430204929416.png"],
+            ["Creme de cassis", "https://www.distillerie-salamandre.com/wp-content/uploads/2024/03/Creme-cassis.png"],
+            ["Creme de pamplemousse", "https://www.cheekyanddry.com/cdn/shop/files/Giffard-Grapefruit-Hero_corrected.png"],
+            ["Creme de pistache", "https://www.topdrinks.fr/media/catalog/product/L/_/L_65_307_00_1_ae91.png"],
+            ["Get 27", "https://www.topdrinks.fr/media/catalog/product/L/_/L_59_899_00_1_9be1.png"],
+            ["Liqueur de pomme", "https://www.onestop.co.uk/wp-content/uploads/2026/08/f1650a2d-6f8c-4d24-a533-d8460ff9f7c6.png"],
+            ["Martini blanc", "https://assets.stickpng.com/images/587e34b39686194a55adab93.png"],
+            ["Martini rouge", "https://d2z05otmbim3z8.cloudfront.net/wp-content/uploads/sites/15/2025/02/01065332/FY26_MARTINI_IT_Website_Product_Rosso_1l_14I5_withShadow_800x1000-1.png"],
+            ["Picon", "https://www.vinatis.com/111514-detail_default/liqueur-picon-original.png"],
+            ["Ricard", "https://www.bieres64-40.fr/wp-content/uploads/2023/01/Ricard.png"],
+            ["Suze", "https://ch.nicolas.com/medias/sys_master/images/images/h44/h95/8802322710558/021574-mainProductPicture-ProductDetailsPage-ConversionMediaFormat.png"],
+            ["Muscat FRONTIGNANT vieillit", "https://media-viniou.com/wineimage/appellation_v2/france/languedoc/muscat-de-frontignan/bottle-75-vins-blanc.png"],
+            ["Biere ambrée", "https://static.vecteezy.com/system/resources/previews/071/169/008/non_2x/amber-glass-beer-bottle-isolated-on-transparent-background-png.png"]
+        ];
+        function ingredientImageFor(name) {
+            const key = ingredientKey(name);
+            const hit = INGREDIENT_IMAGE_SOURCES.find(([label]) => ingredientKey(label) === key);
+            return hit ? hit[1] : '';
+        }
+
         function renderSimpleAlcoholCards(grid, search) {
             const query = ingredientKey(search);
             const options = pantry.map(pantryName)
@@ -668,9 +705,20 @@
                 card.setAttribute('role', 'button');
                 card.tabIndex = 0;
                 const visual = document.createElement('div');
-                visual.className = 'flex h-40 items-center justify-center bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-6xl';
+                visual.className = 'mx-auto mt-4 flex h-56 w-36 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-6xl';
                 visual.setAttribute('aria-hidden', 'true');
-                visual.textContent = '🥃';
+                const imageUrl = ingredientImageFor(name);
+                if (imageUrl) {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.alt = name;
+                    img.loading = 'lazy';
+                    img.className = 'h-full w-full object-contain p-2';
+                    img.onerror = () => { img.remove(); visual.textContent = '🥃'; };
+                    visual.appendChild(img);
+                } else {
+                    visual.textContent = '🥃';
+                }
                 const details = document.createElement('div');
                 details.className = 'flex items-center justify-between gap-3 p-4';
                 const title = document.createElement('span');
@@ -685,6 +733,7 @@
                     id: `simple-alcohol:${ingredientKey(name)}`,
                     name,
                     category: 'Alcool simple',
+                    image: imageUrl,
                     ingredients: [`1 unité de ${name}`],
                     instructions: `Commande de ${name} servi seul.`,
                     isSimpleAlcohol: true
