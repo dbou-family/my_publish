@@ -693,56 +693,85 @@
         function renderSimpleAlcoholCards(grid, search) {
             const query = ingredientKey(search);
             const options = pantry.map(pantryName)
-                .filter(name => pantryIngredientCategory(name) !== 'Autres ingrédients')
+                .filter(name => !['Autres ingrédients', 'Sirops'].includes(pantryIngredientCategory(name)))
                 .filter(name => !query || ingredientKey(name).includes(query));
             if (!options.length) {
                 grid.innerHTML = '<div class="col-span-full py-16 text-center text-slate-500"><p class="text-base">Aucun alcool correspondant n’est présent dans votre bar.</p></div>';
                 return;
             }
+            // Vue invité : 10 colonnes, alcools regroupés par catégorie
+            const compact = guestMode;
+            if (compact) {
+                grid.style.setProperty('grid-template-columns', 'repeat(10, minmax(0, 1fr))', 'important');
+                grid.style.setProperty('gap', '10px', 'important');
+            }
+            const groups = new Map();
             options.forEach(name => {
-                const card = document.createElement('div');
-                card.className = 'mx-auto w-44 cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition hover:border-amber-500/50';
-                card.setAttribute('role', 'button');
-                card.tabIndex = 0;
-                const visual = document.createElement('div');
-                visual.className = 'flex h-72 w-full items-center justify-center bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-6xl';
-                visual.setAttribute('aria-hidden', 'true');
-                const imageUrl = ingredientImageFor(name);
-                if (imageUrl) {
-                    const img = document.createElement('img');
-                    img.src = imageUrl;
-                    img.alt = name;
-                    img.loading = 'lazy';
-                    img.className = 'h-full w-full object-contain p-4';
-                    img.onerror = () => { img.remove(); visual.textContent = '🥃'; };
-                    visual.appendChild(img);
-                } else {
-                    visual.textContent = '🥃';
+                const category = pantryIngredientCategory(name);
+                if (!groups.has(category)) groups.set(category, []);
+                groups.get(category).push(name);
+            });
+            const orderedGroups = compact
+                ? ['Whisky', 'Spiritueux', 'Liqueurs et apéritifs', 'Vins et bulles', 'Bières et cidres']
+                    .filter(category => groups.has(category))
+                    .map(category => [category, groups.get(category)])
+                : [['', options]];
+            orderedGroups.forEach(([category, names]) => {
+                if (compact) {
+                    const heading = document.createElement('div');
+                    heading.className = 'col-span-full border-b border-slate-700 pb-1 text-xs font-bold uppercase tracking-wider text-amber-300';
+                    heading.textContent = `${category} · ${names.length}`;
+                    grid.appendChild(heading);
                 }
-                const details = document.createElement('div');
-                details.className = 'flex flex-col items-center gap-1 p-4 text-center';
-                const title = document.createElement('span');
-                title.className = 'font-bold text-white';
-                title.textContent = name;
-                const action = document.createElement('span');
-                action.className = 'text-xs font-medium text-amber-400';
-                action.textContent = 'Commander';
-                details.append(title, action);
-                card.append(visual, details);
-                const open = () => openDetailModal({
-                    id: `simple-alcohol:${ingredientKey(name)}`,
-                    name,
-                    category: 'Alcool simple',
-                    image: imageUrl,
-                    ingredients: [`1 unité de ${name}`],
-                    instructions: `Commande de ${name} servi seul.`,
-                    isSimpleAlcohol: true
+                names.forEach(name => {
+                    const card = document.createElement('div');
+                    card.className = compact
+                        ? 'cursor-pointer overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow transition hover:border-amber-500/50'
+                        : 'mx-auto w-44 cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition hover:border-amber-500/50';
+                    card.setAttribute('role', 'button');
+                    card.tabIndex = 0;
+                    const visual = document.createElement('div');
+                    visual.className = compact
+                        ? 'flex aspect-[2/3] w-full items-center justify-center bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-3xl'
+                        : 'flex h-72 w-full items-center justify-center bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-6xl';
+                    visual.setAttribute('aria-hidden', 'true');
+                    const imageUrl = ingredientImageFor(name);
+                    if (imageUrl) {
+                        const img = document.createElement('img');
+                        img.src = imageUrl;
+                        img.alt = name;
+                        img.loading = 'lazy';
+                        img.className = compact ? 'h-full w-full object-contain p-1' : 'h-full w-full object-contain p-4';
+                        img.onerror = () => { img.remove(); visual.textContent = '🥃'; };
+                        visual.appendChild(img);
+                    } else {
+                        visual.textContent = '🥃';
+                    }
+                    const details = document.createElement('div');
+                    details.className = compact ? 'flex flex-col items-center gap-0.5 p-2 text-center' : 'flex flex-col items-center gap-1 p-4 text-center';
+                    const title = document.createElement('span');
+                    title.className = compact ? 'w-full truncate text-xs font-bold text-white' : 'font-bold text-white';
+                    title.textContent = name;
+                    const action = document.createElement('span');
+                    action.className = compact ? 'text-[10px] font-medium text-amber-400' : 'text-xs font-medium text-amber-400';
+                    action.textContent = 'Commander';
+                    details.append(title, action);
+                    card.append(visual, details);
+                    const open = () => openDetailModal({
+                        id: `simple-alcohol:${ingredientKey(name)}`,
+                        name,
+                        category: 'Alcool simple',
+                        image: imageUrl,
+                        ingredients: [`1 unité de ${name}`],
+                        instructions: `Commande de ${name} servi seul.`,
+                        isSimpleAlcohol: true
+                    });
+                    card.addEventListener('click', open);
+                    card.addEventListener('keydown', event => {
+                        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); }
+                    });
+                    grid.appendChild(card);
                 });
-                card.addEventListener('click', open);
-                card.addEventListener('keydown', event => {
-                    if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); }
-                });
-                grid.appendChild(card);
             });
         }
 
@@ -761,6 +790,8 @@
         function renderRecipes(filter = 'Tous', search = '') {
             const grid = document.getElementById('recipeGrid');
             grid.innerHTML = '';
+            grid.style.removeProperty('grid-template-columns');
+            grid.style.removeProperty('gap');
 
             if (filter === 'Alcool simple') {
                 renderSimpleAlcoholCards(grid, search);
