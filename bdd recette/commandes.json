@@ -45,5 +45,16 @@
     ],
     "status": "pending",
     "createdAt": "2026-11-21T22:21:05.357Z"
+  },
+  {
+    "id": "9d38dac2-94c6-4f9e-a683-1aca6d3737ef",
+    "guestId": "1b156996-f647-46c4-93c7-7b106f6d957a",
+    "pseudo": "Juste un doigt",
+    "cocktail": "Rhum XO",
+    "ingredients": [
+      "1 unité de Rhum XO"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-21T22:21:15.321Z"
   }
 ]
