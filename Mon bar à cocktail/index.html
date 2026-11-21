@@ -168,8 +168,6 @@
             <button onclick="filterCategory('Tous')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950">Tous</button>
             <button onclick="filterCategory('Alcoolisé')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Alcoolisé</button>
             <button onclick="filterCategory('Sans alcool')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Sans alcool</button>
-            <button onclick="filterCategory('Tiki')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Tiki</button>
-            <button onclick="filterCategory('Chaud')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Chaud</button>
             <button onclick="filterCategory('Mes favoris')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Mes favoris</button>
             <button onclick="filterCategory('À tester')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">À tester</button>
             <button id="simpleAlcoholFilterButton" onclick="filterCategory('Alcool simple')" class="hidden category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Alcool simple</button>
@@ -269,8 +267,6 @@
                                 <select id="formCategory" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-amber-500">
                                     <option value="Alcoolisé">Alcoolisé</option>
                                     <option value="Sans alcool">Sans alcool</option>
-                                    <option value="Tiki">Tiki</option>
-                                    <option value="Chaud">Chaud</option>
                                 </select>
                             </div>
                             <div>
@@ -373,7 +369,10 @@
             document.querySelector('button[onclick="openPantryModal()"]')?.classList.add('hidden');
             document.querySelector('button[onclick="openModal()"]')?.classList.add('hidden');
             document.getElementById('categoryFilters').classList.remove('hidden');
-            document.getElementById('simpleAlcoholFilterButton').classList.remove('hidden');
+            const simpleButton = document.getElementById('simpleAlcoholFilterButton');
+            simpleButton.classList.remove('hidden');
+            const filterBar = document.getElementById('categoryFilters');
+            filterBar.insertBefore(simpleButton, filterBar.firstElementChild);
             document.getElementById('barFilterSeparator').classList.add('hidden');
             document.querySelectorAll('.bar-btn').forEach(button => button.classList.add('hidden'));
         }
