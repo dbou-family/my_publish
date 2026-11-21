@@ -106,8 +106,8 @@
           <span class="order-sent-tray">🍸</span><span class="order-sent-bartender">🏃‍♂️</span>
         </div>
         <h2 id="orderSentTitle" class="text-2xl font-extrabold text-white mt-2">C’est parti !</h2>
-        <p class="text-slate-200 mt-3">✅ Commande transmise au barman. Vous serez averti dès qu’elle sera livrée.</p>
-        <button onclick="closeModal('orderSentModal')" class="mt-6 w-full px-4 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl">Super !</button>
+        <p id="orderSentText" class="text-slate-200 mt-3">✅ Commande transmise au barman. Vous serez averti dès qu’elle sera livrée.</p>
+        <button id="orderSentButton" onclick="closeModal('orderSentModal')" class="mt-6 w-full px-4 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl">Super !</button>
       </div>
     </div>
     <div id="barClosedOverlay" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-[95] hidden flex items-center justify-center p-5" role="status" aria-live="polite">
@@ -1019,6 +1019,7 @@
             event.preventDefault();
             const button = document.getElementById('guestSubmitButton'); button.disabled = true; button.textContent = 'Envoi…';
             const errorBox = document.getElementById('guestOrderError');
+            const pseudoValue = document.getElementById('guestPseudo').value.trim();
             try {
                 const response = await fetch(ORDERS_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
                     guestId, pseudo: document.getElementById('guestPseudo').value.trim(), cocktail: selectedGuestRecipe.name, ingredients: selectedGuestRecipe.ingredients
@@ -1027,9 +1028,46 @@
                 if (!response.ok) throw new Error(result.error || 'La commande n’a pas pu être transmise.');
                 closeModal('guestSubmitModal'); document.getElementById('guestSubmitModal').querySelector('form').reset();
                 playBarcraftSound('sent');
-                document.getElementById('orderSentModal').classList.remove('hidden');
+                showGuestWaiting({ id: result.order?.id ?? result.id ?? null, guestId, pseudo: pseudoValue, cocktail: selectedGuestRecipe.name, sentAt: Date.now() });
             } catch (error) { errorBox.textContent = error.message; errorBox.classList.remove('hidden'); }
             finally { button.disabled = false; button.textContent = 'Transmettre au barman'; }
+        }
+        let guestWaitingOrder = null;
+        let ordersFetchedAt = 0;
+        function showGuestWaiting(waiting) {
+            guestWaitingOrder = waiting;
+            localStorage.setItem('barcraft_guest_waiting', JSON.stringify(waiting));
+            document.getElementById('orderSentTitle').textContent = 'Commande en attente';
+            document.getElementById('orderSentText').textContent = `⏳ Votre commande « ${waiting.cocktail} » est transmise au barman. Cet écran restera affiché jusqu’à la livraison.`;
+            document.getElementById('orderSentButton').classList.add('hidden');
+            document.getElementById('orderSentModal').classList.remove('hidden');
+        }
+        function clearGuestWaiting() {
+            guestWaitingOrder = null;
+            localStorage.removeItem('barcraft_guest_waiting');
+            document.getElementById('orderSentModal').classList.add('hidden');
+            document.getElementById('orderSentTitle').textContent = 'C’est parti !';
+            document.getElementById('orderSentText').textContent = '✅ Commande transmise au barman. Vous serez averti dès qu’elle sera livrée.';
+            document.getElementById('orderSentButton').classList.remove('hidden');
+        }
+        function restoreGuestWaiting() {
+            const saved = localStorage.getItem('barcraft_guest_waiting');
+            if (!saved) return;
+            try { showGuestWaiting(JSON.parse(saved)); }
+            catch (error) { localStorage.removeItem('barcraft_guest_waiting'); }
+        }
+        function checkGuestWaiting() {
+            const waiting = guestWaitingOrder;
+            if (!waiting) return;
+            const match = waiting.id
+                ? ordersCache.find(order => order.id === waiting.id)
+                : ordersCache.find(order => order.guestId === waiting.guestId && order.cocktail === waiting.cocktail && order.pseudo === waiting.pseudo);
+            // Livrée = statut « completed », ou commande disparue de la liste après un rafraîchissement postérieur à l'envoi
+            const delivered = match ? match.status === 'completed' : ordersFetchedAt - waiting.sentAt > 3000;
+            if (delivered) {
+                clearGuestWaiting();
+                playBarcraftSound('delivered');
+            }
         }
         let ordersCache = [];
         let knownPendingOrderIds = null;
@@ -1037,7 +1075,7 @@
             try {
                 const response = await fetch(ORDERS_API, { cache: 'no-store' });
                 if (!response.ok) return;
-                const data = await response.json(); ordersCache = data.orders || [];
+                const data = await response.json(); ordersCache = data.orders || []; ordersFetchedAt = Date.now();
                 const pending = ordersCache.filter(order => order.status !== 'completed');
                 const currentPendingIds = new Set(pending.map(order => order.id));
                 if (knownPendingOrderIds && [...currentPendingIds].some(id => !knownPendingOrderIds.has(id))) playBarcraftSound('incoming');
@@ -1046,6 +1084,7 @@
                 document.getElementById('ordersButton').classList.toggle('hidden', guestMode);
                 document.getElementById('ordersButton').classList.toggle('text-amber-300', pending.length > 0);
                 renderOrders();
+                if (guestMode) { if (!guestWaitingOrder) restoreGuestWaiting(); checkGuestWaiting(); }
             } catch (error) { console.warn('Commandes indisponibles', error); }
         }
         function renderBarStatusButton() {
