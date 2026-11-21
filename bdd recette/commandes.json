@@ -43,7 +43,8 @@
     "ingredients": [
       "1 unité de Scotch blended malt"
     ],
-    "status": "pending",
-    "createdAt": "2026-11-21T10:14:23.820Z"
+    "status": "completed",
+    "createdAt": "2026-11-21T10:14:23.820Z",
+    "completedAt": "2026-11-21T10:14:41.566Z"
   }
 ]
