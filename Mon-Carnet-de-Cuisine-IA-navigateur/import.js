@@ -99,6 +99,13 @@
       .filter(Boolean);
   }
 
+  // Note MyRecipeBox « 0 à 5 » par pas de 0,5 ; absente ou vide -> pas de note
+  function parseRating(v) {
+    const n = parseFloat(String(v ?? '').trim().replace(',', '.'));
+    if (!Number.isFinite(n)) return null;
+    return Math.round(Math.max(0, Math.min(5, n)) * 2) / 2;
+  }
+
   function toRecipe(row, index, stamp) {
     const url = v => (/^https?:\/\//i.test(String(v ?? '').trim()) ? String(v).trim() : '');
     const source = url(row.source);
@@ -116,6 +123,7 @@
       ingredients: parseIngredients(row.ingredients),
       steps: parseSteps(row.instructions),
       favorite: String(row.favorite ?? '').trim().toLowerCase() === 'true',
+      ...(parseRating(row.rating) !== null ? { rating: parseRating(row.rating) } : {}),
       // Ordre décroissant pour que le tri « Les plus récentes » garde l'ordre du fichier
       createdAt: new Date(stamp - index * 1000).toISOString(),
       ...(source ? { sourceUrl: source } : {})
@@ -130,12 +138,13 @@
       formatTime(r.time),
       r.servings ? `${r.servings} pers.` : '',
       r.steps.length ? `${r.steps.length} étape${r.steps.length > 1 ? 's' : ''}` : '',
+      r.rating ? `${String(r.rating).replace('.', ',')} / 5` : '',
       p.duplicate ? 'déjà au carnet' : ''
     ].filter(Boolean).join(' · ');
     return `<li class="import-row${p.duplicate ? ' is-duplicate' : ''}">
       <label class="import-check"><input type="checkbox" data-import-index="${i}"${p.selected ? ' checked' : ''} aria-label="Importer ${esc(r.name)}"></label>
       <div class="import-thumb"${img}></div>
-      <div class="import-info"><b>${esc(r.name)}${r.favorite ? ' <span class="import-fav">♥</span>' : ''}</b><small>${esc(meta)}</small></div>
+      <div class="import-info"><b>${esc(r.name)}${r.favorite ? ' <span class="import-fav">♥</span>' : ''}</b><small>${esc(meta)}</small>${r.rating ? `<span class="import-stars">${renderStars(r.rating)}</span>` : ''}</div>
       <select data-import-cat="${i}" aria-label="Catégorie de ${esc(r.name)}">${CATEGORIES.map(c => `<option${c === p.category ? ' selected' : ''}>${c}</option>`).join('')}</select>
     </li>`;
   }
@@ -225,6 +234,7 @@
 .import-info b{display:block;font:600 13px 'Playfair Display',serif;color:#2c382f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .import-fav{color:#c56b50;font-family:'DM Sans',sans-serif}
 .import-info small{display:block;font-size:10px;color:#858d81;margin-top:3px}
+.import-stars{display:block;margin-top:3px;font-size:10px}
 .import-row select{width:100%;padding:7px;border:1px solid #e2e7de;border-radius:6px;background:#fff;font:10px 'DM Sans',sans-serif;color:#4c463d}
 .import-footer{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}
 .import-footer .sync-primary:disabled{opacity:.5;cursor:not-allowed}
@@ -272,6 +282,6 @@ html[data-theme="dark"] .import-row select{background:#1f1c17;border-color:#3a35
     document.getElementById('importBtn')?.addEventListener('click', () => input.click());
   }
 
-  window.MyRecipeBoxImport = { parseMyRecipeBoxCsv, toRecipe, parseIngredients, parseSteps, mapCategory };
+  window.MyRecipeBoxImport = { parseMyRecipeBoxCsv, toRecipe, parseIngredients, parseSteps, mapCategory, parseRating };
   if (typeof document !== 'undefined' && document.body) init();
 })();
