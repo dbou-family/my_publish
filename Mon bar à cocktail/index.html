@@ -701,7 +701,7 @@
             }
             options.forEach(name => {
                 const card = document.createElement('div');
-                card.className = 'cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition hover:border-amber-500/50';
+                card.className = 'mx-auto w-full max-w-[200px] cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition hover:border-amber-500/50';
                 card.setAttribute('role', 'button');
                 card.tabIndex = 0;
                 const visual = document.createElement('div');
@@ -845,7 +845,11 @@
             const recipe = typeof id === 'object' ? id : recipes.find(r => r.id === id);
             if (!recipe) return;
 
-            document.getElementById('detailImage').src = recipe.image || defaultRecipes[0].image;
+            const detailImg = document.getElementById('detailImage');
+            detailImg.src = recipe.image || defaultRecipes[0].image;
+            detailImg.parentElement.classList.toggle('flex', Boolean(recipe.isSimpleAlcohol));
+            detailImg.parentElement.classList.toggle('justify-center', Boolean(recipe.isSimpleAlcohol));
+            detailImg.className = recipe.isSimpleAlcohol ? 'h-full w-auto max-w-full object-contain py-4' : 'w-full h-full object-contain';
             document.getElementById('detailTitle').textContent = recipe.name;
             document.getElementById('detailCategory').textContent = recipe.category;
             
