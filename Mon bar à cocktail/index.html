@@ -1103,11 +1103,12 @@
         function pantryIngredientCategory(value) {
             const key = ingredientKey(value);
             const hasAny = terms => terms.some(term => (` ${key} `).includes(` ${term} `));
-            if (hasAny(['liqueur', 'curacao', 'triple sec', 'kahlua', 'vermouth', 'campari', 'aperol', 'bitters', 'amaretto', 'chartreuse', 'pastis', 'absinthe', 'pimm'])) return 'Liqueurs et apéritifs';
-            if (hasAny(['vin', 'wine', 'champagne', 'prosecco', 'cava', 'cremant', 'porto', 'sherry', 'xeres', 'marsala', 'sake'])) return 'Vins et bulles';
+            if (hasAny(['liqueur', 'liqueuer', 'curacao', 'triple sec', 'kahlua', 'vermouth', 'martini', 'campari', 'aperol', 'bitters', 'amaretto', 'chartreuse', 'pastis', 'ricard', 'picon', 'suze', 'absinthe', 'pimm', 'cointreau', 'get 27', 'creme de', 'litchi', 'litchee', 'bardouin', 'gato papate'])) return 'Liqueurs et apéritifs';
+            if (hasAny(['sirop'])) return 'Sirops';
+            if (hasAny(['vin', 'wine', 'champagne', 'prosecco', 'cava', 'cremant', 'porto', 'sherry', 'xeres', 'marsala', 'sake', 'muscat', 'frontignan'])) return 'Vins et bulles';
             if (hasAny(['biere', 'beer', 'cidre', 'cider', 'pilsner', 'lager', 'ale', 'stout'])) return 'Bières et cidres';
-            if (hasAny(['whisky', 'whiskey', 'bourbon', 'rye', 'scotch'])) return 'Whisky';
-            if (hasAny(['vodka', 'gin', 'rhum', 'ron', 'tequila', 'mezcal', 'cognac', 'armagnac', 'brandy', 'pisco', 'calvados', 'aquavit'])) return 'Spiritueux';
+            if (hasAny(['whisky', 'whiskey', 'bourbon', 'rye', 'scotch', 'chivas'])) return 'Whisky';
+            if (hasAny(['vodka', 'gin', 'rhum', 'ron', 'tequila', 'mezcal', 'cognac', 'armagnac', 'brandy', 'pisco', 'calvados', 'aquavit', 'malibu', 'grappa', 'kirsch', 'kirsh'])) return 'Spiritueux';
             return 'Autres ingrédients';
         }
         function getIngredientCatalog() {
@@ -1486,7 +1487,7 @@
                 empty.textContent = 'Aucun ingrédient ne correspond à cette recherche.';
                 list.appendChild(empty);
             }
-            const categoryOrder = ['Whisky', 'Spiritueux', 'Liqueurs et apéritifs', 'Vins et bulles', 'Bières et cidres', 'Autres ingrédients'];
+            const categoryOrder = ['Whisky', 'Spiritueux', 'Liqueurs et apéritifs', 'Sirops', 'Vins et bulles', 'Bières et cidres', 'Autres ingrédients'];
             const grouped = new Map(categoryOrder.map(category => [category, []]));
             matches.forEach(entry => grouped.get(pantryIngredientCategory(pantryName(entry.item))).push(entry));
             categoryOrder.forEach(category => {
