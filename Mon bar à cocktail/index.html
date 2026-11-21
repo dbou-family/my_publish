@@ -701,11 +701,11 @@
             }
             options.forEach(name => {
                 const card = document.createElement('div');
-                card.className = 'mx-auto w-full max-w-[200px] cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition hover:border-amber-500/50';
+                card.className = 'mx-auto w-44 cursor-pointer overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg transition hover:border-amber-500/50';
                 card.setAttribute('role', 'button');
                 card.tabIndex = 0;
                 const visual = document.createElement('div');
-                visual.className = 'mx-auto mt-4 flex h-56 w-36 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-6xl';
+                visual.className = 'flex h-72 w-full items-center justify-center bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 text-6xl';
                 visual.setAttribute('aria-hidden', 'true');
                 const imageUrl = ingredientImageFor(name);
                 if (imageUrl) {
@@ -713,14 +713,14 @@
                     img.src = imageUrl;
                     img.alt = name;
                     img.loading = 'lazy';
-                    img.className = 'h-full w-full object-contain p-2';
+                    img.className = 'h-full w-full object-contain p-4';
                     img.onerror = () => { img.remove(); visual.textContent = '🥃'; };
                     visual.appendChild(img);
                 } else {
                     visual.textContent = '🥃';
                 }
                 const details = document.createElement('div');
-                details.className = 'flex items-center justify-between gap-3 p-4';
+                details.className = 'flex flex-col items-center gap-1 p-4 text-center';
                 const title = document.createElement('span');
                 title.className = 'font-bold text-white';
                 title.textContent = name;
