@@ -31,7 +31,8 @@
     "ingredients": [
       "1 unité de Bourbon 3 ans"
     ],
-    "status": "pending",
-    "createdAt": "2026-11-21T10:09:43.420Z"
+    "status": "completed",
+    "createdAt": "2026-11-21T10:09:43.420Z",
+    "completedAt": "2026-11-21T10:10:05.776Z"
   }
 ]
