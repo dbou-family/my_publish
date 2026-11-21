@@ -1169,6 +1169,12 @@
                 if (!response.ok) return;
                 const { orders = [] } = await response.json();
                 const delivered = orders.filter(order => order.status === 'completed' && !localStorage.getItem(`barcraft_notified_${order.id}`));
+                const waiting = guestWaitingOrder;
+                const waitingOrderDelivered = waiting && orders.some(order =>
+                    waiting.id ? order.id === waiting.id && order.status === 'completed'
+                        : order.guestId === waiting.guestId && order.cocktail === waiting.cocktail && order.pseudo === waiting.pseudo && order.status === 'completed'
+                );
+                if (waitingOrderDelivered) clearGuestWaiting();
                 if (delivered.length) {
                     playBarcraftSound('delivered');
                     delivered.forEach(order => localStorage.setItem(`barcraft_notified_${order.id}`, '1'));
