@@ -34,5 +34,16 @@
     "status": "completed",
     "createdAt": "2026-11-21T10:09:43.420Z",
     "completedAt": "2026-11-21T10:10:05.776Z"
+  },
+  {
+    "id": "e01f7ecc-63ae-48bc-aaec-a9f48ff4afc2",
+    "guestId": "e9702b8b-9012-4e1a-b682-1db27b74c1e9",
+    "pseudo": "Dede",
+    "cocktail": "Scotch blended malt",
+    "ingredients": [
+      "1 unité de Scotch blended malt"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-21T10:14:23.820Z"
   }
 ]
