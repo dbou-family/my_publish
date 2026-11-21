@@ -614,11 +614,15 @@
     .toolbar { gap: 12px; margin-bottom: 20px; }
     .search-box { flex-basis: 100%; max-width: none; }
     .search-input { min-height: 48px; font-size: 16px; }
-    .grid { grid-template-columns: 1fr; gap: 16px; }
-    .grid.home-grid { grid-template-columns: 1fr; gap: 16px; }
-    .card.category .card-body { padding: 18px 20px 20px; }
-    .card.category .label { font-size: 1.4rem; }
-    .card-body { padding: 16px; }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .grid.home-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .card.category .card-body { padding: 14px 14px 16px; }
+    .card.category .label { font-size: 1.1rem; }
+    .card.category .desc { font-size: 0.82rem; }
+    .card-body { padding: 12px; gap: 6px; }
+    .card .label { font-size: 0.95rem; }
+    .card-title-row { flex-wrap: wrap; gap: 6px; }
+    .count-pill { font-size: 0.75rem; }
   }
 
   @media (hover: none) and (pointer: coarse) {
