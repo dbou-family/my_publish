@@ -165,12 +165,12 @@
         
         <!-- Filtres par catégorie -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2" id="categoryFilters">
+            <button id="simpleAlcoholFilterButton" onclick="filterCategory('Alcool simple')" class="hidden category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Alcool simple</button>
             <button onclick="filterCategory('Tous')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-amber-500 text-slate-950">Tous</button>
             <button onclick="filterCategory('Alcoolisé')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Alcoolisé</button>
             <button onclick="filterCategory('Sans alcool')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700">Sans alcool</button>
             <button onclick="filterCategory('Mes favoris')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Mes favoris</button>
             <button onclick="filterCategory('À tester')" class="category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">À tester</button>
-            <button id="simpleAlcoholFilterButton" onclick="filterCategory('Alcool simple')" class="hidden category-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Alcool simple</button>
             <span id="barFilterSeparator" class="w-px bg-slate-700 mx-1 shrink-0"></span>
             <button onclick="setBarFilter('pret')" data-bar="pret" class="bar-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Réalisables</button>
             <button onclick="setBarFilter('un')" data-bar="un" class="bar-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Il manque 1</button>
@@ -369,10 +369,7 @@
             document.querySelector('button[onclick="openPantryModal()"]')?.classList.add('hidden');
             document.querySelector('button[onclick="openModal()"]')?.classList.add('hidden');
             document.getElementById('categoryFilters').classList.remove('hidden');
-            const simpleButton = document.getElementById('simpleAlcoholFilterButton');
-            simpleButton.classList.remove('hidden');
-            const filterBar = document.getElementById('categoryFilters');
-            filterBar.insertBefore(simpleButton, filterBar.firstElementChild);
+            document.getElementById('simpleAlcoholFilterButton').classList.remove('hidden');
             document.getElementById('barFilterSeparator').classList.add('hidden');
             document.querySelectorAll('.bar-btn').forEach(button => button.classList.add('hidden'));
         }
@@ -1037,7 +1034,7 @@
             guestWaitingOrder = waiting;
             localStorage.setItem('barcraft_guest_waiting', JSON.stringify(waiting));
             document.getElementById('orderSentTitle').textContent = 'Commande en attente';
-            document.getElementById('orderSentText').textContent = `⏳ Votre commande « ${waiting.cocktail} » est transmise au barman. Cet écran restera affiché jusqu’à la livraison.`;
+            document.getElementById('orderSentText').textContent = `⏳ Votre commande « ${waiting.cocktail} » est transmise au barman. Afin de prolonger votre soirée et préserver votre état de sobriété, vous ne pouvez faire qu’une commande à la fois.`;
             document.getElementById('orderSentButton').classList.add('hidden');
             document.getElementById('orderSentModal').classList.remove('hidden');
         }
