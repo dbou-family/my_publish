@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T13:06:00.289Z",
+  "updatedAt": "2026-11-21T13:07:21.940Z",
   "recipes": [
     {
       "id": "imp1795266199300_0",
@@ -64,7 +64,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Aioli_mit_Oliven.jpg/960px-Aioli_mit_Oliven.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -91,7 +91,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:03:18.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Robert Kindermann aka RobertK . User RobertK on de.wikipedia",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Aioli_mit_Oliven.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Aioli_mit_Oliven.jpg",
+      "imageLicense": "CC BY-SA 2.0 de",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/de/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Aioli mit Oliven",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_2",
@@ -110,7 +118,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:03:17.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352759698
     },
     {
       "id": "imp1795266199300_3",
@@ -326,7 +335,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Huit_merguez_et_trois_saucisses_en_d%C3%A9but_de_cuisson_au_barbecue_en_mars_2020.jpg/960px-Huit_merguez_et_trois_saucisses_en_d%C3%A9but_de_cuisson_au_barbecue_en_mars_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [],
       "steps": [
@@ -334,7 +343,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:03:12.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Benoît Prieur",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Huit_merguez_et_trois_saucisses_en_d%C3%A9but_de_cuisson_au_barbecue_en_mars_2020.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Huit_merguez_et_trois_saucisses_en_d%C3%A9but_de_cuisson_au_barbecue_en_mars_2020.jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Huit merguez et trois saucisses en début de cuisson au barbecue en mars 2020",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_8",
@@ -372,7 +389,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:03:11.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352763628
     },
     {
       "id": "imp1795266199300_9",
@@ -410,7 +428,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:03:10.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352762522
     },
     {
       "id": "imp1795266199300_10",
@@ -419,7 +438,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Shrimp_Bisque.jpg/960px-Shrimp_Bisque.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -456,7 +475,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:03:09.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "French Recipes",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Shrimp_Bisque.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Shrimp_Bisque.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Shrimp Bisque",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_11",
@@ -843,7 +870,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:03:02.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352764456
     },
     {
       "id": "imp1795266199300_18",
@@ -852,7 +880,7 @@
       "time": 20,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Brioche.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -901,7 +929,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:03:01.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Auteur Wikimedia Commons",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Brioche.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Brioche.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Brioche",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_19",
@@ -1056,7 +1092,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Smashburger_BBQ_bacon_cheddar_burger_with_deep-fried_onions.jpg/960px-Smashburger_BBQ_bacon_cheddar_burger_with_deep-fried_onions.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -1099,7 +1135,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:58.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Cortney Martin from Houston, Texas, USA",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Smashburger_BBQ_bacon_cheddar_burger_with_deep-fried_onions.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Smashburger_BBQ_bacon_cheddar_burger_with_deep-fried_onions.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Smashburger BBQ bacon cheddar burger with deep-fried onions",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_22",
@@ -1108,7 +1152,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Eastbound_FL_44_%40_Wildwood_Burger_King.JPG/960px-Eastbound_FL_44_%40_Wildwood_Burger_King.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -1165,7 +1209,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:57.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "DanTD",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Eastbound_FL_44_@_Wildwood_Burger_King.JPG",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Eastbound_FL_44_@_Wildwood_Burger_King.JPG",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Eastbound FL 44 @ Wildwood Burger King",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_23",
@@ -1218,7 +1270,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:56.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352766143
     },
     {
       "id": "imp1795266199300_24",
@@ -1322,7 +1375,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:54.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352767243
     },
     {
       "id": "imp1795266199300_26",
@@ -1345,7 +1399,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:53.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352768862
     },
     {
       "id": "imp1795266199300_27",
@@ -1477,7 +1532,8 @@
       "steps": [],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:50.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352767548
     },
     {
       "id": "imp1795266199300_30",
@@ -1634,7 +1690,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Chipolatas.jpg/960px-Chipolatas.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -1672,7 +1728,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:47.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Stewart Dawson",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Chipolatas.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Chipolatas.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Chipolatas",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_33",
@@ -1716,7 +1780,8 @@
       "steps": [],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:46.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352769048
     },
     {
       "id": "imp1795266199300_34",
@@ -1725,7 +1790,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Shrimp_%26_Chips_%283457809211%29.jpg/960px-Shrimp_%26_Chips_%283457809211%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -1738,7 +1803,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:45.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Mack Male from Edmonton, AB, Canada",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Shrimp_%26_Chips_(3457809211).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Shrimp_%26_Chips_(3457809211).jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Shrimp & Chips (3457809211)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_35",
@@ -1765,7 +1838,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:44.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352775062
     },
     {
       "id": "imp1795266199300_36",
@@ -1863,7 +1937,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:42.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352770763
     },
     {
       "id": "imp1795266199300_38",
@@ -1906,7 +1981,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Confiture-rhubarbe-christine-ferber.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -1955,7 +2030,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:40.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Gillescharlesmuller",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Confiture-rhubarbe-christine-ferber.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Confiture-rhubarbe-christine-ferber.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Confiture-rhubarbe-christine-ferber",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_40",
@@ -2042,7 +2125,7 @@
       "time": 10,
       "servings": 4,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Christmas_Cookies_Plateful.JPG/960px-Christmas_Cookies_Plateful.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2091,7 +2174,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:37.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Fagles",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Christmas_Cookies_Plateful.JPG",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Christmas_Cookies_Plateful.JPG",
+      "imageLicense": "CC BY-SA 2.5",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Christmas Cookies Plateful",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_43",
@@ -2100,7 +2191,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Schnitzel_Cordon_bleu.JPG/960px-Schnitzel_Cordon_bleu.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2127,7 +2218,15 @@
       "steps": [],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:36.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Thomas Richter, User:THOMAS",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Schnitzel_Cordon_bleu.JPG",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Schnitzel_Cordon_bleu.JPG",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Schnitzel Cordon bleu",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_44",
@@ -2136,7 +2235,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Cr%C3%AAmet_d%27Anjou%C2%AE_sur_un_coulis_de_fruits_rouges.jpg/960px-Cr%C3%AAmet_d%27Anjou%C2%AE_sur_un_coulis_de_fruits_rouges.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2160,7 +2259,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:35.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Abirouge",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%AAmet_d%27Anjou%C2%AE_sur_un_coulis_de_fruits_rouges.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%AAmet_d%27Anjou%C2%AE_sur_un_coulis_de_fruits_rouges.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Crêmet d'Anjou® sur un coulis de fruits rouges",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_45",
@@ -2306,7 +2413,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:32.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352775008
     },
     {
       "id": "imp1795266199300_48",
@@ -2397,7 +2505,7 @@
       "time": 240,
       "servings": 1,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Creme_Brulee_Torch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -2422,7 +2530,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:29.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "ChrisEngelsma",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Creme_Brulee_Torch.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Creme_Brulee_Torch.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Creme Brulee Torch",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_51",
@@ -2463,7 +2579,7 @@
       "time": 240,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Dessert_%28sabl%C3%A9_press%C3%A9_au_gianduja%2C_cr%C3%A8me_chocolat_au_lait%2C_glace_mogador%29.jpg/960px-Dessert_%28sabl%C3%A9_press%C3%A9_au_gianduja%2C_cr%C3%A8me_chocolat_au_lait%2C_glace_mogador%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2492,7 +2608,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:27.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Gzen92",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Dessert_(sabl%C3%A9_press%C3%A9_au_gianduja,_cr%C3%A8me_chocolat_au_lait,_glace_mogador).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Dessert_(sabl%C3%A9_press%C3%A9_au_gianduja,_cr%C3%A8me_chocolat_au_lait,_glace_mogador).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Dessert (sablé pressé au gianduja, crème chocolat au lait, glace mogador)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_53",
@@ -2501,7 +2625,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Cr%C3%A8me_mascarpone_et_pommes_caram%C3%A9lis%C3%A9es_%28du_local_au_bocal%29.jpg/960px-Cr%C3%A8me_mascarpone_et_pommes_caram%C3%A9lis%C3%A9es_%28du_local_au_bocal%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2523,7 +2647,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:26.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Benoît Prieur",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%A8me_mascarpone_et_pommes_caram%C3%A9lis%C3%A9es_(du_local_au_bocal).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%A8me_mascarpone_et_pommes_caram%C3%A9lis%C3%A9es_(du_local_au_bocal).jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Crème mascarpone et pommes caramélisées (du local au bocal)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_54",
@@ -2532,7 +2664,7 @@
       "time": 0,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Cr%C3%A8me_p%C3%A2tissi%C3%A8re_%288718516095%29.jpg/960px-Cr%C3%A8me_p%C3%A2tissi%C3%A8re_%288718516095%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2557,7 +2689,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:25.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Divya Kudua from Chennai, India",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%A8me_p%C3%A2tissi%C3%A8re_(8718516095).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%A8me_p%C3%A2tissi%C3%A8re_(8718516095).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Crème pâtissière (8718516095)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_55",
@@ -2566,7 +2706,7 @@
       "time": 0,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Course_-9_%28Part_1%29_Malted_Banana_Banana_%22Parfait%2C%22_Macallan_12%2C_Malt_%22Genoise%22_and_%22Cr%C3%A8me_P%C3%A2tissi%C3%A8re_au_Chocolat%22_%289168968704%29.jpg/960px-Course_-9_%28Part_1%29_Malted_Banana_Banana_%22Parfait%2C%22_Macallan_12%2C_Malt_%22Genoise%22_and_%22Cr%C3%A8me_P%C3%A2tissi%C3%A8re_au_Chocolat%22_%289168968704%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2595,7 +2735,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:24.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "City Foodsters",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Course_-9_(Part_1)_Malted_Banana_Banana_%22Parfait,%22_Macallan_12,_Malt_%22Genoise%22_and_%22Cr%C3%A8me_P%C3%A2tissi%C3%A8re_au_Chocolat%22_(9168968704).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Course_-9_(Part_1)_Malted_Banana_Banana_%22Parfait,%22_Macallan_12,_Malt_%22Genoise%22_and_%22Cr%C3%A8me_P%C3%A2tissi%C3%A8re_au_Chocolat%22_(9168968704).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Course -9 (Part 1) Malted Banana Banana \"Parfait,\" Macallan 12, Malt \"Genoise\" and \"Crème Pâtissière au Chocolat\" (9168968704)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_56",
@@ -2604,7 +2752,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Cr%C3%A8me_br%C3%BBl%C3%A9e_%C3%A0_la_vanille.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -2631,7 +2779,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:23.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Nikchick",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%A8me_br%C3%BBl%C3%A9e_%C3%A0_la_vanille.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Cr%C3%A8me_br%C3%BBl%C3%A9e_%C3%A0_la_vanille.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Crème brûlée à la vanille",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_57",
@@ -2640,7 +2796,7 @@
       "time": 70,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Crepes_dsc07085.jpg/960px-Crepes_dsc07085.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -2674,7 +2830,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:22.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "David Monniaux",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Crepes_dsc07085.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Crepes_dsc07085.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Crepes dsc07085",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_58",
@@ -2790,7 +2954,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:19.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352781936
     },
     {
       "id": "imp1795266199300_61",
@@ -2899,7 +3064,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/a/a2/%C3%89clair_au_chocolat%2C_chantilly_et_sucre_glace.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -2910,7 +3075,15 @@
       "steps": [],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:16.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Nikchick",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:%C3%89clair_au_chocolat,_chantilly_et_sucre_glace.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:%C3%89clair_au_chocolat,_chantilly_et_sucre_glace.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Éclair au chocolat, chantilly et sucre glace",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_64",
@@ -3070,7 +3243,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:12.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352785430
     },
     {
       "id": "imp1795266199300_68",
@@ -3116,7 +3290,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:11.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352784428
     },
     {
       "id": "imp1795266199300_69",
@@ -3158,7 +3333,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:10.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352785068
     },
     {
       "id": "imp1795266199300_70",
@@ -3191,7 +3367,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:09.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352785838
     },
     {
       "id": "imp1795266199300_71",
@@ -3277,7 +3454,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:07.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352786303
     },
     {
       "id": "imp1795266199300_73",
@@ -3339,7 +3517,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Flamby.jpg/960px-Flamby.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -3389,7 +3567,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:05.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "HAF 932",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Flamby.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Flamby.jpg",
+      "imageLicense": "Public domain",
+      "imageLicenseUrl": "https://commons.wikimedia.org/wiki/File:Flamby.jpg",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Flamby",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_75",
@@ -3540,7 +3726,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:02:02.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352787024
     },
     {
       "id": "imp1795266199300_78",
@@ -3549,7 +3736,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Foie_gras_de_canard_po%C3%AAl%C3%A9_aux_poires_et_aux_raisins_poudre_de_pain_d%27%C3%A9pices_et_r%C3%A9duction_de_Juran%C3%A7on_%C3%A0_l%27Auberge_de_la_Brie_de_Couilly-Pont-aux-Dames.jpg/960px-Foie_gras_de_canard_po%C3%AAl%C3%A9_aux_poires_et_aux_raisins_poudre_de_pain_d%27%C3%A9pices_et_r%C3%A9duction_de_Juran%C3%A7on_%C3%A0_l%27Auberge_de_la_Brie_de_Couilly-Pont-aux-Dames.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -3566,7 +3753,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:02:01.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Guillaume Capron",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Foie_gras_de_canard_po%C3%AAl%C3%A9_aux_poires_et_aux_raisins_poudre_de_pain_d%27%C3%A9pices_et_r%C3%A9duction_de_Juran%C3%A7on_%C3%A0_l%27Auberge_de_la_Brie_de_Couilly-Pont-aux-Dames.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Foie_gras_de_canard_po%C3%AAl%C3%A9_aux_poires_et_aux_raisins_poudre_de_pain_d%27%C3%A9pices_et_r%C3%A9duction_de_Juran%C3%A7on_%C3%A0_l%27Auberge_de_la_Brie_de_Couilly-Pont-aux-Dames.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Foie gras de canard poêlé aux poires et aux raisins poudre de pain d'épices et réduction de Jurançon à l'Auberge de la Brie de Couilly-Pont-aux-Dames",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_79",
@@ -3684,7 +3879,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Carpe_frite_du_Sundgau-Ferrette_%283%29.jpg/960px-Carpe_frite_du_Sundgau-Ferrette_%283%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [],
       "steps": [
@@ -3695,7 +3890,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:58.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Ji-Elle",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Carpe_frite_du_Sundgau-Ferrette_(3).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Carpe_frite_du_Sundgau-Ferrette_(3).jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Carpe frite du Sundgau-Ferrette (3)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_82",
@@ -3755,7 +3958,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:57.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352789768
     },
     {
       "id": "imp1795266199300_83",
@@ -3764,7 +3968,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Espelette_maison_du_fromage.jpg/960px-Espelette_maison_du_fromage.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -3834,7 +4038,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:56.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Pierre Bona",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Espelette_maison_du_fromage.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Espelette_maison_du_fromage.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Espelette maison du fromage",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_84",
@@ -3862,7 +4074,8 @@
       "steps": [],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:55.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352791007
     },
     {
       "id": "imp1795266199300_85",
@@ -3871,7 +4084,7 @@
       "time": 0,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Galette_des_Rois.png/960px-Galette_des_Rois.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -3919,7 +4132,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:54.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Gorrk",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Galette_des_Rois.png",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Galette_des_Rois.png",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Galette des Rois",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_86",
@@ -3928,7 +4149,7 @@
       "time": 45,
       "servings": 12,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Galette_des_Rois.png/960px-Galette_des_Rois.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -3980,7 +4201,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:53.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Gorrk",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Galette_des_Rois.png",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Galette_des_Rois.png",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Galette des Rois",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_87",
@@ -4041,7 +4270,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:52.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352792619
     },
     {
       "id": "imp1795266199300_88",
@@ -4050,7 +4280,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Le_Grand_Casse-noisette_du_25_Juillet_ou_la_Ganache_impuissante._Paris_Mus%C3%A9es_20230520194626.jpg/960px-Le_Grand_Casse-noisette_du_25_Juillet_ou_la_Ganache_impuissante._Paris_Mus%C3%A9es_20230520194626.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -4082,7 +4312,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:51.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Anonyme, dessinateur-lithographe",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Le_Grand_Casse-noisette_du_25_Juillet_ou_la_Ganache_impuissante._Paris_Mus%C3%A9es_20230520194626.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Le_Grand_Casse-noisette_du_25_Juillet_ou_la_Ganache_impuissante._Paris_Mus%C3%A9es_20230520194626.jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Le Grand Casse-noisette du 25 Juillet ou la Ganache impuissante. Paris Musées 20230520194626",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_89",
@@ -4204,7 +4442,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:49.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352793120
     },
     {
       "id": "imp1795266199300_91",
@@ -4256,7 +4495,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:48.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352793892
     },
     {
       "id": "imp1795266199300_92",
@@ -4265,7 +4505,7 @@
       "time": 40,
       "servings": 8,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Fondant_au_chocolat_d%C3%A9cor%C3%A9_avec_des_smarties_en_guise_de_g%C3%A2teau_d%27anniversaire_et_ses_bougies.jpg/960px-Fondant_au_chocolat_d%C3%A9cor%C3%A9_avec_des_smarties_en_guise_de_g%C3%A2teau_d%27anniversaire_et_ses_bougies.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -4309,7 +4549,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:47.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Benoît Prieur",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Fondant_au_chocolat_d%C3%A9cor%C3%A9_avec_des_smarties_en_guise_de_g%C3%A2teau_d%27anniversaire_et_ses_bougies.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Fondant_au_chocolat_d%C3%A9cor%C3%A9_avec_des_smarties_en_guise_de_g%C3%A2teau_d%27anniversaire_et_ses_bougies.jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Fondant au chocolat décoré avec des smarties en guise de gâteau d'anniversaire et ses bougies",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_93",
@@ -4318,7 +4566,7 @@
       "time": 45,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/2019-01-19_G%C3%A2teau_de_foie_002.jpg/960px-2019-01-19_G%C3%A2teau_de_foie_002.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -4368,7 +4616,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:46.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "FarceRéjeane",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:2019-01-19_G%C3%A2teau_de_foie_002.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:2019-01-19_G%C3%A2teau_de_foie_002.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "2019-01-19 Gâteau de foie 002",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_94",
@@ -4651,7 +4907,7 @@
       "time": 0,
       "servings": 4,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Guacamole_in_a_bowl_by_Jon_Sullivan_%284_April_2004%29.jpg/960px-Guacamole_in_a_bowl_by_Jon_Sullivan_%284_April_2004%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -4681,7 +4937,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:39.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Jon Sullivan",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Guacamole_in_a_bowl_by_Jon_Sullivan_(4_April_2004).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Guacamole_in_a_bowl_by_Jon_Sullivan_(4_April_2004).jpg",
+      "imageLicense": "Public domain",
+      "imageLicenseUrl": "https://commons.wikimedia.org/wiki/File:Guacamole_in_a_bowl_by_Jon_Sullivan_(4_April_2004).jpg",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Guacamole in a bowl by Jon Sullivan (4 April 2004)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_101",
@@ -4690,7 +4954,7 @@
       "time": 0,
       "servings": 50,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Vegan_curry_gyoza_at_SOJO.jpg/960px-Vegan_curry_gyoza_at_SOJO.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -4743,7 +5007,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:38.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "NMaia",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Vegan_curry_gyoza_at_SOJO.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Vegan_curry_gyoza_at_SOJO.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Vegan curry gyoza at SOJO",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_102",
@@ -4832,7 +5104,7 @@
       "time": 0,
       "servings": 3,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Iles_Flottantes_Titicaca_%28pixinn.net%29.jpg/960px-Iles_Flottantes_Titicaca_%28pixinn.net%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -4879,7 +5151,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:35.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Christophe Meneboeuf",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Iles_Flottantes_Titicaca_(pixinn.net).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Iles_Flottantes_Titicaca_(pixinn.net).jpg",
+      "imageLicense": "CC BY-SA 2.5",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Iles Flottantes Titicaca (pixinn.net)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_105",
@@ -5011,7 +5291,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/4/48/Atassi_accompagn%C3%A9_du_jus_de_tomate_et_du_poisson.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -5039,7 +5319,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:32.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Leocyriaque",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Atassi_accompagn%C3%A9_du_jus_de_tomate_et_du_poisson.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Atassi_accompagn%C3%A9_du_jus_de_tomate_et_du_poisson.jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Atassi accompagné du jus de tomate et du poisson",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_108",
@@ -5333,7 +5621,7 @@
       "time": 0,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Pr%C3%A9paration_des_lasagnes_%28mars_2020%29_-_%28018%29_%C3%A0_table.jpg/960px-Pr%C3%A9paration_des_lasagnes_%28mars_2020%29_-_%28018%29_%C3%A0_table.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -5396,7 +5684,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:25.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Benoît Prieur",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Pr%C3%A9paration_des_lasagnes_(mars_2020)_-_(018)_%C3%A0_table.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Pr%C3%A9paration_des_lasagnes_(mars_2020)_-_(018)_%C3%A0_table.jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Préparation des lasagnes (mars 2020) - (018) à table",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_115",
@@ -5448,7 +5744,7 @@
       "time": 13,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Macarons_Marcolini_02.jpg/960px-Macarons_Marcolini_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "macarons meringue italienne",
       "ingredients": [
         [
@@ -5504,7 +5800,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:23.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "M0tty",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Macarons_Marcolini_02.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Macarons_Marcolini_02.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Macarons Marcolini 02",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_117",
@@ -5513,7 +5817,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/%C3%89glise_de_la_Madeleine_2907x2028.jpg/960px-%C3%89glise_de_la_Madeleine_2907x2028.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -5551,7 +5855,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:22.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "wagner51",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:%C3%89glise_de_la_Madeleine_2907x2028.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:%C3%89glise_de_la_Madeleine_2907x2028.jpg",
+      "imageLicense": "CC BY-SA 2.0 fr",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Église de la Madeleine 2907x2028",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_118",
@@ -5560,7 +5872,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Tulpe_%27Orange_Marmelade%27_im_botanischen_Garten_in_M%C3%BCnchen_01.jpg/960px-Tulpe_%27Orange_Marmelade%27_im_botanischen_Garten_in_M%C3%BCnchen_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -5587,7 +5899,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:21.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Kritzolina",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tulpe_%27Orange_Marmelade%27_im_botanischen_Garten_in_M%C3%BCnchen_01.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tulpe_%27Orange_Marmelade%27_im_botanischen_Garten_in_M%C3%BCnchen_01.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Tulpe 'Orange Marmelade' im botanischen Garten in München 01",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_119",
@@ -5715,7 +6035,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:18.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352801577
     },
     {
       "id": "imp1795266199300_122",
@@ -5833,7 +6154,7 @@
       "time": 0,
       "servings": 2,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Vieux_moules_%28faisselles%29_terre_cuite_fabriqu%C3%A9s_%C3%A0_Saint_Jean_du_bruel.Aveyron.France_pour_fromages_brebis-P%C3%A9rail_de_ferme_et_Roquefort.JPG/960px-Vieux_moules_%28faisselles%29_terre_cuite_fabriqu%C3%A9s_%C3%A0_Saint_Jean_du_bruel.Aveyron.France_pour_fromages_brebis-P%C3%A9rail_de_ferme_et_Roquefort.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -5878,7 +6199,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:14.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "LAGRIC",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Vieux_moules_(faisselles)_terre_cuite_fabriqu%C3%A9s_%C3%A0_Saint_Jean_du_bruel.Aveyron.France_pour_fromages_brebis-P%C3%A9rail_de_ferme_et_Roquefort.JPG",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Vieux_moules_(faisselles)_terre_cuite_fabriqu%C3%A9s_%C3%A0_Saint_Jean_du_bruel.Aveyron.France_pour_fromages_brebis-P%C3%A9rail_de_ferme_et_Roquefort.JPG",
+      "imageLicense": "Public domain",
+      "imageLicenseUrl": "https://commons.wikimedia.org/wiki/File:Vieux_moules_(faisselles)_terre_cuite_fabriqu%C3%A9s_%C3%A0_Saint_Jean_du_bruel.Aveyron.France_pour_fromages_brebis-P%C3%A9rail_de_ferme_et_Roquefort.JPG",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Vieux moules (faisselles) terre cuite fabriqués à Saint Jean du bruel.Aveyron.France pour fromages brebis-Pérail de ferme et Roquefort",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_126",
@@ -5921,7 +6250,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Verrine_de_caill%C3%A9%2C_de_mangue%2C_mousse_coco_et_perles_de_pamplemousse.jpg/960px-Verrine_de_caill%C3%A9%2C_de_mangue%2C_mousse_coco_et_perles_de_pamplemousse.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -5954,7 +6283,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:12.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "traaf",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Verrine_de_caill%C3%A9,_de_mangue,_mousse_coco_et_perles_de_pamplemousse.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Verrine_de_caill%C3%A9,_de_mangue,_mousse_coco_et_perles_de_pamplemousse.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Verrine de caillé, de mangue, mousse coco et perles de pamplemousse",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_128",
@@ -6078,7 +6415,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:10.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352802856
     },
     {
       "id": "imp1795266199300_130",
@@ -6095,7 +6433,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:09.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352803369
     },
     {
       "id": "imp1795266199300_131",
@@ -6141,7 +6480,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:08.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352805000
     },
     {
       "id": "imp1795266199300_132",
@@ -6319,7 +6659,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Pain_au_chocolat_Luc_Viatour.jpg/960px-Pain_au_chocolat_Luc_Viatour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -6345,7 +6685,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:04.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Luc Viatour",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Pain_au_chocolat_Luc_Viatour.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Pain_au_chocolat_Luc_Viatour.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Pain au chocolat Luc Viatour",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_136",
@@ -6354,7 +6702,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Pain_au_levain_dit_%C3%A0_l%27ancienne_02.jpg/960px-Pain_au_levain_dit_%C3%A0_l%27ancienne_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -6395,7 +6743,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:01:03.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Zantastik",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Pain_au_levain_dit_%C3%A0_l%27ancienne_02.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Pain_au_levain_dit_%C3%A0_l%27ancienne_02.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Pain au levain dit à l'ancienne 02",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_137",
@@ -6478,7 +6834,7 @@
       "time": 55,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Plat_de_hrissa_et_de_thon_avec_de_ka_kissra%2C_Tunisie_2019.jpg/960px-Plat_de_hrissa_et_de_thon_avec_de_ka_kissra%2C_Tunisie_2019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -6524,7 +6880,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:01:01.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Habib M'henni",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Plat_de_hrissa_et_de_thon_avec_de_ka_kissra,_Tunisie_2019.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Plat_de_hrissa_et_de_thon_avec_de_ka_kissra,_Tunisie_2019.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Plat de hrissa et de thon avec de ka kissra, Tunisie 2019",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_139",
@@ -6683,7 +7047,7 @@
       "time": 135,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Panacotta%2C_Puffed_Barley%2C_Malted_Milk_Ice_Cream%2C_Corn_Rocks_Corriander_%2813348040723%29.jpg/960px-Panacotta%2C_Puffed_Barley%2C_Malted_Milk_Ice_Cream%2C_Corn_Rocks_Corriander_%2813348040723%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -6721,7 +7085,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:58.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Charles Haynes",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Panacotta,_Puffed_Barley,_Malted_Milk_Ice_Cream,_Corn_Rocks_Corriander_(13348040723).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Panacotta,_Puffed_Barley,_Malted_Milk_Ice_Cream,_Corn_Rocks_Corriander_(13348040723).jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Panacotta, Puffed Barley, Malted Milk Ice Cream, Corn Rocks Corriander (13348040723)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_142",
@@ -6913,7 +7285,8 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:00:56.300Z",
       "sourceUrl": "https://www.meilleurduchef.com/fr/recette/paris-brest.html",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352810095
     },
     {
       "id": "imp1795266199300_144",
@@ -7034,7 +7407,7 @@
       "time": 25,
       "servings": 30,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Pate_a_choux_technique_realisation_couleur.jpg/960px-Pate_a_choux_technique_realisation_couleur.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -7072,7 +7445,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:53.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "F.Cecconi / Vorzinek.org",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Pate_a_choux_technique_realisation_couleur.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Pate_a_choux_technique_realisation_couleur.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Pate a choux technique realisation couleur",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_147",
@@ -7115,7 +7496,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:52.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352810257
     },
     {
       "id": "imp1795266199300_148",
@@ -7214,7 +7596,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:50.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352812087
     },
     {
       "id": "imp1795266199300_150",
@@ -7381,7 +7764,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:46.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352814900
     },
     {
       "id": "imp1795266199300_154",
@@ -7390,7 +7774,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Pesto_pasta_-_Stierch.jpg/960px-Pesto_pasta_-_Stierch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -7430,7 +7814,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:45.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Missvain",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Pesto_pasta_-_Stierch.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Pesto_pasta_-_Stierch.jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Pesto pasta - Stierch",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_155",
@@ -7483,7 +7875,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Pierrade_de_Saumon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "Les bonnes astuces",
       "ingredients": [],
       "steps": [
@@ -7494,7 +7886,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:43.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Sérieys",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Pierrade_de_Saumon.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Pierrade_de_Saumon.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Pierrade de Saumon",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_157",
@@ -7556,7 +7956,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:42.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352814682
     },
     {
       "id": "imp1795266199300_158",
@@ -7702,7 +8103,7 @@
       "time": 0,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Th%C3%A9%C3%A2tre_de_l%27Op%C3%A9ra%2C_Tabarin%2C_op%C3%A9ra_en_deux_actes%2C_po%C3%A8me_de_M._Paul_Ferrier%2C_musique_de_M._%C3%89mile_Pessard_-_1._Le_cabaret_de_la_Pomme-de-Pin%2C_1er_acte%2C_d%C3%A9cor_de_M._Lavastre._2._La_place_Dauphine%2C_2e_acte%2C_d%C3%A9cor..._-_btv1b531181500.jpg/960px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -7736,7 +8137,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:38.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Toussaint, Henri (1849-1911). Dessinateur du modèle Fernique, Ph.. Graveur",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A9%C3%A2tre_de_l%27Op%C3%A9ra,_Tabarin,_op%C3%A9ra_en_deux_actes,_po%C3%A8me_de_M._Paul_Ferrier,_musique_de_M._%C3%89mile_Pessard_-_1._Le_cabaret_de_la_Pomme-de-Pin,_1er_acte,_d%C3%A9cor_de_M._Lavastre._2._La_place_Dauphine,_2e_acte,_d%C3%A9cor..._-_btv1b531181500.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A9%C3%A2tre_de_l%27Op%C3%A9ra,_Tabarin,_op%C3%A9ra_en_deux_actes,_po%C3%A8me_de_M._Paul_Ferrier,_musique_de_M._%C3%89mile_Pessard_-_1._Le_cabaret_de_la_Pomme-de-Pin,_1er_acte,_d%C3%A9cor_de_M._Lavastre._2._La_place_Dauphine,_2e_acte,_d%C3%A9cor..._-_btv1b531181500.jpg",
+      "imageLicense": "Public domain",
+      "imageLicenseUrl": "https://commons.wikimedia.org/wiki/File:Th%C3%A9%C3%A2tre_de_l%27Op%C3%A9ra,_Tabarin,_op%C3%A9ra_en_deux_actes,_po%C3%A8me_de_M._Paul_Ferrier,_musique_de_M._%C3%89mile_Pessard_-_1._Le_cabaret_de_la_Pomme-de-Pin,_1er_acte,_d%C3%A9cor_de_M._Lavastre._2._La_place_Dauphine,_2e_acte,_d%C3%A9cor..._-_btv1b531181500.jpg",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Théâtre de l'Opéra, Tabarin, opéra en deux actes, poème de M. Paul Ferrier, musique de M. Émile Pessard - 1. Le cabaret de la Pomme-de-Pin, 1er acte, décor de M. Lavastre. 2. La place Dauphine, 2e acte, décor... - btv1b531181500",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_162",
@@ -7843,7 +8252,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:35.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352816314
     },
     {
       "id": "imp1795266199300_165",
@@ -7858,7 +8268,8 @@
       "steps": [],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:34.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352815971
     },
     {
       "id": "imp1795266199300_166",
@@ -7867,7 +8278,7 @@
       "time": 0,
       "servings": 4,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Tajine_de_poulet_aux_olives_%28Maroc%29.jpg/960px-Tajine_de_poulet_aux_olives_%28Maroc%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -7907,7 +8318,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:33.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Indiana Younes",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tajine_de_poulet_aux_olives_(Maroc).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tajine_de_poulet_aux_olives_(Maroc).jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Tajine de poulet aux olives (Maroc)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_167",
@@ -7954,7 +8373,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:32.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352817971
     },
     {
       "id": "imp1795266199300_168",
@@ -7963,7 +8383,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Sparkling_praline_chocolate_%2811824705276%29.jpg/960px-Sparkling_praline_chocolate_%2811824705276%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -7974,7 +8394,15 @@
       "steps": [],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:31.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Ruth Hartnup from Vancouver, Canada",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Sparkling_praline_chocolate_(11824705276).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Sparkling_praline_chocolate_(11824705276).jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Sparkling praline chocolate (11824705276)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_169",
@@ -7983,7 +8411,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Pr%C3%A9fou.jpg/960px-Pr%C3%A9fou.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -8011,7 +8439,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:30.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Thomon",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Pr%C3%A9fou.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Pr%C3%A9fou.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Préfou",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_170",
@@ -8265,7 +8701,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:25.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352819553
     },
     {
       "id": "imp1795266199300_175",
@@ -8471,7 +8908,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:21.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352820489
     },
     {
       "id": "imp1795266199300_179",
@@ -8622,7 +9060,7 @@
       "time": 0,
       "servings": 4,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Ris_de_veau_et_d%27agneau_truff%C3%A9s.jpg/960px-Ris_de_veau_et_d%27agneau_truff%C3%A9s.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -8646,7 +9084,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:16.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "nyaa_birdies_perch",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Ris_de_veau_et_d%27agneau_truff%C3%A9s.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Ris_de_veau_et_d%27agneau_truff%C3%A9s.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Ris de veau et d'agneau truffés",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_184",
@@ -8728,7 +9174,7 @@
       "time": 0,
       "servings": 8,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Bol_de_riz_au_lait.jpg/960px-Bol_de_riz_au_lait.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -8754,7 +9200,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:14.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "anonyme",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Bol_de_riz_au_lait.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Bol_de_riz_au_lait.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Bol de riz au lait",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_186",
@@ -8783,7 +9237,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Riz_cantonais.jpg/960px-Riz_cantonais.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -8834,7 +9288,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:12.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Arnaud 25",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Riz_cantonais.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Riz_cantonais.jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Riz cantonais",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_188",
@@ -8852,7 +9314,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:11.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352822364
     },
     {
       "id": "imp1795266199300_189",
@@ -8901,7 +9364,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:10.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352823929
     },
     {
       "id": "imp1795266199300_190",
@@ -8979,7 +9443,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Fort_Rouille_2008.jpg/960px-Fort_Rouille_2008.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -9015,7 +9479,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:07.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "GTD Aquitaine",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Fort_Rouille_2008.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Fort_Rouille_2008.jpg",
+      "imageLicense": "Public domain",
+      "imageLicenseUrl": "https://commons.wikimedia.org/wiki/File:Fort_Rouille_2008.jpg",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Fort Rouille 2008",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_193",
@@ -9024,7 +9496,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Lyon_5e_-_Rue_Tramassac_-_Daniel_%26_Denise_-_Sabodet.jpg/960px-Lyon_5e_-_Rue_Tramassac_-_Daniel_%26_Denise_-_Sabodet.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [],
       "steps": [
@@ -9052,7 +9524,15 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:00:06.300Z",
       "sourceUrl": "https://www.lecochonetleboeuf.fr/softbb_le-sabodet(-saucisson-de-tete-de-porc)_826_msg.html",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Romainbehar",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Lyon_5e_-_Rue_Tramassac_-_Daniel_%26_Denise_-_Sabodet.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Lyon_5e_-_Rue_Tramassac_-_Daniel_%26_Denise_-_Sabodet.jpg",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Lyon 5e - Rue Tramassac - Daniel & Denise - Sabodet",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_194",
@@ -9070,7 +9550,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:00:05.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352824764
     },
     {
       "id": "imp1795266199300_195",
@@ -9140,7 +9621,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Salades_de_l%C3%A9gumes_au_B%C3%A9nin_01.jpg/960px-Salades_de_l%C3%A9gumes_au_B%C3%A9nin_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [],
       "steps": [
@@ -9148,7 +9629,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T13:00:02.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Adoscam",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Salades_de_l%C3%A9gumes_au_B%C3%A9nin_01.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Salades_de_l%C3%A9gumes_au_B%C3%A9nin_01.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Salades de légumes au Bénin 01",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_198",
@@ -9281,7 +9770,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:59.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352827266
     },
     {
       "id": "imp1795266199300_201",
@@ -9290,7 +9780,7 @@
       "time": 0,
       "servings": 4,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Filet_de_b%C5%93uf_sauce_foresti%C3%A8re%2C_crique_maison_et_l%C3%A9gumes.JPG/960px-Filet_de_b%C5%93uf_sauce_foresti%C3%A8re%2C_crique_maison_et_l%C3%A9gumes.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -9318,7 +9808,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:58.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Benoît Prieur",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Filet_de_b%C5%93uf_sauce_foresti%C3%A8re,_crique_maison_et_l%C3%A9gumes.JPG",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Filet_de_b%C5%93uf_sauce_foresti%C3%A8re,_crique_maison_et_l%C3%A9gumes.JPG",
+      "imageLicense": "CC0",
+      "imageLicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Filet de bœuf sauce forestière, crique maison et légumes",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_202",
@@ -9352,7 +9850,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:57.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352828444
     },
     {
       "id": "imp1795266199300_203",
@@ -9388,7 +9887,8 @@
       "steps": [],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:56.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352828962
     },
     {
       "id": "imp1795266199300_204",
@@ -9552,7 +10052,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:54.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352829448
     },
     {
       "id": "imp1795266199300_206",
@@ -9587,7 +10088,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:53.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352830646
     },
     {
       "id": "imp1795266199300_207",
@@ -9806,7 +10308,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:49.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352830352
     },
     {
       "id": "imp1795266199300_211",
@@ -9815,7 +10318,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Sponge_cake.jpg/960px-Sponge_cake.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -9850,7 +10353,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:48.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Auteur Wikimedia Commons",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Sponge_cake.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Sponge_cake.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Sponge cake",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_212",
@@ -9928,7 +10439,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Tacos_-_al_pastor%2C_pollo_and_a_sunkist.jpg/960px-Tacos_-_al_pastor%2C_pollo_and_a_sunkist.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -9963,7 +10474,15 @@
       "steps": [],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:46.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Paul Bailey",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tacos_-_al_pastor,_pollo_and_a_sunkist.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tacos_-_al_pastor,_pollo_and_a_sunkist.jpg",
+      "imageLicense": "CC BY-SA 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Tacos - al pastor, pollo and a sunkist",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_214",
@@ -9987,7 +10506,8 @@
       "steps": [],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:45.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352831851
     },
     {
       "id": "imp1795266199300_215",
@@ -10039,7 +10559,7 @@
       "time": 50,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Revest-du-Bion_Les_Marronniers_Tarte_%C3%A0_l%27oignon.JPG/960px-Revest-du-Bion_Les_Marronniers_Tarte_%C3%A0_l%27oignon.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -10075,7 +10595,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:43.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Marianne Casamance",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Revest-du-Bion_Les_Marronniers_Tarte_%C3%A0_l%27oignon.JPG",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Revest-du-Bion_Les_Marronniers_Tarte_%C3%A0_l%27oignon.JPG",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Revest-du-Bion Les Marronniers Tarte à l'oignon",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_217",
@@ -10084,7 +10612,7 @@
       "time": 45,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Tarte_alsacienne_%C3%A0_la_confiture_ou_linzer.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -10130,7 +10658,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:42.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Randalfino",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tarte_alsacienne_%C3%A0_la_confiture_ou_linzer.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tarte_alsacienne_%C3%A0_la_confiture_ou_linzer.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Tarte alsacienne à la confiture ou linzer",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_218",
@@ -10303,7 +10839,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:39.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352834348
     },
     {
       "id": "imp1795266199300_221",
@@ -10360,7 +10897,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:38.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352834684
     },
     {
       "id": "imp1795266199300_222",
@@ -10369,7 +10907,7 @@
       "time": 0,
       "servings": 14,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Tartelettes_aux_fruits.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "",
       "ingredients": [
         [
@@ -10424,7 +10962,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:37.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Thomon",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tartelettes_aux_fruits.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tartelettes_aux_fruits.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Tartelettes aux fruits",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_223",
@@ -10433,7 +10979,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Sonde_de_temp%C3%A9rature_de_la_Cyana_dans_des_chemin%C3%A9es_de_sulfure_%28Ifremer_00532-64404%29.jpg/960px-Sonde_de_temp%C3%A9rature_de_la_Cyana_dans_des_chemin%C3%A9es_de_sulfure_%28Ifremer_00532-64404%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [],
       "steps": [
@@ -10445,7 +10991,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:36.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "null",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Sonde_de_temp%C3%A9rature_de_la_Cyana_dans_des_chemin%C3%A9es_de_sulfure_(Ifremer_00532-64404).jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Sonde_de_temp%C3%A9rature_de_la_Cyana_dans_des_chemin%C3%A9es_de_sulfure_(Ifremer_00532-64404).jpg",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Sonde de température de la Cyana dans des cheminées de sulfure (Ifremer 00532-64404)",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_224",
@@ -10538,7 +11092,7 @@
       "time": 21,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Tiramisu_-_Raffaele_Diomede.jpg/960px-Tiramisu_-_Raffaele_Diomede.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -10582,7 +11136,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:33.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Raffaele Diomede from Pordenone, ITALIA",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tiramisu_-_Raffaele_Diomede.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Tiramisu_-_Raffaele_Diomede.jpg",
+      "imageLicense": "CC BY 2.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Tiramisu - Raffaele Diomede",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_227",
@@ -10635,7 +11197,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:32.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352836432
     },
     {
       "id": "imp1795266199300_228",
@@ -10690,7 +11253,7 @@
       "time": 110,
       "servings": 30,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Salon_chocolat_Paris_2017_Truffes_2896.jpg/960px-Salon_chocolat_Paris_2017_Truffes_2896.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -10716,7 +11279,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:30.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Sukkoria",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Salon_chocolat_Paris_2017_Truffes_2896.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Salon_chocolat_Paris_2017_Truffes_2896.jpg",
+      "imageLicense": "CC BY-SA 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Salon chocolat Paris 2017 Truffes 2896",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_230",
@@ -10794,7 +11365,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:28.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795352837356
     },
     {
       "id": "imp1795266199300_232",
@@ -10839,7 +11411,7 @@
       "time": 0,
       "servings": 0,
       "difficulty": "",
-      "image": "",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Viande_s%C3%A9chee_vs.jpg/960px-Viande_s%C3%A9chee_vs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "description": "",
       "ingredients": [
         [
@@ -10862,7 +11434,15 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T12:59:26.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Popo le Chien",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Viande_s%C3%A9chee_vs.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Viande_s%C3%A9chee_vs.jpg",
+      "imageLicense": "CC BY-SA 3.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Viande séchee vs",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "imp1795266199300_234",
@@ -10985,7 +11565,7 @@
       "time": 0,
       "servings": 6,
       "difficulty": "",
-      "image": "",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Liz_Calnan%2C_Handwoven_wrap.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "description": "WRAP ou pour tacos",
       "ingredients": [
         [
@@ -11014,7 +11594,15 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-21T12:59:23.300Z",
-      "imageSearchState": "pending"
+      "imageSearchState": "found",
+      "imageCredit": "Elizabeth Calnan",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Liz_Calnan,_Handwoven_wrap.jpg",
+      "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Liz_Calnan,_Handwoven_wrap.jpg",
+      "imageLicense": "FAL",
+      "imageLicenseUrl": "http://artlibre.org/licence/lal/en",
+      "imageProvider": "Wikimedia Commons",
+      "imageTitle": "Liz Calnan, Handwoven wrap",
+      "imageSearchRetryAt": 0
     },
     {
       "id": "r1795207019791",
