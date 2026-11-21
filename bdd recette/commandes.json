@@ -22,5 +22,16 @@
     "status": "completed",
     "createdAt": "2026-11-21T21:41:11.648Z",
     "completedAt": "2026-11-21T21:41:45.719Z"
+  },
+  {
+    "id": "3fe4656b-d073-4388-b45c-28e8412cb50e",
+    "guestId": "1b156996-f647-46c4-93c7-7b106f6d957a",
+    "pseudo": "Max",
+    "cocktail": "Rhum XO",
+    "ingredients": [
+      "1 unité de Rhum XO"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-21T21:41:52.020Z"
   }
 ]
