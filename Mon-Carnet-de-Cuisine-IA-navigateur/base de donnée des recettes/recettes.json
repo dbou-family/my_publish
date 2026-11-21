@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T13:52:08.529Z",
+  "updatedAt": "2026-11-21T15:52:55.881Z",
   "recipes": [
     {
       "id": "imp1795269116123_0",
@@ -55,7 +55,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:51:56.123Z",
-      "sourceUrl": "https://www.750g.com/ail-marine-au-vinaigre-r99841.htm"
+      "sourceUrl": "https://www.750g.com/ail-marine-au-vinaigre-r99841.htm",
+      "rating": 4
     },
     {
       "id": "imp1795269116123_1",
