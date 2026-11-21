@@ -43,8 +43,9 @@
     "ingredients": [
       "1 unité de Rhum XO"
     ],
-    "status": "pending",
-    "createdAt": "2026-11-21T22:21:05.357Z"
+    "status": "completed",
+    "createdAt": "2026-11-21T22:21:05.357Z",
+    "completedAt": "2026-11-21T22:26:35.757Z"
   },
   {
     "id": "9d38dac2-94c6-4f9e-a683-1aca6d3737ef",
