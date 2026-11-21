@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "2446af99-1f05-4d22-af78-ae3adcf053b6",
+    "guestId": "e9702b8b-9012-4e1a-b682-1db27b74c1e9",
+    "pseudo": "Dede",
+    "cocktail": "Grappa",
+    "ingredients": [
+      "1 unité de Grappa"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-21T09:59:41.534Z"
+  }
+]
