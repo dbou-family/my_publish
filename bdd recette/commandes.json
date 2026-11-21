@@ -34,5 +34,16 @@
     "status": "completed",
     "createdAt": "2026-11-21T21:41:52.020Z",
     "completedAt": "2026-11-21T21:42:21.899Z"
+  },
+  {
+    "id": "f415f05b-70b6-4728-a11b-7caa09c4f4a9",
+    "guestId": "99ad1b2c-f9cb-4a90-9531-895553a624aa",
+    "pseudo": "Merci mr le barman",
+    "cocktail": "Rhum XO",
+    "ingredients": [
+      "1 unité de Rhum XO"
+    ],
+    "status": "pending",
+    "createdAt": "2026-11-21T22:21:05.357Z"
   }
 ]
