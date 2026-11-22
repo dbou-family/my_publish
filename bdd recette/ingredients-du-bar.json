@@ -1,12 +1,15 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21T07:26:50.020Z",
+  "updatedAt": "2026-11-22T11:45:27.132Z",
   "pantry": [
     "Aperol",
     "Bardouin",
     "Biere ambrée",
     "Bourbon 3 ans",
-    "Chivas",
+    {
+      "name": "Chivas",
+      "image": "https://m.media-amazon.com/images/I/61enJ3UkMcL._AC_SY445_SX342_QL70_ML2_.jpg"
+    },
     "Cointreau",
     "Creme de cassis",
     "Creme de châtaigne",
