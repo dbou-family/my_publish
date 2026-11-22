@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:40:28.178Z",
+  "updatedAt": "2026-11-22T16:40:47.331Z",
   "pantry": [
     "Aperol",
     "Bardouin",
@@ -33,7 +33,10 @@
     "Porto",
     "Rhum ambrée",
     "Rhum blanc",
-    "Rhum MAMA QUILLA",
+    {
+      "name": "Rhum MAMA QUILLA",
+      "image": "https://m.media-amazon.com/images/I/715jz79ZzmL._AC_SX342_SY445_QL70_ML2_.jpg"
+    },
     "Rhum XO",
     "Ricard",
     "Scotch blended malt",
