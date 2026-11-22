@@ -1,0 +1,72 @@
+Crée une application web mono-fichier (un seul index.html) en français pour gérer une carte de cocktails et le stock d'un bar, avec un mode invité permettant aux clients de commander depuis leur téléphone.
+
+## Contraintes techniques
+- Un seul fichier HTML : HTML, CSS et JavaScript vanilla. Pas de framework ni de build.
+- Tailwind CSS via le CDN (https://cdn.tailwindcss.com), avec une configuration personnalisée : couleurs "dark" #0f172a, "card" #1e293b, "accent" #f59e0b, "hover" #d97706.
+- Thème sombre (fond slate-950/900, texte slate-100), accents ambre. Icônes SVG inline (heroicons style).
+- Favicon SVG en data URI (une icône de bouteille ou de cocktail).
+- Interface entièrement en français, balise lang="fr".
+- Responsive, avec une attention particulière au tactile : boutons d'au moins 44 px sur mobile, grille à une colonne sur petit écran, filtres défilables horizontalement, marges de sécurité (env(safe-area-inset-bottom)), champs à 16 px de police pour éviter le zoom iOS, et respect de prefers-reduced-motion.
+- Aucun localStorage pour les données métier. Seul un identifiant invité anonyme (UUID) peut être stocké localement.
+
+## Données et persistance
+- Les données sont lues et écrites via trois endpoints d'API relatifs : /api/cocktails, /api/pantry, /api/orders. Ces endpoints sont supposés exister (par exemple des fonctions serverless qui lisent et écrivent un fichier JSON dans un dépôt GitHub).
+- Chaque lecture renvoie les données et un "sha" ; chaque écriture (PUT) renvoie le nouveau sha et le transmet. En cas de 409 ou 422, réinitialiser le sha et demander de recharger avant de réessayer.
+- Si le fichier n'existe pas (404), initialiser avec des données par défaut puis les enregistrer.
+- Mettre en file d'attente les écritures (promesse chaînée) pour éviter les conflits entre sauvegardes concurrentes, et compter les écritures en cours.
+- Un bouton « Synchronisation » dans l'en-tête est rouge quand les données ne sont pas synchronisées et vert quand elles le sont ; il ouvre une modale affichant le statut et permettant de relancer la connexion.
+- Normaliser les recettes au chargement : note entre 0 et 4, booléens favori et « à tester ».
+
+### Modèle de données
+- Recette : id, name, category (« Alcoolisé », « Sans alcool », « Tiki », etc.), image (URL), ingredients (tableau de chaînes libres, par exemple « 6 cl de Rhum blanc »), instructions (texte), rating, favorite, toTry.
+- Catalogue d'ingrédients et « Mon bar » (pantry) : une liste de produits disponibles, avec un catalogue global de noms d'ingrédients catégorisés (Alcools, Sirops, Autres ingrédients, etc.) que l'on peut enrichir.
+- Commande : id, pseudo du client, cocktail, date, statut (en attente / livrée), identifiant invité.
+- Statut du bar : ouvert ou fermé, lu et écrit via l'API, avec interrogation régulière.
+
+## Écran principal (barman / gérant)
+- En-tête : titre « BarCraft Pro » avec sous-titre, bouton « Sommaire » (lien de retour), bouton QR code, champ de recherche, bouton « Mon bar », bouton Synchronisation, bouton cloche des commandes avec compteur (masqué en mode invité), bouton « Fermer le bar » / « Ouvrir le bar » (vert), et bouton « Nouvelle recette ».
+- Filtres par catégorie en pilules : Tous, Alcoolisé, Sans alcool, Mes favoris, À tester. Ajouter une vue « Alcool simple » pour le mode invité.
+- Filtres de faisabilité selon le bar : « Réalisables » (tous les ingrédients disponibles) et « Il manque 1 ».
+- Grille de cartes : image, nom, catégorie, badge de faisabilité (« Réalisable » en vert ou « Il manque : X » en violet), note par étoiles, boutons favori et à tester.
+- Modale de détail : grande image, ingrédients, instructions, boutons Modifier, Supprimer (avec confirmation) et Commander.
+- Modale d'ajout/édition : nom, catégorie, URL d'image, ingrédients ajoutés un à un avec suggestions depuis le catalogue, instructions.
+- Modale « Mon bar » : recherche dans le catalogue avec suggestions (navigation clavier flèches haut/bas et Entrée), ajout au bar, liste du stock groupée par catégorie avec titres collants, suppression, et ajout de nouveaux ingrédients au catalogue.
+
+## Logique de faisabilité
+- Normaliser les textes : supprimer les accents, passer en minuscules, retirer la ponctuation.
+- Ignorer les quantités, unités et mots vides français (de, du, des, le, la, feuilles, cl, c. à café, etc.) pour comparer les ingrédients.
+- Considérer comme toujours disponibles l'eau gazeuse, les glaçons et la glace pilée.
+- Gérer les alternatives écrites avec « ou » : l'ingrédient est disponible si l'une des options l'est.
+- Un ingrédient correspond à un produit du bar si tous les mots significatifs de l'un sont dans l'autre.
+- Afficher le nom nettoyé de l'ingrédient manquant (par exemple « Curaçao triple sec » pour « 1,5 cl de Curaçao triple sec »).
+
+## Mode invité (client)
+- Activé par le paramètre d'URL ?guest=1 (ou ?consultation=1). Sans ce paramètre, à l'ouverture, afficher une modale de choix : « Entrer en mode invité » ou « Accéder au bar ».
+- En mode invité : masquer la navigation de gestion (Sommaire, QR, Synchronisation, Mon bar, Nouvelle recette, filtres de faisabilité), afficher un bandeau « MODE INVITÉ · Choisissez un cocktail à commander ».
+- Afficher une vue compacte (5 colonnes sur grand écran) des alcools présents au bar, regroupés par catégorie, avec leur image de bouteille si elle existe (table de correspondance nom → URL d'image).
+- Commander : cliquer sur un cocktail ouvre une modale demandant un pseudo (maxlength 40, requis), puis envoie la commande à /api/orders. Après envoi, afficher une modale de confirmation animée (un barman qui court et un plateau qui rebondit, en CSS keyframes) et jouer un son.
+- Vérifier régulièrement (toutes les 12 s) si le bar est ouvert. S'il est fermé, afficher un écran plein « BAR FERMÉ / À bientôt ! » qui bloque l'interface.
+- Vérifier aussi si la commande a été livrée : afficher une notification « ✅ Votre commande est livrée ! » et jouer un son de livraison.
+
+## Mode barman
+- Afficher la liste des commandes en attente dans une modale (heure, pseudo, cocktail, bouton « Livrée »), et un bouton « Vider la liste ».
+- Actualiser les commandes toutes les 20 s, et jouer un son (deux notes montantes) à l'arrivée d'une nouvelle commande.
+- Le bouton de statut du bar est en état « en cours » pendant la mise à jour, avec une pastille de chargement flottante.
+
+## QR code
+- Une modale affiche un QR code qui pointe vers l'URL courante avec ?guest=1, généré via https://api.qrserver.com/v1/create-qr-code/. Afficher l'URL en clair en dessous.
+
+## Audio
+- Générer les sons avec la Web Audio API (oscillateurs et bruit filtré pour les claquements), sans fichier, avec un repli si besoin. Déverrouiller le contexte audio au premier clic ou appui clavier.
+- Pour le son de commande envoyée, utiliser un fichier mp3 si disponible (fireworks), avec repli sur les claquements.
+
+## Données par défaut
+- Pré-remplir quelques cocktails d'exemple : Mojito Cubain (Alcoolisé), Old Fashioned (Alcoolisé), Virgin Colada (Sans alcool), Mai Tai (Tiki), avec des images Unsplash, des ingrédients détaillés et des instructions.
+
+## Gestion des erreurs
+- Afficher les erreurs de synchronisation dans la modale et dans l'en-tête, sans bloquer l'interface. Journaliser les erreurs en console.
+- Les modales se ferment avec le bouton ✕ et la touche Échap, et se ferment en cliquant sur le fond.
+- Accessibilité : rôles dialog et aria-modal, aria-live sur les notifications, labels sur les champs, aria-selected sur les suggestions.
+
+## Livrable
+Produis un unique fichier index.html complet, sans commentaire superflu, prêt à être déployé. Indique en fin de réponse les endpoints d'API que le front attend et le format JSON attendu pour chacun.
