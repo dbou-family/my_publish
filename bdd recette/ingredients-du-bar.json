@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:44:20.449Z",
+  "updatedAt": "2026-11-22T16:44:44.592Z",
   "pantry": [
     "Aperol",
     {
@@ -38,7 +38,10 @@
       "name": "Liqueuer de litchee",
       "image": "https://cdn.auchan.fr/media/A0220100928000503070PRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
     },
-    "Liqueur de banane",
+    {
+      "name": "Liqueur de banane",
+      "image": "https://m.media-amazon.com/images/I/51z-3t3-ExL._AC_SY445_SX342_QL70_ML2_.jpg"
+    },
     "Liqueur de pomme",
     "Malibu",
     "Martini blanc",
