@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T11:45:27.132Z",
+  "updatedAt": "2026-11-22T16:39:35.123Z",
   "pantry": [
     "Aperol",
     "Bardouin",
@@ -48,7 +48,10 @@
     "Suze",
     "Tequila blanche",
     "Vodka",
-    "Whisky",
+    {
+      "name": "Whisky",
+      "image": "https://www.google.com/aclk?sa=L&ai=DChsSEwj4obL1gZyYAxVppIMHHe9NOgcYACICCAEQBhoCZWY&co=1&gclid=Cj0KCQiAworYBhDoARIsAP5ft3K1D3-jDIuz1kaVK0_gA1XrD8M3UEuRXwI6PATeksSy3JwbHOzaaBIaAvZKEALw_wcB&cid=CAASrwHkaDFvQMCmgp9w7X7K8C-NvcVfwvY6b7YLP3LeX8OnxF-e4gf-Ei5MWA5nscUfF3drpY_pHCwPVa_R0zCgg6_ByRlxRHIQgsfa02C3o0_5itt8Mk0tfWZAgGXx7bBP6PTCty5qkXqXs4j40AZ3qz08-32DukJMhZ_8MNUK7AUw86DjV7mtSrTNLQnxn2p1ehRoG2Fm8KfBZCVMcj5S5mR4aXIOeyS-Id6DcLR8TYb8&cce=2&sig=AOD64_3-u82Jm-xk9ko0duDXiFB7xrgJrQ&ctype=5&q=&ved=2ahUKEwjl-az1gZyYAxXV8bsIHUGaJ90Q5bgDKAB6BAgKEDI&adurl="
+    },
     "Whisky francais FONDAUDEGE",
     "Whisky miel JD"
   ]
