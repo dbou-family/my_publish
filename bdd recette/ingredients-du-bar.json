@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:43:59.687Z",
+  "updatedAt": "2026-11-22T16:44:20.449Z",
   "pantry": [
     "Aperol",
     {
@@ -34,7 +34,10 @@
     "Grappa",
     "Grappa ambree",
     "Kirsh",
-    "Liqueuer de litchee",
+    {
+      "name": "Liqueuer de litchee",
+      "image": "https://cdn.auchan.fr/media/A0220100928000503070PRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
+    },
     "Liqueur de banane",
     "Liqueur de pomme",
     "Malibu",
