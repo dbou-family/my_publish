@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:46:51.573Z",
+  "updatedAt": "2026-11-22T16:47:05.609Z",
   "pantry": [
     "Aperol",
     {
@@ -80,7 +80,10 @@
       "name": "Sirop de violette",
       "image": "https://www.epicerieduterroir.fr/photos/340-340-1875.jpg"
     },
-    "Sirop fraise",
+    {
+      "name": "Sirop fraise",
+      "image": "https://m1.delidrinks.com/26019-large_default/sirop-fraise-bonbon-bouteille-verre-700ml.jpg"
+    },
     "Sirop framboise rhubarbe",
     "Sirop menthe",
     "Sirop peche blanche",
