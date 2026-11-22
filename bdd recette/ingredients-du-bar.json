@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:45:03.245Z",
+  "updatedAt": "2026-11-22T16:45:55.252Z",
   "pantry": [
     "Aperol",
     {
@@ -64,7 +64,10 @@
     },
     "Ricard",
     "Scotch blended malt",
-    "Sirop d’orgeat",
+    {
+      "name": "Sirop d’orgeat",
+      "image": "https://www.maxicoffee.com/dw/image/v2/bmff_prd/on/demandware.static/-/Sites-default-catalog/default/dw4dbe04c2/images/long/files/image_principale_187320/media/image_principale_187320.jpg?sw=500&sfrm=jpg"
+    },
     "Sirop de grenadine",
     "Sirop de sucre de canne",
     "Sirop de violette",
