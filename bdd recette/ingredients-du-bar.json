@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:47:05.609Z",
+  "updatedAt": "2026-11-22T16:47:25.023Z",
   "pantry": [
     "Aperol",
     {
@@ -84,7 +84,10 @@
       "name": "Sirop fraise",
       "image": "https://m1.delidrinks.com/26019-large_default/sirop-fraise-bonbon-bouteille-verre-700ml.jpg"
     },
-    "Sirop framboise rhubarbe",
+    {
+      "name": "Sirop framboise rhubarbe",
+      "image": "https://m1.delidrinks.com/26021-large_default/sirop-framboise-bouteille-verre-700ml.jpg"
+    },
     "Sirop menthe",
     "Sirop peche blanche",
     "Suze",
