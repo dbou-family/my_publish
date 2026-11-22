@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:47:43.147Z",
+  "updatedAt": "2026-11-22T16:48:00.769Z",
   "pantry": [
     "Aperol",
     {
@@ -92,7 +92,10 @@
       "name": "Sirop menthe",
       "image": "https://m2.delidrinks.com/23797-large_default/sirop-menthe-verte-bouteille-verre-700ml.jpg"
     },
-    "Sirop peche blanche",
+    {
+      "name": "Sirop peche blanche",
+      "image": "https://static1.chronodrive.com/img/PM/Z/0/32/0Z_146632.jpg"
+    },
     "Suze",
     "Tequila blanche",
     "Vodka",
