@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:41:47.262Z",
+  "updatedAt": "2026-11-22T16:42:59.142Z",
   "pantry": [
     "Aperol",
     {
@@ -15,7 +15,10 @@
     },
     "Cointreau",
     "Creme de cassis",
-    "Creme de châtaigne",
+    {
+      "name": "Creme de châtaigne",
+      "image": "https://m.media-amazon.com/images/I/71u9-crrvML._AC_SY300_SX300_QL70_ML2_.jpg"
+    },
     "Creme de pamplemousse",
     "Creme de pistache",
     "Curaçao bleu",
