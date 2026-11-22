@@ -682,6 +682,8 @@
         ];
         function ingredientImageFor(name) {
             const key = ingredientKey(name);
+            const custom = pantry.find(item => typeof item === 'object' && item?.image && ingredientKey(pantryName(item)) === key);
+            if (custom) return custom.image;
             const hit = INGREDIENT_IMAGE_SOURCES.find(([label]) => ingredientKey(label) === key);
             return hit ? hit[1] : '';
         }
@@ -1483,9 +1485,24 @@
         let pantry = [];
         try {
             const storedPantry = JSON.parse(localStorage.getItem('barcraft_pantry') || '[]');
-            if (Array.isArray(storedPantry)) pantry = storedPantry.map(pantryName).filter(Boolean);
+            if (Array.isArray(storedPantry)) pantry = storedPantry.map(normalizePantryItem).filter(Boolean);
         } catch (error) { console.warn('Liste du bar illisible', error); }
         let pendingPantryIngredient = '';
+        let editingPantryIndex = null;
+        function normalizePantryItem(item) {
+            const name = pantryName(item).trim();
+            if (!name) return null;
+            return item && typeof item === 'object' && item.image ? { name, image: item.image } : name;
+        }
+        function setPantryItemImage(index, url) {
+            const item = pantry[index];
+            if (item === undefined) return;
+            const name = pantryName(item);
+            pantry[index] = normalizePantryItem(url ? { name, image: url } : name);
+            editingPantryIndex = null;
+            savePantry();
+            renderPantry();
+        }
 
         function savePantry() {
             pantryRevision++;
@@ -1515,7 +1532,7 @@
                 setPantrySyncState(true);
                 return;
             }
-            pantry = data.pantry.map(pantryName).filter(Boolean);
+            pantry = data.pantry.map(normalizePantryItem).filter(Boolean);
             localStorage.setItem('barcraft_pantry', JSON.stringify(pantry));
             renderPantry();
             renderRecipes(currentFilter, document.getElementById('searchInput').value);
@@ -1577,7 +1594,7 @@
                 return;
             }
             pantry.push(pendingPantryIngredient);
-            pantry.sort((a, b) => a.localeCompare(b, 'fr'));
+            pantry.sort((a, b) => pantryName(a).localeCompare(pantryName(b), 'fr'));
             savePantry();
             pendingPantryIngredient = '';
             document.getElementById('pantrySelection').classList.add('hidden');
@@ -1587,6 +1604,7 @@
 
         function removePantryItem(index) {
             pantry.splice(index, 1);
+            editingPantryIndex = null;
             savePantry();
             renderPantry();
         }
@@ -1624,16 +1642,109 @@
                 list.appendChild(heading);
                 entries.sort((a, b) => pantryName(a.item).localeCompare(pantryName(b.item), 'fr'));
                 entries.forEach(({ item, index }) => {
+                    const name = pantryName(item);
+                    const isEditing = editingPantryIndex === index;
                     const li = document.createElement('li');
-                    li.className = 'flex items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-800/40 px-3 py-2 text-sm text-slate-300';
+                    li.className = 'rounded-lg border border-slate-800 bg-slate-800/40 px-3 py-2 text-sm text-slate-300';
+
+                    const row = document.createElement('div');
+                    row.className = 'flex items-center justify-between gap-3';
+
+                    const info = document.createElement('div');
+                    info.className = 'flex min-w-0 items-center gap-3';
+                    const thumb = document.createElement('img');
+                    thumb.className = 'h-10 w-8 shrink-0 rounded object-contain bg-slate-900/60';
+                    thumb.alt = '';
+                    thumb.loading = 'lazy';
+                    const thumbUrl = ingredientImageFor(name);
+                    if (thumbUrl) thumb.src = thumbUrl; else thumb.classList.add('invisible');
                     const span = document.createElement('span');
-                    span.textContent = pantryName(item);
+                    span.className = 'truncate';
+                    span.textContent = name;
+                    info.append(thumb, span);
+
+                    const actions = document.createElement('div');
+                    actions.className = 'flex shrink-0 items-center gap-3';
+                    const imageBtn = document.createElement('button');
+                    imageBtn.type = 'button';
+                    imageBtn.textContent = 'Image';
+                    imageBtn.setAttribute('aria-expanded', String(isEditing));
+                    imageBtn.setAttribute('aria-label', `Modifier l'image de ${name}`);
+                    imageBtn.className = 'text-xs font-medium text-amber-300 transition hover:text-amber-200';
+                    imageBtn.onclick = () => {
+                        editingPantryIndex = isEditing ? null : index;
+                        renderPantry();
+                        if (editingPantryIndex !== null) document.getElementById('pantryImageUrl')?.focus();
+                    };
                     const btn = document.createElement('button');
                     btn.type = 'button';
                     btn.textContent = 'Retirer';
-                    btn.className = 'shrink-0 text-xs text-rose-400 transition hover:text-rose-300';
+                    btn.className = 'text-xs text-rose-400 transition hover:text-rose-300';
                     btn.onclick = () => removePantryItem(index);
-                    li.append(span, btn);
+                    actions.append(imageBtn, btn);
+                    row.append(info, actions);
+                    li.appendChild(row);
+
+                    if (isEditing) {
+                        const form = document.createElement('form');
+                        form.className = 'mt-3 flex flex-col gap-2 border-t border-slate-700 pt-3';
+                        form.noValidate = true;
+
+                        const label = document.createElement('label');
+                        label.htmlFor = 'pantryImageUrl';
+                        label.className = 'text-xs font-semibold text-slate-300';
+                        label.textContent = `URL de l'image pour ${name}`;
+
+                        const input = document.createElement('input');
+                        input.id = 'pantryImageUrl';
+                        input.type = 'url';
+                        input.inputMode = 'url';
+                        input.autocomplete = 'off';
+                        input.placeholder = 'https://…';
+                        input.value = item && typeof item === 'object' ? (item.image || '') : '';
+                        input.className = 'w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-base text-slate-200 focus:outline-none focus:border-amber-500';
+
+                        const error = document.createElement('p');
+                        error.className = 'hidden text-xs text-rose-400';
+                        error.setAttribute('role', 'alert');
+
+                        const buttons = document.createElement('div');
+                        buttons.className = 'flex flex-wrap items-center gap-2';
+                        const save = document.createElement('button');
+                        save.type = 'submit';
+                        save.textContent = 'Enregistrer';
+                        save.className = 'px-3 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-sm';
+                        const cancel = document.createElement('button');
+                        cancel.type = 'button';
+                        cancel.textContent = 'Annuler';
+                        cancel.className = 'px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-semibold';
+                        cancel.onclick = () => { editingPantryIndex = null; renderPantry(); };
+                        buttons.append(save, cancel);
+                        if (item && typeof item === 'object' && item.image) {
+                            const reset = document.createElement('button');
+                            reset.type = 'button';
+                            reset.textContent = "Supprimer l'image";
+                            reset.className = 'ml-auto text-xs text-slate-400 transition hover:text-rose-300';
+                            reset.onclick = () => setPantryItemImage(index, '');
+                            buttons.append(reset);
+                        }
+
+                        form.onsubmit = event => {
+                            event.preventDefault();
+                            const url = input.value.trim();
+                            if (url && !/^https?:\/\/\S+$/i.test(url)) {
+                                error.textContent = 'Saisissez une adresse complète commençant par https://';
+                                error.classList.remove('hidden');
+                                input.setAttribute('aria-invalid', 'true');
+                                input.focus();
+                                return;
+                            }
+                            setPantryItemImage(index, url);
+                        };
+                        form.append(label, input, error, buttons);
+                        li.appendChild(form);
+                    }
+
                     list.appendChild(li);
                 });
             });
