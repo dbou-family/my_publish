@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:46:15.652Z",
+  "updatedAt": "2026-11-22T16:46:30.223Z",
   "pantry": [
     "Aperol",
     {
@@ -72,7 +72,10 @@
       "name": "Sirop de grenadine",
       "image": "https://cdn.auchan.fr/media/A0220140630000855561PRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
     },
-    "Sirop de sucre de canne",
+    {
+      "name": "Sirop de sucre de canne",
+      "image": "https://cdn.auchan.fr/media/A0219900101000055065PRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
+    },
     "Sirop de violette",
     "Sirop fraise",
     "Sirop framboise rhubarbe",
