@@ -70,7 +70,13 @@ export async function onRequest({ request, env }) {
     const raw = await request.text();
     if (raw.length > 100_000) return json({ error: 'La liste d’ingrédients dépasse la taille autorisée.' }, 413);
     const input = JSON.parse(raw);
-    if (!Array.isArray(input.pantry) || input.pantry.some(item => typeof item !== 'string' || !item.trim() || item.length > 100)) {
+    const validPantryItem = item => {
+      if (typeof item === 'string') return Boolean(item.trim()) && item.length <= 100;
+      return item && typeof item === 'object' && !Array.isArray(item)
+        && typeof item.name === 'string' && Boolean(item.name.trim()) && item.name.length <= 100
+        && (item.image === undefined || (typeof item.image === 'string' && item.image.length <= 2048 && /^https?:\/\/\S+$/i.test(item.image)));
+    };
+    if (!Array.isArray(input.pantry) || input.pantry.some(item => !validPantryItem(item))) {
       return json({ error: 'La liste d’ingrédients est invalide.' }, 400);
     }
     let currentSha = null;
