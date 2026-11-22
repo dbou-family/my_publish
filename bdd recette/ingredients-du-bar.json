@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:43:18.876Z",
+  "updatedAt": "2026-11-22T16:43:59.687Z",
   "pantry": [
     "Aperol",
     {
@@ -25,7 +25,10 @@
       "name": "Curaçao bleu",
       "image": "https://cdn.auchan.fr/media/P02000000000TOFPRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
     },
-    "Gato papate",
+    {
+      "name": "Gato papate",
+      "image": "https://cdn.rhumattitude.com/wp-content/uploads/2021/03/isautier-douceur-d-arrang-gato-patat-50-cl17.jpg"
+    },
     "Get 27",
     "Gin",
     "Grappa",
