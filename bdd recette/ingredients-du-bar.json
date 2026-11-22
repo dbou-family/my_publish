@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:45:55.252Z",
+  "updatedAt": "2026-11-22T16:46:15.652Z",
   "pantry": [
     "Aperol",
     {
@@ -68,7 +68,10 @@
       "name": "Sirop d’orgeat",
       "image": "https://www.maxicoffee.com/dw/image/v2/bmff_prd/on/demandware.static/-/Sites-default-catalog/default/dw4dbe04c2/images/long/files/image_principale_187320/media/image_principale_187320.jpg?sw=500&sfrm=jpg"
     },
-    "Sirop de grenadine",
+    {
+      "name": "Sirop de grenadine",
+      "image": "https://cdn.auchan.fr/media/A0220140630000855561PRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
+    },
     "Sirop de sucre de canne",
     "Sirop de violette",
     "Sirop fraise",
