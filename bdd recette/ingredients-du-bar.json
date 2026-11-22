@@ -1,9 +1,12 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:41:17.912Z",
+  "updatedAt": "2026-11-22T16:41:47.262Z",
   "pantry": [
     "Aperol",
-    "Bardouin",
+    {
+      "name": "Bardouin",
+      "image": "https://cdn.auchan.fr/media/A0219950706000059553PRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
+    },
     "Biere ambrée",
     "Bourbon 3 ans",
     {
