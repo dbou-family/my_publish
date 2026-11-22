@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:40:12.069Z",
+  "updatedAt": "2026-11-22T16:40:28.178Z",
   "pantry": [
     "Aperol",
     "Bardouin",
@@ -53,6 +53,9 @@
       "image": "https://media.e.leclerc/5010327105215_1?fit=fit&op_sharpen=1&resmode=bilin&fmt=webP&qlt=85&trim=0.5%2Cwhites&wid=450&hei=450"
     },
     "Whisky francais FONDAUDEGE",
-    "Whisky miel JD"
+    {
+      "name": "Whisky miel JD",
+      "image": "https://cdn.auchan.fr/media/A0220131219000531387PRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
+    }
   ]
 }
