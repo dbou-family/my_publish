@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T16:42:59.142Z",
+  "updatedAt": "2026-11-22T16:43:18.876Z",
   "pantry": [
     "Aperol",
     {
@@ -21,7 +21,10 @@
     },
     "Creme de pamplemousse",
     "Creme de pistache",
-    "Curaçao bleu",
+    {
+      "name": "Curaçao bleu",
+      "image": "https://cdn.auchan.fr/media/P02000000000TOFPRIMARY_0x0/B2CD/?width=500&height=500&fit=pad&format=rw&quality=75"
+    },
     "Gato papate",
     "Get 27",
     "Gin",
