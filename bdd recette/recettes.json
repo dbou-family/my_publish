@@ -45,7 +45,7 @@
     ],
     "instructions": "Mettre tout ensemble",
     "rating": 4,
-    "favorite": false,
+    "favorite": true,
     "toTry": false
   }
 ]
