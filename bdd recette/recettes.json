@@ -1,5 +1,20 @@
 [
   {
+    "id": 1795467861731,
+    "rating": 0,
+    "favorite": false,
+    "toTry": false,
+    "name": "Blue Hawaii",
+    "category": "Alcoolisé",
+    "image": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
+    "ingredients": [
+      "2 cl de Rhum blanc",
+      "2 cl de Vodka",
+      "1 cl de Curaçao bleu"
+    ],
+    "instructions": "Dans un shaker avec des glacons\n20ml de rhum\n20ml de vodka\n20ml de curacao bleu\n90ml de jus d'ananas\n15ml de sirop de sucre"
+  },
+  {
     "id": 1795467670282,
     "rating": 0,
     "favorite": false,
