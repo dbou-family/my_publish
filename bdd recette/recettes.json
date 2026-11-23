@@ -1,5 +1,20 @@
 [
   {
+    "id": 1795467670282,
+    "rating": 0,
+    "favorite": false,
+    "toTry": false,
+    "name": "Bloody Mary",
+    "category": "Alcoolisé",
+    "image": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
+    "ingredients": [
+      "4,5 cl de Vodka",
+      "9 cl de jus de tomate",
+      "1 cl de Jus de citron jaune"
+    ],
+    "instructions": "mettre des glacons dans un verre highball\n2 traits de Worcestershire sauce\n1 trait de tabasco\nsel\npoivre\n45ml de vodka\n90ml de jus de tomate\n15ml de jus de citron\ngarnir avec une tige de celeri"
+  },
+  {
     "id": 1795467475607,
     "rating": 0,
     "favorite": false,
