@@ -390,7 +390,7 @@
                 name: "Mojito Cubain",
                 category: "Alcoolisé",
                 image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
-                ingredients: ["6 cl de Rhum blanc", "3 cl de Jus de lime frais", "6 feuilles de Menthe fraîche", "2 c. à café de Sucre de canne", "Eau gazeuse"],
+                ingredients: ["60 ml de Rhum blanc", "30 ml de Jus de lime frais", "6 feuilles de Menthe fraîche", "2 c. à café de Sucre de canne", "Eau gazeuse"],
                 instructions: "Dans un verre highball, placer les feuilles de menthe et le sucre. Ajouter le jus de lime et écraser délicatement. Remplir le verre de glace pilée, verser le rhum et compléter avec de l'eau gazeuse. Mélanger délicatement."
             },
             {
@@ -398,7 +398,7 @@
                 name: "Old Fashioned",
                 category: "Alcoolisé",
                 image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
-                ingredients: ["6 cl de Bourbon ou Rye whiskey", "2 traits d'Angostura bitters", "1 morceau de sucre", "Un trait d'eau"],
+                ingredients: ["60 ml de Bourbon ou Rye whiskey", "2 traits d'Angostura bitters", "1 morceau de sucre", "Un trait d'eau"],
                 instructions: "Dans un verre Old Fashioned, placer le morceau de sucre et imbiber d'Angostura bitters et d'eau. Écraser le sucre. Remplir le verre de glaçons et verser le bourbon. Remuer pendant environ 30 secondes. Décorer d'un zeste d'orange."
             },
             {
@@ -406,7 +406,7 @@
                 name: "Virgin Colada",
                 category: "Sans alcool",
                 image: "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=800&q=80",
-                ingredients: ["12 cl de Jus d'ananas", "4 cl de Lait de coco", "2 cl de Sirop de sucre de canne", "Glaçons"],
+                ingredients: ["120 ml de Jus d'ananas", "40 ml de Lait de coco", "20 ml de Sirop de sucre de canne", "Glaçons"],
                 instructions: "Mettre tous les ingrédients dans un blender avec une poignée de glaçons. Mixer à vitesse maximale jusqu'à l'obtention d'une texture onctueuse et mousseuse. Servir dans un grand verre avec une tranche d'ananas."
             },
             {
@@ -414,7 +414,7 @@
                 name: "Mai Tai",
                 category: "Tiki",
                 image: "https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=800&q=80",
-                ingredients: ["4 cl de Rhum ambré", "2 cl de Rhum blanc", "1,5 cl de Curaçao triple sec", "1,5 cl de Sirop d'orgeat", "1 cl de Jus de lime frais"],
+                ingredients: ["40 ml de Rhum ambré", "20 ml de Rhum blanc", "15 ml de Curaçao triple sec", "15 ml de Sirop d'orgeat", "10 ml de Jus de lime frais"],
                 instructions: "Verser tous les ingrédients dans un shaker rempli de glaçons. Secouer vigoureusement pendant 10 secondes. Verser dans un verre tumbler rempli de glace fraîche. Garnir d'un quartier de lime et d'un brin de menthe."
             }
         ];
@@ -1327,15 +1327,16 @@
             list.classList.toggle('hidden', matches.length === 0 && !query);
         }
         const RECIPE_UNITS = [
-            ['cl', 'cl'], ['unite', 'unité(s)'], ['cac', 'cac'], ['cas', 'cas'],
+            ['ml', 'ml'], ['cl', 'cl'], ['unite', 'unité(s)'], ['cac', 'cac'], ['cas', 'cas'],
             ['feuille', 'feuille(s)'], ['trait', 'trait(s)'], ['morceau', 'morceau(x)'], ['shot', 'shot(s)']
         ];
         function parseRecipeIngredient(ingredient) {
             const text = String(ingredient || '').trim();
-            const match = text.match(/^\s*(\d+(?:[.,]\d+)?|un|une)\s*(cl|c\.?\s*à\s*café|c\.?\s*à\s*soupe|unités?|feuilles?|traits?|morceaux?|shots?)\s+(?:de\s+|d['’])?(.+)$/i);
-            if (!match) return { name: nomIngredient(text), amount: '', unit: 'cl' };
+            const match = text.match(/^\s*(\d+(?:[.,]\d+)?|un|une)\s*(ml|cl|c\.?\s*à\s*café|c\.?\s*à\s*soupe|unités?|feuilles?|traits?|morceaux?|shots?)\s+(?:de\s+|d['’])?(.+)$/i);
+            if (!match) return { name: nomIngredient(text), amount: '', unit: 'ml' };
             const rawUnit = match[2].toLowerCase();
-            const unit = rawUnit.startsWith('c') && rawUnit.includes('café') ? 'cac'
+            const unit = rawUnit === 'ml' ? 'ml'
+                : rawUnit.startsWith('c') && rawUnit.includes('café') ? 'cac'
                 : rawUnit.startsWith('c') && rawUnit.includes('soupe') ? 'cas'
                 : rawUnit.startsWith('unité') ? 'unite'
                 : rawUnit.startsWith('feuille') ? 'feuille'
@@ -1349,6 +1350,7 @@
             const number = Number(amount);
             const count = Number.isInteger(number) ? String(number) : String(number).replace('.', ',');
             const phrases = {
+                ml: `${count} ml de ${name}`,
                 cl: `${count} cl de ${name}`,
                 unite: `${count} ${number === 1 ? 'unité' : 'unités'} de ${name}`,
                 cac: `${count} c. à café de ${name}`,
@@ -1358,9 +1360,9 @@
                 morceau: `${count} ${number === 1 ? 'morceau' : 'morceaux'} de ${name}`,
                 shot: `${count} ${number === 1 ? 'shot' : 'shots'} de ${name}`
             };
-            return phrases[unit] || phrases.cl;
+            return phrases[unit] || phrases.ml;
         }
-        function addRecipeIngredient(name, amount = '', selectedUnit = 'cl') {
+        function addRecipeIngredient(name, amount = '', selectedUnit = 'ml') {
             const container = document.getElementById('recipeIngredientRows');
             if ([...container.children].some(row => ingredientKey(row.dataset.name) === ingredientKey(name))) {
                 document.getElementById('recipeIngredientError').textContent = 'Cet ingrédient est déjà dans la recette.';
@@ -1436,7 +1438,7 @@
             if (ingredientRows.length === 0 || invalidQuantity) {
                 ingredientError.textContent = ingredientRows.length === 0
                     ? 'Choisissez au moins un ingrédient dans la liste.'
-                    : 'Indiquez une quantité en cl supérieure à zéro pour chaque ingrédient.';
+                    : 'Indiquez une quantité supérieure à zéro pour chaque ingrédient.';
                 ingredientError.classList.remove('hidden');
                 (invalidQuantity?.querySelector('input') || document.getElementById('recipeIngredientSearch')).focus();
                 return;
