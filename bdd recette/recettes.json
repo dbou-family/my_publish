@@ -1,5 +1,20 @@
 [
   {
+    "id": 1795552266810,
+    "rating": 0,
+    "favorite": false,
+    "toTry": false,
+    "name": "Blue Kamikaze",
+    "category": "Alcoolisé",
+    "image": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
+    "ingredients": [
+      "50 ml de Vodka",
+      "50 ml de Curaçao bleu",
+      "50 ml de Jus de citron vert"
+    ],
+    "instructions": "Remplir le shaker de glacons\n50ml de Vodka\n50ml de Curacao\n50ml de citron vert\nDans un verrre shot"
+  },
+  {
     "id": 1795467861731,
     "rating": 0,
     "favorite": false,
