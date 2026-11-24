@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T21:01:19.320Z",
+  "updatedAt": "2026-11-24T21:01:49.465Z",
   "pantry": [
     "Aperol",
     {
@@ -102,7 +102,10 @@
     },
     "Suze",
     "Tequila blanche",
-    "Vin pétillant",
+    {
+      "name": "Vin pétillant",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS26MT7uZISNzO-hLkBybJnW83efxPa-Lp4PPnvpbwslA&s=10"
+    },
     "Vodka",
     {
       "name": "Whisky",
