@@ -1,5 +1,21 @@
 [
   {
+    "id": 1795552979267,
+    "rating": 0,
+    "favorite": false,
+    "toTry": false,
+    "name": "Daiquiri Ananas",
+    "category": "Alcoolisé",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT055DCybh_f1X9wPqLgOMHQWWMud-ypf9BSv0FrVJp1g&s=10",
+    "ingredients": [
+      "60 ml de Rhum blanc",
+      "40 ml de Jus d’ananas",
+      "20 ml de Jus de citron vert",
+      "20 ml de Sirop de sucre de canne"
+    ],
+    "instructions": "tout mélanger\n"
+  },
+  {
     "id": 1795552860871,
     "rating": 0,
     "favorite": false,
