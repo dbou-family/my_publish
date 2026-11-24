@@ -174,6 +174,7 @@
             <span id="barFilterSeparator" class="w-px bg-slate-700 mx-1 shrink-0"></span>
             <button onclick="setBarFilter('pret')" data-bar="pret" class="bar-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Réalisables</button>
             <button onclick="setBarFilter('un')" data-bar="un" class="bar-btn px-4 py-2 rounded-full text-xs font-medium transition bg-slate-800 text-slate-300 hover:bg-slate-700 whitespace-nowrap">Il manque 1</button>
+            <button id="randomCocktailButton" type="button" onclick="pickRandomCocktail()" class="px-4 py-2 rounded-full text-xs font-semibold transition border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 whitespace-nowrap">🎲 Au hasard</button>
         </div>
 
         <!-- Grille des cocktails -->
@@ -810,6 +811,8 @@
                 return matchCategory && matchSearch && matchBar;
             });
 
+            visibleRecipeIds = filtered.map(r => r.id);
+
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full py-16 text-center text-slate-500">
@@ -850,6 +853,24 @@
             });
         }
 
+        // Tirage aléatoire d'un cocktail parmi ceux affichés (évite de retomber sur le même)
+        let visibleRecipeIds = [];
+        let lastRandomRecipeId = null;
+
+        function pickRandomCocktail() {
+            let candidates = currentFilter === 'Alcool simple'
+                ? recipes
+                : recipes.filter(r => visibleRecipeIds.includes(r.id));
+            if (candidates.length === 0) candidates = recipes;
+            if (candidates.length === 0) return;
+
+            const others = candidates.filter(r => r.id !== lastRandomRecipeId);
+            const pool = others.length > 0 ? others : candidates;
+            const recipe = pool[Math.floor(Math.random() * pool.length)];
+            lastRandomRecipeId = recipe.id;
+            openDetailModal(recipe.id);
+        }
+
         // Filtrage par catégorie
         function filterCategory(category) {
             currentFilter = category;
@@ -887,7 +908,7 @@
             recipe.ingredients.forEach(ing => {
                 const li = document.createElement('li');
                 li.className = "flex items-center gap-2 bg-slate-800/40 px-3 py-2 rounded-lg border border-slate-800";
-                li.innerHTML = `<span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span> ${ing}`;
+                li.innerHTML = `<span class="h-1.5 w-1.5 rounded-full ${ingredientDisponible(ing, pantry) ? 'bg-emerald-500' : 'bg-rose-500'}" title="${ingredientDisponible(ing, pantry) ? 'Disponible dans le bar' : 'Non disponible dans le bar'}"></span> ${ing}`;
                 ingList.appendChild(li);
             });
 
