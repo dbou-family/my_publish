@@ -245,7 +245,7 @@ label{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted
     <div class="row">
       <a class="back-link" href="../index.html">← Retour au sommaire</a>
       <div class="stats">NOTES : <b id="total">0</b></div>
-      <button id="syncBtn" type="button">Synchroniser</button>
+      <button id="syncBtn" type="button">Recharger depuis GitHub</button>
     </div>
   </header>
 
@@ -317,8 +317,9 @@ const KEYWORDS = {
   appli: ['appli', 'application', 'bug', 'fonctionnalité', 'écran', 'bouton', 'code', 'version', 'interface', 'notification', 'développer', 'mise à jour', 'test'],
   oublier: ['rappeler', 'acheter', 'penser à', 'ne pas oublier', 'important', 'urgent', 'impérativement', 'anniversaire', 'ne pas manquer', 'à faire']
 };
-const STORE_KEY = 'notes-vocales-v1';
 const NOTES_API = '../api/notes';
+// Efface la copie locale des anciennes versions : GitHub est la source unique.
+try { localStorage.removeItem('notes-vocales-v1'); } catch {}
 
 const recBtn = document.getElementById('recBtn');
 const statusEl = document.getElementById('status');
@@ -329,9 +330,9 @@ const clearBtn = document.getElementById('clearBtn');
 const deleteLastBtn = document.getElementById('deleteLastBtn');
 const waveEl = document.getElementById('wave');
 
-let notes = load();
+let notes = [];
 let notesFileSha = null;
-let notesSynced = false;
+let notesReady = false;
 let notesSyncQueue = Promise.resolve();
 let notesSyncPending = 0;
 let listening = false;
@@ -339,84 +340,91 @@ let finalText = '';
 let recognition = null;
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-// Stockage : texte seulement. L'audio n'est jamais conservé.
-function load() {
-  try {
-    return JSON.parse(localStorage.getItem(STORE_KEY)) || [];
-  } catch { return []; }
-}
-function save() {
-  try {
-    localStorage.setItem(STORE_KEY, JSON.stringify(notes));
-  } catch {}
-  if (notesSynced) queueNotesSave();
-}
-
 function setNotesSyncState(synced) {
   const button = document.getElementById('syncBtn');
-  button.classList.toggle('synced', synced && notesSyncPending === 0);
-  button.title = synced && notesSyncPending === 0 ? 'Notes synchronisées avec GitHub' : 'Notes non synchronisées avec GitHub';
+  button.classList.toggle('synced', synced);
+  button.title = synced ? 'Notes chargées depuis GitHub' : 'Notes non chargées depuis GitHub';
   button.setAttribute('aria-label', button.title);
 }
 
-async function writeNotes() {
+async function writeNotes(nextNotes, sha = notesFileSha) {
   const response = await fetch(NOTES_API, {
     method: 'PUT', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ notes, ...(notesFileSha ? { sha: notesFileSha } : {}) })
+    body: JSON.stringify({ notes: nextNotes, ...(sha ? { sha } : {}) })
   });
   const result = await response.json().catch(() => ({}));
   if (!response.ok) {
-    if (response.status === 409) notesFileSha = null;
     throw new Error(result.error || `Échec de l'enregistrement (${response.status}).`);
   }
-  notesFileSha = result.sha;
+  return result.sha;
 }
 
-function queueNotesSave() {
+async function readNotes() {
+  const response = await fetch(NOTES_API);
+  if (response.status === 404) return { sha: null, notes: [] };
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || `Lecture impossible (${response.status}).`);
+  if (!Array.isArray(result.notes)) throw new Error('Le fichier GitHub ne contient pas une liste de notes valide.');
+  return result;
+}
+
+function changeNotes(change, successMessage) {
   notesSyncPending++;
-  setNotesSyncState(false);
+  updateButtons();
+  let saved = false;
   notesSyncQueue = notesSyncQueue.then(async () => {
     try {
-      await writeNotes();
+      let nextNotes = change(notes);
+      let nextSha;
+      try {
+        nextSha = await writeNotes(nextNotes);
+      } catch (error) {
+        if (!/HTTP 409/.test(error.message)) throw error;
+        const latest = await readNotes();
+        notes = latest.notes;
+        notesFileSha = latest.sha;
+        nextNotes = change(notes);
+        nextSha = await writeNotes(nextNotes, notesFileSha);
+      }
+      notes = nextNotes;
+      notesFileSha = nextSha;
+      render();
+      statusEl.textContent = successMessage;
+      saved = true;
     } catch (error) {
-      statusEl.textContent = 'Synchronisation impossible : ' + error.message;
-      notesSynced = false;
+      statusEl.textContent = 'Enregistrement GitHub impossible : ' + error.message;
     } finally {
       notesSyncPending--;
-      setNotesSyncState(notesSynced);
+      updateButtons();
+      render();
     }
   });
+  return notesSyncQueue.then(() => saved);
 }
 
 async function syncNotes() {
   const button = document.getElementById('syncBtn');
   button.disabled = true;
-  statusEl.textContent = 'Synchronisation avec GitHub…';
+  statusEl.textContent = 'Chargement des notes depuis GitHub…';
   try {
     await notesSyncQueue;
-    const response = await fetch(NOTES_API);
-    if (response.status === 404) {
-      notesFileSha = null;
-      await writeNotes();
-    } else {
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || `Lecture impossible (${response.status}).`);
-      notesFileSha = result.sha;
-      const merged = new Map((result.notes || []).map(note => [String(note.id), note]));
-      for (const note of notes) if (!merged.has(String(note.id))) merged.set(String(note.id), note);
-      notes = [...merged.values()];
-      try { localStorage.setItem(STORE_KEY, JSON.stringify(notes)); } catch {}
-      if (notes.length !== result.notes.length) await writeNotes();
+    const result = await readNotes();
+    notesFileSha = result.sha;
+    notes = result.notes;
+    if (!notesFileSha) {
+      notesFileSha = await writeNotes(notes, null);
     }
-    notesSynced = true;
+    notesReady = true;
     setNotesSyncState(true);
     render();
-    statusEl.textContent = 'Notes synchronisées avec GitHub.';
+    statusEl.textContent = 'Notes chargées depuis GitHub.';
   } catch (error) {
-    notesSynced = false;
     setNotesSyncState(false);
-    statusEl.textContent = 'Synchronisation impossible : ' + error.message;
-  } finally { button.disabled = false; }
+    statusEl.textContent = 'Chargement GitHub impossible : ' + error.message;
+  } finally {
+    button.disabled = false;
+    updateButtons();
+  }
 }
 
 // Supprime les anciens audios stockés par les versions précédentes
@@ -433,9 +441,10 @@ function classify(text) {
 }
 
 function updateButtons() {
-  addBtn.disabled = listening || !transcript.value.trim();
+  const busy = !notesReady || notesSyncPending > 0;
+  addBtn.disabled = busy || listening || !transcript.value.trim();
   clearBtn.disabled = listening;
-  deleteLastBtn.disabled = !notes.length;
+  deleteLastBtn.disabled = busy || !notes.length;
 }
 
 if (SR) {
@@ -488,17 +497,17 @@ recBtn.addEventListener('click', () => listening ? stopRecording() : startRecord
 document.getElementById('syncBtn').addEventListener('click', syncNotes);
 transcript.addEventListener('input', updateButtons);
 
-addBtn.addEventListener('click', () => {
+addBtn.addEventListener('click', async () => {
   const text = transcript.value.trim();
-  if (!text) return;
+  if (!text || !notesReady || notesSyncPending) return;
   const chosen = categorySel.value;
   const cat = chosen === 'auto' ? classify(text) : chosen;
-  notes.push({ id: Date.now(), text, cat, date: new Date().toLocaleString('fr-FR') });
-  save();
+  const note = { id: Date.now(), text, cat, date: new Date().toLocaleString('fr-FR') };
+  addBtn.disabled = true;
+  if (!await changeNotes(current => [...current, note], 'Note ajoutée dans ' + LABELS[cat])) return;
   transcript.value = '';
   finalText = '';
-  render();
-  statusEl.textContent = 'Note ajoutée dans ' + LABELS[cat];
+  updateButtons();
 });
 
 clearBtn.addEventListener('click', () => {
@@ -540,22 +549,16 @@ document.addEventListener('keydown', e => {
 });
 
 deleteLastBtn.addEventListener('click', async () => {
-  if (!notes.length) return;
+  if (!notesReady || notesSyncPending || !notes.length) return;
   if (!await askConfirm('Supprimer le dernier enregistrement ?')) return;
-  notes.pop();
-  save();
-  render();
-  statusEl.textContent = 'Dernier enregistrement supprimé';
+  await changeNotes(current => current.slice(0, -1), 'Dernier enregistrement supprimé');
 });
 
 async function deleteNote(id) {
   const note = notes.find(n => n.id === id);
   if (!note) return;
   if (!await askConfirm('Supprimer cette note ?')) return;
-  notes = notes.filter(n => n.id !== id);
-  save();
-  render();
-  statusEl.textContent = 'Note supprimée de ' + LABELS[note.cat];
+  await changeNotes(current => current.filter(n => n.id !== id), 'Note supprimée de ' + LABELS[note.cat]);
 }
 
 function render() {
@@ -583,7 +586,7 @@ function render() {
       del.title = 'Supprimer cette note';
       del.setAttribute('aria-label', 'Supprimer cette note');
       del.textContent = '✕';
-      del.disabled = listening;
+      del.disabled = listening || !notesReady || notesSyncPending > 0;
       del.addEventListener('click', () => deleteNote(n.id));
       li.appendChild(del);
       ul.appendChild(li);
@@ -595,6 +598,7 @@ function render() {
 
 if (!SR) statusEl.textContent = 'Transcription vocale non supportée par ce navigateur (essayez Chrome, Edge ou Safari).';
 render();
+syncNotes();
 </script>
 </body>
 </html>
