@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T19:38:03.397Z",
+  "updatedAt": "2026-11-26T21:32:46.659Z",
   "recipes": [
     {
       "id": "imp1795269116123_0",
@@ -119,8 +119,8 @@
       "favorite": true,
       "rating": 5,
       "createdAt": "2026-11-21T13:51:54.123Z",
-      "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795815164418
     },
     {
       "id": "imp1795269116123_3",
