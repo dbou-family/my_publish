@@ -19,6 +19,7 @@
   --boulot:#00e5ff;
   --business:#b6ff3b;
   --appli:#ff2bd6;
+  --oublier:#ff9f1c;
   color-scheme:dark;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -161,6 +162,7 @@ label{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted
 .card.boulot{--c:var(--boulot)}
 .card.business{--c:var(--business)}
 .card.appli{--c:var(--appli)}
+.card.oublier{--c:var(--oublier)}
 .card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--c);box-shadow:0 0 14px var(--c)}
 .card header{
   padding:16px 18px;display:flex;justify-content:space-between;align-items:center;
@@ -219,7 +221,7 @@ label{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted
     </div>
     <div class="row">
       <div class="stats">NOTES : <b id="total">0</b></div>
-      <button id="syncBtn" type="button">Synchroniser GitHub</button>
+      <button id="syncBtn" type="button">Synchroniser</button>
     </div>
   </header>
 
@@ -242,6 +244,7 @@ label{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted
           <option value="boulot">Boulot</option>
           <option value="business">Business</option>
           <option value="appli">Appli</option>
+          <option value="oublier">Ne pas oublier</option>
         </select>
       </label>
       <button id="addBtn" class="primary" disabled>Ajouter la note</button>
@@ -263,12 +266,16 @@ label{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted
       <header><span>Appli</span><span class="count" id="count-appli">0</span></header>
       <ul id="list-appli"></ul>
     </article>
+    <article class="card oublier">
+      <header><span>Ne pas oublier</span><span class="count" id="count-oublier">0</span></header>
+      <ul id="list-oublier"></ul>
+    </article>
   </section>
 </main>
 
 <script>
-const CATS = ['boulot', 'business', 'appli'];
-const LABELS = { boulot: 'Boulot', business: 'Business', appli: 'Appli' };
+const CATS = ['boulot', 'business', 'appli', 'oublier'];
+const LABELS = { boulot: 'Boulot', business: 'Business', appli: 'Appli', oublier: 'Ne pas oublier' };
 const KEYWORDS = {
   boulot: ['réunion', 'collègue', 'équipe', 'chef', 'bureau', 'mail', 'rapport', 'planning', 'deadline', 'rendez-vous', 'tâche', 'projet'],
   business: ['client', 'vente', 'chiffre', 'budget', 'facture', 'marché', 'investisseur', 'stratégie', 'marge', 'bénéfice', 'prospect', 'contrat', 'offre'],
