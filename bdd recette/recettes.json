@@ -1,20 +1,5 @@
 [
   {
-    "id": 1795725426189,
-    "rating": 4,
-    "favorite": false,
-    "toTry": true,
-    "name": "Bacardi Cocktail",
-    "category": "Alcoolisé",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLBp-p4SQcurwlcWN7ql4QnvkUPAUl8ObBQFWyhYjEgQ&s=10",
-    "ingredients": [
-      "45 ml de Rhum blanc",
-      "20 ml de Citron vert",
-      "10 ml de Sirop de grenadine"
-    ],
-    "instructions": "Verre cocktail"
-  },
-  {
     "id": 1795725325202,
     "rating": 0,
     "favorite": false,
