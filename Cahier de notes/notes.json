@@ -1,5 +1,24 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-26T21:33:28.358Z",
-  "notes": []
+  "updatedAt": "2026-11-26T21:33:33.693Z",
+  "notes": [
+    {
+      "id": 1795727837262,
+      "text": "Pends s'ajouter des notes pour le boulot",
+      "cat": "boulot",
+      "date": "26/11/2026 22:17:17"
+    },
+    {
+      "id": 1795728193937,
+      "text": "Acheter du pain  ne pas oublier",
+      "cat": "oublier",
+      "date": "26/11/2026 22:23:13"
+    },
+    {
+      "id": 1795728289308,
+      "text": "Pense à ne pas oublier des affaires",
+      "cat": "oublier",
+      "date": "26/11/2026 22:24:49"
+    }
+  ]
 }
