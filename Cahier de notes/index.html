@@ -66,6 +66,9 @@ h1{margin:0;font-size:1.5rem;letter-spacing:.2em;text-transform:uppercase;font-w
 .stats b{color:var(--lime);font-weight:700}
 #syncBtn{border-color:var(--danger);color:var(--danger)}
 #syncBtn.synced{border-color:var(--lime);color:var(--lime)}
+.back-link{display:inline-flex;align-items:center;text-decoration:none;font:inherit;font-size:.92rem;padding:11px 18px;border-radius:12px;
+  border:1px solid var(--line);background:rgba(0,229,255,.05);color:var(--text);transition:box-shadow .2s,background .2s}
+.back-link:hover{box-shadow:0 0 16px rgba(0,229,255,.35);background:rgba(0,229,255,.12)}
 
 /* Panneaux verre */
 .panel{
@@ -240,6 +243,7 @@ label{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted
       </div>
     </div>
     <div class="row">
+      <a class="back-link" href="../index.html">← Retour au sommaire</a>
       <div class="stats">NOTES : <b id="total">0</b></div>
       <button id="syncBtn" type="button">Synchroniser</button>
     </div>
