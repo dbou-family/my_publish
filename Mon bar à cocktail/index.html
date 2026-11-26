@@ -811,6 +811,8 @@
                 return matchCategory && matchSearch && matchBar;
             });
 
+            filtered.sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
+
             visibleRecipeIds = filtered.map(r => r.id);
 
             if (filtered.length === 0) {
