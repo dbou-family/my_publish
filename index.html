@@ -540,6 +540,25 @@
     --accent-ink: #fdba74;
   }
 
+  /* Vignette du carnet de notes vocales */
+  .card.category[data-key="notes-vocales"] {
+    --accent: #7c3aed;
+    --accent-soft: #ede9fe;
+    --accent-ink: #5b21b6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-color-mode="light"]) .card.category[data-key="notes-vocales"] {
+      --accent: #a78bfa;
+      --accent-soft: rgba(167, 139, 250, 0.18);
+      --accent-ink: #c4b5fd;
+    }
+  }
+  :root[data-color-mode="dark"] .card.category[data-key="notes-vocales"] {
+    --accent: #a78bfa;
+    --accent-soft: rgba(167, 139, 250, 0.18);
+    --accent-ink: #c4b5fd;
+  }
+
   .card.category .media-wrap {
     aspect-ratio: 16 / 9;
   }
@@ -777,6 +796,31 @@
         <circle cx="120" cy="150" r="4" fill="rgba(255,255,255,0.5)"/>
         <circle cx="280" cy="160" r="3" fill="rgba(255,255,255,0.5)"/>
         <circle cx="90" cy="110" r="2.5" fill="rgba(255,255,255,0.5)"/>
+      </svg>`,
+    "notes-vocales": `
+      <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-notes-vocales" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#312e81"/>
+            <stop offset="55%" stop-color="#6d28d9"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+          </linearGradient>
+          <radialGradient id="glow-notes-vocales" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#c4b5fd" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#c4b5fd" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="225" fill="url(#g-notes-vocales)"/>
+        <circle cx="205" cy="112" r="115" fill="url(#glow-notes-vocales)"/>
+        <circle cx="200" cy="112" r="77" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+        <rect x="180" y="59" width="40" height="73" rx="20" fill="#f5f3ff"/>
+        <path d="M166 108a34 34 0 0 0 68 0M200 143v25m-20 0h40" fill="none" stroke="#f5f3ff" stroke-width="7" stroke-linecap="round"/>
+        <g fill="none" stroke="#ddd6fe" stroke-width="4" stroke-linecap="round" opacity="0.9">
+          <path d="M112 102v20m-14-31v42m-14-24v30m198-37v20m14-31v42m14-24v30"/>
+        </g>
+        <circle cx="200" cy="95" r="5" fill="#a78bfa"/>
+        <path d="M200 95v18l12 7" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M48 44h54m196 137h54" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
       </svg>`
   };
 
@@ -817,6 +861,15 @@
     title: "Mon Bar à Cocktails",
     description: "Recettes de cocktails et index du bar, à consulter directement dans le navigateur.",
     img: "cocktail",
+    image: null
+  };
+
+  /* Vignette de sélection : ouvre l'index du carnet de notes vocales */
+  const NOTES_TILE = {
+    key: "notes-vocales",
+    href: "Cahier%20de%20notes/index.html",
+    title: "Mon Carnet de notes",
+    description: "Capturez vos idées à la voix et retrouvez vos notes transcrites.",
     image: null
   };
 
@@ -1072,6 +1125,14 @@
       description: BAR_TILE.description,
       image: BAR_TILE.image,
       key: BAR_TILE.key,
+      isCategory: true
+    }));
+    ul.appendChild(makeCard({
+      href: NOTES_TILE.href,
+      name: NOTES_TILE.title,
+      description: NOTES_TILE.description,
+      image: NOTES_TILE.image,
+      key: NOTES_TILE.key,
       isCategory: true
     }));
     app.appendChild(ul);
