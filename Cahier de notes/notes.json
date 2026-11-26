@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-26T21:34:28.700Z",
+  "updatedAt": "2026-11-26T21:34:34.034Z",
   "notes": [
     {
       "id": 1795728193937,
@@ -13,6 +13,12 @@
       "text": "Pense à ne pas oublier des affaires",
       "cat": "oublier",
       "date": "26/11/2026 22:24:49"
+    },
+    {
+      "id": 1795727837262,
+      "text": "Pends s'ajouter des notes pour le boulot",
+      "cat": "boulot",
+      "date": "26/11/2026 22:17:17"
     }
   ]
 }
