@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-27T18:24:14.060Z",
+  "updatedAt": "2026-11-27T19:15:08.500Z",
   "notes": [
     {
       "id": 1795764234934,
@@ -19,6 +19,12 @@
       "text": "nouvelle idée pour faire une nouvelle appli plus rapide et plus puissante",
       "cat": "appli",
       "date": "27/11/2026 08:25:15"
+    },
+    {
+      "id": 1795806908317,
+      "text": "Sais, c'est faire de l'argent en vendant de l'argent",
+      "cat": "boulot",
+      "date": "27/11/2026 20:15:08"
     }
   ]
 }
