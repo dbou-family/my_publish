@@ -217,6 +217,10 @@ label{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted
   border:1px solid rgba(255,59,107,.35);background:rgba(255,59,107,.06);color:var(--danger);
   opacity:.7;
 }
+.note-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:6px}
+.note-foot small{margin-top:0}
+.note-cat{font-size:.75rem;padding:4px 8px;border-radius:8px;min-width:0}
+.note-cat:disabled{opacity:.35;cursor:not-allowed}
 .note-del:hover:not(:disabled){opacity:1;box-shadow:0 0 12px rgba(255,59,107,.5);background:rgba(255,59,107,.15)}
 .card ul::-webkit-scrollbar{width:6px}
 .card ul::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
@@ -554,6 +558,16 @@ deleteLastBtn.addEventListener('click', async () => {
   await changeNotes(current => current.slice(0, -1), 'Dernier enregistrement supprimé');
 });
 
+async function changeCategory(id, newCat) {
+  const note = notes.find(n => n.id === id);
+  if (!note || note.cat === newCat) return;
+  if (!CATS.includes(newCat)) return;
+  await changeNotes(
+    current => current.map(n => n.id === id ? { ...n, cat: newCat } : n),
+    'Note déplacée vers ' + LABELS[newCat]
+  );
+}
+
 async function deleteNote(id) {
   const note = notes.find(n => n.id === id);
   if (!note) return;
@@ -578,9 +592,26 @@ function render() {
     items.forEach(n => {
       const li = document.createElement('li');
       li.textContent = n.text;
+      const foot = document.createElement('div');
+      foot.className = 'note-foot';
       const sm = document.createElement('small');
       sm.textContent = n.date;
-      li.appendChild(sm);
+      foot.appendChild(sm);
+      const catSel = document.createElement('select');
+      catSel.className = 'note-cat';
+      catSel.title = 'Changer la catégorie';
+      catSel.setAttribute('aria-label', 'Changer la catégorie de cette note');
+      for (const c of CATS) {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = LABELS[c];
+        catSel.appendChild(opt);
+      }
+      catSel.value = n.cat;
+      catSel.disabled = listening || !notesReady || notesSyncPending > 0;
+      catSel.addEventListener('change', () => changeCategory(n.id, catSel.value));
+      foot.appendChild(catSel);
+      li.appendChild(foot);
       const del = document.createElement('button');
       del.className = 'note-del';
       del.title = 'Supprimer cette note';
