@@ -73,3 +73,6 @@ body{background:#f5f5f0;color:#252c25;letter-spacing:.005em}
   .recipe-card:hover { transform: none; }
   button, a { -webkit-tap-highlight-color: transparent; }
 }
+
+.speech-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px}.speech-controls .small-action{min-height:38px}.small-action:disabled{opacity:.45;cursor:not-allowed}.reading-status{font-size:10px;color:#68765a}
+@media(max-width:700px){.speech-controls .small-action{min-height:44px}}
