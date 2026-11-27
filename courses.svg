@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Courses au marché</title>
+  <desc id="desc">Scène éditoriale d'une cliente choisissant des fruits et légumes sur un étal de marché.</desc>
+  <defs>
+    <linearGradient id="wall" x2="0" y2="1"><stop stop-color="#e8e2d5"/><stop offset="1" stop-color="#c9c2b1"/></linearGradient>
+    <linearGradient id="light" x2="1" y2="1"><stop stop-color="#fff8df" stop-opacity=".8"/><stop offset="1" stop-color="#fff8df" stop-opacity="0"/></linearGradient>
+    <linearGradient id="coat" x2="1" y2="1"><stop stop-color="#334b45"/><stop offset="1" stop-color="#192f2c"/></linearGradient>
+    <linearGradient id="produce" x2="0" y2="1"><stop stop-color="#8e9a60"/><stop offset="1" stop-color="#596844"/></linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="13"/></filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#wall)"/>
+  <path d="M0 0h800v58H0z" fill="#43534a" opacity=".92"/>
+  <path d="M0 58h800v18H0z" fill="#efe7d6" opacity=".82"/>
+  <!-- Lumière et arrière-plan de marché -->
+  <path d="M0 77h800v242H0z" fill="#d7d2c4"/>
+  <path d="M28 80h188v223H28zM245 80h196v223H245zM472 80h294v223H472z" fill="#7d8877" opacity=".2"/>
+  <path d="M0 77h800v242H0z" fill="url(#light)"/>
+  <g opacity=".45" filter="url(#soft)" fill="#f6eedb">
+    <ellipse cx="130" cy="147" rx="82" ry="71"/><ellipse cx="374" cy="136" rx="95" ry="62"/><ellipse cx="660" cy="145" rx="115" ry="73"/>
+  </g>
+  <!-- Étagères et caisses -->
+  <path d="M0 228h800v11H0zM0 300h800v13H0z" fill="#806c53" opacity=".72"/>
+  <path d="M26 174h182v48H26zM254 167h177v55H254zM493 175h275v47H493z" fill="#927b5e" opacity=".65"/>
+  <g opacity=".86">
+    <circle cx="66" cy="194" r="18" fill="#a34d36"/><circle cx="103" cy="193" r="17" fill="#c28b39"/><circle cx="140" cy="195" r="18" fill="#6f804b"/><circle cx="177" cy="194" r="16" fill="#a34d36"/>
+    <circle cx="293" cy="191" r="17" fill="#7b8547"/><circle cx="331" cy="190" r="19" fill="#c18d3d"/><circle cx="372" cy="190" r="17" fill="#a64c37"/><circle cx="409" cy="190" r="16" fill="#75834b"/>
+    <circle cx="544" cy="196" r="18" fill="#bd8038"/><circle cx="584" cy="194" r="18" fill="#9d4835"/><circle cx="624" cy="196" r="18" fill="#758649"/><circle cx="665" cy="193" r="19" fill="#c19747"/><circle cx="709" cy="195" r="17" fill="#a24d35"/><circle cx="747" cy="194" r="17" fill="#788349"/>
+  </g>
+  <!-- Cliente vue de trois-quarts, silhouette adulte -->
+  <path d="M267 145c0-39 27-67 62-67 34 0 59 27 59 64 0 14-4 26-11 36l-3 29h-86l-5-30c-10-9-16-20-16-32z" fill="#40342c"/>
+  <path d="M285 143c0-29 19-48 44-48 24 0 42 19 42 45 0 20-11 36-28 43l-1 27h-39l-2-30c-10-8-16-21-16-37z" fill="#c99570"/>
+  <path d="M280 135c5-32 24-54 52-54 27 0 47 18 53 46-13-4-22-12-29-23-13 15-38 26-76 31z" fill="#40342c"/>
+  <path d="M328 153q7 4 13 0" fill="none" stroke="#543b31" stroke-width="3" stroke-linecap="round"/>
+  <path d="M318 178q13 8 25 0" fill="none" stroke="#965d4b" stroke-width="3" stroke-linecap="round"/>
+  <!-- Manteau et bras tendu vers les produits -->
+  <path d="M267 229q19-22 48-26l18 18 19-19q31 7 49 27l30 137H235z" fill="url(#coat)"/>
+  <path d="M316 211l17 39 20-39" fill="none" stroke="#d9d2c1" stroke-width="5" opacity=".82"/>
+  <path d="M385 246q44-7 81-30l63-28" fill="none" stroke="#c99570" stroke-width="22" stroke-linecap="round"/>
+  <path d="M517 188q12-8 23-3l10 8-15 12-15-7" fill="#c99570"/>
+  <!-- Sac réutilisable en toile -->
+  <path d="M186 284h97l-10 112h-78z" fill="#b58b57"/>
+  <path d="M205 287q3-42 29-42t29 42" fill="none" stroke="#80613f" stroke-width="8"/>
+  <path d="M202 310h66" stroke="#d7bb8b" stroke-width="4" opacity=".7"/>
+  <!-- Étal au premier plan -->
+  <path d="M0 328h800v122H0z" fill="#53483a"/>
+  <path d="M0 328h800v20H0z" fill="#7c684d"/>
+  <path d="M0 349h800v7H0z" fill="#382f28" opacity=".45"/>
+  <path d="M26 333h748v90H26z" fill="url(#produce)"/>
+  <g>
+    <ellipse cx="90" cy="367" rx="35" ry="25" fill="#a34c37"/><ellipse cx="151" cy="377" rx="35" ry="25" fill="#c28b39"/><ellipse cx="218" cy="366" rx="37" ry="25" fill="#7e8748"/>
+    <ellipse cx="302" cy="376" rx="37" ry="26" fill="#a64d37"/><ellipse cx="378" cy="364" rx="37" ry="25" fill="#c19143"/><ellipse cx="454" cy="379" rx="37" ry="25" fill="#74824a"/>
+    <ellipse cx="540" cy="365" rx="37" ry="25" fill="#a34b36"/><ellipse cx="619" cy="378" rx="38" ry="25" fill="#c18a3b"/><ellipse cx="703" cy="366" rx="38" ry="25" fill="#77854a"/>
+  </g>
+  <path d="M0 0h800v450H0z" fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
+</svg>

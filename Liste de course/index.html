@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mes Courses — Liste Moderne par Rayons</title>
+  <style>
+    :root {
+      --bg-app: #f6f7f9;
+      --bg-card: #ffffff;
+      --bg-subtle: #f0f2f5;
+      --text-main: #18181b;
+      --text-muted: #646770;
+      --border: #e4e6eb;
+      --accent: #16a34a;
+      --accent-soft: #dcfce7;
+      --accent-dark: #15803d;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top right, #eef7f0 0%, var(--bg-app) 45%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px 16px 80px;
+      line-height: 1.45;
+    }
+
+    .app {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* En-tête */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      box-shadow: 0 6px 16px rgba(22, 163, 74, 0.25);
+    }
+
+    h1 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s ease;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .btn-ghost {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-subtle);
+    }
+
+    .btn-danger-ghost:hover {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border-color: #fecaca;
+    }
+
+    /* Barre de progression */
+    .progress-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .progress-label {
+      font-weight: 600;
+    }
+
+    .progress-stats {
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    .progress-track {
+      height: 8px;
+      background: var(--bg-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      border-radius: 999px;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Formulaire d'ajout */
+    .add-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .add-form {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      background: var(--bg-subtle);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 0 12px;
+      transition: all 0.2s ease;
+    }
+
+    .input-group:focus-within {
+      background: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+    }
+
+    .input-group input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 12px 6px;
+      font-size: 0.96rem;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .qty-input {
+      width: 68px !important;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    select {
+      background: var(--bg-subtle);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 0 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-main);
+      cursor: pointer;
+      outline: none;
+      height: 46px;
+      transition: all 0.2s ease;
+    }
+
+    select:focus {
+      background: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-add {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.94rem;
+      padding: 0 20px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+    }
+
+    .btn-add:hover {
+      background: var(--accent-dark);
+    }
+
+    .add-row-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      flex-wrap: wrap;
+    }
+
+    .category-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .category-select-wrap select {
+      height: 36px;
+      font-size: 0.85rem;
+      padding: 0 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .auto-badge {
+      font-size: 0.76rem;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .auto-badge.visible {
+      opacity: 1;
+    }
+
+    /* Filtres par catégorie */
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+      scrollbar-width: thin;
+    }
+
+    .filter-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-pill:hover {
+      border-color: #cbd5e1;
+      color: var(--text-main);
+    }
+
+    .filter-pill.active {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+    }
+
+    .pill-count {
+      background: rgba(128, 128, 128, 0.16);
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+    }
+
+    .filter-pill.active .pill-count {
+      background: rgba(255, 255, 255, 0.22);
+      color: #fff;
+    }
+
+    /* Liste triée par catégories */
+    .categories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .category-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--cat-bg, var(--bg-subtle));
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--cat-color, var(--text-main));
+    }
+
+    .category-emoji {
+      font-size: 1.2rem;
+    }
+
+    .category-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--text-main);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .items-ul {
+      list-style: none;
+    }
+
+    .item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--bg-subtle);
+      transition: all 0.32s ease;
+    }
+
+    .item-row:last-child {
+      border-bottom: none;
+    }
+
+    .item-row:hover {
+      background: #fafbfc;
+    }
+
+    .item-row.removing {
+      opacity: 0;
+      transform: translateX(36px);
+      background: var(--accent-soft);
+    }
+
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-custom {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      border: 2px solid #cbd5e1;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .item-left:hover .checkbox-custom {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .item-row.checked .checkbox-custom {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .checkbox-custom svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.18s ease;
+    }
+
+    .item-row.checked .checkbox-custom svg,
+    .item-left:hover .checkbox-custom svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .item-left:not(:hover) .checkbox-custom svg {
+      color: var(--accent);
+    }
+
+    .item-row.checked .checkbox-custom svg {
+      color: #fff;
+    }
+
+    .item-name {
+      font-size: 0.98rem;
+      font-weight: 500;
+      transition: all 0.22s ease;
+    }
+
+    .item-row.checked .item-name {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .item-qty {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-subtle);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .btn-delete {
+      background: transparent;
+      color: #94a3b8;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+    }
+
+    .btn-delete:hover {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    /* État vide */
+    .empty-state {
+      text-align: center;
+      background: var(--bg-card);
+      border: 1px dashed #cbd5e1;
+      border-radius: var(--radius-lg);
+      padding: 48px 24px;
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .empty-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .empty-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    /* Toast d'annulation */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translate(-50%, 100px);
+      background: var(--text-main);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+      font-size: 0.9rem;
+      z-index: 100;
+      opacity: 0;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    .toast-undo {
+      background: #22c55e;
+      color: #052e16;
+      font-weight: 700;
+      font-size: 0.84rem;
+      padding: 5px 11px;
+      border-radius: 7px;
+    }
+
+    .toast-undo:hover {
+      background: #4ade80;
+    }
+
+    @media (max-width: 600px) {
+      .add-form {
+        grid-template-columns: 1fr auto;
+      }
+
+      .btn-add {
+        grid-column: 1 / -1;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">🛒</div>
+        <div>
+          <h1>Mes Courses</h1>
+          <p class="subtitle">Classées automatiquement par rayon • Cochées = retirées</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn-ghost" id="btnExample">✨ Exemple</button>
+        <button type="button" class="btn-ghost btn-danger-ghost" id="btnClear">🗑️ Vider</button>
+      </div>
+    </header>
+
+    <section class="progress-card" aria-label="Progression des courses">
+      <div class="progress-top">
+        <span class="progress-label" id="progressLabel">Panier prêt</span>
+        <span class="progress-stats" id="progressStats">0 article restant</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </section>
+
+    <section class="add-card" aria-label="Ajouter un article">
+      <form class="add-form" id="addForm">
+        <div class="input-group">
+          <input
+            type="text"
+            id="itemInput"
+            placeholder="Ajouter un produit (ex: avocats, lait, pain...)"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <div class="input-group" title="Quantité">
+          <input
+            type="text"
+            id="qtyInput"
+            class="qty-input"
+            placeholder="Qté"
+            aria-label="Quantité"
+          />
+        </div>
+        <button type="submit" class="btn-add">＋ Ajouter</button>
+      </form>
+
+      <div class="add-row-bottom">
+        <div class="category-select-wrap">
+          <label for="categorySelect">Rayon :</label>
+          <select id="categorySelect"></select>
+        </div>
+        <span class="auto-badge" id="autoBadge">Rayon détecté auto</span>
+      </div>
+    </section>
+
+    <nav class="filters" id="filtersBar" aria-label="Filtrer par rayon"></nav>
+
+    <main class="categories-list" id="categoriesContainer"></main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span id="toastText">Article acheté</span>
+    <button type="button" class="toast-undo" id="toastUndo">Annuler</button>
+  </div>
+
+  <script>
+    const CATEGORIES = [
+      { id: 'fruits-legumes', name: 'Fruits & Légumes', emoji: '🥦', bg: '#ecfdf5', color: '#065f46' },
+      { id: 'boulangerie', name: 'Boulangerie', emoji: '🥖', bg: '#fffbeb', color: '#92400e' },
+      { id: 'cremerie', name: 'Produits Laitiers & Œufs', emoji: '🧀', bg: '#eff6ff', color: '#1e40af' },
+      { id: 'boucherie-poisson', name: 'Boucherie & Poissonnerie', emoji: '🥩', bg: '#fef2f2', color: '#991b1b' },
+      { id: 'epicerie-salee', name: 'Épicerie Salée', emoji: '🍝', bg: '#f5f3ff', color: '#5b21b6' },
+      { id: 'epicerie-sucree', name: 'Épicerie Sucrée', emoji: '🍫', bg: '#fdf2f8', color: '#9d174d' },
+      { id: 'boissons', name: 'Boissons', emoji: '🥤', bg: '#ecfeff', color: '#155e75' },
+      { id: 'surgeles', name: 'Surgelés', emoji: '🧊', bg: '#f0f9ff', color: '#075985' },
+      { id: 'hygiene-entretien', name: 'Hygiène & Entretien', emoji: '🧴', bg: '#f8fafc', color: '#334155' }
+    ];
+
+    const KEYWORDS = {
+      'fruits-legumes': ['pomme', 'banane', 'orange', 'citron', 'fraise', 'framboise', 'tomate', 'pomme de terre', 'patate', 'carotte', 'oignon', 'ail', 'salade', 'laitue', 'concombre', 'courgette', 'avocat', 'poivron', 'brocoli', 'champignon', 'raisin', 'poire', 'mangue', 'ananas', 'melon', 'épinard', 'poireau', 'chou'],
+      'boulangerie': ['pain', 'baguette', 'croissant', 'brioche', 'pain au chocolat', 'chocolatine', 'pain de mie', 'wrap', 'tortilla', 'pita', 'cake'],
+      'cremerie': ['lait', 'beurre', 'yaourt', 'fromage', 'gruyère', 'emmental', 'camembert', 'chèvre', 'mozzarella', 'crème', 'œuf', 'oeuf', 'oeufs', 'œufs', 'skyr', 'kefir'],
+      'boucherie-poisson': ['poulet', 'boeuf', 'bœuf', 'porc', 'steak', 'jambon', 'lardon', 'saucisse', 'viande', 'saumon', 'thon', 'cabillaud', 'crevette', 'poisson', 'dinde', 'agneau'],
+      'epicerie-salee': ['pâte', 'pâtes', 'riz', 'semoule', 'lentille', 'pois chiche', 'farine', 'huile', 'vinaigre', 'sel', 'poivre', 'sauce', 'coulis', 'moutarde', 'mayonnaise', 'conserve', 'olive', 'bouillon', 'épice'],
+      'epicerie-sucree': ['sucre', 'chocolat', 'biscuit', 'gâteau', 'gateau', 'miel', 'confiture', 'pâte à tartiner', 'nutella', 'céréale', 'cereale', 'compote', 'bonbon', 'farine'],
+      'boissons': ['eau', 'jus', 'soda', 'café', 'cafe', 'thé', 'the', 'vin', 'bière', 'biere', 'sirop', 'limonade', 'lait d\'amande', 'combucha'],
+      'surgeles': ['glace', 'sorbet', 'pizza surgelée', 'frites', 'petits pois', 'légumes surgelés', 'poisson pané', 'surgelé'],
+      'hygiene-entretien': ['savon', 'shampoing', 'gel douche', 'dentifrice', 'papier toilette', 'essuie-tout', 'lessive', 'liquide vaisselle', 'éponge', 'sac poubelle', 'déodorant', 'crème hydratante']
+    };
+
+    const SAMPLE_ITEMS = [
+      { id: 's1', name: 'Avocats mûrs', qty: '3', category: 'fruits-legumes' },
+      { id: 's2', name: 'Tomates cerises', qty: '500g', category: 'fruits-legumes' },
+      { id: 's3', name: 'Baguette tradition', qty: '2', category: 'boulangerie' },
+      { id: 's4', name: 'Œufs plein air', qty: 'x12', category: 'cremerie' },
+      { id: 's5', name: 'Yaourts nature', qty: 'x8', category: 'cremerie' },
+      { id: 's6', name: 'Filets de poulet', qty: '600g', category: 'boucherie-poisson' },
+      { id: 's7', name: 'Pâtes fusilli', qty: '500g', category: 'epicerie-salee' },
+      { id: 's8', name: 'Huile d’olive vierge extra', qty: '1L', category: 'epicerie-salee' },
+      { id: 's9', name: 'Chocolat noir 70%', qty: '2 tablettes', category: 'epicerie-sucree' },
+      { id: 's10', name: 'Eau pétillante', qty: '6x1L', category: 'boissons' },
+      { id: 's11', name: 'Liquide vaisselle', qty: '1', category: 'hygiene-entretien' }
+    ];
+
+    const STORAGE_KEY = 'mes_courses_moderne_v1';
+
+    let state = {
+      items: [],
+      filter: 'all',
+      initialTotal: 0,
+      lastDeleted: null,
+      toastTimer: null
+    };
+
+    const els = {
+      addForm: document.getElementById('addForm'),
+      itemInput: document.getElementById('itemInput'),
+      qtyInput: document.getElementById('qtyInput'),
+      categorySelect: document.getElementById('categorySelect'),
+      autoBadge: document.getElementById('autoBadge'),
+      filtersBar: document.getElementById('filtersBar'),
+      categoriesContainer: document.getElementById('categoriesContainer'),
+      progressLabel: document.getElementById('progressLabel'),
+      progressStats: document.getElementById('progressStats'),
+      progressFill: document.getElementById('progressFill'),
+      btnExample: document.getElementById('btnExample'),
+      btnClear: document.getElementById('btnClear'),
+      toast: document.getElementById('toast'),
+      toastText: document.getElementById('toastText'),
+      toastUndo: document.getElementById('toastUndo')
+    };
+
+    let manualCategoryOverride = false;
+
+    function initSelect() {
+      els.categorySelect.innerHTML = CATEGORIES.map(
+        cat => `<option value="${cat.id}">${cat.emoji} ${cat.name}</option>`
+      ).join('');
+    }
+
+    function detectCategory(text) {
+      const normalized = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      for (const [catId, words] of Object.entries(KEYWORDS)) {
+        for (const word of words) {
+          const cleanWord = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          if (normalized.includes(cleanWord)) {
+            return catId;
+          }
+        }
+      }
+      return null;
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        items: state.items,
+        initialTotal: Math.max(state.initialTotal, state.items.length)
+      }));
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          state.items = Array.isArray(parsed.items) ? parsed.items : [];
+          state.initialTotal = typeof parsed.initialTotal === 'number' ? parsed.initialTotal : state.items.length;
+        }
+      } catch (e) {
+        state.items = [];
+      }
+    }
+
+    function showToast(message, deletedItem) {
+      state.lastDeleted = deletedItem;
+      els.toastText.textContent = message;
+      els.toast.classList.add('show');
+      clearTimeout(state.toastTimer);
+      state.toastTimer = setTimeout(() => {
+        els.toast.classList.remove('show');
+        state.lastDeleted = null;
+      }, 4500);
+    }
+
+    function undoDelete() {
+      if (!state.lastDeleted) return;
+      state.items.push(state.lastDeleted);
+      state.lastDeleted = null;
+      els.toast.classList.remove('show');
+      clearTimeout(state.toastTimer);
+      saveState();
+      render();
+    }
+
+    function completeItem(id, rowEl) {
+      const idx = state.items.findIndex(item => item.id === id);
+      if (idx === -1) return;
+
+      const [removed] = state.items.splice(idx, 1);
+      saveState();
+
+      if (rowEl) {
+        rowEl.classList.add('checked', 'removing');
+        setTimeout(() => {
+          render();
+          showToast(`« ${removed.name} » acheté et retiré`, removed);
+        }, 300);
+      } else {
+        render();
+        showToast(`« ${removed.name} » acheté et retiré`, removed);
+      }
+    }
+
+    function deleteDirectly(id) {
+      const idx = state.items.findIndex(item => item.id === id);
+      if (idx === -1) return;
+      const [removed] = state.items.splice(idx, 1);
+      saveState();
+      render();
+      showToast(`« ${removed.name} » supprimé`, removed);
+    }
+
+    function renderProgress() {
+      const remaining = state.items.length;
+      const totalBase = Math.max(state.initialTotal, remaining);
+      const boughtCount = Math.max(0, totalBase - remaining);
+      const pct = totalBase === 0 ? 0 : Math.round((boughtCount / totalBase) * 100);
+
+      els.progressFill.style.width = `${pct}%`;
+
+      if (remaining === 0 && totalBase > 0) {
+        els.progressLabel.textContent = '🎉 Toutes les courses sont terminées !';
+        els.progressStats.textContent = `${boughtCount}/${totalBase} achetés`;
+      } else if (remaining === 0) {
+        els.progressLabel.textContent = 'Votre panier est vide';
+        els.progressStats.textContent = 'Ajoutez vos premiers articles';
+      } else {
+        els.progressLabel.textContent = `${remaining} article${remaining > 1 ? 's' : ''} à acheter`;
+        els.progressStats.textContent = totalBase > remaining ? `${boughtCount} déjà acheté${boughtCount > 1 ? 's' : ''} (${pct}%)` : 'Prêt pour le magasin';
+      }
+    }
+
+    function renderFilters() {
+      const counts = {};
+      for (const item of state.items) {
+        counts[item.category] = (counts[item.category] || 0) + 1;
+      }
+
+      if (state.filter !== 'all' && !counts[state.filter]) {
+        state.filter = 'all';
+      }
+
+      const pills = [
+        `<button type="button" class="filter-pill ${state.filter === 'all' ? 'active' : ''}" data-filter="all">
+          Tous les rayons <span class="pill-count">${state.items.length}</span>
+        </button>`
+      ];
+
+      for (const cat of CATEGORIES) {
+        const c = counts[cat.id] || 0;
+        if (c > 0) {
+          pills.push(`
+            <button type="button" class="filter-pill ${state.filter === cat.id ? 'active' : ''}" data-filter="${cat.id}">
+              <span>${cat.emoji}</span> ${cat.name} <span class="pill-count">${c}</span>
+            </button>
+          `);
+        }
+      }
+
+      els.filtersBar.innerHTML = pills.join('');
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderList() {
+      renderProgress();
+      renderFilters();
+
+      if (state.items.length === 0) {
+        els.categoriesContainer.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">🛍️</div>
+            <div class="empty-title">Aucune course en attente</div>
+            <p class="empty-desc">Ajoutez des articles ci-dessus ou chargez une liste exemple pour tester le tri par rayon.</p>
+            <button type="button" class="btn-ghost" id="emptyExampleBtn">✨ Charger une liste exemple</button>
+          </div>
+        `;
+        const emptyBtn = document.getElementById('emptyExampleBtn');
+        if (emptyBtn) emptyBtn.addEventListener('click', loadExample);
+        return;
+      }
+
+      const activeCategories = CATEGORIES.filter(cat => {
+        if (state.filter !== 'all' && cat.id !== state.filter) return false;
+        return state.items.some(item => item.category === cat.id);
+      });
+
+      els.categoriesContainer.innerHTML = activeCategories.map(cat => {
+        const catItems = state.items.filter(item => item.category === cat.id);
+        return `
+          <section class="category-section" style="--cat-bg: ${cat.bg}; --cat-color: ${cat.color};">
+            <div class="category-header">
+              <div class="category-title">
+                <span class="category-emoji" aria-hidden="true">${cat.emoji}</span>
+                <span>${cat.name}</span>
+              </div>
+              <span class="category-badge">${catItems.length}</span>
+            </div>
+            <ul class="items-ul">
+              ${catItems.map(item => `
+                <li class="item-row" data-id="${item.id}">
+                  <div class="item-left" role="button" tabindex="0" aria-label="Marquer ${escapeHtml(item.name)} comme acheté">
+                    <span class="checkbox-custom" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                    <span class="item-name">${escapeHtml(item.name)}</span>
+                    ${item.qty ? `<span class="item-qty">${escapeHtml(item.qty)}</span>` : ''}
+                  </div>
+                  <button type="button" class="btn-delete" title="Supprimer sans acheter" aria-label="Supprimer ${escapeHtml(item.name)}">✕</button>
+                </li>
+              `).join('')}
+            </ul>
+          </section>
+        `;
+      }).join('');
+    }
+
+    function render() {
+      renderList();
+    }
+
+    function loadExample() {
+      state.items = SAMPLE_ITEMS.map(item => ({
+        ...item,
+        id: `${item.id}_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`
+      }));
+      state.initialTotal = state.items.length;
+      state.filter = 'all';
+      saveState();
+      render();
+    }
+
+    /* Événements */
+    els.itemInput.addEventListener('input', () => {
+      if (manualCategoryOverride) return;
+      const detected = detectCategory(els.itemInput.value);
+      if (detected) {
+        els.categorySelect.value = detected;
+        els.autoBadge.classList.add('visible');
+      } else {
+        els.autoBadge.classList.remove('visible');
+      }
+    });
+
+    els.categorySelect.addEventListener('change', () => {
+      manualCategoryOverride = true;
+      els.autoBadge.classList.remove('visible');
+    });
+
+    els.addForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = els.itemInput.value.trim();
+      if (!name) return;
+
+      const qty = els.qtyInput.value.trim();
+      const category = els.categorySelect.value;
+
+      state.items.push({
+        id: `item_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+        name,
+        qty,
+        category
+      });
+
+      if (state.items.length > state.initialTotal) {
+        state.initialTotal = state.items.length;
+      }
+
+      saveState();
+      render();
+
+      els.itemInput.value = '';
+      els.qtyInput.value = '';
+      manualCategoryOverride = false;
+      els.autoBadge.classList.remove('visible');
+      els.itemInput.focus();
+    });
+
+    els.filtersBar.addEventListener('click', e => {
+      const pill = e.target.closest('.filter-pill');
+      if (!pill) return;
+      state.filter = pill.dataset.filter;
+      render();
+    });
+
+    els.categoriesContainer.addEventListener('click', e => {
+      const row = e.target.closest('.item-row');
+      if (!row) return;
+      const id = row.dataset.id;
+
+      if (e.target.closest('.btn-delete')) {
+        deleteDirectly(id);
+        return;
+      }
+
+      if (e.target.closest('.item-left')) {
+        completeItem(id, row);
+      }
+    });
+
+    els.categoriesContainer.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const left = e.target.closest('.item-left');
+        if (!left) return;
+        e.preventDefault();
+        const row = left.closest('.item-row');
+        if (row) completeItem(row.dataset.id, row);
+      }
+    });
+
+    els.toastUndo.addEventListener('click', undoDelete);
+
+    els.btnExample.addEventListener('click', loadExample);
+
+    els.btnClear.addEventListener('click', () => {
+      if (state.items.length === 0) return;
+      if (confirm('Voulez-vous vraiment vider toute votre liste de courses ?')) {
+        state.items = [];
+        state.initialTotal = 0;
+        saveState();
+        render();
+      }
+    });
+
+    /* Initialisation */
+    initSelect();
+    loadState();
+    render();
+  </script>
+</body>
+</html>

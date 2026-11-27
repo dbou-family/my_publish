@@ -559,6 +559,25 @@
     --accent-ink: #c4b5fd;
   }
 
+  /* Vignette de la liste de courses */
+  .card.category[data-key="courses"] {
+    --accent: #16a34a;
+    --accent-soft: #dcfce7;
+    --accent-ink: #166534;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-color-mode="light"]) .card.category[data-key="courses"] {
+      --accent: #4ade80;
+      --accent-soft: rgba(74, 222, 128, 0.18);
+      --accent-ink: #86efac;
+    }
+  }
+  :root[data-color-mode="dark"] .card.category[data-key="courses"] {
+    --accent: #4ade80;
+    --accent-soft: rgba(74, 222, 128, 0.18);
+    --accent-ink: #86efac;
+  }
+
   .card.category .media-wrap {
     aspect-ratio: 16 / 9;
   }
@@ -821,6 +840,52 @@
         <circle cx="200" cy="95" r="5" fill="#a78bfa"/>
         <path d="M200 95v18l12 7" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M48 44h54m196 137h54" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+      </svg>`,
+    courses: `
+      <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-courses" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#14532d"/>
+            <stop offset="100%" stop-color="#22c55e"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="225" fill="url(#g-courses)"/>
+        <circle cx="330" cy="40" r="60" fill="#ffffff" opacity="0.08"/>
+        <g transform="rotate(-7 115 110)">
+          <rect x="62" y="48" width="106" height="128" rx="8" fill="#fefce8"/>
+          <rect x="88" y="41" width="54" height="14" rx="4" fill="#94a3b8"/>
+          <g stroke="#a8a29e" stroke-width="3" stroke-linecap="round">
+            <line x1="104" y1="78" x2="150" y2="78"/>
+            <line x1="104" y1="100" x2="150" y2="100"/>
+            <line x1="104" y1="122" x2="150" y2="122"/>
+            <line x1="104" y1="144" x2="140" y2="144"/>
+          </g>
+          <g fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M76 75 l5 5 l9 -10"/>
+            <path d="M76 119 l5 5 l9 -10"/>
+          </g>
+          <rect x="76" y="136" width="14" height="14" rx="3" fill="none" stroke="#a8a29e" stroke-width="2.5"/>
+        </g>
+        <path d="M214 62 H238 L266 140" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M238 84 H336 L320 146 H254 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="4" stroke-linejoin="round"/>
+        <g stroke="#bbf7d0" stroke-width="2" opacity="0.8">
+          <line x1="262" y1="84" x2="272" y2="146"/>
+          <line x1="288" y1="84" x2="296" y2="146"/>
+          <line x1="314" y1="84" x2="318" y2="146"/>
+          <line x1="240" y1="106" x2="330" y2="106"/>
+          <line x1="250" y1="126" x2="324" y2="126"/>
+        </g>
+        <circle cx="268" cy="96" r="10" fill="#ef4444"/>
+        <path d="M268 86 q2 -6 6 -6" fill="none" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M296 100 q-2 -10 6 -10 q8 0 6 10 z" fill="#f97316"/>
+        <rect x="312" y="92" width="10" height="28" rx="4" fill="#38bdf8"/>
+        <rect x="310" y="86" width="14" height="8" rx="2" fill="#0ea5e9"/>
+        <ellipse cx="282" cy="124" rx="12" ry="8" fill="#d97706"/>
+        <circle cx="266" cy="162" r="8" fill="#0f172a"/>
+        <circle cx="312" cy="162" r="8" fill="#0f172a"/>
+        <circle cx="266" cy="162" r="3" fill="#94a3b8"/>
+        <circle cx="312" cy="162" r="3" fill="#94a3b8"/>
+        <path d="M48 44h54m196 137h54" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
       </svg>`
   };
 
@@ -871,6 +936,15 @@
     title: "Mon Carnet de notes",
     description: "Capturez vos idées à la voix et retrouvez vos notes transcrites.",
     image: null
+  };
+
+  /* Vignette de sélection : ouvre la liste de courses */
+  const COURSES_TILE = {
+    key: "courses",
+    href: "Liste%20de%20course/index.html",
+    title: "Ma Liste de courses",
+    description: "Préparez votre panier et retrouvez facilement les articles à acheter.",
+    image: "liste courses.png"
   };
 
   const IMAGE_EXT = ["jpg", "jpeg", "png", "webp"];
@@ -1090,7 +1164,7 @@
     const total = PAGES.length;
     updateHeader({
       title: "Mes pages",
-      sub: total ? `Explorez vos ${total} ressources réparties en 3 univers` : "Aucune page trouvée"
+      sub: total ? `Explorez vos ${total} ressources et vos espaces personnels` : "Aucune page trouvée"
     });
     btnSommaire.disabled = true;
     app.innerHTML = "";
@@ -1133,6 +1207,14 @@
       description: NOTES_TILE.description,
       image: NOTES_TILE.image,
       key: NOTES_TILE.key,
+      isCategory: true
+    }));
+    ul.appendChild(makeCard({
+      href: COURSES_TILE.href,
+      name: COURSES_TILE.title,
+      description: COURSES_TILE.description,
+      image: COURSES_TILE.image,
+      key: COURSES_TILE.key,
       isCategory: true
     }));
     app.appendChild(ul);
