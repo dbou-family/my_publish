@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T15:46:54.239Z",
+  "updatedAt": "2026-11-28T15:47:20.458Z",
   "recipes": [
     {
       "id": "imp1795269116123_0",
@@ -55,7 +55,8 @@
       ],
       "favorite": false,
       "createdAt": "2026-11-21T13:51:56.123Z",
-      "sourceUrl": "https://www.750g.com/ail-marine-au-vinaigre-r99841.htm"
+      "sourceUrl": "https://www.750g.com/ail-marine-au-vinaigre-r99841.htm",
+      "weekend": false
     },
     {
       "id": "imp1795269116123_1",
@@ -119,8 +120,8 @@
       "favorite": true,
       "rating": 5,
       "createdAt": "2026-11-21T13:51:54.123Z",
-      "imageSearchState": "pending",
-      "imageSearchRetryAt": 1795875931947
+      "imageSearchState": "not-found",
+      "imageSearchRetryAt": 1795967237946
     },
     {
       "id": "imp1795269116123_3",
@@ -393,7 +394,7 @@
       "favorite": true,
       "createdAt": "2026-11-21T13:51:48.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120115
     },
     {
       "id": "imp1795269116123_9",
@@ -432,7 +433,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:51:47.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120118
     },
     {
       "id": "imp1795269116123_10",
@@ -879,7 +880,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:51:39.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120119
     },
     {
       "id": "imp1795269116123_18",
@@ -1284,7 +1285,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:51:33.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120157
     },
     {
       "id": "imp1795269116123_24",
@@ -1390,7 +1391,7 @@
       "favorite": true,
       "createdAt": "2026-11-21T13:51:31.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120158
     },
     {
       "id": "imp1795269116123_26",
@@ -1415,7 +1416,7 @@
       "rating": 4.5,
       "createdAt": "2026-11-21T13:51:30.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120159
     },
     {
       "id": "imp1795269116123_27",
@@ -1549,7 +1550,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:51:27.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120197
     },
     {
       "id": "imp1795269116123_30",
@@ -1799,7 +1800,7 @@
       "rating": 4.5,
       "createdAt": "2026-11-21T13:51:23.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120198
     },
     {
       "id": "imp1795269116123_34",
@@ -1858,7 +1859,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:51:21.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120200
     },
     {
       "id": "imp1795269116123_36",
@@ -1959,7 +1960,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:51:19.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120664
     },
     {
       "id": "imp1795269116123_38",
@@ -2442,7 +2443,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:51:09.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120665
     },
     {
       "id": "imp1795269116123_48",
@@ -2994,7 +2995,7 @@
       "rating": 4,
       "createdAt": "2026-11-21T13:50:56.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120666
     },
     {
       "id": "imp1795269116123_61",
@@ -3287,7 +3288,7 @@
       "rating": 4,
       "createdAt": "2026-11-21T13:50:49.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120706
     },
     {
       "id": "imp1795269116123_68",
@@ -3334,7 +3335,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:50:48.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120708
     },
     {
       "id": "imp1795269116123_69",
@@ -3377,7 +3378,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:50:47.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120709
     },
     {
       "id": "imp1795269116123_70",
@@ -3412,7 +3413,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:50:46.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120743
     },
     {
       "id": "imp1795269116123_71",
@@ -3501,7 +3502,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:50:44.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120747
     },
     {
       "id": "imp1795269116123_73",
@@ -3776,7 +3777,7 @@
       "favorite": true,
       "createdAt": "2026-11-21T13:50:39.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120748
     },
     {
       "id": "imp1795269116123_78",
@@ -4011,7 +4012,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:50:34.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120784
     },
     {
       "id": "imp1795269116123_83",
@@ -4127,7 +4128,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:50:32.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120789
     },
     {
       "id": "imp1795269116123_85",
@@ -4326,7 +4327,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:50:29.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120791
     },
     {
       "id": "imp1795269116123_88",
@@ -4500,7 +4501,7 @@
       "rating": 4.5,
       "createdAt": "2026-11-21T13:50:26.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120832
     },
     {
       "id": "imp1795269116123_91",
@@ -4554,7 +4555,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:50:25.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120834
     },
     {
       "id": "imp1795269116123_92",
@@ -6115,7 +6116,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:49:55.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120835
     },
     {
       "id": "imp1795269116123_122",
@@ -6499,7 +6500,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:49:47.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120872
     },
     {
       "id": "imp1795269116123_130",
@@ -6518,7 +6519,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:49:46.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120877
     },
     {
       "id": "imp1795269116123_131",
@@ -6566,7 +6567,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:49:45.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120879
     },
     {
       "id": "imp1795269116123_132",
@@ -7376,7 +7377,7 @@
       "createdAt": "2026-11-21T13:49:33.123Z",
       "sourceUrl": "https://www.meilleurduchef.com/fr/recette/paris-brest.html",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120935
     },
     {
       "id": "imp1795269116123_144",
@@ -7589,7 +7590,7 @@
       "favorite": true,
       "createdAt": "2026-11-21T13:49:29.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120939
     },
     {
       "id": "imp1795269116123_148",
@@ -7690,7 +7691,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:49:27.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120945
     },
     {
       "id": "imp1795269116123_150",
@@ -7860,7 +7861,7 @@
       "rating": 3.5,
       "createdAt": "2026-11-21T13:49:23.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120982
     },
     {
       "id": "imp1795269116123_154",
@@ -8054,7 +8055,7 @@
       "rating": 4,
       "createdAt": "2026-11-21T13:49:19.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120984
     },
     {
       "id": "imp1795269116123_158",
@@ -8353,7 +8354,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:49:12.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803120985
     },
     {
       "id": "imp1795269116123_165",
@@ -8370,7 +8371,7 @@
       "rating": 2.5,
       "createdAt": "2026-11-21T13:49:11.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121017
     },
     {
       "id": "imp1795269116123_166",
@@ -8477,7 +8478,7 @@
       "rating": 3,
       "createdAt": "2026-11-21T13:49:09.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121018
     },
     {
       "id": "imp1795269116123_168",
@@ -8810,7 +8811,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:49:02.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121023
     },
     {
       "id": "imp1795269116123_175",
@@ -9017,7 +9018,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:48:58.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121063
     },
     {
       "id": "imp1795269116123_179",
@@ -9426,7 +9427,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:48:48.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121065
     },
     {
       "id": "imp1795269116123_189",
@@ -9477,7 +9478,7 @@
       "rating": 4,
       "createdAt": "2026-11-21T13:48:47.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121066
     },
     {
       "id": "imp1795269116123_190",
@@ -9665,7 +9666,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:48:42.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121106
     },
     {
       "id": "imp1795269116123_195",
@@ -9890,7 +9891,7 @@
       "rating": 3.5,
       "createdAt": "2026-11-21T13:48:36.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121111
     },
     {
       "id": "imp1795269116123_201",
@@ -9972,7 +9973,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:48:34.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121114
     },
     {
       "id": "imp1795269116123_203",
@@ -10010,7 +10011,7 @@
       "rating": 4,
       "createdAt": "2026-11-21T13:48:33.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121151
     },
     {
       "id": "imp1795269116123_204",
@@ -10175,7 +10176,7 @@
       "favorite": false,
       "createdAt": "2026-11-21T13:48:31.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121155
     },
     {
       "id": "imp1795269116123_206",
@@ -10211,7 +10212,7 @@
       "favorite": true,
       "createdAt": "2026-11-21T13:48:30.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121157
     },
     {
       "id": "imp1795269116123_207",
@@ -10434,7 +10435,7 @@
       "rating": 3.5,
       "createdAt": "2026-11-21T13:48:26.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121194
     },
     {
       "id": "imp1795269116123_211",
@@ -10634,7 +10635,7 @@
       "favorite": true,
       "createdAt": "2026-11-21T13:48:22.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121198
     },
     {
       "id": "imp1795269116123_215",
@@ -10972,7 +10973,7 @@
       "rating": 3.5,
       "createdAt": "2026-11-21T13:48:16.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121201
     },
     {
       "id": "imp1795269116123_221",
@@ -11031,7 +11032,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:48:15.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121253
     },
     {
       "id": "imp1795269116123_222",
@@ -11334,7 +11335,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:48:09.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121257
     },
     {
       "id": "imp1795269116123_228",
@@ -11505,7 +11506,7 @@
       "rating": 5,
       "createdAt": "2026-11-21T13:48:05.123Z",
       "imageSearchState": "pending",
-      "imageSearchRetryAt": 0
+      "imageSearchRetryAt": 1795803121261
     },
     {
       "id": "imp1795269116123_232",
@@ -11793,7 +11794,9 @@
         "Mettre de oignons pickles",
         "Finir par la sauce"
       ],
-      "favorite": false,
+      "favorite": true,
+      "weekend": true,
+      "rating": 5,
       "createdAt": "2026-11-20T20:36:59.791Z"
     },
     {
