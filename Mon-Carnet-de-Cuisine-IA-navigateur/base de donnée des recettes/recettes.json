@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T07:44:04.681Z",
+  "updatedAt": "2026-11-28T07:44:15.297Z",
   "recipes": [
     {
       "id": "imp1795269116123_0",
@@ -11795,9 +11795,9 @@
         "Finir par la sauce"
       ],
       "favorite": true,
-      "createdAt": "2026-11-20T20:36:59.791Z",
+      "weekend": true,
       "rating": 5,
-      "weekend": true
+      "createdAt": "2026-11-20T20:36:59.791Z"
     },
     {
       "id": "r1795202253323",
