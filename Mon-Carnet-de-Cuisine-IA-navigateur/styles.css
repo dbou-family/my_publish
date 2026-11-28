@@ -76,3 +76,6 @@ body{background:#f5f5f0;color:#252c25;letter-spacing:.005em}
 
 .speech-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px}.speech-controls .small-action{min-height:38px}.small-action:disabled{opacity:.45;cursor:not-allowed}.reading-status{font-size:10px;color:#68765a}
 @media(max-width:700px){.speech-controls .small-action{min-height:44px}}
+
+.weekend-button{position:absolute;left:10px;bottom:10px;z-index:2;border:1px solid #ffffffc9;border-radius:999px;padding:5px 9px;background:#fffefaeb;color:#59624f;font:600 9px 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 1px 5px #00000012}.weekend-button.is-weekend{background:#58684d;color:#fff;border-color:#58684d}.weekend-detail-action.is-weekend{background:#e9ede3;border-color:#cbd5c4;color:#455b43}.weekend-detail-action{white-space:nowrap}
+@media(max-width:700px){.weekend-button{min-height:34px;padding:6px 9px}}

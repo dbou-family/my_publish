@@ -30,7 +30,7 @@ Pour un site ou une vidéo TikTok, indiquez le lien comme référence et collez 
 
 ## Modifier les recettes de démonstration
 
-Les exemples sont définis dans `app.js`, au début du fichier, dans `seedRecipes`. Un objet recette contient `id`, `name`, `category`, `time` (minutes), `servings`, `difficulty`, `image` (URL), `description`, `ingredients` (tableaux `[nom, quantité]`), `steps` (liste de textes) et `favorite` (booléen). Pour réinitialiser les exemples, effacez la donnée `mon-carnet-recettes-v1` dans le stockage local du navigateur.
+Les exemples sont définis dans `app.js`, au début du fichier, dans `seedRecipes`. Un objet recette contient `id`, `name`, `category`, `time` (minutes), `servings`, `difficulty`, `image` (URL), `description`, `ingredients` (tableaux `[nom, quantité]`), `steps` (liste de textes) et `favorite` (booléen), ainsi que `weekend` (booléen, vrai quand la recette porte le tag « week-end »). Ce champ est enregistré avec la recette et transmis au dépôt lors de la synchronisation. Pour réinitialiser les exemples, effacez la donnée `mon-carnet-recettes-v1` dans le stockage local du navigateur.
 
 ## Structure
 
