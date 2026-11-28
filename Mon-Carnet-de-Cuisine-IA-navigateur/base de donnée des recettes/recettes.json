@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-27T19:29:59.032Z",
+  "updatedAt": "2026-11-28T07:09:42.691Z",
   "recipes": [
     {
       "id": "imp1795269116123_0",
@@ -11793,7 +11793,7 @@
         "Mettre de oignons pickles",
         "Finir par la sauce"
       ],
-      "favorite": false,
+      "favorite": true,
       "createdAt": "2026-11-20T20:36:59.791Z"
     },
     {
