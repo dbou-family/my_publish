@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-28T07:43:52.721Z",
+  "updatedAt": "2026-11-28T07:44:04.681Z",
   "recipes": [
     {
       "id": "imp1795269116123_0",
@@ -11796,7 +11796,8 @@
       ],
       "favorite": true,
       "createdAt": "2026-11-20T20:36:59.791Z",
-      "rating": 5
+      "rating": 5,
+      "weekend": true
     },
     {
       "id": "r1795202253323",
